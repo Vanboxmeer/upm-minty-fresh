@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import TrustedBy from "@/components/TrustedBy";
 import Services from "@/components/Services";
 import Pricing from "@/components/Pricing";
+import Membership from "@/components/Membership";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -13,6 +14,7 @@ const Index = () => {
       <TrustedBy />
       <Services />
       <Pricing />
+      <Membership />
       <Footer />
     </div>
   );
