@@ -1,13 +1,10 @@
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-bg.jpg";
-
 const Hero = () => {
-  return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      >
+  return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
+      backgroundImage: `url(${heroImage})`
+    }}>
         <div className="absolute inset-0 bg-gradient-to-r from-background/90 to-background/70"></div>
       </div>
       
@@ -24,11 +21,7 @@ const Hero = () => {
             </span>
           </h1>
           
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in">
-            Whether you're looking to grow your business, launch an established project, 
-            UPM helps you get in front of the right audience through powerful 
-            PR, distribution and native ad placements across the top-paying media.
-          </p>
+          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in">Whether you're looking to grow your business, launch an established project, UPM helps you get in front of the right audience through powerful kol collaborations, PR distribution, native ad placements, and earned tier 1 media features.</p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
             <Button variant="hero" size="lg" className="px-8 py-6 text-lg">
@@ -40,8 +33,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
