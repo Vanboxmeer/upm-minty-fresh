@@ -6,11 +6,10 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <div className="text-2xl font-bold text-primary">UPM</div>
-          <div className="text-sm text-muted-foreground hidden sm:block">United Press Media</div>
         </div>
         
         <nav className="hidden md:flex items-center space-x-8">
-          <a href="#services" className="text-foreground hover:text-primary transition-colors">Services</a>
+          <a href="/services" className="text-foreground hover:text-primary transition-colors">Services</a>
           <a href="#about" className="text-foreground hover:text-primary transition-colors">About</a>
           <a href="#contact" className="text-foreground hover:text-primary transition-colors">Contact</a>
         </nav>

@@ -5,51 +5,51 @@ import { Check } from "lucide-react";
 const Pricing = () => {
   const plans = [
     {
-      name: "Starter",
-      price: "$299",
-      period: "per campaign",
-      description: "Perfect for small businesses getting started with digital marketing",
+      name: "Growth",
+      price: "$5,000",
+      period: "per package",
+      description: "Perfect for emerging projects looking to establish market presence",
       features: [
-        "1 Press Release Distribution",
-        "Basic Analytics Dashboard",
-        "Email Support",
-        "Standard Publication Network",
-        "Social Media Amplification"
+        "2-3 KOL Collaborations",
+        "Press Release Distribution",
+        "Basic Media Outreach",
+        "Social Media Amplification",
+        "Campaign Analytics"
       ],
       cta: "Get Started",
       popular: false
     },
     {
-      name: "Professional", 
-      price: "$799",
-      period: "per campaign",
-      description: "Ideal for growing companies looking to scale their marketing efforts",
+      name: "Scale", 
+      price: "$25,000",
+      period: "per package",
+      description: "Comprehensive marketing for projects ready to scale significantly",
       features: [
-        "3 Press Release Distributions",
+        "5-8 Premium KOL Partnerships",
+        "Multi-tier Press Release Campaign",
+        "Executive Interview Placements",
+        "Community Event Hosting",
+        "Dedicated Account Manager",
         "Advanced Analytics & Reporting",
-        "Priority Phone Support",
-        "Premium Publication Network",
-        "Custom Content Creation",
-        "Multi-channel Promotion",
-        "Performance Optimization"
+        "Custom Content Creation"
       ],
       cta: "Get Started",
       popular: true
     },
     {
-      name: "Enterprise",
-      price: "Custom",
-      period: "pricing",
-      description: "Comprehensive solution for large organizations with complex needs",
+      name: "Dominate",
+      price: "$100,000",
+      period: "per package",
+      description: "Maximum exposure package for industry-leading projects",
       features: [
-        "Unlimited Press Releases",
-        "Dedicated Account Manager",
+        "15+ Top-Tier KOL Collaborations",
+        "Major Publication Features",
+        "C-Suite Media Tour",
+        "Industry Conference Hosting",
+        "Custom Marketing Strategy",
+        "White-glove Service",
         "24/7 Priority Support",
-        "Exclusive Media Network",
-        "Custom Strategy Development",
-        "White-label Solutions",
-        "API Access",
-        "Advanced Targeting"
+        "Exclusive Media Access"
       ],
       cta: "Contact Sales",
       popular: false

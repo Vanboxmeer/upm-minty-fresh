@@ -6,30 +6,33 @@ import { CheckCircle } from "lucide-react";
 const Services = () => {
   const services = [
     {
-      title: "Press Release Distribution",
-      description: "Push your announcement to the most-read crypto publications, automatically including product launches, memes, updates, we ensure your message appears in front of the right eyes.",
+      title: "KOL Collaborations",
+      description: "Collaborate with influencers and key opinion leaders who have a direct connection with your target audience.",
       features: [
-        "Reach 1M audience of viewers",
-        "Access to top-right publications",
-        "Optional writing support - $199 per press release"
+        "Verified influencer network",
+        "Targeted audience matching",
+        "Campaign performance tracking",
+        "Content creation support"
       ]
     },
     {
-      title: "Scalable ROI-Positive Content Promotion", 
-      description: "Promote your project with native ad placements that drive out engagement, not just impressions. Pay only for performance, and target your ideal users with advanced, auto-optimizing budgeting.",
+      title: "Press Release Services", 
+      description: "Distribute press releases to keep your investors and community up to date with important news and milestone events.",
       features: [
-        "Performance-based pricing",
-        "Advanced targeting options", 
-        "Auto-optimizing campaigns"
+        "Major publication distribution",
+        "Investor-focused messaging",
+        "Timeline milestone coverage",
+        "Community engagement boost"
       ]
     },
     {
-      title: "Goal-Based Digital Marketing",
-      description: "Comprehensive digital marketing services tailored to achieve your specific business objectives through data-driven strategies and proven methodologies.",
+      title: "Features, Interviews, Spaces",
+      description: "Get featured in top media, have your CEO as a guest on a popular show, or co-host a community event.",
       features: [
-        "Custom strategy development",
-        "Multi-channel campaigns",
-        "Performance tracking & optimization"
+        "Top-tier media placements",
+        "Executive interview opportunities",
+        "Community event hosting",
+        "Thought leadership positioning"
       ]
     }
   ];
@@ -40,33 +43,33 @@ const Services = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Distribute Press Releases That{" "}
-              <span className="text-primary">Get Read</span>
+              Premium Marketing Services for{" "}
+              <span className="text-primary">Crypto Projects</span>
             </h2>
             
             <p className="text-lg text-muted-foreground mb-6">
-              Push your announcement to the most-read crypto publications, 
-              automatically including product launches, memes, updates, we 
-              ensure your message appears in front of the right eyes.
+              From KOL collaborations to press releases and media features, 
+              we provide comprehensive marketing solutions that drive real 
+              results for your project.
             </p>
             
             <div className="space-y-3 mb-8">
               <div className="flex items-center gap-3">
                 <CheckCircle className="h-5 w-5 text-primary" />
-                <span>Reach to audience of 1 million</span>
+                <span>Verified influencer network access</span>
               </div>
               <div className="flex items-center gap-3">
                 <CheckCircle className="h-5 w-5 text-primary" />
-                <span>Access to top-right publications</span>
+                <span>Major publication distribution</span>
               </div>
               <div className="flex items-center gap-3">
                 <CheckCircle className="h-5 w-5 text-primary" />
-                <span>Optional writing support - Live write per journalists</span>
+                <span>Executive media placement</span>
               </div>
             </div>
             
             <Button variant="cta" size="lg">
-              Launch a PR Campaign
+              Get Started Today
             </Button>
           </div>
           
