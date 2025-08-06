@@ -12,15 +12,22 @@ const Header = () => {
     }
   };
 
+  const scrollToCoveragePackages = () => {
+    const coverageSection = document.getElementById('coverage-packages');
+    if (coverageSection) {
+      coverageSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <header className="w-full bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center">
           <a href="/" className="block">
             <img 
-              src="/lovable-uploads/e7c5744d-4804-4575-b2f2-0e55bee6382b.png" 
+              src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
               alt="UPM Logo" 
-              className="h-12 w-auto"
+              className="h-16 w-auto"
             />
           </a>
         </div>
@@ -32,7 +39,7 @@ const Header = () => {
             <a href="#about" className="text-foreground hover:text-primary transition-colors">About</a>
             <a href="#contact" className="text-foreground hover:text-primary transition-colors">Contact</a>
             <a href="#blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
-            <a href="#campaign" className="text-foreground hover:text-primary transition-colors">Start a Campaign</a>
+            <button onClick={scrollToCoveragePackages} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer">Start a Campaign</button>
           </nav>
           
           <div className="flex items-center space-x-4">
@@ -58,7 +65,7 @@ const Header = () => {
             <a href="#about" className="text-foreground hover:text-primary transition-colors">About</a>
             <a href="#contact" className="text-foreground hover:text-primary transition-colors">Contact</a>
             <a href="#blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
-            <a href="#campaign" className="text-foreground hover:text-primary transition-colors">Start a Campaign</a>
+            <button onClick={scrollToCoveragePackages} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer text-left">Start a Campaign</button>
             <div className="flex flex-col space-y-2 pt-4 border-t border-border">
               <Button variant="outline" size="sm">Login</Button>
               <Button variant="cta" size="sm" onClick={scrollToMembership}>Start Subscription</Button>

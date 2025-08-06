@@ -1,6 +1,12 @@
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-bg.jpg";
 const Hero = () => {
+  const scrollToCoveragePackages = () => {
+    const coverageSection = document.getElementById('coverage-packages');
+    if (coverageSection) {
+      coverageSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
       backgroundImage: `url(${heroImage})`
@@ -24,8 +30,8 @@ const Hero = () => {
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in">Whether you're looking to grow your business, launch an established project, UPM helps you get in front of the right audience through powerful kol collaborations, PR distribution, native ad placements, and earned tier 1 media features.</p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
-            <Button variant="hero" size="lg" className="px-8 py-6 text-lg">
-              Launch an Ad Campaign
+            <Button variant="hero" size="lg" className="px-8 py-6 text-lg" onClick={scrollToCoveragePackages}>
+              Start a Campaign
             </Button>
             <Button variant="outline" size="lg" className="px-8 py-6 text-lg">
               View Our Services
