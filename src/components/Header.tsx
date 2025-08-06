@@ -1,24 +1,71 @@
 import { Button } from "@/components/ui/button";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
 
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const scrollToMembership = () => {
+    const membershipSection = document.getElementById('membership');
+    if (membershipSection) {
+      membershipSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <header className="w-full bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <div className="flex items-center space-x-2">
-          <div className="text-2xl font-bold text-primary">UPM</div>
+        <div className="flex items-center">
+          <a href="/" className="block">
+            <img 
+              src="/lovable-uploads/e7c5744d-4804-4575-b2f2-0e55bee6382b.png" 
+              alt="UPM Logo" 
+              className="h-12 w-auto"
+            />
+          </a>
         </div>
         
-        <nav className="hidden md:flex items-center justify-center space-x-8 flex-1">
-          <a href="/services" className="text-foreground hover:text-primary transition-colors">Services</a>
-          <a href="#about" className="text-foreground hover:text-primary transition-colors">About</a>
-          <a href="#contact" className="text-foreground hover:text-primary transition-colors">Contact</a>
-        </nav>
-        
-        <div className="flex items-center space-x-4">
-          <Button variant="outline" size="sm">Login</Button>
-          <Button variant="cta" size="sm">Get Started</Button>
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center space-x-8">
+          <nav className="flex items-center space-x-8">
+            <a href="/services" className="text-foreground hover:text-primary transition-colors">Services</a>
+            <a href="#about" className="text-foreground hover:text-primary transition-colors">About</a>
+            <a href="#contact" className="text-foreground hover:text-primary transition-colors">Contact</a>
+            <a href="#blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
+            <a href="#campaign" className="text-foreground hover:text-primary transition-colors">Start a Campaign</a>
+          </nav>
+          
+          <div className="flex items-center space-x-4">
+            <Button variant="outline" size="sm">Login</Button>
+            <Button variant="cta" size="sm" onClick={scrollToMembership}>Start Subscription</Button>
+          </div>
         </div>
+        
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="md:hidden p-2"
+        >
+          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
       </div>
+      
+      {/* Mobile Navigation */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-background border-t border-border">
+          <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+            <a href="/services" className="text-foreground hover:text-primary transition-colors">Services</a>
+            <a href="#about" className="text-foreground hover:text-primary transition-colors">About</a>
+            <a href="#contact" className="text-foreground hover:text-primary transition-colors">Contact</a>
+            <a href="#blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
+            <a href="#campaign" className="text-foreground hover:text-primary transition-colors">Start a Campaign</a>
+            <div className="flex flex-col space-y-2 pt-4 border-t border-border">
+              <Button variant="outline" size="sm">Login</Button>
+              <Button variant="cta" size="sm" onClick={scrollToMembership}>Start Subscription</Button>
+            </div>
+          </nav>
+        </div>
+      )}
     </header>
   );
 };
