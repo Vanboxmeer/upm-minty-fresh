@@ -38,7 +38,7 @@ const Header = () => {
             <a href="/services" className="text-foreground hover:text-primary transition-colors">Services</a>
             <a href="#about" className="text-foreground hover:text-primary transition-colors">About</a>
             <a href="#contact" className="text-foreground hover:text-primary transition-colors">Contact</a>
-            <a href="#blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
+            <a href="/blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
             <button onClick={scrollToCoveragePackages} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer">Start a Campaign</button>
           </nav>
           
@@ -64,7 +64,7 @@ const Header = () => {
             <a href="/services" className="text-foreground hover:text-primary transition-colors">Services</a>
             <a href="#about" className="text-foreground hover:text-primary transition-colors">About</a>
             <a href="#contact" className="text-foreground hover:text-primary transition-colors">Contact</a>
-            <a href="#blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
+            <a href="/blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
             <button onClick={scrollToCoveragePackages} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer text-left">Start a Campaign</button>
             <div className="flex flex-col space-y-2 pt-4 border-t border-border">
               <Button variant="outline" size="sm">Login</Button>
