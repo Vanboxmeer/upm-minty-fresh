@@ -4,7 +4,9 @@ const Hero = () => {
   const scrollToCoveragePackages = () => {
     const coverageSection = document.getElementById('coverage-packages');
     if (coverageSection) {
-      coverageSection.scrollIntoView({ behavior: 'smooth' });
+      coverageSection.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
   };
   return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -16,9 +18,7 @@ const Hero = () => {
       
       <div className="relative container mx-auto px-4 py-20 text-center">
         <div className="max-w-4xl mx-auto">
-          <p className="text-primary font-semibold mb-4 animate-fade-in">
-            Join 5000+ happy digital marketing clients!
-          </p>
+          <p className="text-primary font-semibold mb-4 animate-fade-in">Reach your KPI Goals with Data-Driven and Targeted Strategies</p>
           
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in">
             Growth Platform Built for{" "}
