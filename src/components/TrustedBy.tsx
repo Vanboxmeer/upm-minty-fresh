@@ -2,12 +2,12 @@ const TrustedBy = () => {
   const projects = [
     {
       name: "Originality.ai",
-      logo: "/lovable-uploads/34105d70-e9a0-4097-912a-e85b083ca25e.png",
+      logo: "/lovable-uploads/22fd7692-dae4-4f2d-84ab-58b4c39c5b0c.png",
       description: "Originality.AI is a plagiarism checker and AI detector built by a team of content marketing and GPT-3 AI experts"
     },
     {
       name: "Unicrypt",
-      logo: "/lovable-uploads/9b590fdc-5b82-4573-9626-80858143c432.png",
+      logo: "/lovable-uploads/91531968-ee6d-4b3a-8743-b0ac73a6698a.png",
       description: "Unicrypt provides an ever-growing suite of decentralized services."
     },
     {
