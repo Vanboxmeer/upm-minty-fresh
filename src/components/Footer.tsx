@@ -20,7 +20,7 @@ const Footer = () => {
         </div>
 
         {/* Contact Form */}
-        <div className="bg-white/10 rounded-lg p-8 mb-16 max-w-2xl mx-auto">
+        <div id="contact-form" className="bg-white/10 rounded-lg p-8 mb-16 max-w-2xl mx-auto">
           <h3 className="text-2xl font-bold mb-6 text-center">Get In Touch</h3>
           <div className="grid md:grid-cols-2 gap-4 mb-4">
             <Input 
@@ -50,6 +50,11 @@ const Footer = () => {
           <Button variant="hero" className="w-full mt-4">
             Send Message
           </Button>
+          <div className="mt-4 text-center">
+            <p className="text-sm opacity-80">
+              Or reach us on Telegram: <a href="https://t.me/unitedpressmedia" className="text-primary hover:underline">@unitedpressmedia</a>
+            </p>
+          </div>
         </div>
 
         {/* Footer Links */}

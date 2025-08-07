@@ -19,6 +19,13 @@ const Header = () => {
     }
   };
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact-form');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <header className="w-full bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -35,9 +42,9 @@ const Header = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           <nav className="flex items-center space-x-8">
+            <a href="/" className="text-foreground hover:text-primary transition-colors">Home</a>
             <a href="/services" className="text-foreground hover:text-primary transition-colors">Services</a>
-            <a href="#about" className="text-foreground hover:text-primary transition-colors">About</a>
-            <a href="#contact" className="text-foreground hover:text-primary transition-colors">Contact</a>
+            <button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer">Contact</button>
             <a href="/blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
             <button onClick={scrollToCoveragePackages} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer">Start a Campaign</button>
           </nav>
@@ -61,9 +68,9 @@ const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-background border-t border-border">
           <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+            <a href="/" className="text-foreground hover:text-primary transition-colors">Home</a>
             <a href="/services" className="text-foreground hover:text-primary transition-colors">Services</a>
-            <a href="#about" className="text-foreground hover:text-primary transition-colors">About</a>
-            <a href="#contact" className="text-foreground hover:text-primary transition-colors">Contact</a>
+            <button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer text-left">Contact</button>
             <a href="/blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
             <button onClick={scrollToCoveragePackages} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer text-left">Start a Campaign</button>
             <div className="flex flex-col space-y-2 pt-4 border-t border-border">
