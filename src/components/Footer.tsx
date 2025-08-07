@@ -1,52 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-
 const Footer = () => {
-  return (
-    <footer className="bg-foreground text-background">
+  return <footer className="bg-foreground text-background">
       <div className="container mx-auto px-4 py-16">
         {/* CTA Section */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to get started?
-          </h2>
-          <p className="text-lg opacity-80 mb-8 max-w-2xl mx-auto">
-            Join thousands of successful businesses that trust UPM for their digital marketing needs. 
-            Get started today and see the difference professional marketing can make.
-          </p>
-          <Button variant="hero" size="lg" className="px-8 py-6 text-lg">
-            Launch Your Campaign
-          </Button>
-        </div>
+        
 
         {/* Contact Form */}
         <div id="contact-form" className="bg-white/10 rounded-lg p-8 mb-16 max-w-2xl mx-auto">
           <h3 className="text-2xl font-bold mb-6 text-center">Get In Touch</h3>
           <div className="grid md:grid-cols-2 gap-4 mb-4">
-            <Input 
-              placeholder="First Name" 
-              className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
-            />
-            <Input 
-              placeholder="Last Name" 
-              className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
-            />
+            <Input placeholder="First Name" className="bg-white/20 border-white/30 text-white placeholder:text-white/70" />
+            <Input placeholder="Last Name" className="bg-white/20 border-white/30 text-white placeholder:text-white/70" />
           </div>
           <div className="grid md:grid-cols-2 gap-4 mb-4">
-            <Input 
-              placeholder="Email" 
-              type="email"
-              className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
-            />
-            <Input 
-              placeholder="Phone" 
-              className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
-            />
+            <Input placeholder="Email" type="email" className="bg-white/20 border-white/30 text-white placeholder:text-white/70" />
+            <Input placeholder="Phone" className="bg-white/20 border-white/30 text-white placeholder:text-white/70" />
           </div>
-          <textarea 
-            placeholder="Message"
-            className="w-full p-3 rounded-md bg-white/20 border border-white/30 text-white placeholder:text-white/70 min-h-[120px] resize-none"
-          />
+          <textarea placeholder="Message" className="w-full p-3 rounded-md bg-white/20 border border-white/30 text-white placeholder:text-white/70 min-h-[120px] resize-none" />
           <Button variant="hero" className="w-full mt-4">
             Send Message
           </Button>
@@ -105,8 +76,6 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
