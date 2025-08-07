@@ -12,12 +12,12 @@ interface PaymentProps {
 const Payment = ({ planName, planType }: PaymentProps) => {
   const planDetails = {
     gold: {
-      monthly: { price: "$250", fee: "1%" },
-      annual: { price: "$2,700", fee: "0.75%", savings: "10%" }
+      monthly: { price: "$995", fee: "1%" },
+      annual: { price: "$10,746", fee: "0.75%", savings: "10%" }
     },
     silver: {
-      monthly: { price: "$995", fee: "3.45%" },
-      annual: { price: "$10,746", fee: "2.96%", savings: "10%" }
+      monthly: { price: "$250", fee: "3.45%" },
+      annual: { price: "$2,700", fee: "2.96%", savings: "10%" }
     }
   };
 

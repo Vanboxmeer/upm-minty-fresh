@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Membership = () => {
+  const navigate = useNavigate();
   const membershipPlans = [
     {
       name: "On Demand",
@@ -28,7 +30,7 @@ const Membership = () => {
     {
       name: "Silver Membership Plan",
       subtitle: "3.45%",
-      price: "$995 USD",
+      price: "$250 USD",
       period: "per month minimum",
       description: "Designed for medium sized campaigns with reduced service fees",
       features: [
@@ -50,7 +52,7 @@ const Membership = () => {
     {
       name: "Gold Membership Plan",
       subtitle: "1%",
-      price: "$250 USD",
+      price: "$995 USD",
       period: "per month minimum",
       description: "Designed for large and highly active marketing campaigns requiring administrative work",
       features: [
@@ -145,9 +147,9 @@ const Membership = () => {
                     if (plan.name === "On Demand") {
                       document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                     } else if (plan.name.includes("Gold")) {
-                      document.getElementById('payment-gold')?.scrollIntoView({ behavior: 'smooth' });
+                      navigate('/payment/gold');
                     } else if (plan.name.includes("Silver")) {
-                      document.getElementById('payment-silver')?.scrollIntoView({ behavior: 'smooth' });
+                      navigate('/payment/silver');
                     }
                   }}
                 >
