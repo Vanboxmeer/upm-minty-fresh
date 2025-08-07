@@ -26,28 +26,6 @@ const Membership = () => {
       popular: false
     },
     {
-      name: "Gold Membership Plan",
-      subtitle: "1%",
-      price: "$250 USD",
-      period: "per month minimum",
-      description: "Designed for large and highly active marketing campaigns requiring administrative work",
-      features: [
-        "Members media deck",
-        "Campaign builder",
-        "Order facilitation", 
-        "Quote builder and shortlist assistance",
-        "KPI tracking",
-        "Dedicated account manager and campaign advisor",
-        "Managed Brave Ads and Telegram Ads",
-        "KOL communications",
-        "Press negotiations",
-        "Gold members pricing - service fees reduced to just 1%"
-      ],
-      excludedFeatures: [],
-      cta: "Start Gold Plan",
-      popular: true
-    },
-    {
       name: "Silver Membership Plan",
       subtitle: "3.45%",
       price: "$995 USD",
@@ -68,6 +46,28 @@ const Membership = () => {
       excludedFeatures: [],
       cta: "Start Silver Plan",
       popular: false
+    },
+    {
+      name: "Gold Membership Plan",
+      subtitle: "1%",
+      price: "$250 USD",
+      period: "per month minimum",
+      description: "Designed for large and highly active marketing campaigns requiring administrative work",
+      features: [
+        "Members media deck",
+        "Campaign builder",
+        "Order facilitation", 
+        "Quote builder and shortlist assistance",
+        "KPI tracking",
+        "Dedicated account manager and campaign advisor",
+        "Managed Brave Ads and Telegram Ads",
+        "KOL communications",
+        "Press negotiations",
+        "Gold members pricing - service fees reduced to just 1%"
+      ],
+      excludedFeatures: [],
+      cta: "Start Gold Plan",
+      popular: true
     }
   ];
 
@@ -141,6 +141,15 @@ const Membership = () => {
                   variant={plan.popular ? "hero" : "outline"} 
                   className="w-full"
                   size="lg"
+                  onClick={() => {
+                    if (plan.name === "On Demand") {
+                      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                    } else if (plan.name.includes("Gold")) {
+                      document.getElementById('payment-gold')?.scrollIntoView({ behavior: 'smooth' });
+                    } else if (plan.name.includes("Silver")) {
+                      document.getElementById('payment-silver')?.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
                 >
                   {plan.cta}
                 </Button>
