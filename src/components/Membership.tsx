@@ -3,18 +3,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Check, X } from "lucide-react";
 
 const Membership = () => {
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contact-form');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const handlePaymentLink = (planType: string) => {
-    // Placeholder for payment integration - can be updated with actual payment processor
-    alert(`Payment for ${planType} - Choose Crypto or Fiat payment. Annual plans available with additional discounts!`);
-  };
-
   const membershipPlans = [
     {
       name: "On Demand",
@@ -35,36 +23,12 @@ const Membership = () => {
         "Membership pricing"
       ],
       cta: "Get Started",
-      popular: false,
-      action: scrollToContact
-    },
-    {
-      name: "Silver Membership Plan",
-      subtitle: "3.45%",
-      price: "$250 USD",
-      period: "per month minimum",
-      description: "Designed for medium sized campaigns with reduced service fees",
-      features: [
-        "Members media deck",
-        "Campaign builder",
-        "Order facilitation",
-        "Quote builder and shortlist assistance", 
-        "KPI tracking",
-        "Dedicated account manager and campaign advisor",
-        "Managed Brave Ads and Telegram Ads",
-        "KOL communications",
-        "Press negotiations",
-        "Silver members pricing - service fees reduced to just 3.45%"
-      ],
-      excludedFeatures: [],
-      cta: "Start Silver Plan",
-      popular: false,
-      action: () => handlePaymentLink('Silver Plan')
+      popular: false
     },
     {
       name: "Gold Membership Plan",
       subtitle: "1%",
-      price: "$995 USD",
+      price: "$250 USD",
       period: "per month minimum",
       description: "Designed for large and highly active marketing campaigns requiring administrative work",
       features: [
@@ -81,8 +45,29 @@ const Membership = () => {
       ],
       excludedFeatures: [],
       cta: "Start Gold Plan",
-      popular: true,
-      action: () => handlePaymentLink('Gold Plan')
+      popular: true
+    },
+    {
+      name: "Silver Membership Plan",
+      subtitle: "3.45%",
+      price: "$995 USD",
+      period: "per month minimum",
+      description: "Designed for medium sized campaigns with reduced service fees",
+      features: [
+        "Members media deck",
+        "Campaign builder",
+        "Order facilitation",
+        "Quote builder and shortlist assistance", 
+        "KPI tracking",
+        "Dedicated account manager and campaign advisor",
+        "Managed Brave Ads and Telegram Ads",
+        "KOL communications",
+        "Press negotiations",
+        "Silver members pricing - service fees reduced to just 3.45%"
+      ],
+      excludedFeatures: [],
+      cta: "Start Silver Plan",
+      popular: false
     }
   ];
 
@@ -156,7 +141,6 @@ const Membership = () => {
                   variant={plan.popular ? "hero" : "outline"} 
                   className="w-full"
                   size="lg"
-                  onClick={plan.action}
                 >
                   {plan.cta}
                 </Button>
