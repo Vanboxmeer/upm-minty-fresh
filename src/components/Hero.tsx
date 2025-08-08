@@ -27,7 +27,7 @@ const Hero = () => {
             </span>
           </h1>
           
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in">Whether you're looking to grow your business, launch an established project, UPM helps you get in front of the right audience through powerful kol collaborations, PR distribution, native ad placements, and earned tier 1 media features.</p>
+          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in">UPM helps you get in front of the right audience through powerful kol collaborations, PR distribution, native ad placements, and earned tier 1 media features.</p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
             <Button variant="hero" size="lg" className="px-8 py-6 text-lg" onClick={scrollToCoveragePackages}>

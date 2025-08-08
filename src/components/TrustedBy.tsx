@@ -1,74 +1,57 @@
 const TrustedBy = () => {
-  const projects = [
-    {
-      name: "Originality.ai",
-      logo: "/lovable-uploads/22fd7692-dae4-4f2d-84ab-58b4c39c5b0c.png",
-      description: "Originality.AI is a plagiarism checker and AI detector built by a team of content marketing and GPT-3 AI experts"
-    },
-    {
-      name: "Unicrypt",
-      logo: "/lovable-uploads/91531968-ee6d-4b3a-8743-b0ac73a6698a.png",
-      description: "Unicrypt provides an ever-growing suite of decentralized services."
-    },
-    {
-      name: "Bittensor",
-      logo: "/lovable-uploads/34105d70-e9a0-4097-912a-e85b083ca25e.png",
-      description: "Bittensor is a peer-to-peer market that commoditizes machine intelligence using a proof-of-intelligence consensus mechanism."
-    },
-    {
-      name: "eMoney",
-      logo: "/lovable-uploads/bbe20575-36a4-480b-9408-085567a1cecb.png",
-      description: "Next Generation Stablecoins for the Internet of Money."
-    },
-    {
-      name: "Doge Dash",
-      logo: "/lovable-uploads/9b590fdc-5b82-4573-9626-80858143c432.png",
-      description: "Doge Dash features 10 fun, fast paced levels with the degree of difficulty increasing as the player progresses."
-    },
-    {
-      name: "Umbrella",
-      logo: "/lovable-uploads/9aa3ddc7-17e3-4af9-a6a7-b6a5174b8269.png",
-      description: "Umbrella is the first truly decentralized oracle service providing low cost, massively scalable, and secure solutions for smart contracts."
-    },
-    {
-      name: "MetalCore",
-      logo: "/lovable-uploads/1e9ef986-400b-448c-b35f-801917674404.png",
-      description: "MetalCore is an NFT-based, open world, mechanized combat game. Fight alongside your faction in territorial battles on a mineral rich alien planet."
-    },
-    {
-      name: "Evrylife",
-      logo: "/lovable-uploads/e111a023-8c4a-4f1e-9c22-7a80f265b13e.png",
-      description: "Evrylife is a multi-chain web3 explorer, a type of decentralized social media application."
-    }
-  ];
-
-  return (
-    <section className="py-16 bg-muted/30">
+  const projects = [{
+    name: "Originality.ai",
+    logo: "/lovable-uploads/22fd7692-dae4-4f2d-84ab-58b4c39c5b0c.png",
+    description: "Originality.AI is a plagiarism checker and AI detector built by a team of content marketing and GPT-3 AI experts"
+  }, {
+    name: "Unicrypt",
+    logo: "/lovable-uploads/91531968-ee6d-4b3a-8743-b0ac73a6698a.png",
+    description: "Unicrypt provides an ever-growing suite of decentralized services."
+  }, {
+    name: "Bittensor",
+    logo: "/lovable-uploads/34105d70-e9a0-4097-912a-e85b083ca25e.png",
+    description: "Bittensor is a peer-to-peer market that commoditizes machine intelligence using a proof-of-intelligence consensus mechanism."
+  }, {
+    name: "eMoney",
+    logo: "/lovable-uploads/bbe20575-36a4-480b-9408-085567a1cecb.png",
+    description: "Next Generation Stablecoins for the Internet of Money."
+  }, {
+    name: "Doge Dash",
+    logo: "/lovable-uploads/9b590fdc-5b82-4573-9626-80858143c432.png",
+    description: "Doge Dash features 10 fun, fast paced levels with the degree of difficulty increasing as the player progresses."
+  }, {
+    name: "Umbrella",
+    logo: "/lovable-uploads/9aa3ddc7-17e3-4af9-a6a7-b6a5174b8269.png",
+    description: "Umbrella is the first truly decentralized oracle service providing low cost, massively scalable, and secure solutions for smart contracts."
+  }, {
+    name: "MetalCore",
+    logo: "/lovable-uploads/1e9ef986-400b-448c-b35f-801917674404.png",
+    description: "MetalCore is an NFT-based, open world, mechanized combat game. Fight alongside your faction in territorial battles on a mineral rich alien planet."
+  }, {
+    name: "Evrylife",
+    logo: "/lovable-uploads/e111a023-8c4a-4f1e-9c22-7a80f265b13e.png",
+    description: "Evrylife is a multi-chain web3 explorer, a type of decentralized social media application."
+  }];
+  return <section className="py-16 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
-            TOP Projects in AI, Crypto Gaming, and Web3 Utilize <span className="text-primary">UPM Services</span>
+            TOP Projects in AI, Crypto Gaming, and Web3 Utilize <span className="text-primary">
+UPM Services</span>
           </h2>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {projects.map((project, index) => (
-            <div key={index} className="text-center space-y-4">
+          {projects.map((project, index) => <div key={index} className="text-center space-y-4">
               <div className="flex justify-center mb-4">
-                <img 
-                  src={project.logo} 
-                  alt={project.name}
-                  className="h-16 w-auto object-contain"
-                />
+                <img src={project.logo} alt={project.name} className="h-16 w-auto object-contain" />
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {project.description}
               </p>
-            </div>
-          ))}
+            </div>)}
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
 export default TrustedBy;

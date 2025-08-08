@@ -71,9 +71,7 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-white/20 mt-12 pt-8 text-center">
-          <p className="text-sm opacity-60">
-            © 2024 United Press Media. All rights reserved.
-          </p>
+          <p className="text-sm opacity-60">© 2025 United Press Media. All rights reserved.</p>
         </div>
       </div>
     </footer>;
