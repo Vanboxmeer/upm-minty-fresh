@@ -8,6 +8,9 @@ import Services from "./pages/Services";
 import Blog from "./pages/Blog";
 import PaymentGold from "./pages/PaymentGold";
 import PaymentSilver from "./pages/PaymentSilver";
+import PaymentGrowth from "./pages/PaymentGrowth";
+import PaymentScale from "./pages/PaymentScale";
+import PaymentDominate from "./pages/PaymentDominate";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +27,9 @@ const App = () => (
           <Route path="/blog" element={<Blog />} />
           <Route path="/payment/gold" element={<PaymentGold />} />
           <Route path="/payment/silver" element={<PaymentSilver />} />
+          <Route path="/payment/growth" element={<PaymentGrowth />} />
+          <Route path="/payment/scale" element={<PaymentScale />} />
+          <Route path="/payment/dominate" element={<PaymentDominate />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

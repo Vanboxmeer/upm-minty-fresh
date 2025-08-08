@@ -1,7 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 const Pricing = () => {
+  const navigate = useNavigate();
+  
+  const handleOrderPackage = (planName: string) => {
+    const route = `/payment/${planName.toLowerCase()}`;
+    navigate(route);
+  };
+
   const plans = [{
     name: "Growth",
     price: "$5,000",
@@ -15,7 +23,7 @@ const Pricing = () => {
       "Basic analytics and performance reporting",
       "Email campaign to targeted investor lists"
     ],
-    cta: "Get Started",
+    cta: "Order Package",
     popular: false
   }, {
     name: "Scale",
@@ -32,7 +40,7 @@ const Pricing = () => {
       "Dedicated account manager and priority support",
       "Advanced analytics with ROI tracking"
     ],
-    cta: "Get Started",
+    cta: "Order Package",
     popular: true
   }, {
     name: "Dominate",
@@ -50,7 +58,7 @@ const Pricing = () => {
       "White-glove service with 24/7 priority support",
       "Direct access to tier-1 journalists and editors"
     ],
-    cta: "Contact Sales",
+    cta: "Order Package",
     popular: false
   }];
   return <section id="coverage-packages" className="py-20 bg-muted/30">
@@ -89,7 +97,12 @@ const Pricing = () => {
                     </li>)}
                 </ul>
 
-                <Button variant={plan.popular ? "hero" : "outline"} className="w-full" size="lg">
+                <Button 
+                  variant={plan.popular ? "hero" : "outline"} 
+                  className="w-full" 
+                  size="lg"
+                  onClick={() => handleOrderPackage(plan.name)}
+                >
                   {plan.cta}
                 </Button>
               </CardContent>
