@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import servicesIcon from "@/assets/services-icon.jpg";
+import servicesIcon from "@/assets/crypto-marketing-services.jpg";
 import { CheckCircle } from "lucide-react";
 const Services = () => {
   const services = [{

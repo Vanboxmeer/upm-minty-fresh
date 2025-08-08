@@ -28,13 +28,13 @@ const Header = () => {
 
   return (
     <header className="w-full bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div className="container mx-auto px-4 py-2 flex items-center justify-between">
         <div className="flex items-center">
           <a href="/" className="block">
             <img 
               src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
               alt="UPM Logo" 
-              className="h-16 w-auto"
+              className="h-12 w-auto transition-transform duration-200 hover:scale-105"
             />
           </a>
         </div>

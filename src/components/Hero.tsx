@@ -16,7 +16,7 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-background/90 to-background/70"></div>
       </div>
       
-      <div className="relative container mx-auto px-4 py-20 text-center">
+      <div className="relative container mx-auto px-4 py-12 text-center">
         <div className="max-w-4xl mx-auto">
           <p className="text-primary font-semibold mb-4 animate-fade-in">Reach your KPI Goals with Data-Driven and Targeted Strategies</p>
           
