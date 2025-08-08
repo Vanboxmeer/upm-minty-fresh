@@ -7,7 +7,14 @@ const Pricing = () => {
     price: "$5,000",
     period: "per package",
     description: "Perfect for emerging projects looking to establish market presence",
-    features: ["2-3 KOL Collaborations", "Press Release Distribution", "Basic Media Outreach", "Social Media Amplification", "Campaign Analytics"],
+    features: [
+      "Press Release Distribution to 150+ crypto & tech outlets",
+      "3-5 KOL Collaborations with verified micro-influencers",
+      "Feature placement in 2-3 tier 2 crypto publications",
+      "Social media amplification across key platforms",
+      "Basic analytics and performance reporting",
+      "Email campaign to targeted investor lists"
+    ],
     cta: "Get Started",
     popular: false
   }, {
@@ -15,7 +22,16 @@ const Pricing = () => {
     price: "$25,000",
     period: "per package",
     description: "Comprehensive marketing for projects ready to scale significantly",
-    features: ["5-8 Premium KOL Partnerships", "Multi-tier Press Release Campaign", "Executive Interview Placements", "Community Event Hosting", "Dedicated Account Manager", "Advanced Analytics & Reporting", "Custom Content Creation"],
+    features: [
+      "Press Release Distribution to 500+ premium outlets worldwide",
+      "8-12 Premium KOL Partnerships with top-tier influencers",
+      "Executive interviews in 4-6 major crypto publications",
+      "Feature articles in Forbes, CoinDesk, and Decrypt",
+      "Podcast appearances on leading crypto shows",
+      "Community AMA hosting and event coordination",
+      "Dedicated account manager and priority support",
+      "Advanced analytics with ROI tracking"
+    ],
     cta: "Get Started",
     popular: true
   }, {
@@ -23,7 +39,17 @@ const Pricing = () => {
     price: "$100,000",
     period: "per package",
     description: "Maximum exposure package for industry-leading projects",
-    features: ["15+ Top-Tier KOL Collaborations", "Major Publication Features", "C-Suite Media Tour", "Industry Conference Hosting", "Custom Marketing Strategy", "White-glove Service", "24/7 Priority Support", "Exclusive Media Access"],
+    features: [
+      "Press Release Distribution to 1000+ global media outlets",
+      "20+ Elite KOL Collaborations with celebrity endorsers",
+      "Cover stories in top-tier publications (Wall Street Journal, Bloomberg)",
+      "TV interviews on CNBC, Fox Business, and Bloomberg TV",
+      "Speaking slots at major industry conferences",
+      "Exclusive media tours and investor roadshows",
+      "Custom content creation and thought leadership articles",
+      "White-glove service with 24/7 priority support",
+      "Direct access to tier-1 journalists and editors"
+    ],
     cta: "Contact Sales",
     popular: false
   }];
@@ -59,7 +85,7 @@ const Pricing = () => {
                 <ul className="space-y-3 mb-8">
                   {plan.features.map((feature, idx) => <li key={idx} className="flex items-center gap-3">
                       <Check className="h-5 w-5 text-primary flex-shrink-0" />
-                      
+                      <span className="text-sm">{feature}</span>
                     </li>)}
                 </ul>
 
