@@ -1,6 +1,67 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 const Footer = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!firstName || !lastName || !email || !message) {
+      toast({
+        title: "Error",
+        description: "Please fill in all required fields",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const { error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          firstName,
+          lastName,
+          email,
+          phone,
+          message,
+        },
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for your message. We'll get back to you soon.",
+      });
+
+      // Reset form
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPhone("");
+      setMessage("");
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return <footer className="bg-foreground text-background">
       <div className="container mx-auto px-4 py-16">
         {/* CTA Section */}
@@ -9,18 +70,55 @@ const Footer = () => {
         {/* Contact Form */}
         <div id="contact-form" className="bg-white/10 rounded-lg p-8 mb-16 max-w-2xl mx-auto">
           <h3 className="text-2xl font-bold mb-6 text-center">Get In Touch</h3>
-          <div className="grid md:grid-cols-2 gap-4 mb-4">
-            <Input placeholder="First Name" className="bg-white/20 border-white/30 text-white placeholder:text-white/70" />
-            <Input placeholder="Last Name" className="bg-white/20 border-white/30 text-white placeholder:text-white/70" />
-          </div>
-          <div className="grid md:grid-cols-2 gap-4 mb-4">
-            <Input placeholder="Email" type="email" className="bg-white/20 border-white/30 text-white placeholder:text-white/70" />
-            <Input placeholder="Phone" className="bg-white/20 border-white/30 text-white placeholder:text-white/70" />
-          </div>
-          <textarea placeholder="Message" className="w-full p-3 rounded-md bg-white/20 border border-white/30 text-white placeholder:text-white/70 min-h-[120px] resize-none" />
-          <Button variant="hero" className="w-full mt-4">
-            Send Message
-          </Button>
+          <form onSubmit={handleSubmit}>
+            <div className="grid md:grid-cols-2 gap-4 mb-4">
+              <Input 
+                placeholder="First Name" 
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
+                required
+              />
+              <Input 
+                placeholder="Last Name" 
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
+                required
+              />
+            </div>
+            <div className="grid md:grid-cols-2 gap-4 mb-4">
+              <Input 
+                placeholder="Email" 
+                type="email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
+                required
+              />
+              <Input 
+                placeholder="Phone" 
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
+              />
+            </div>
+            <textarea 
+              placeholder="Message" 
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              className="w-full p-3 rounded-md bg-white/20 border border-white/30 text-white placeholder:text-white/70 min-h-[120px] resize-none" 
+              required
+            />
+            <Button 
+              type="submit" 
+              variant="hero" 
+              className="w-full mt-4"
+              disabled={isLoading}
+            >
+              {isLoading ? "Sending..." : "Send Message"}
+            </Button>
+          </form>
           <div className="mt-4 text-center">
             <p className="text-sm opacity-80">
               Or reach us on Telegram: <a href="https://t.me/unitedpressmedia" className="text-primary hover:underline">@unitedpressmedia</a>
