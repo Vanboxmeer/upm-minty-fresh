@@ -66,17 +66,13 @@ const Payment = ({ planName, planType }: PaymentProps) => {
           </p>
         </div>
 
-        {!isPackagePlan && (
+        {!isPackagePlan ? (
           <Tabs value={billingFrequency} onValueChange={setBillingFrequency} className="mb-8">
             <TabsList className="grid w-full grid-cols-2 max-w-md mx-auto">
               <TabsTrigger value="monthly">Monthly</TabsTrigger>
               <TabsTrigger value="annual">Annual</TabsTrigger>
             </TabsList>
-          </Tabs>
-        )}
-
-        {!isPackagePlan ? (
-          <>
+            
             <TabsContent value="monthly" className="space-y-6">
               <Card className="p-6">
                 <div className="flex justify-between items-center mb-4">
@@ -117,7 +113,7 @@ const Payment = ({ planName, planType }: PaymentProps) => {
                 )}
               </Card>
             </TabsContent>
-          </>
+          </Tabs>
         ) : (
           <Card className="p-6 mb-8">
             <div className="flex justify-between items-center mb-4">
