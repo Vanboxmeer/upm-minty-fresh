@@ -45,7 +45,7 @@ const Footer = () => {
               <li><a href="#" className="hover:text-primary transition-colors">Press Release Distribution</a></li>
               <li><a href="#" className="hover:text-primary transition-colors">Content Marketing</a></li>
               <li><a href="#" className="hover:text-primary transition-colors">Digital Advertising</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Analytics & Reporting</a></li>
+              
             </ul>
           </div>
           
@@ -63,7 +63,7 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">Support</h4>
             <ul className="space-y-2 text-sm opacity-80">
               <li><a href="#" className="hover:text-primary transition-colors">Help Center</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Documentation</a></li>
+              
               <li><a href="#" className="hover:text-primary transition-colors">Privacy Policy</a></li>
               <li><a href="#" className="hover:text-primary transition-colors">Terms of Service</a></li>
             </ul>
