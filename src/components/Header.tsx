@@ -8,21 +8,24 @@ const Header = () => {
   const scrollToMembership = () => {
     const membershipSection = document.getElementById('membership');
     if (membershipSection) {
-      membershipSection.scrollIntoView({ behavior: 'smooth' });
+      const offsetTop = membershipSection.offsetTop - 80; // Account for header height
+      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
     }
   };
 
   const scrollToCoveragePackages = () => {
     const coverageSection = document.getElementById('coverage-packages');
     if (coverageSection) {
-      coverageSection.scrollIntoView({ behavior: 'smooth' });
+      const offsetTop = coverageSection.offsetTop - 80; // Account for header height
+      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
     }
   };
 
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact-form');
     if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+      const offsetTop = contactSection.offsetTop - 80; // Account for header height
+      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
     }
   };
 
