@@ -136,20 +136,24 @@ const Payment = ({
             <CardHeader className="text-center">
               <CardTitle className="flex items-center justify-center gap-2">
                 <CreditCard className="h-5 w-5" />
-                Fiat Payment
+                Fiat Payment Options
               </CardTitle>
               <CardDescription>
-                Pay with traditional payment methods
+                Traditional payment methods available
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <Button className="w-full" variant="outline">
+              <div className="w-full p-3 border rounded-md bg-muted/50 text-center text-sm font-medium">
                 Credit/Debit Card
-              </Button>
+              </div>
               
-              <Button className="w-full" variant="outline">
+              <div className="w-full p-3 border rounded-md bg-muted/50 text-center text-sm font-medium">
                 PayPal
-              </Button>
+              </div>
+              
+              <div className="w-full p-3 border rounded-md bg-muted/50 text-center text-sm font-medium">
+                Bank Transfer
+              </div>
             </CardContent>
           </Card>
 
@@ -157,22 +161,22 @@ const Payment = ({
             <CardHeader className="text-center">
               <CardTitle className="flex items-center justify-center gap-2">
                 <Coins className="h-5 w-5" />
-                Crypto Payment
+                Crypto Payment Options
               </CardTitle>
               <CardDescription>
-                Pay with cryptocurrency
+                Cryptocurrency options available
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <Button className="w-full" variant="outline">
+              <div className="w-full p-3 border rounded-md bg-muted/50 text-center text-sm font-medium">
                 Bitcoin (BTC)
-              </Button>
-              <Button className="w-full" variant="outline">
+              </div>
+              <div className="w-full p-3 border rounded-md bg-muted/50 text-center text-sm font-medium">
                 Ethereum (ETH)
-              </Button>
-              <Button className="w-full" variant="outline">
+              </div>
+              <div className="w-full p-3 border rounded-md bg-muted/50 text-center text-sm font-medium">
                 USDC/USDT
-              </Button>
+              </div>
             </CardContent>
           </Card>
         </div>
