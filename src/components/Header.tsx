@@ -4,23 +4,33 @@ import { useState } from "react";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const scrollToMembership = () => {
-    const membershipSection = document.getElementById('membership');
-    if (membershipSection) {
-      const offsetTop = membershipSection.offsetTop - 80; // Account for header height
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth'
-      });
+    // Navigate to home if not there, then scroll
+    if (window.location.pathname !== '/') {
+      window.location.href = '/#package-selector';
+    } else {
+      const packageSection = document.querySelector('[data-section="package-selector"]');
+      if (packageSection) {
+        const offsetTop = packageSection.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        });
+      }
     }
   };
   const scrollToCoveragePackages = () => {
-    const coverageSection = document.getElementById('coverage-packages');
-    if (coverageSection) {
-      const offsetTop = coverageSection.offsetTop - 80; // Account for header height
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth'
-      });
+    // Navigate to home if not there, then scroll
+    if (window.location.pathname !== '/') {
+      window.location.href = '/#package-selector';
+    } else {
+      const packageSection = document.querySelector('[data-section="package-selector"]');
+      if (packageSection) {
+        const offsetTop = packageSection.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        });
+      }
     }
   };
   const scrollToContact = () => {

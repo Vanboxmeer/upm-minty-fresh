@@ -3,8 +3,7 @@ import Hero from "@/components/Hero";
 import TrustedBy from "@/components/TrustedBy";
 import Services from "@/components/Services";
 import BlogSection from "@/components/BlogSection";
-import Pricing from "@/components/Pricing";
-import Membership from "@/components/Membership";
+import PackageSelector from "@/components/PackageSelector";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -15,8 +14,7 @@ const Index = () => {
       <TrustedBy />
       <Services />
       <BlogSection />
-      <Pricing />
-      <Membership />
+      <PackageSelector />
       <Footer />
     </div>
   );
