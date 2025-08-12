@@ -89,13 +89,19 @@ const Membership = () => {
 
                 <Button variant={plan.popular ? "hero" : "outline"} className="w-full" size="lg" onClick={() => {
               if (plan.name === "On Demand") {
-                document.getElementById('contact')?.scrollIntoView({
-                  behavior: 'smooth'
-                });
-              } else if (plan.name.includes("Gold")) {
-                navigate('/payment/gold');
-              } else if (plan.name.includes("Silver")) {
-                navigate('/payment/silver');
+                const membershipDetails = encodeURIComponent(`Membership: ${plan.name} - ${plan.subtitle} (${plan.description})`);
+                window.history.pushState({}, '', `/?membership=${membershipDetails}#contact-form`);
+                const contactSection = document.getElementById('contact-form');
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              } else {
+                const routeMap: { [key: string]: string } = {
+                  "Silver Membership Plan": "/payment-silver",
+                  "Gold Membership Plan": "/payment-gold"
+                };
+                const membershipDetails = encodeURIComponent(`Membership: ${plan.name} - ${plan.price} ${plan.period || ""} (${plan.description})`);
+                navigate(`${routeMap[plan.name] || "/payment-silver"}?membership=${membershipDetails}`);
               }
             }}>
                   {plan.cta}

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 const Footer = () => {
@@ -10,7 +10,30 @@ const Footer = () => {
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [selectionSummary, setSelectionSummary] = useState("");
   const { toast } = useToast();
+
+  useEffect(() => {
+    // Check URL parameters for package/membership selection
+    const urlParams = new URLSearchParams(window.location.search);
+    const packageSelection = urlParams.get('package');
+    const membershipSelection = urlParams.get('membership');
+    const generalSelection = urlParams.get('selection');
+    
+    if (packageSelection) {
+      const summary = `SELECTED COVERAGE PACKAGE:\n${decodeURIComponent(packageSelection)}\n\n`;
+      setSelectionSummary(summary);
+      setMessage(summary + "I'm interested in this package. Please contact me with more details.");
+    } else if (membershipSelection) {
+      const summary = `SELECTED SUBSCRIPTION PLAN:\n${decodeURIComponent(membershipSelection)}\n\n`;
+      setSelectionSummary(summary);
+      setMessage(summary + "I'm interested in this membership plan. Please contact me with more details.");
+    } else if (generalSelection) {
+      const summary = `SELECTED PLAN:\n${decodeURIComponent(generalSelection)}\n\n`;
+      setSelectionSummary(summary);
+      setMessage(summary + "I'm interested in this plan. Please contact me with more details.");
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,7 +56,7 @@ const Footer = () => {
           lastName,
           email,
           phone,
-          message,
+          message: selectionSummary + message,
         },
       });
 
@@ -50,6 +73,7 @@ const Footer = () => {
       setEmail("");
       setPhone("");
       setMessage("");
+      setSelectionSummary("");
     } catch (error) {
       console.error("Error sending message:", error);
       toast({
@@ -119,9 +143,16 @@ const Footer = () => {
               {isLoading ? "Sending..." : "Send Message"}
             </Button>
           </form>
+          {selectionSummary && (
+            <div className="mt-4 p-3 bg-primary/20 rounded-md border border-primary/30">
+              <p className="text-sm font-medium mb-1">Your Selection Summary:</p>
+              <p className="text-xs opacity-80 whitespace-pre-line">{selectionSummary.replace(/\n\n$/, '')}</p>
+            </div>
+          )}
           <div className="mt-4 text-center">
             <p className="text-sm opacity-80">
               Or reach us on Telegram: <a href="https://t.me/unitedpressmedia" className="text-primary hover:underline">@unitedpressmedia</a>
+              {selectionSummary && <span className="block mt-1 text-xs opacity-60">You can forward your selection details to our Telegram for quick assistance.</span>}
             </p>
           </div>
         </div>

@@ -181,8 +181,19 @@ const Payment = ({
           </Card>
         </div>
 
-        <div className="text-center mt-8">
+        <div className="text-center mt-8 space-y-4">
           <p className="text-sm text-muted-foreground">All payments are processed securely. contact@unitedpress.media for custom payment arrangements.</p>
+          <Button 
+            variant="outline" 
+            onClick={() => {
+              const selectionSummary = encodeURIComponent(
+                `${isPackagePlan ? "Package" : "Subscription"}: ${planName} - $${planDetails.price.toLocaleString()}${!isPackagePlan ? ` (${billingFrequency} billing)` : " (one-time)"}${planDetails.savings ? ` - Save $${planDetails.savings}` : ""}`
+              );
+              window.location.href = `/?selection=${selectionSummary}#contact-form`;
+            }}
+          >
+            Contact Us About This Plan
+          </Button>
         </div>
       </div>
     </section>;

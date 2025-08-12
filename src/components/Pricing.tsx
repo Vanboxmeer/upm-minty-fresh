@@ -6,8 +6,14 @@ const Pricing = () => {
   const navigate = useNavigate();
   
   const handleOrderPackage = (planName: string) => {
-    const route = `/payment/${planName.toLowerCase()}`;
-    navigate(route);
+    const routeMap: { [key: string]: string } = {
+      "Growth": "/payment-growth",
+      "Scale": "/payment-scale", 
+      "Dominate": "/payment-dominate"
+    };
+    const selectedPlan = plans.find(plan => plan.name === planName);
+    const packageDetails = encodeURIComponent(`Package: ${planName} Package - ${selectedPlan?.price} (${selectedPlan?.description})`);
+    navigate(`${routeMap[planName] || "/payment-growth"}?package=${packageDetails}`);
   };
 
   const plans = [{
