@@ -1,33 +1,30 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const scrollToMembership = () => {
-    const membershipSection = document.getElementById('membership-plans');
-    if (membershipSection) {
-      const offsetTop = membershipSection.offsetTop - 80; // Account for header height
-      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+  const scrollToSection = (sectionId: string) => {
+    if (location.pathname !== '/') {
+      // Navigate to homepage with hash
+      navigate(`/#${sectionId}`);
+    } else {
+      // Already on homepage, just scroll
+      const section = document.getElementById(sectionId);
+      if (section) {
+        const offsetTop = section.offsetTop - 80;
+        window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+      }
     }
   };
 
-  const scrollToCoveragePackages = () => {
-    const coverageSection = document.getElementById('coverage-packages');
-    if (coverageSection) {
-      const offsetTop = coverageSection.offsetTop - 80; // Account for header height
-      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-    }
-  };
-
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contact-form');
-    if (contactSection) {
-      const offsetTop = contactSection.offsetTop - 80; // Account for header height
-      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-    }
-  };
+  const scrollToMembership = () => scrollToSection('membership-plans');
+  const scrollToCoveragePackages = () => scrollToSection('coverage-packages');
+  const scrollToContact = () => scrollToSection('contact-form');
 
   return (
     <header className="w-full bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
