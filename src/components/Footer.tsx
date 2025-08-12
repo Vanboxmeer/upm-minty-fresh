@@ -140,10 +140,9 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Services</h4>
             <ul className="space-y-2 text-sm opacity-80">
-              <li><a href="#" className="hover:text-primary transition-colors">Press Release Distribution</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Content Marketing</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Digital Advertising</a></li>
-              
+              <li><a href="/services#kol-collaborations" className="hover:text-primary transition-colors">KOL Collaborations</a></li>
+              <li><a href="/services#press-release-services" className="hover:text-primary transition-colors">Press Release Services</a></li>
+              <li><a href="/services#features--interviews--spaces" className="hover:text-primary transition-colors">Features, Interviews, Spaces</a></li>
             </ul>
           </div>
           
