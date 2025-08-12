@@ -20,16 +20,29 @@ const Footer = () => {
     const membershipSelection = urlParams.get('membership');
     const generalSelection = urlParams.get('selection');
     
+    // Safe decode function to handle malformed URIs
+    const safeDecodeURIComponent = (str: string): string => {
+      try {
+        return decodeURIComponent(str);
+      } catch (error) {
+        console.warn('Failed to decode URI component:', str, error);
+        return str; // Return original string if decoding fails
+      }
+    };
+    
     if (packageSelection) {
-      const summary = `SELECTED COVERAGE PACKAGE:\n${decodeURIComponent(packageSelection)}\n\n`;
+      const decodedSelection = safeDecodeURIComponent(packageSelection);
+      const summary = `SELECTED COVERAGE PACKAGE:\n${decodedSelection}\n\n`;
       setSelectionSummary(summary);
       setMessage(summary + "I'm interested in this package. Please contact me with more details.");
     } else if (membershipSelection) {
-      const summary = `SELECTED SUBSCRIPTION PLAN:\n${decodeURIComponent(membershipSelection)}\n\n`;
+      const decodedSelection = safeDecodeURIComponent(membershipSelection);
+      const summary = `SELECTED SUBSCRIPTION PLAN:\n${decodedSelection}\n\n`;
       setSelectionSummary(summary);
       setMessage(summary + "I'm interested in this membership plan. Please contact me with more details.");
     } else if (generalSelection) {
-      const summary = `SELECTED PLAN:\n${decodeURIComponent(generalSelection)}\n\n`;
+      const decodedSelection = safeDecodeURIComponent(generalSelection);
+      const summary = `SELECTED PLAN:\n${decodedSelection}\n\n`;
       setSelectionSummary(summary);
       setMessage(summary + "I'm interested in this plan. Please contact me with more details.");
     }
