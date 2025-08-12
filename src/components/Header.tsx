@@ -1,50 +1,43 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const scrollToSection = (sectionId: string) => {
-    if (location.pathname !== '/') {
-      // Navigate to homepage first, then scroll after navigation completes
-      navigate('/');
-      setTimeout(() => {
-        const section = document.getElementById(sectionId);
-        if (section) {
-          const offsetTop = section.offsetTop - 80;
-          window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-        }
-      }, 100);
-    } else {
-      // Already on homepage, just scroll
-      const section = document.getElementById(sectionId);
-      if (section) {
-        const offsetTop = section.offsetTop - 80;
-        window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-      }
+  const scrollToMembership = () => {
+    const membershipSection = document.getElementById('membership');
+    if (membershipSection) {
+      const offsetTop = membershipSection.offsetTop - 80; // Account for header height
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
     }
   };
-
-  const scrollToMembership = () => scrollToSection('membership');
-  const scrollToCoveragePackages = () => scrollToSection('coverage-packages');
-  const scrollToContact = () => scrollToSection('contact-form');
-
-  return (
-    <header className="w-full bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
+  const scrollToCoveragePackages = () => {
+    const coverageSection = document.getElementById('coverage-packages');
+    if (coverageSection) {
+      const offsetTop = coverageSection.offsetTop - 80; // Account for header height
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
+    }
+  };
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact-form');
+    if (contactSection) {
+      const offsetTop = contactSection.offsetTop - 80; // Account for header height
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
+    }
+  };
+  return <header className="w-full bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
       <div className="container mx-auto px-4 py-2 flex items-center justify-between">
         <div className="flex items-center">
           <a href="/" className="block">
-            <div className="relative overflow-hidden">
-              <img 
-                src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
-                alt="UPM Logo" 
-                className="h-12 w-auto transition-transform duration-200 hover:scale-105 animate-logo-fill"
-              />
-            </div>
+            <img src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" alt="UPM Logo" className="h-12 w-auto transition-transform duration-200 hover:scale-105" />
           </a>
         </div>
         
@@ -65,17 +58,11 @@ const Header = () => {
         </div>
         
         {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden p-2"
-        >
-          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        
       </div>
       
       {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-background border-t border-border">
+      {isMenuOpen && <div className="md:hidden bg-background border-t border-border">
           <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
             <a href="/" className="text-foreground hover:text-primary transition-colors">Home</a>
             <a href="/services" className="text-foreground hover:text-primary transition-colors">Services</a>
@@ -87,10 +74,7 @@ const Header = () => {
               <Button variant="cta" size="sm" onClick={scrollToMembership}>Start Subscription</Button>
             </div>
           </nav>
-        </div>
-      )}
-    </header>
-  );
+        </div>}
+    </header>;
 };
-
 export default Header;
