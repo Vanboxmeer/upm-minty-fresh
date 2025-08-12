@@ -2,10 +2,18 @@ import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-bg.jpg";
 const Hero = () => {
   const scrollToCoveragePackages = () => {
-    const coverageSection = document.getElementById('coverage-packages');
-    if (coverageSection) {
-      const offsetTop = coverageSection.offsetTop - 80; // Account for header height
-      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+    // Navigate to home if not there, then scroll
+    if (window.location.pathname !== '/') {
+      window.location.href = '/#package-selector';
+    } else {
+      const packageSection = document.querySelector('[data-section="package-selector"]');
+      if (packageSection) {
+        const offsetTop = packageSection.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        });
+      }
     }
   };
   return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -32,8 +40,8 @@ const Hero = () => {
             <Button variant="hero" size="lg" className="px-8 py-6 text-lg" onClick={scrollToCoveragePackages}>
               Start a Campaign
             </Button>
-            <Button variant="outline" size="lg" className="px-8 py-6 text-lg">
-              View Our Services
+            <Button variant="outline" size="lg" className="px-8 py-6 text-lg" asChild>
+              <a href="/services">View Our Services</a>
             </Button>
           </div>
         </div>
