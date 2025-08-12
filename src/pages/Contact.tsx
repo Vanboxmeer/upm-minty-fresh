@@ -1,9 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
 const Contact = () => {
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Header />
       
       <main className="pt-24 pb-16">
@@ -28,10 +26,7 @@ const Contact = () => {
                     <p className="text-muted-foreground mb-3">
                       Send us a detailed message about your marketing needs.
                     </p>
-                    <a 
-                      href="mailto:unitedpress.media@gmail.com"
-                      className="text-primary hover:underline font-medium"
-                    >
+                    <a href="mailto:unitedpress.media@gmail.com" className="text-primary hover:underline font-medium">
                       unitedpress.media@gmail.com
                     </a>
                   </div>
@@ -44,14 +39,7 @@ const Contact = () => {
                     <p className="text-muted-foreground mb-3">
                       Quick questions? Chat with us directly on Telegram.
                     </p>
-                    <a 
-                      href="https://t.me/upressagency"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:underline font-medium"
-                    >
-                      @upressagency
-                    </a>
+                    <a href="https://t.me/upressagency" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">@unitedpressmedia</a>
                   </div>
                   
                   <div className="bg-card p-6 rounded-lg border">
@@ -96,13 +84,8 @@ const Contact = () => {
                 
                 {/* Redirect to home page contact form */}
                 <div className="bg-muted p-8 rounded-lg text-center">
-                  <p className="mb-4">
-                    Use our comprehensive contact form on the homepage to send us a detailed message.
-                  </p>
-                  <a 
-                    href="/#contact-form"
-                    className="inline-block bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity"
-                  >
+                  <p className="mb-4">Use our package and subscription selector to let us know what you're looking for.</p>
+                  <a href="/#contact-form" className="inline-block bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
                     Go to Contact Form
                   </a>
                 </div>
@@ -141,16 +124,10 @@ const Contact = () => {
                 Join hundreds of satisfied clients who have amplified their brand reach with UPM.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a 
-                  href="/services"
-                  className="inline-block bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity"
-                >
+                <a href="/services" className="inline-block bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
                   View Our Services
                 </a>
-                <a 
-                  href="/case-studies"
-                  className="inline-block border border-primary text-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary hover:text-primary-foreground transition-colors"
-                >
+                <a href="/case-studies" className="inline-block border border-primary text-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary hover:text-primary-foreground transition-colors">
                   See Case Studies
                 </a>
               </div>
@@ -160,8 +137,6 @@ const Contact = () => {
       </main>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Contact;
