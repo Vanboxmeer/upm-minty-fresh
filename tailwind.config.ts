@@ -86,11 +86,26 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'logo-fill': {
+					'0%': {
+						filter: 'grayscale(1) brightness(0.3)',
+						transform: 'scale(0.98)'
+					},
+					'50%': {
+						filter: 'grayscale(0.5) brightness(0.7)',
+						transform: 'scale(1)'
+					},
+					'100%': {
+						filter: 'grayscale(0) brightness(1)',
+						transform: 'scale(1)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'logo-fill': 'logo-fill 1.2s ease-out'
 			}
 		}
 	},

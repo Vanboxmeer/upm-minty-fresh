@@ -38,11 +38,13 @@ const Header = () => {
       <div className="container mx-auto px-4 py-2 flex items-center justify-between">
         <div className="flex items-center">
           <a href="/" className="block">
-            <img 
-              src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
-              alt="UPM Logo" 
-              className="h-12 w-auto transition-transform duration-200 hover:scale-105"
-            />
+            <div className="relative overflow-hidden">
+              <img 
+                src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
+                alt="UPM Logo" 
+                className="h-12 w-auto transition-transform duration-200 hover:scale-105 animate-logo-fill"
+              />
+            </div>
           </a>
         </div>
         
