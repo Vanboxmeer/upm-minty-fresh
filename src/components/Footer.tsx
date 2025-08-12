@@ -162,6 +162,8 @@ const Footer = () => {
           <div className="mt-4 text-center">
             <p className="text-sm opacity-80">
               Or reach us on Telegram: <a href="https://t.me/unitedpressmedia" className="text-primary hover:underline">@unitedpressmedia</a>
+              <br />
+              Or send us an Email: <a href="mailto:unitedpress.media@gmail.com" className="text-primary hover:underline">unitedpress.media@gmail.com</a>
               {selectionSummary && <span className="block mt-1 text-xs opacity-60">You can forward your selection details to our Telegram for quick assistance.</span>}
             </p>
           </div>
