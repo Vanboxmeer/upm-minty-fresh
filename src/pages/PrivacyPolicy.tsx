@@ -1,9 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
 const PrivacyPolicy = () => {
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Header />
       
       <main className="pt-24 pb-16">
@@ -12,9 +10,7 @@ const PrivacyPolicy = () => {
             <h1 className="text-4xl md:text-5xl font-bold text-center mb-8">
               Privacy Policy
             </h1>
-            <p className="text-center text-muted-foreground mb-12">
-              Last updated: January 12, 2025
-            </p>
+            <p className="text-center text-muted-foreground mb-12">Last updated: August 11, 2025</p>
             
             <div className="prose prose-lg max-w-none space-y-8">
               <section>
@@ -137,8 +133,8 @@ const PrivacyPolicy = () => {
                 </p>
                 <div className="bg-muted p-6 rounded-lg">
                   <p><strong>United Press Media</strong></p>
-                  <p>Email: unitedpress.media@gmail.com</p>
-                  <p>Telegram: <a href="https://t.me/unitedpressmedia" className="text-primary hover:underline">@unitedpressmedia</a></p>
+                  <p>Email: contact@unitedpress.media</p>
+                  <p>Telegram: <a href="https://t.me/upressagency" className="text-primary hover:underline">@upressagency</a></p>
                 </div>
               </section>
             </div>
@@ -147,8 +143,6 @@ const PrivacyPolicy = () => {
       </main>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default PrivacyPolicy;
