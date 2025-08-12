@@ -17,22 +17,22 @@ const Membership = () => {
     name: "Silver Membership Plan",
     subtitle: "3.45%",
     price: "$250 USD",
-    period: "per month minimum",
+    period: "per month",
     description: "Designed for medium sized campaigns with reduced service fees",
     features: ["Members media deck", "Campaign builder", "Order facilitation", "Quote builder and shortlist assistance", "KPI tracking", "Dedicated account manager and campaign advisor", "Managed Brave Ads and Telegram Ads", "KOL communications", "Press negotiations", "Silver members pricing - service fees reduced to just 3.45%"],
     excludedFeatures: [],
     cta: "Start Silver Plan",
-    popular: false
+    popular: true
   }, {
     name: "Gold Membership Plan",
     subtitle: "1%",
     price: "$995 USD",
-    period: "per month minimum",
+    period: "per month",
     description: "Designed for large and highly active marketing campaigns requiring administrative work",
     features: ["Members media deck", "Campaign builder", "Order facilitation", "Quote builder and shortlist assistance", "KPI tracking", "Dedicated account manager and campaign advisor", "Managed Brave Ads and Telegram Ads", "KOL communications", "Press negotiations", "Gold members pricing - service fees reduced to just 1%"],
     excludedFeatures: [],
     cta: "Start Gold Plan",
-    popular: true
+    popular: false
   }];
   return <section id="membership" className="py-20 bg-background">
       <div className="container mx-auto px-4">
