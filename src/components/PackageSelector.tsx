@@ -147,10 +147,9 @@ const PackageSelector = () => {
             {coveragePackages.map((pkg, index) => (
               <Card 
                 key={index} 
-                className={`cursor-pointer transition-all hover:shadow-lg ${
+                className={`transition-all hover:shadow-lg ${
                   selectedPackage === pkg.name ? 'border-primary bg-primary/5' : ''
                 } ${pkg.popular ? 'border-primary/50' : ''}`}
-                onClick={() => setSelectedPackage(pkg.name)}
               >
                 {pkg.popular && (
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
@@ -164,7 +163,7 @@ const PackageSelector = () => {
                   <CardDescription>{pkg.description}</CardDescription>
                 </CardHeader>
 
-                <CardContent>
+                <CardContent className="space-y-4">
                   <ul className="space-y-2 text-sm">
                     {pkg.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start gap-2">
@@ -173,6 +172,14 @@ const PackageSelector = () => {
                       </li>
                     ))}
                   </ul>
+                  
+                  <Button 
+                    variant={selectedPackage === pkg.name ? "default" : "outline"}
+                    className="w-full"
+                    onClick={() => setSelectedPackage(pkg.name)}
+                  >
+                    {selectedPackage === pkg.name ? "Selected" : "Select Option"}
+                  </Button>
                 </CardContent>
               </Card>
             ))}
@@ -186,10 +193,9 @@ const PackageSelector = () => {
             {subscriptionPlans.map((plan, index) => (
               <Card 
                 key={index} 
-                className={`cursor-pointer transition-all hover:shadow-lg ${
+                className={`transition-all hover:shadow-lg ${
                   selectedSubscription === plan.name ? 'border-primary bg-primary/5' : ''
                 } ${plan.popular ? 'border-primary/50' : ''}`}
-                onClick={() => setSelectedSubscription(plan.name)}
               >
                 {plan.popular && (
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
@@ -204,7 +210,7 @@ const PackageSelector = () => {
                   <CardDescription>{plan.description}</CardDescription>
                 </CardHeader>
 
-                <CardContent>
+                <CardContent className="space-y-4">
                   <div className="space-y-3">
                     <div>
                       <h5 className="font-medium text-green-600 text-sm mb-2">Included:</h5>
@@ -232,6 +238,14 @@ const PackageSelector = () => {
                       </div>
                     )}
                   </div>
+                  
+                  <Button 
+                    variant={selectedSubscription === plan.name ? "default" : "outline"}
+                    className="w-full"
+                    onClick={() => setSelectedSubscription(plan.name)}
+                  >
+                    {selectedSubscription === plan.name ? "Selected" : "Select Option"}
+                  </Button>
                 </CardContent>
               </Card>
             ))}
