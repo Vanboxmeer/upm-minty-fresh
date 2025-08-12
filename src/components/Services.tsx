@@ -47,7 +47,16 @@ Crypto Projects</span>
               </div>
             </div>
             
-            <Button variant="cta" size="lg">
+            <Button variant="cta" size="lg" onClick={() => {
+              const packageSection = document.querySelector('[data-section="package-selector"]');
+              if (packageSection) {
+                const offsetTop = packageSection.getBoundingClientRect().top + window.pageYOffset - 80;
+                window.scrollTo({
+                  top: offsetTop,
+                  behavior: 'smooth'
+                });
+              }
+            }}>
               Get Started Today
             </Button>
           </div>
