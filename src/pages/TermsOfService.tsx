@@ -1,9 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
 const TermsOfService = () => {
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Header />
       
       <main className="pt-24 pb-16">
@@ -19,16 +17,12 @@ const TermsOfService = () => {
             <div className="prose prose-lg max-w-none space-y-8">
               <section>
                 <h2 className="text-2xl font-semibold mb-4">Agreement to Terms</h2>
-                <p>
-                  By accessing and using United Press Media's website and services, you agree to be bound 
-                  by these Terms of Service and all applicable laws and regulations. If you do not agree 
-                  with any of these terms, you are prohibited from using our services.
-                </p>
+                <p>By accessing and using UnitedPress.Media's website and services, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using our services. The words “you” and “your” refer to each customer, website visitor, clients, or application user, “we”, “us” and “our” refer to ‘UPM’ (unitedpress.media) and “Services” and or “Coverages” refers to all services provided by us. UPM (unitedpress.media) is operated by BVB Management Inc – Charles Court, 1st Floor, 189 Main Street, P.O. Box 4406, Tortola VG1110 British Virgin Islands.</p>
               </section>
 
               <section>
                 <h2 className="text-2xl font-semibold mb-4">Description of Services</h2>
-                <p className="mb-4">United Press Media provides:</p>
+                <p className="mb-4">UPM provides:</p>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>Press release distribution services</li>
                   <li>Tier-1 media placement coordination</li>
@@ -63,9 +57,9 @@ const TermsOfService = () => {
                 <h2 className="text-2xl font-semibold mb-4">Payment Terms</h2>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>Payment is required in advance for all services</li>
-                  <li>All prices are in USD unless otherwise specified</li>
+                  <li>All prices are in USD unless otherwise specified, however payment can be made in crypto and fiat options</li>
                   <li>Refunds are subject to our refund policy outlined below</li>
-                  <li>We reserve the right to change pricing with 30 days notice</li>
+                  
                   <li>Late payments may result in service suspension</li>
                 </ul>
               </section>
@@ -98,8 +92,6 @@ const TermsOfService = () => {
                     <li><strong>Partial delivery:</strong> Prorated refund for undelivered services</li>
                     <li><strong>Service failures:</strong> Refund if we fail to deliver agreed-upon services</li>
                     <li><strong>No refunds:</strong> Once press releases are distributed or content is published</li>
-                    <li><strong>Service fees and subscription fees are non refundable</strong></li>
-                    <li><strong>Non communication for 3 months results in loss of remaining budget</strong></li>
                   </ul>
                   
                   <p className="mt-4">
@@ -131,9 +123,9 @@ const TermsOfService = () => {
                 <h2 className="text-2xl font-semibold mb-4">Termination</h2>
                 <p className="mb-4">Either party may terminate services:</p>
                 <ul className="list-disc pl-6 space-y-2">
-                  <li>With 30 days written notice for ongoing services</li>
+                  <li>We may terminate services:</li>
                   <li>Immediately for breach of these terms</li>
-                  <li>Immediately for non-payment</li>
+                  
                   <li>For any reason with mutual agreement</li>
                 </ul>
               </section>
@@ -171,8 +163,8 @@ const TermsOfService = () => {
                 </p>
                 <div className="bg-muted p-6 rounded-lg">
                   <p><strong>United Press Media</strong></p>
-                  <p>Email: unitedpress.media@gmail.com</p>
-                  <p>Telegram: <a href="https://t.me/unitedpressmedia" className="text-primary hover:underline">@unitedpressmedia</a></p>
+                  <p>Email: contact@unitedpress.media</p>
+                  <p>Telegram: <a href="https://t.me/upressagency" className="text-primary hover:underline">@upressagency</a></p>
                 </div>
               </section>
             </div>
@@ -181,8 +173,6 @@ const TermsOfService = () => {
       </main>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default TermsOfService;
