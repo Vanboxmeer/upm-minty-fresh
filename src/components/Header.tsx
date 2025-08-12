@@ -29,7 +29,7 @@ const Header = () => {
     }
   };
 
-  const scrollToMembership = () => scrollToSection('membership-plans');
+  const scrollToMembership = () => scrollToSection('membership');
   const scrollToCoveragePackages = () => scrollToSection('coverage-packages');
   const scrollToContact = () => scrollToSection('contact-form');
 
