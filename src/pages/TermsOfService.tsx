@@ -98,6 +98,8 @@ const TermsOfService = () => {
                     <li><strong>Partial delivery:</strong> Prorated refund for undelivered services</li>
                     <li><strong>Service failures:</strong> Refund if we fail to deliver agreed-upon services</li>
                     <li><strong>No refunds:</strong> Once press releases are distributed or content is published</li>
+                    <li><strong>Service fees and subscription fees are non refundable</strong></li>
+                    <li><strong>Non communication for 3 months results in loss of remaining budget</strong></li>
                   </ul>
                   
                   <p className="mt-4">
