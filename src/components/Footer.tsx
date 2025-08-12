@@ -32,19 +32,16 @@ const Footer = () => {
     
     if (packageSelection) {
       const decodedSelection = safeDecodeURIComponent(packageSelection);
-      const summary = `SELECTED COVERAGE PACKAGE:\n${decodedSelection}\n\n`;
-      setSelectionSummary(summary);
-      setMessage(summary + "I'm interested in this package. Please contact me with more details.");
+      setSelectionSummary(decodedSelection);
+      setMessage("I'm interested in this package. Please contact me with more details.");
     } else if (membershipSelection) {
       const decodedSelection = safeDecodeURIComponent(membershipSelection);
-      const summary = `SELECTED SUBSCRIPTION PLAN:\n${decodedSelection}\n\n`;
-      setSelectionSummary(summary);
-      setMessage(summary + "I'm interested in this membership plan. Please contact me with more details.");
+      setSelectionSummary(decodedSelection);
+      setMessage("I'm interested in this membership plan. Please contact me with more details.");
     } else if (generalSelection) {
       const decodedSelection = safeDecodeURIComponent(generalSelection);
-      const summary = `SELECTED PLAN:\n${decodedSelection}\n\n`;
-      setSelectionSummary(summary);
-      setMessage(summary + "I'm interested in this plan. Please contact me with more details.");
+      setSelectionSummary(decodedSelection);
+      setMessage("I'm interested in this plan. Please contact me with more details.");
     }
   }, []);
 
@@ -69,7 +66,7 @@ const Footer = () => {
           lastName,
           email,
           phone,
-          message: selectionSummary + message,
+          message: selectionSummary ? `SELECTED: ${selectionSummary}\n\n${message}` : message,
         },
       });
 
