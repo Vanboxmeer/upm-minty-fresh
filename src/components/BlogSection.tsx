@@ -17,7 +17,7 @@ const BlogSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {recent.map((post) => (
             <Card key={post.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
               <div className={`${post.color} h-2`}></div>

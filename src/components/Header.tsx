@@ -67,7 +67,13 @@ const Header = () => {
         </div>
         
         {/* Mobile Menu Button */}
-        
+        <button 
+          className="md:hidden p-2"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle mobile menu"
+        >
+          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
       </div>
       
       {/* Mobile Navigation */}

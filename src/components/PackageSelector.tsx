@@ -135,7 +135,7 @@ const PackageSelector = () => {
         {/* Coverage Package Selection */}
         <div className="mb-16">
           <h3 className="text-2xl font-bold text-center mb-8">Step 1: Choose Coverage Package</h3>
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {coveragePackages.map((pkg, index) => (
               <Card 
                 key={index} 
@@ -181,7 +181,7 @@ const PackageSelector = () => {
         {/* Subscription Level Selection */}
         <div className="mb-16">
           <h3 className="text-2xl font-bold text-center mb-8">Step 2: Choose Subscription Level</h3>
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {subscriptionPlans.map((plan, index) => (
               <Card 
                 key={index} 
@@ -286,16 +286,16 @@ const PackageSelector = () => {
             <Card className="p-6 bg-primary/5 border-primary">
               <h3 className="text-xl font-bold mb-4 text-center">Your Selection Summary</h3>
               <div className="space-y-2 mb-6">
-                <div className="flex justify-between">
+                <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                   <span>Coverage Package:</span>
                   <span className="font-semibold">{selectedPackage} - {coveragePackages.find(p => p.name === selectedPackage)?.price}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                   <span>Subscription Level:</span>
                   <span className="font-semibold">{selectedSubscription}</span>
                 </div>
                 {subscriptionPlans.find(p => p.name === selectedSubscription)?.hasBilling && (
-                  <div className="flex justify-between">
+                  <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                     <span>Billing:</span>
                     <span className="font-semibold capitalize">
                       {billingFrequency} - ${billingFrequency === "monthly" 

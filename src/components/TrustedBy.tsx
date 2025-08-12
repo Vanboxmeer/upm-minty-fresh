@@ -41,7 +41,7 @@ UPM Services</span>
           </h2>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {projects.map((project, index) => <div key={index} className="text-center space-y-4">
               <div className="flex justify-center mb-4">
                 <img src={project.logo} alt={project.name} className="h-16 w-auto object-contain" />
