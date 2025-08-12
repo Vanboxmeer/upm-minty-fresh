@@ -31,7 +31,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Send notification email to team
     const teamNotification = await resend.emails.send({
       from: "UPM Contact Form <noreply@unitedpress.media>",
-      to: ["contact@unitedpress.media"],
+      to: ["unitedpress.media@gmail.com"],
       subject: `New Contact Form Submission from ${firstName} ${lastName}`,
       html: `
         <h2>New Contact Form Submission</h2>
