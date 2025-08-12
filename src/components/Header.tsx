@@ -6,7 +6,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const scrollToMembership = () => {
-    const membershipSection = document.getElementById('membership');
+    const membershipSection = document.getElementById('membership-plans');
     if (membershipSection) {
       const offsetTop = membershipSection.offsetTop - 80; // Account for header height
       window.scrollTo({ top: offsetTop, behavior: 'smooth' });
