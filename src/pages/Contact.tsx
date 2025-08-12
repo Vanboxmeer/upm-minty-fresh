@@ -29,10 +29,10 @@ const Contact = () => {
                       Send us a detailed message about your marketing needs.
                     </p>
                     <a 
-                      href="mailto:contact@unitedpress.media"
+                      href="mailto:unitedpress.media@gmail.com"
                       className="text-primary hover:underline font-medium"
                     >
-                      contact@unitedpress.media
+                      unitedpress.media@gmail.com
                     </a>
                   </div>
                   
