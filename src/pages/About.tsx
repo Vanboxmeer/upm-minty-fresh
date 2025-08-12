@@ -67,10 +67,6 @@ const About = () => {
                   <ul className="space-y-3">
                     <li className="flex items-start">
                       <span className="text-primary mr-2">✓</span>
-                      Proven track record with hundreds of successful campaigns
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-primary mr-2">✓</span>
                       Extensive network of media contacts and content creators
                     </li>
                     <li className="flex items-start">
