@@ -182,7 +182,7 @@ const Payment = ({
         </div>
 
         <div className="text-center mt-8 space-y-4">
-          <p className="text-sm text-muted-foreground">All payments are processed securely. contact@unitedpress.media for custom payment arrangements.</p>
+          <p className="text-sm text-muted-foreground">All payments are processed securely. unitedpress.media@gmail.com for custom payment arrangements.</p>
           <Button 
             variant="outline" 
             onClick={() => {
