@@ -14,47 +14,39 @@ const PackageSelector = () => {
     {
       name: "Growth",
       price: "$5,000",
-      description: "Perfect for emerging projects looking to establish market presence",
+      description: "Perfect for emerging projects looking to establish market presence. Use your budget for things such as:",
       features: [
-        "Press Release Distribution to 150+ crypto & tech outlets",
-        "3-5 KOL Collaborations with verified micro-influencers",
-        "Feature placement in 2-3 tier 2 crypto publications",
-        "Social media amplification across key platforms",
-        "Basic analytics and performance reporting",
-        "Email campaign to targeted investor lists"
+        "Press release distribution to key outlets",
+        "Collaborations with micro-influencers",
+        "Feature placements in industry publications",
+        "Social media amplification",
+        "Targeted email campaigns"
       ],
       popular: false
     },
     {
       name: "Scale",
       price: "$25,000",
-      description: "Comprehensive marketing for projects ready to scale significantly",
+      description: "Comprehensive marketing for projects ready to scale significantly. Use your budget for things such as:",
       features: [
-        "Press Release Distribution to 500+ premium outlets worldwide",
-        "8-12 Premium KOL Partnerships with top-tier influencers",
-        "Executive interviews in 4-6 major crypto publications",
-        "Feature articles in Forbes, CoinDesk, and Decrypt",
-        "Podcast appearances on leading crypto shows",
-        "Community AMA hosting and event coordination",
-        "Dedicated account manager and priority support",
-        "Advanced analytics with ROI tracking"
+        "Global press release distribution",
+        "Partnerships with a top-tier influencer",
+        "Collaborations with multiple micro-influencers",
+        "Executive interviews and features in major publications",
+        "Feature articles in leading industry sites"
       ],
       popular: true
     },
     {
       name: "Dominate",
       price: "$100,000",
-      description: "Maximum exposure package for industry-leading projects",
+      description: "Maximum exposure package for industry-leading projects. Use your budget for things such as:",
       features: [
-        "Press Release Distribution to 1000+ global media outlets",
-        "20+ Elite KOL Collaborations with celebrity endorsers",
-        "Cover stories in top-tier publications (Wall Street Journal, Bloomberg)",
-        "TV interviews on CNBC, Fox Business, and Bloomberg TV",
-        "Speaking slots at major industry conferences",
-        "Exclusive media tours and investor roadshows",
-        "Custom content creation and thought leadership articles",
-        "White-glove service with 24/7 priority support",
-        "Direct access to tier-1 journalists and editors"
+        "Global media outreach to 500+ outlets",
+        "Collaborations with multiple top-tier influencers",
+        "Collaborations with small and medium sized content creators",
+        "Coverage in multiple tier-1 media publications",
+        "Budget gives room for a longer campaign or larger media blitz"
       ],
       popular: false
     }
@@ -136,7 +128,7 @@ const PackageSelector = () => {
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Select both a coverage package and subscription level to get started. 
-            First choose your marketing package, then select your membership level for service fees and features.
+            Choose your marketing package below and use your budget for the listed activities.
           </p>
         </div>
 
