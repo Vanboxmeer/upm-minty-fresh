@@ -166,17 +166,12 @@ const PackageSelector = () => {
 
                 <CardContent>
                   <ul className="space-y-2 text-sm">
-                    {pkg.features.slice(0, 4).map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-2">
-                        <Check className="h-4 w-4 text-primary flex-shrink-0" />
+                    {pkg.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start gap-2">
+                        <Check className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
                         <span>{feature}</span>
                       </li>
                     ))}
-                    {pkg.features.length > 4 && (
-                      <li className="text-muted-foreground text-xs">
-                        +{pkg.features.length - 4} more features
-                      </li>
-                    )}
                   </ul>
                 </CardContent>
               </Card>
@@ -214,17 +209,12 @@ const PackageSelector = () => {
                     <div>
                       <h5 className="font-medium text-green-600 text-sm mb-2">Included:</h5>
                       <ul className="space-y-1 text-xs">
-                        {plan.features.slice(0, 3).map((feature, idx) => (
+                        {plan.features.map((feature, idx) => (
                           <li key={idx} className="flex items-start gap-2">
                             <Check className="h-3 w-3 text-green-600 flex-shrink-0 mt-0.5" />
                             <span>{feature}</span>
                           </li>
                         ))}
-                        {plan.features.length > 3 && (
-                          <li className="text-muted-foreground text-xs">
-                            +{plan.features.length - 3} more features
-                          </li>
-                        )}
                       </ul>
                     </div>
                     
@@ -232,7 +222,7 @@ const PackageSelector = () => {
                       <div>
                         <h5 className="font-medium text-red-600 text-sm mb-2">Not Included:</h5>
                         <ul className="space-y-1 text-xs">
-                          {plan.excludedFeatures.slice(0, 2).map((feature, idx) => (
+                          {plan.excludedFeatures.map((feature, idx) => (
                             <li key={idx} className="flex items-start gap-2">
                               <X className="h-3 w-3 text-red-600 flex-shrink-0 mt-0.5" />
                               <span className="text-muted-foreground">{feature}</span>
