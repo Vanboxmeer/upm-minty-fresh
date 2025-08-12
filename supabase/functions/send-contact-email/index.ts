@@ -28,8 +28,9 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Sending contact email:", { firstName, lastName, email });
 
-    const emailResponse = await resend.emails.send({
-      from: "UPM Contact Form <onboarding@resend.dev>",
+    // Send notification email to team
+    const teamNotification = await resend.emails.send({
+      from: "UPM Contact Form <noreply@unitedpress.media>",
       to: ["contact@unitedpress.media"],
       subject: `New Contact Form Submission from ${firstName} ${lastName}`,
       html: `
@@ -44,9 +45,35 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    console.log("Email sent successfully:", emailResponse);
+    // Send confirmation email to user
+    const userConfirmation = await resend.emails.send({
+      from: "United Press Media <noreply@unitedpress.media>",
+      to: [email],
+      subject: "Thank you for contacting United Press Media",
+      html: `
+        <h2>Thank you for your inquiry!</h2>
+        <p>Dear ${firstName},</p>
+        <p>We have received your message and will get back to you within 24 hours.</p>
+        <p><strong>Your message:</strong></p>
+        <p style="background-color: #f5f5f5; padding: 15px; border-radius: 5px;">${message.replace(/\n/g, '<br>')}</p>
+        <p>Best regards,<br>The United Press Media Team</p>
+        <hr>
+        <p style="font-size: 12px; color: #666;">
+          United Press Media<br>
+          Digital Marketing Services<br>
+          <a href="https://unitedpress.media">unitedpress.media</a>
+        </p>
+      `,
+    });
 
-    return new Response(JSON.stringify({ success: true, emailResponse }), {
+    console.log("Team notification sent:", teamNotification);
+    console.log("User confirmation sent:", userConfirmation);
+
+    return new Response(JSON.stringify({ 
+      success: true, 
+      teamNotification, 
+      userConfirmation 
+    }), {
       status: 200,
       headers: {
         "Content-Type": "application/json",
