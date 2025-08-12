@@ -164,7 +164,7 @@ const CaseStudies = () => {
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">Explore example case studies to see how our strategic marketing campaigns can help brands achieve their goals and exceed expectations.</p>
             <div className="flex justify-center gap-4 text-sm text-muted-foreground">
               <span>• Client names anonymized for privacy</span>
-              <span>• All metrics verified</span>
+              <span>• Simulated metrics</span>
               <span>• Results vary by package size</span>
             </div>
           </div>
