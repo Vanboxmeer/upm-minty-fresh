@@ -10,8 +10,15 @@ const Header = () => {
 
   const scrollToSection = (sectionId: string) => {
     if (location.pathname !== '/') {
-      // Navigate to homepage with hash
-      navigate(`/#${sectionId}`);
+      // Navigate to homepage first, then scroll after navigation completes
+      navigate('/');
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          const offsetTop = section.offsetTop - 80;
+          window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+        }
+      }, 100);
     } else {
       // Already on homepage, just scroll
       const section = document.getElementById(sectionId);
