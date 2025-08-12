@@ -62,7 +62,6 @@ const Header = () => {
           </nav>
           
           <div className="flex items-center space-x-4">
-            <Button variant="outline" size="sm">Login</Button>
             <Button variant="cta" size="sm" onClick={scrollToMembership}>Start Subscription</Button>
           </div>
         </div>
@@ -80,7 +79,6 @@ const Header = () => {
             <a href="/blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
             <button onClick={scrollToCoveragePackages} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer text-left">Start a Campaign</button>
             <div className="flex flex-col space-y-2 pt-4 border-t border-border">
-              <Button variant="outline" size="sm">Login</Button>
               <Button variant="cta" size="sm" onClick={scrollToMembership}>Start Subscription</Button>
             </div>
           </nav>
