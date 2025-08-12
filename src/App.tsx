@@ -14,6 +14,11 @@ import PaymentSilver from "./pages/PaymentSilver";
 import PaymentGrowth from "./pages/PaymentGrowth";
 import PaymentScale from "./pages/PaymentScale";
 import PaymentDominate from "./pages/PaymentDominate";
+import About from "./pages/About";
+import HelpCenter from "./pages/HelpCenter";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +41,11 @@ const App = () => (
           <Route path="/payment/growth" element={<PaymentGrowth />} />
           <Route path="/payment/scale" element={<PaymentScale />} />
           <Route path="/payment/dominate" element={<PaymentDominate />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/help-center" element={<HelpCenter />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/contact" element={<Contact />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

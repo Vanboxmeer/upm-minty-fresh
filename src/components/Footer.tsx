@@ -190,20 +190,19 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Company</h4>
             <ul className="space-y-2 text-sm opacity-80">
-              <li><a href="#" className="hover:text-primary transition-colors">About Us</a></li>
+              <li><a href="/about" className="hover:text-primary transition-colors">About Us</a></li>
               <li><a href="/case-studies" className="hover:text-primary transition-colors">Case Studies</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Blog</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Contact</a></li>
+              <li><a href="/blog" className="hover:text-primary transition-colors">Blog</a></li>
+              <li><a href="/contact" className="hover:text-primary transition-colors">Contact</a></li>
             </ul>
           </div>
           
           <div>
             <h4 className="font-semibold mb-4">Support</h4>
             <ul className="space-y-2 text-sm opacity-80">
-              <li><a href="#" className="hover:text-primary transition-colors">Help Center</a></li>
-              
-              <li><a href="#" className="hover:text-primary transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Terms of Service</a></li>
+              <li><a href="/help-center" className="hover:text-primary transition-colors">Help Center</a></li>
+              <li><a href="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</a></li>
+              <li><a href="/terms-of-service" className="hover:text-primary transition-colors">Terms of Service</a></li>
             </ul>
           </div>
         </div>
