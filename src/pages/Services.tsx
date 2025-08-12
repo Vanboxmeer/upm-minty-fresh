@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Services from "@/components/Services";
-import Pricing from "@/components/Pricing";
+import PackageSelector from "@/components/PackageSelector";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -45,7 +45,16 @@ const ServicesPage = () => {
             From KOL collaborations to press releases and media features, we provide 
             comprehensive marketing solutions with packages ranging from $5K to $100K.
           </p>
-          <Button variant="cta" size="lg">
+          <Button variant="cta" size="lg" onClick={() => {
+            const packageSection = document.querySelector('[data-section="package-selector"]');
+            if (packageSection) {
+              const offsetTop = packageSection.getBoundingClientRect().top + window.pageYOffset - 80;
+              window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+              });
+            }
+          }}>
             View Our Packages
           </Button>
         </div>
@@ -100,7 +109,7 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      <Pricing />
+      <PackageSelector />
       <Footer />
     </div>;
 };
