@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Link } from "react-router-dom";
-import { blogPosts } from "@/data/blogPosts";
+import { getVisiblePosts, convertToLegacyPost } from "@/data/enhancedBlogPosts";
 import { useEffect } from "react";
 const Blog = () => {
   useEffect(() => {
@@ -44,7 +44,7 @@ const Blog = () => {
         <div className="mb-8">
           <h2 className="text-2xl font-semibold mb-6">Latest Articles</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {blogPosts.map((post) => (
+            {getVisiblePosts().map(convertToLegacyPost).map((post) => (
               <Card key={post.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
                 <div className={`${post.color} h-2`}></div>
                 <Link to={`/blog/${post.slug}`} className="block focus:outline-none">

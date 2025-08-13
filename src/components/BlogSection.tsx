@@ -3,9 +3,10 @@ import { Button } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { blogPosts } from "@/data/blogPosts";
+import { getVisiblePosts, convertToLegacyPost } from "@/data/enhancedBlogPosts";
 const BlogSection = () => {
-  const recent = blogPosts.slice(0, 3);
+  const allPosts = getVisiblePosts();
+  const recent = allPosts.slice(0, 3).map(convertToLegacyPost);
 
   return (
     <section className="py-16 bg-muted/50">

@@ -2,8 +2,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getPostBySlug } from "@/data/blogPosts";
+import { getEnhancedPostBySlug } from "@/data/enhancedBlogPosts";
 import { Card } from "@/components/ui/card";
+import NewsletterSignup from "@/components/NewsletterSignup";
+import ReactMarkdown from 'react-markdown';
 
 const setMeta = (title: string, description: string, canonical: string, imageUrl?: string) => {
   document.title = title;
@@ -43,7 +45,7 @@ const setMeta = (title: string, description: string, canonical: string, imageUrl
 
 const BlogPost = () => {
   const { slug } = useParams();
-  const post = slug ? getPostBySlug(slug) : undefined;
+  const post = slug ? getEnhancedPostBySlug(slug) : undefined;
 
   useEffect(() => {
     if (post) {
@@ -98,11 +100,14 @@ const BlogPost = () => {
             />
           </figure>
 
-          <section className="prose prose-neutral dark:prose-invert max-w-3xl mx-auto">
-            {post.content.map((para, idx) => (
-              <p key={idx}>{para}</p>
-            ))}
+          <section className="prose prose-neutral dark:prose-invert max-w-3xl mx-auto mb-12">
+            <ReactMarkdown>{post.content.markdown}</ReactMarkdown>
           </section>
+
+          {/* Newsletter Signup */}
+          <div className="max-w-2xl mx-auto">
+            <NewsletterSignup variant="blog" />
+          </div>
         </article>
       </main>
       <Footer />
