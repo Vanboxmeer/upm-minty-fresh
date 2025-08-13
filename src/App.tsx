@@ -9,8 +9,6 @@ import Services from "./pages/Services";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import CaseStudies from "./pages/CaseStudies";
-import PaymentGold from "./pages/PaymentGold";
-import PaymentSilver from "./pages/PaymentSilver";
 import PaymentGrowth from "./pages/PaymentGrowth";
 import PaymentScale from "./pages/PaymentScale";
 import PaymentDominate from "./pages/PaymentDominate";
@@ -36,8 +34,6 @@ const App = () => (
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/case-studies" element={<CaseStudies />} />
-          <Route path="/payment/gold" element={<PaymentGold />} />
-          <Route path="/payment/silver" element={<PaymentSilver />} />
           <Route path="/payment/growth" element={<PaymentGrowth />} />
           <Route path="/payment/scale" element={<PaymentScale />} />
           <Route path="/payment/dominate" element={<PaymentDominate />} />

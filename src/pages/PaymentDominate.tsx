@@ -1,15 +1,12 @@
-import Header from "@/components/Header";
-import Payment from "@/components/Payment";
-import Footer from "@/components/Footer";
+import { useEffect } from "react";
 
 const PaymentDominate = () => {
-  return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <Payment planName="Dominate Package" planType="dominate" />
-      <Footer />
-    </div>
-  );
+  useEffect(() => {
+    const packageDetails = encodeURIComponent("Package: Dominate Package - $100,000 (one-time)");
+    window.location.href = `/?selection=${packageDetails}#contact-form`;
+  }, []);
+
+  return null;
 };
 
 export default PaymentDominate;

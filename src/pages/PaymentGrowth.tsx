@@ -1,15 +1,12 @@
-import Header from "@/components/Header";
-import Payment from "@/components/Payment";
-import Footer from "@/components/Footer";
+import { useEffect } from "react";
 
 const PaymentGrowth = () => {
-  return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <Payment planName="Growth Package" planType="growth" />
-      <Footer />
-    </div>
-  );
+  useEffect(() => {
+    const packageDetails = encodeURIComponent("Package: Growth Package - $5,000 (one-time)");
+    window.location.href = `/?selection=${packageDetails}#contact-form`;
+  }, []);
+
+  return null;
 };
 
 export default PaymentGrowth;

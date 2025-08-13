@@ -1,9 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check, X } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 const Membership = () => {
-  const navigate = useNavigate();
   const membershipPlans = [{
     name: "On Demand",
     subtitle: "(non member)",
@@ -96,12 +94,8 @@ const Membership = () => {
                   contactSection.scrollIntoView({ behavior: 'smooth' });
                 }
               } else {
-                const routeMap: { [key: string]: string } = {
-                  "Silver Membership Plan": "/payment-silver",
-                  "Gold Membership Plan": "/payment-gold"
-                };
                 const membershipDetails = encodeURIComponent(`Membership: ${plan.name} - ${plan.price} ${plan.period || ""} (${plan.description})`);
-                navigate(`${routeMap[plan.name] || "/payment-silver"}?membership=${membershipDetails}`);
+                window.location.href = `/?selection=${membershipDetails}#contact-form`;
               }
             }}>
                   {plan.cta}

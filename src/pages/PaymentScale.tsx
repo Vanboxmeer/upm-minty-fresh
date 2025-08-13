@@ -1,15 +1,12 @@
-import Header from "@/components/Header";
-import Payment from "@/components/Payment";
-import Footer from "@/components/Footer";
+import { useEffect } from "react";
 
 const PaymentScale = () => {
-  return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <Payment planName="Scale Package" planType="scale" />
-      <Footer />
-    </div>
-  );
+  useEffect(() => {
+    const packageDetails = encodeURIComponent("Package: Scale Package - $25,000 (one-time)");
+    window.location.href = `/?selection=${packageDetails}#contact-form`;
+  }, []);
+
+  return null;
 };
 
 export default PaymentScale;
