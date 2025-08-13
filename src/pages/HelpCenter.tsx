@@ -6,35 +6,31 @@ const HelpCenter = () => {
   const faqs = [
     {
       question: "How long does it take to see results from a press release campaign?",
-      answer: "Typically, you'll start seeing initial results within 24-48 hours of publication. Full campaign results and analytics are usually available within 7-14 days."
+      answer: "Results can vary depending on your budget size, selected media coverages, campaign goals, market timing, and target audience. We'll work with you to track progress and provide updates throughout the campaign."
     },
     {
       question: "What's included in your KOL collaboration packages?",
-      answer: "Our KOL packages include influencer identification, outreach, content creation coordination, campaign management, and performance reporting. We handle the entire process from start to finish."
+      answer: "Our KOL packages typically cover influencer collaborations, content creation coordination, and campaign management from idea to completion. Let's discuss the specifics of your campaign to tailor our approach."
     },
     {
       question: "Can I see examples of previous work?",
-      answer: "Yes! Check out our Case Studies page to see detailed examples of successful campaigns we've executed for our clients across various industries."
+      answer: "We have example case studies that you can view which demonstrate our services on our website."
     },
     {
-      question: "Do you offer refunds if I'm not satisfied?",
-      answer: "We stand behind our work. If you're not satisfied with the deliverables outlined in your package, we'll work with you to make it right or provide appropriate compensation based on our terms of service."
+      question: "Do you offer refunds?",
+      answer: "If there has been no work on your campaign you can request a refund within the first 48 hours."
     },
     {
       question: "How do you select media outlets for press release distribution?",
-      answer: "We use a combination of factors including your target audience, industry relevance, outlet authority, and geographic reach to select the most appropriate media outlets for your campaign."
-    },
-    {
-      question: "Can I customize my package?",
-      answer: "Absolutely! While we offer standard packages, we can customize any package to better fit your specific needs and budget. Contact us to discuss your requirements."
+      answer: "We consider several factors when selecting media outlets, including relevance to your audience and campaign goals. Our goal is to find the best fit for your campaign. You will receive a media deck of options where you can shortlist any media outlets and content creators that you would like to be featured on or work with."
     },
     {
       question: "How do you measure campaign success?",
-      answer: "We provide comprehensive analytics including reach, impressions, engagement rates, website traffic, backlinks generated, and social media mentions. You'll receive detailed reports throughout and after your campaign."
+      answer: "We work with you to set and reach your KPIs. We set goals and we work to achieve them."
     },
     {
       question: "What industries do you work with?",
-      answer: "We work with businesses across all industries, including technology, finance, healthcare, e-commerce, crypto, gaming, and more. Our team has experience crafting campaigns for diverse sectors."
+      answer: "We work with businesses across various industries. Primarily AI, Gaming, and Web3 industries. Let's talk about your specific needs, and we'll see how we can help."
     }
   ];
 
