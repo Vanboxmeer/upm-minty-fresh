@@ -835,8 +835,7 @@ export const getEnhancedPostBySlug = (slug: string): EnhancedBlogPost | undefine
   return post && isPostVisible(post) ? post : undefined;
 };
 
-// Export for use in other files
-export { enhancedBlogPosts };
+// Already exported above at line 43
 
 // Convert to legacy format for backward compatibility
 export const convertToLegacyPost = (post: EnhancedBlogPost) => ({

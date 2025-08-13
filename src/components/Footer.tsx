@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -9,6 +10,7 @@ const Footer = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
+  const [subscribeToNewsletter, setSubscribeToNewsletter] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectionSummary, setSelectionSummary] = useState("");
   const { toast } = useToast();
@@ -72,6 +74,23 @@ const Footer = () => {
 
       if (error) throw error;
 
+      // Handle newsletter subscription if checked
+      if (subscribeToNewsletter) {
+        try {
+          await supabase.functions.invoke('subscribe-newsletter', {
+            body: {
+              email,
+              name: `${firstName} ${lastName}`,
+              source: "contact-form",
+              userAgent: navigator.userAgent
+            }
+          });
+        } catch (newsletterError) {
+          console.error("Newsletter subscription error:", newsletterError);
+          // Don't fail the main form if newsletter subscription fails
+        }
+      }
+
       toast({
         title: "Message Sent!",
         description: "Thank you for your message. We'll get back to you soon.",
@@ -83,6 +102,7 @@ const Footer = () => {
       setEmail("");
       setPhone("");
       setMessage("");
+      setSubscribeToNewsletter(false);
       setSelectionSummary("");
     } catch (error) {
       console.error("Error sending message:", error);
@@ -144,7 +164,24 @@ const Footer = () => {
               className="w-full p-3 rounded-md bg-white/20 border border-white/30 text-white placeholder:text-white/70 min-h-[120px] resize-none" 
               required
             />
-            <Button 
+            
+            {/* Newsletter Subscription Checkbox */}
+            <div className="flex items-center space-x-2 mt-4">
+              <Checkbox 
+                id="newsletter" 
+                checked={subscribeToNewsletter}
+                onCheckedChange={(checked) => setSubscribeToNewsletter(checked as boolean)}
+                className="border-white/30 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+              />
+              <label 
+                htmlFor="newsletter" 
+                className="text-sm text-white/90 cursor-pointer"
+              >
+                Subscribe to our marketing newsletter (bi-weekly insights)
+              </label>
+            </div>
+            
+            <Button
               type="submit" 
               variant="hero" 
               className="w-full mt-4"
