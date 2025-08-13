@@ -61,7 +61,7 @@ const HelpCenter = () => {
                     Need immediate assistance? Our support team is here to help.
                   </p>
                   <a 
-                    href="https://t.me/upressagency" 
+                    href="https://t.me/unitedpressmedia" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-primary hover:underline"
