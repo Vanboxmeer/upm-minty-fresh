@@ -239,6 +239,7 @@ export function convertToLegacyPost(post: EnhancedBlogPost) {
   const content = post.content.markdown.split('\n\n')[1] || post.description;
   return {
     id: post.id,
+    slug: post.slug,
     title: post.title,
     description: post.description,
     category: post.category,
@@ -246,6 +247,7 @@ export function convertToLegacyPost(post: EnhancedBlogPost) {
     date: post.date,
     readTime: post.readTime,
     image: post.image,
+    imageAlt: post.imageAlt,
     content
   };
 }
