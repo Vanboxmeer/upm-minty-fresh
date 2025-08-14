@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
+import { auditLogger } from '@/utils/auditLogger';
 import { useAdminAuth } from '@/contexts/AdminAuthContext';
 import type { Database } from '@/integrations/supabase/types';
 
@@ -88,6 +90,14 @@ export const useBlogPosts = () => {
   };
 
   const deletePost = async (id: string) => {
+    const postToDelete = posts.find(post => post.id === id);
+    
+    // Log the deletion attempt
+    auditLogger.logBlogAction('delete_attempt', id, user?.id, user?.email, {
+      postTitle: postToDelete?.title,
+      postStatus: postToDelete?.status
+    });
+    
     try {
       const { error } = await supabase
         .from('blog_posts')
@@ -95,8 +105,17 @@ export const useBlogPosts = () => {
         .eq('id', id);
       
       if (error) throw error;
+      
       await fetchPosts();
+      auditLogger.logBlogAction('delete_success', id, user?.id, user?.email, {
+        postTitle: postToDelete?.title
+      });
+      toast.success('Post deleted successfully');
     } catch (err) {
+      auditLogger.logBlogAction('delete_failed', id, user?.id, user?.email, { 
+        error: err instanceof Error ? err.message : 'Unknown error' 
+      });
+      toast.error('Failed to delete post');
       throw new Error(err instanceof Error ? err.message : 'Failed to delete post');
     }
   };
