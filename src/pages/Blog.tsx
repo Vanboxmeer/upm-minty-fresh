@@ -43,7 +43,7 @@ const Blog = () => {
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">UPM Blog: Web3 and Crypto Marketing</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Educational, human-first articles on Web3 growth, KOLs, PR, and brand building.
+            Web3 growth, KOLs, PR, and brand building.
           </p>
         </div>
 
