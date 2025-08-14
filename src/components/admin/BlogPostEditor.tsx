@@ -77,7 +77,12 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
       seo_description: post?.seo_description || '',
       seo_keywords: post?.seo_keywords?.join(', ') || '',
       read_time: post?.read_time || '5 min read',
-      publish_date: post?.publish_date ? new Date(post.publish_date).toISOString().slice(0, 16) : '',
+      publish_date: post?.publish_date ? (() => {
+        const date = new Date(post.publish_date);
+        // Convert to local time for datetime-local input
+        const localDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000));
+        return localDate.toISOString().slice(0, 16);
+      })() : '',
     },
   });
 
@@ -166,8 +171,11 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
       const postData = {
         ...data,
         seo_keywords: keywords,
-        publish_date: data.publish_date ? new Date(data.publish_date).toISOString() : 
-                     (data.status === 'published' ? new Date().toISOString() : null),
+        publish_date: data.publish_date ? (() => {
+          // datetime-local input gives us local time, convert properly to UTC
+          const localDate = new Date(data.publish_date);
+          return localDate.toISOString();
+        })() : (data.status === 'published' ? new Date().toISOString() : null),
       };
 
       await onSave(postData);
