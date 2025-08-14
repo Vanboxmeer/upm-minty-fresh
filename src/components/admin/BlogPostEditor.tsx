@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -236,12 +238,34 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                       <FormItem>
                         <FormLabel>Content</FormLabel>
                         <FormControl>
-                          <Textarea 
-                            placeholder="Write your post content in Markdown..."
-                            rows={20}
-                            className="font-mono"
-                            {...field}
-                          />
+                          <div className="bg-background border rounded-md">
+                            <ReactQuill
+                              theme="snow"
+                              value={field.value}
+                              onChange={field.onChange}
+                              placeholder="Write your blog post content..."
+                              modules={{
+                                toolbar: [
+                                  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                                  ['bold', 'italic', 'underline', 'strike'],
+                                  [{ 'align': [] }],
+                                  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                                  [{ 'indent': '-1'}, { 'indent': '+1' }],
+                                  ['blockquote', 'code-block'],
+                                  ['link', 'image'],
+                                  [{ 'color': [] }, { 'background': [] }],
+                                  ['clean']
+                                ]
+                              }}
+                              formats={[
+                                'header', 'bold', 'italic', 'underline', 'strike',
+                                'align', 'list', 'bullet', 'indent',
+                                'blockquote', 'code-block', 'link', 'image',
+                                'color', 'background'
+                              ]}
+                              style={{ minHeight: '300px' }}
+                            />
+                          </div>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
