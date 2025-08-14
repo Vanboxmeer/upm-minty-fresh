@@ -27,6 +27,7 @@ export interface BlogPost {
 export const useBlogPosts = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const { user } = useAdminAuth();
   const [error, setError] = useState<string | null>(null);
 
   const fetchPosts = async (onlyPublished = false) => {

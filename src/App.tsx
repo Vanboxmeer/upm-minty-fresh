@@ -4,6 +4,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "@/components/ScrollToTop";
+import { AdminAuthProvider } from "@/contexts/AdminAuthContext";
+import { ProtectedRoute } from "@/components/admin/ProtectedRoute";
 import Index from "./pages/Index";
 import Services from "./pages/Services";
 import Blog from "./pages/Blog";
@@ -23,6 +25,7 @@ import NotFound from "./pages/NotFound";
 import { BlogDashboard } from "./pages/admin/BlogDashboard";
 import { BlogPostCreate } from "./pages/admin/BlogPostCreate";
 import { BlogPostEdit } from "./pages/admin/BlogPostEdit";
+import { AdminLogin } from "./pages/admin/AdminLogin";
 
 const queryClient = new QueryClient();
 
@@ -32,8 +35,9 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
+        <AdminAuthProvider>
+          <ScrollToTop />
+          <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/services" element={<Services />} />
           <Route path="/blog" element={<Blog />} />
@@ -49,13 +53,15 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           
           {/* Admin Routes */}
-          <Route path="/admin/blog" element={<BlogDashboard />} />
-          <Route path="/admin/blog/new" element={<BlogPostCreate />} />
-          <Route path="/admin/blog/edit/:id" element={<BlogPostEdit />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/blog" element={<ProtectedRoute><BlogDashboard /></ProtectedRoute>} />
+          <Route path="/admin/blog/new" element={<ProtectedRoute><BlogPostCreate /></ProtectedRoute>} />
+          <Route path="/admin/blog/edit/:id" element={<ProtectedRoute><BlogPostEdit /></ProtectedRoute>} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
-        </Routes>
+          </Routes>
+        </AdminAuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

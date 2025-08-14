@@ -1,7 +1,8 @@
 import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, FileText, PlusCircle } from 'lucide-react';
+import { ArrowLeft, FileText, LogOut } from 'lucide-react';
+import { useAdminAuth } from '@/contexts/AdminAuthContext';
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -10,6 +11,8 @@ interface AdminLayoutProps {
 }
 
 export const AdminLayout = ({ children, title, action }: AdminLayoutProps) => {
+  const { user, signOut } = useAdminAuth();
+  
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b bg-card">
@@ -27,7 +30,18 @@ export const AdminLayout = ({ children, title, action }: AdminLayoutProps) => {
                 <h1 className="text-2xl font-bold">{title}</h1>
               </div>
             </div>
-            {action}
+            <div className="flex items-center gap-4">
+              {action}
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-muted-foreground">
+                  {user?.email}
+                </span>
+                <Button variant="ghost" size="sm" onClick={signOut}>
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Sign Out
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </header>
