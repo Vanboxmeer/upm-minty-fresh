@@ -7,12 +7,18 @@ import { Link } from "react-router-dom";
 import { useBlogPosts, BlogPost } from "@/hooks/useBlogPosts";
 
 const BlogSection = () => {
-  const { posts } = useBlogPosts();
+  const { fetchPublicPosts } = useBlogPosts();
   const [recent, setRecent] = useState<BlogPost[]>([]);
 
   useEffect(() => {
-    const publishedPosts = posts.filter(post => post.status === 'published');
-    setRecent(publishedPosts.slice(0, 3));
+    fetchPublicPosts();
+  }, [fetchPublicPosts]);
+
+  // Get posts from the hook after fetching
+  const { posts } = useBlogPosts();
+  
+  useEffect(() => {
+    setRecent(posts.slice(0, 3));
   }, [posts]);
 
   return (
@@ -44,7 +50,7 @@ const BlogSection = () => {
                       {post.category}
                     </span>
                     <span className="text-xs text-muted-foreground">
-                      {new Date(post.created_at).toLocaleDateString()} • {post.read_time}
+                      {new Date(post.publish_date || post.created_at).toLocaleDateString()} • {post.read_time}
                     </span>
                   </div>
                   <CardTitle className="text-lg group-hover:text-primary transition-colors">

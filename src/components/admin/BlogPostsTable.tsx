@@ -107,7 +107,19 @@ export const BlogPostsTable = ({ posts, onDelete, loading }: BlogPostsTableProps
               <TableCell>{post.category}</TableCell>
               <TableCell>{post.author}</TableCell>
               <TableCell>
-                {format(new Date(post.created_at), 'MMM d, yyyy')}
+                <div>
+                  <div className="text-sm">
+                    {post.publish_date 
+                      ? format(new Date(post.publish_date), 'MMM d, yyyy')
+                      : format(new Date(post.created_at), 'MMM d, yyyy')
+                    }
+                  </div>
+                  {post.publish_date && new Date(post.publish_date) > new Date() && post.status === 'published' && (
+                    <div className="text-xs text-orange-600 font-medium">
+                      Scheduled
+                    </div>
+                  )}
+                </div>
               </TableCell>
               <TableCell className="text-right">
                 <div className="flex items-center justify-end gap-2">

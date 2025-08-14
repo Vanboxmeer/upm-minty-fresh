@@ -39,13 +39,39 @@ export const useBlogPosts = () => {
       let query = supabase
         .from('blog_posts')
         .select('*')
+        .order('publish_date', { ascending: false, nullsFirst: false })
         .order('created_at', { ascending: false });
       
       if (onlyPublished) {
         query = query.eq('status', 'published');
+        // For public view, only show posts with publish_date <= now() or null publish_date
+        const now = new Date().toISOString();
+        query = query.or(`publish_date.is.null,publish_date.lte.${now}`);
       }
       
       const { data, error } = await query;
+      
+      if (error) throw error;
+      setPosts((data || []) as BlogPost[]);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch posts');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Separate method for public posts (published + not in future)
+  const fetchPublicPosts = async () => {
+    try {
+      setLoading(true);
+      const now = new Date().toISOString();
+      const { data, error } = await supabase
+        .from('blog_posts')
+        .select('*')
+        .eq('status', 'published')
+        .or(`publish_date.is.null,publish_date.lte.${now}`)
+        .order('publish_date', { ascending: false, nullsFirst: false })
+        .order('created_at', { ascending: false });
       
       if (error) throw error;
       setPosts((data || []) as BlogPost[]);
@@ -122,11 +148,13 @@ export const useBlogPosts = () => {
 
   const getPostBySlug = async (slug: string) => {
     try {
+      const now = new Date().toISOString();
       const { data, error } = await supabase
         .from('blog_posts')
         .select('*')
         .eq('slug', slug)
         .eq('status', 'published')
+        .or(`publish_date.is.null,publish_date.lte.${now}`)
         .single();
       
       if (error) throw error;
@@ -145,6 +173,7 @@ export const useBlogPosts = () => {
     loading,
     error,
     fetchPosts,
+    fetchPublicPosts,
     createPost,
     updatePost,
     deletePost,

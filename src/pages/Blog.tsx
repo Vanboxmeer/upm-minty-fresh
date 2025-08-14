@@ -7,8 +7,9 @@ import { Link } from "react-router-dom";
 import { useBlogPosts, BlogPost } from "@/hooks/useBlogPosts";
 
 const Blog = () => {
-  const { posts } = useBlogPosts();
+  const { fetchPublicPosts } = useBlogPosts();
   const [publishedPosts, setPublishedPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const title = "UPM Blog | Web3 and Crypto Marketing Guides";
@@ -33,8 +34,22 @@ const Blog = () => {
   }, []);
 
   useEffect(() => {
-    const published = posts.filter(post => post.status === 'published');
-    setPublishedPosts(published);
+    const loadPublicPosts = async () => {
+      try {
+        setLoading(true);
+        await fetchPublicPosts();
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadPublicPosts();
+  }, [fetchPublicPosts]);
+
+  // Get posts from the hook after fetching
+  const { posts } = useBlogPosts();
+  
+  useEffect(() => {
+    setPublishedPosts(posts);
   }, [posts]);
 
   return (
@@ -70,7 +85,7 @@ const Blog = () => {
                         {post.category}
                       </span>
                       <span className="text-xs text-muted-foreground">
-                        {new Date(post.created_at).toLocaleDateString()} • {post.read_time}
+                        {new Date(post.publish_date || post.created_at).toLocaleDateString()} • {post.read_time}
                       </span>
                     </div>
                     <CardTitle className="text-lg group-hover:text-primary transition-colors">

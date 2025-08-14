@@ -115,7 +115,7 @@ const BlogPost = () => {
             <p className="text-xs inline-flex items-center gap-2 rounded-full px-3 py-1 bg-muted mb-4">
               <span className="font-medium tracking-wide">{post.category}</span>
               <span className="text-muted-foreground">•</span>
-              <span className="text-muted-foreground">{new Date(post.created_at).toLocaleDateString()}</span>
+              <span className="text-muted-foreground">{new Date(post.publish_date || post.created_at).toLocaleDateString()}</span>
               <span className="text-muted-foreground">•</span>
               <span className="text-muted-foreground">{post.read_time}</span>
             </p>
