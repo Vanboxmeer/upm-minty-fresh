@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { useAdminAuth } from '@/contexts/AdminAuthContext';
 import type { Database } from '@/integrations/supabase/types';
 
 type DatabaseBlogPost = Database['public']['Tables']['blog_posts']['Row'];
