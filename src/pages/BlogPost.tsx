@@ -139,7 +139,15 @@ const BlogPost = () => {
           <section className="prose prose-neutral dark:prose-invert max-w-3xl mx-auto mb-12">
             <div 
               dangerouslySetInnerHTML={{ 
-                __html: DOMPurify.sanitize(post.content) 
+                __html: (() => {
+                  console.log('Raw content:', post.content);
+                  const sanitized = DOMPurify.sanitize(post.content, {
+                    ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'blockquote', 'a', 'img', 'code', 'pre'],
+                    ALLOWED_ATTR: ['href', 'src', 'alt', 'title', 'target', 'rel']
+                  });
+                  console.log('Sanitized content:', sanitized);
+                  return sanitized;
+                })()
               }} 
             />
           </section>
