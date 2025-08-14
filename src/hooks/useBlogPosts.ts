@@ -64,7 +64,6 @@ export const useBlogPosts = () => {
   const fetchPublicPosts = async () => {
     try {
       setLoading(true);
-      const now = new Date().toISOString();
       const { data: allPosts, error } = await supabase
         .from('blog_posts')
         .select('*')
@@ -72,10 +71,18 @@ export const useBlogPosts = () => {
       
       if (error) throw error;
       
+      // Get current date/time in UTC to ensure consistent comparison
+      const now = new Date();
+      
       // Filter posts client-side to ensure proper date comparison
       const filteredPosts = (allPosts || []).filter(post => {
         if (!post.publish_date) return true; // Show posts without publish_date
-        return new Date(post.publish_date) <= new Date(); // Only show posts with publish_date in past or now
+        
+        // Parse the publish_date and compare with current time
+        const publishDate = new Date(post.publish_date);
+        
+        // Compare dates (publish_date must be in the past or current moment)
+        return publishDate <= now;
       });
       
       // Sort by publish_date (desc), then created_at (desc)  

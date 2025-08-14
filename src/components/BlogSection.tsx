@@ -1,25 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useBlogPosts, BlogPost } from "@/hooks/useBlogPosts";
+import { useBlogPosts } from "@/hooks/useBlogPosts";
 
 const BlogSection = () => {
-  const { fetchPublicPosts } = useBlogPosts();
-  const [recent, setRecent] = useState<BlogPost[]>([]);
+  const { fetchPublicPosts, posts } = useBlogPosts();
 
   useEffect(() => {
     fetchPublicPosts();
   }, [fetchPublicPosts]);
 
-  // Get posts from the hook after fetching
-  const { posts } = useBlogPosts();
-  
-  useEffect(() => {
-    setRecent(posts.slice(0, 3));
-  }, [posts]);
+  const recent = posts.slice(0, 3);
 
   return (
     <section className="py-16 bg-muted/50">

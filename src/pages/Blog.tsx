@@ -1,15 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Link } from "react-router-dom";
-import { useBlogPosts, BlogPost } from "@/hooks/useBlogPosts";
+import { useBlogPosts } from "@/hooks/useBlogPosts";
 
 const Blog = () => {
-  const { fetchPublicPosts } = useBlogPosts();
-  const [publishedPosts, setPublishedPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { fetchPublicPosts, posts, loading } = useBlogPosts();
 
   useEffect(() => {
     const title = "UPM Blog | Web3 and Crypto Marketing Guides";
@@ -34,23 +32,8 @@ const Blog = () => {
   }, []);
 
   useEffect(() => {
-    const loadPublicPosts = async () => {
-      try {
-        setLoading(true);
-        await fetchPublicPosts();
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadPublicPosts();
+    fetchPublicPosts();
   }, [fetchPublicPosts]);
-
-  // Get posts from the hook after fetching
-  const { posts } = useBlogPosts();
-  
-  useEffect(() => {
-    setPublishedPosts(posts);
-  }, [posts]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -67,7 +50,7 @@ const Blog = () => {
         <div className="mb-8">
           <h2 className="text-2xl font-semibold mb-6">Latest Articles</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {publishedPosts.map((post) => (
+            {posts.map((post) => (
               <Card key={post.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
                 <div className="h-2 bg-primary"></div>
                 <Link to={`/blog/${post.slug}`} className="block focus:outline-none">
