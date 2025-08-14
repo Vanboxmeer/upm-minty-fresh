@@ -44,6 +44,7 @@ const blogPostSchema = z.object({
   seo_description: z.string().optional(),
   seo_keywords: z.string().optional(),
   read_time: z.string().optional(),
+  publish_date: z.string().optional(),
 });
 
 type BlogPostFormData = z.infer<typeof blogPostSchema>;
@@ -57,6 +58,7 @@ interface BlogPostEditorProps {
 export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) => {
   const [uploading, setUploading] = useState(false);
   const [previewMode, setPreviewMode] = useState(false);
+  const [contentMode, setContentMode] = useState<'rich' | 'html'>('rich');
   const { toast } = useToast();
   
   const form = useForm<BlogPostFormData>({
@@ -75,6 +77,7 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
       seo_description: post?.seo_description || '',
       seo_keywords: post?.seo_keywords?.join(', ') || '',
       read_time: post?.read_time || '5 min read',
+      publish_date: post?.publish_date ? new Date(post.publish_date).toISOString().slice(0, 16) : '',
     },
   });
 
@@ -96,16 +99,42 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      toast({
+        title: 'Error',
+        description: 'Please select an image file',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    // Validate file size (5MB max)
+    if (file.size > 5 * 1024 * 1024) {
+      toast({
+        title: 'Error',
+        description: 'Image must be smaller than 5MB',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     try {
       setUploading(true);
       const fileExt = file.name.split('.').pop();
-      const fileName = `${Date.now()}.${fileExt}`;
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
       
       const { data, error } = await supabase.storage
         .from('blog-images')
-        .upload(fileName, file);
+        .upload(fileName, file, {
+          cacheControl: '3600',
+          upsert: false
+        });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Upload error:', error);
+        throw new Error(error.message);
+      }
 
       const { data: { publicUrl } } = supabase.storage
         .from('blog-images')
@@ -116,10 +145,11 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
         title: 'Success',
         description: 'Image uploaded successfully',
       });
-    } catch (error) {
+    } catch (error: any) {
+      console.error('Upload failed:', error);
       toast({
         title: 'Error',
-        description: 'Failed to upload image',
+        description: error.message || 'Failed to upload image',
         variant: 'destructive',
       });
     } finally {
@@ -136,7 +166,8 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
       const postData = {
         ...data,
         seo_keywords: keywords,
-        publish_date: data.status === 'published' ? new Date().toISOString() : null,
+        publish_date: data.publish_date ? new Date(data.publish_date).toISOString() : 
+                     (data.status === 'published' ? new Date().toISOString() : null),
       };
 
       await onSave(postData);
@@ -165,6 +196,13 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
           </Badge>
         </div>
         <div className="flex items-center gap-2">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => setContentMode(contentMode === 'rich' ? 'html' : 'rich')}
+          >
+            {contentMode === 'rich' ? 'HTML' : 'Rich'}
+          </Button>
           <Button
             type="button"
             variant="outline"
@@ -238,34 +276,43 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                       <FormItem>
                         <FormLabel>Content</FormLabel>
                         <FormControl>
-                          <div className="bg-background border rounded-md">
-                            <ReactQuill
-                              theme="snow"
-                              value={field.value}
-                              onChange={field.onChange}
-                              placeholder="Write your blog post content..."
-                              modules={{
-                                toolbar: [
-                                  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                                  ['bold', 'italic', 'underline', 'strike'],
-                                  [{ 'align': [] }],
-                                  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                                  [{ 'indent': '-1'}, { 'indent': '+1' }],
-                                  ['blockquote', 'code-block'],
-                                  ['link', 'image'],
-                                  [{ 'color': [] }, { 'background': [] }],
-                                  ['clean']
-                                ]
-                              }}
-                              formats={[
-                                'header', 'bold', 'italic', 'underline', 'strike',
-                                'align', 'list', 'bullet', 'indent',
-                                'blockquote', 'code-block', 'link', 'image',
-                                'color', 'background'
-                              ]}
-                              style={{ minHeight: '300px' }}
+                          {contentMode === 'rich' ? (
+                            <div className="bg-background border rounded-md">
+                              <ReactQuill
+                                theme="snow"
+                                value={field.value}
+                                onChange={field.onChange}
+                                placeholder="Write your blog post content..."
+                                modules={{
+                                  toolbar: [
+                                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                                    ['bold', 'italic', 'underline', 'strike'],
+                                    [{ 'align': [] }],
+                                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                                    [{ 'indent': '-1'}, { 'indent': '+1' }],
+                                    ['blockquote', 'code-block'],
+                                    ['link', 'image'],
+                                    [{ 'color': [] }, { 'background': [] }],
+                                    ['clean']
+                                  ]
+                                }}
+                                formats={[
+                                  'header', 'bold', 'italic', 'underline', 'strike',
+                                  'align', 'list', 'bullet', 'indent',
+                                  'blockquote', 'code-block', 'link', 'image',
+                                  'color', 'background'
+                                ]}
+                                style={{ minHeight: '300px' }}
+                              />
+                            </div>
+                          ) : (
+                            <Textarea 
+                              placeholder="Paste your HTML code here..."
+                              rows={15}
+                              className="font-mono text-sm"
+                              {...field}
                             />
-                          </div>
+                          )}
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -350,6 +397,23 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                         <FormLabel>Read Time</FormLabel>
                         <FormControl>
                           <Input placeholder="5 min read" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="publish_date"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Publish Date</FormLabel>
+                        <FormControl>
+                          <Input 
+                            type="datetime-local" 
+                            {...field}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
