@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { useParams, Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import NewsletterSignup from "@/components/NewsletterSignup";
-import ReactMarkdown from 'react-markdown';
+import DOMPurify from 'dompurify';
 import { useBlogPosts, type BlogPost } from "@/hooks/useBlogPosts";
 
 const setMeta = (title: string, description: string, canonical: string, imageUrl?: string) => {
@@ -137,7 +137,11 @@ const BlogPost = () => {
           )}
 
           <section className="prose prose-neutral dark:prose-invert max-w-3xl mx-auto mb-12">
-            <ReactMarkdown>{post.content}</ReactMarkdown>
+            <div 
+              dangerouslySetInnerHTML={{ 
+                __html: DOMPurify.sanitize(post.content) 
+              }} 
+            />
           </section>
 
           {/* Newsletter Signup */}
