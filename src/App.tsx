@@ -19,6 +19,11 @@ import TermsOfService from "./pages/TermsOfService";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
+// Admin imports
+import { BlogDashboard } from "./pages/admin/BlogDashboard";
+import { BlogPostCreate } from "./pages/admin/BlogPostCreate";
+import { BlogPostEdit } from "./pages/admin/BlogPostEdit";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -42,6 +47,12 @@ const App = () => (
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/contact" element={<Contact />} />
+          
+          {/* Admin Routes */}
+          <Route path="/admin/blog" element={<BlogDashboard />} />
+          <Route path="/admin/blog/new" element={<BlogPostCreate />} />
+          <Route path="/admin/blog/edit/:id" element={<BlogPostEdit />} />
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

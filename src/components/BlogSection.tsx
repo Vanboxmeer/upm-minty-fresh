@@ -1,12 +1,19 @@
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { getVisiblePosts, convertToLegacyPost } from "@/data/enhancedBlogPosts";
+import { useBlogPosts, BlogPost } from "@/hooks/useBlogPosts";
+
 const BlogSection = () => {
-  const allPosts = getVisiblePosts();
-  const recent = allPosts.slice(0, 3).map(convertToLegacyPost);
+  const { posts } = useBlogPosts();
+  const [recent, setRecent] = useState<BlogPost[]>([]);
+
+  useEffect(() => {
+    const publishedPosts = posts.filter(post => post.status === 'published');
+    setRecent(publishedPosts.slice(0, 3));
+  }, [posts]);
 
   return (
     <section className="py-16 bg-muted/50">
@@ -21,17 +28,24 @@ const BlogSection = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {recent.map((post) => (
             <Card key={post.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
-              <div className={`${post.color} h-2`}></div>
+              <div className="h-2 bg-primary"></div>
               <Link to={`/blog/${post.slug}`} className="block focus:outline-none">
                 <AspectRatio ratio={16 / 9}>
-                  <img src={post.image} alt={post.imageAlt} loading="lazy" className="w-full h-full object-cover" />
+                  <img 
+                    src={post.featured_image || '/placeholder.svg'} 
+                    alt={post.featured_image_alt || post.title} 
+                    loading="lazy" 
+                    className="w-full h-full object-cover" 
+                  />
                 </AspectRatio>
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between mb-2">
-                    <span className={`${post.color} text-white text-xs px-2 py-1 rounded-full font-medium`}>
+                    <span className="bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full font-medium">
                       {post.category}
                     </span>
-                    <span className="text-xs text-muted-foreground">{post.date} • {post.readTime}</span>
+                    <span className="text-xs text-muted-foreground">
+                      {new Date(post.created_at).toLocaleDateString()} • {post.read_time}
+                    </span>
                   </div>
                   <CardTitle className="text-lg group-hover:text-primary transition-colors">
                     {post.title}
@@ -39,7 +53,7 @@ const BlogSection = () => {
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-sm leading-relaxed">
-                    {post.description}
+                    {post.excerpt || post.content?.substring(0, 150) + '...'}
                   </CardDescription>
                 </CardContent>
               </Link>

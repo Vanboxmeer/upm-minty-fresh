@@ -1,11 +1,15 @@
+import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Link } from "react-router-dom";
-import { getVisiblePosts, convertToLegacyPost } from "@/data/enhancedBlogPosts";
-import { useEffect } from "react";
+import { useBlogPosts, BlogPost } from "@/hooks/useBlogPosts";
+
 const Blog = () => {
+  const { posts } = useBlogPosts();
+  const [publishedPosts, setPublishedPosts] = useState<BlogPost[]>([]);
+
   useEffect(() => {
     const title = "UPM Blog | Web3 and Crypto Marketing Guides";
     const description = "Educational articles on Web3, crypto marketing, KOLs, PR, and growth.";
@@ -28,6 +32,10 @@ const Blog = () => {
     ensureTag('link[rel="canonical"]', linkCanonical);
   }, []);
 
+  useEffect(() => {
+    const published = posts.filter(post => post.status === 'published');
+    setPublishedPosts(published);
+  }, [posts]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -44,24 +52,26 @@ const Blog = () => {
         <div className="mb-8">
           <h2 className="text-2xl font-semibold mb-6">Latest Articles</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {getVisiblePosts().map(convertToLegacyPost).map((post) => (
+            {publishedPosts.map((post) => (
               <Card key={post.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
-                <div className={`${post.color} h-2`}></div>
+                <div className="h-2 bg-primary"></div>
                 <Link to={`/blog/${post.slug}`} className="block focus:outline-none">
                   <AspectRatio ratio={16 / 9}>
-                    <img
-                      src={post.image}
-                      alt={post.imageAlt}
+                    <img 
+                      src={post.featured_image || '/placeholder.svg'} 
+                      alt={post.featured_image_alt || post.title}
                       loading="lazy"
                       className="w-full h-full object-cover"
                     />
                   </AspectRatio>
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between mb-2">
-                      <span className={`${post.color} text-white text-xs px-2 py-1 rounded-full font-medium`}>
+                      <span className="bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full font-medium">
                         {post.category}
                       </span>
-                      <span className="text-xs text-muted-foreground">{post.date} • {post.readTime}</span>
+                      <span className="text-xs text-muted-foreground">
+                        {new Date(post.created_at).toLocaleDateString()} • {post.read_time}
+                      </span>
                     </div>
                     <CardTitle className="text-lg group-hover:text-primary transition-colors">
                       {post.title}
@@ -69,7 +79,7 @@ const Blog = () => {
                   </CardHeader>
                   <CardContent>
                     <CardDescription className="text-sm leading-relaxed">
-                      {post.description}
+                      {post.excerpt || post.content?.substring(0, 150) + '...'}
                     </CardDescription>
                   </CardContent>
                 </Link>
