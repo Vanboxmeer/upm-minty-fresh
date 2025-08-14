@@ -65,16 +65,27 @@ export const useBlogPosts = () => {
     try {
       setLoading(true);
       const now = new Date().toISOString();
-      const { data, error } = await supabase
+      const { data: allPosts, error } = await supabase
         .from('blog_posts')
         .select('*')
-        .eq('status', 'published')
-        .or(`publish_date.is.null,publish_date.lte.${now}`)
-        .order('publish_date', { ascending: false, nullsFirst: false })
-        .order('created_at', { ascending: false });
+        .eq('status', 'published');
       
       if (error) throw error;
-      setPosts((data || []) as BlogPost[]);
+      
+      // Filter posts client-side to ensure proper date comparison
+      const filteredPosts = (allPosts || []).filter(post => {
+        if (!post.publish_date) return true; // Show posts without publish_date
+        return new Date(post.publish_date) <= new Date(); // Only show posts with publish_date in past or now
+      });
+      
+      // Sort by publish_date (desc), then created_at (desc)  
+      const sortedPosts = filteredPosts.sort((a, b) => {
+        const aDate = new Date(a.publish_date || a.created_at);
+        const bDate = new Date(b.publish_date || b.created_at);
+        return bDate.getTime() - aDate.getTime();
+      });
+      
+      setPosts(sortedPosts as BlogPost[]);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch posts');
     } finally {
@@ -148,17 +159,26 @@ export const useBlogPosts = () => {
 
   const getPostBySlug = async (slug: string) => {
     try {
-      const now = new Date().toISOString();
-      const { data, error } = await supabase
+      const { data: allPosts, error } = await supabase
         .from('blog_posts')
         .select('*')
         .eq('slug', slug)
-        .eq('status', 'published')
-        .or(`publish_date.is.null,publish_date.lte.${now}`)
-        .single();
+        .eq('status', 'published');
       
       if (error) throw error;
-      return data;
+      
+      if (!allPosts || allPosts.length === 0) {
+        throw new Error('Post not found');
+      }
+      
+      const post = allPosts[0];
+      
+      // Check if post is scheduled for future
+      if (post.publish_date && new Date(post.publish_date) > new Date()) {
+        throw new Error('Post not found'); // Hide future posts from public
+      }
+      
+      return post;
     } catch (err) {
       throw new Error(err instanceof Error ? err.message : 'Post not found');
     }
