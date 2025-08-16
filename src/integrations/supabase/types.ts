@@ -182,6 +182,10 @@ export type Database = {
         Args: { client_ip: string }
         Returns: boolean
       }
+      cleanup_newsletter_rate_limits: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
       generate_slug: {
         Args: { title: string }
         Returns: string
