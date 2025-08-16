@@ -158,4 +158,9 @@ All colors MUST be HSL.
     color: hsl(var(--primary));
     opacity: 0.8;
   }
+
+  /* Hover Scale Animation */
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
 }

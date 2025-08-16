@@ -1,3 +1,5 @@
+import { useScrollAnimation, useStaggeredAnimation } from "@/hooks/useScrollAnimation";
+
 const TrustedBy = () => {
   const projects = [{
     name: "Originality.ai",
@@ -32,17 +34,26 @@ const TrustedBy = () => {
     logo: "/lovable-uploads/e111a023-8c4a-4f1e-9c22-7a80f265b13e.png",
     description: "Evrylife is a multi-chain web3 explorer, a type of decentralized social media application."
   }];
-  return <section className="py-16 bg-muted/30">
+
+  const { elementRef: sectionRef, isVisible } = useScrollAnimation();
+  const { containerRef: gridRef, visibleItems } = useStaggeredAnimation(150);
+
+  return <section ref={sectionRef} className="py-16 bg-muted/30">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+        <div className={`text-center mb-12 transition-all duration-700 ${isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
             TOP Projects in AI, Crypto Gaming, and Web3 Utilize <span className="text-primary">
 UPM Services</span>
           </h2>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {projects.map((project, index) => <div key={index} className="text-center space-y-4">
+        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {projects.map((project, index) => <div 
+              key={index} 
+              className={`text-center space-y-4 transition-all duration-500 ${
+                visibleItems.has(index) ? 'animate-fade-in hover-scale' : 'opacity-0 translate-y-8'
+              }`}
+            >
               <div className="flex justify-center mb-4">
                 <img src={project.logo} alt={project.name} className="h-16 w-auto object-contain" />
               </div>

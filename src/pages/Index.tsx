@@ -6,6 +6,7 @@ import Services from "@/components/Services";
 import BlogSection from "@/components/BlogSection";
 import PackageSelector from "@/components/PackageSelector";
 import Footer from "@/components/Footer";
+import PageLoader from "@/components/PageLoader";
 import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
 
 const Index = () => {
@@ -29,15 +30,18 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <Hero />
-      <TrustedBy />
-      <Services />
-      <BlogSection />
-      <PackageSelector />
-      <Footer />
-    </div>
+    <>
+      <PageLoader />
+      <div className="min-h-screen bg-background">
+        <Header />
+        <Hero />
+        <TrustedBy />
+        <Services />
+        <BlogSection />
+        <PackageSelector />
+        <Footer />
+      </div>
+    </>
   );
 };
 

@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import servicesIcon from "@/assets/crypto-marketing-services.jpg";
 import { CheckCircle } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 const Services = () => {
   const services = [{
     title: "KOL Collaborations",
@@ -16,10 +17,14 @@ const Services = () => {
     description: "Get featured in top media, have your CEO as a guest on a popular show, or co-host a community event.",
     features: ["Top-tier media placements", "Executive interview opportunities", "Community event hosting", "Thought leadership positioning"]
   }];
+
+  const { elementRef: heroRef, isVisible: heroVisible } = useScrollAnimation();
+  const { elementRef: cardsRef, isVisible: cardsVisible } = useScrollAnimation({ threshold: 0.2 });
+
   return <section id="services" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-          <div>
+        <div ref={heroRef} className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+          <div className={`transition-all duration-700 ${heroVisible ? 'animate-fade-in' : 'opacity-0 translate-x-[-50px]'}`}>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               Premium Marketing Services for{" "}
               <span className="text-primary">
@@ -61,13 +66,19 @@ Crypto Projects</span>
             </Button>
           </div>
           
-          <div className="relative">
+          <div className={`relative transition-all duration-700 delay-300 ${heroVisible ? 'animate-fade-in' : 'opacity-0 translate-x-[50px]'}`}>
             <img src={servicesIcon} alt="Digital Marketing Services" className="w-full h-auto rounded-lg shadow-lg" />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => <Card key={index} className="border-border hover:shadow-lg transition-shadow">
+        <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service, index) => <Card 
+              key={index} 
+              className={`border-border hover:shadow-lg transition-all duration-500 hover-scale ${
+                cardsVisible ? 'animate-fade-in' : 'opacity-0 translate-y-8'
+              }`}
+              style={{ animationDelay: `${index * 150}ms` }}
+            >
               <CardHeader>
                 <CardTitle className="text-xl">{service.title}</CardTitle>
                 <CardDescription className="text-base">
