@@ -113,6 +113,33 @@ export type Database = {
         }
         Relationships: []
       }
+      newsletter_rate_limits: {
+        Row: {
+          attempt_count: number | null
+          blocked_until: string | null
+          first_attempt_at: string | null
+          id: string
+          ip_address: string
+          last_attempt_at: string | null
+        }
+        Insert: {
+          attempt_count?: number | null
+          blocked_until?: string | null
+          first_attempt_at?: string | null
+          id?: string
+          ip_address: string
+          last_attempt_at?: string | null
+        }
+        Update: {
+          attempt_count?: number | null
+          blocked_until?: string | null
+          first_attempt_at?: string | null
+          id?: string
+          ip_address?: string
+          last_attempt_at?: string | null
+        }
+        Relationships: []
+      }
       newsletter_subscribers: {
         Row: {
           consent: boolean
@@ -151,6 +178,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      check_newsletter_rate_limit: {
+        Args: { client_ip: string }
+        Returns: boolean
+      }
       generate_slug: {
         Args: { title: string }
         Returns: string
