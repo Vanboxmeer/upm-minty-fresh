@@ -20,7 +20,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
-import SitemapXML from "./pages/SitemapXML";
+
 
 // Admin imports
 import { BlogDashboard } from "./pages/admin/BlogDashboard";
@@ -51,7 +51,7 @@ const App = () => (
           <Route path="/help-center" element={<HelpCenter />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-service" element={<TermsOfService />} />
-              <Route path="/sitemap.xml" element={<SitemapXML />} />
+              
            <Route path="/contact" element={<Contact />} />
            
            {/* Admin Routes */}
