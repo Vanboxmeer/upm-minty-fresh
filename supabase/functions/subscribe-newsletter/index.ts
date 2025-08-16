@@ -40,16 +40,54 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Check if already subscribed
+    // Get client IP from various headers (for security logging)
+    const clientIP = ip || 
+      req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+      req.headers.get('x-real-ip') ||
+      req.headers.get('cf-connecting-ip') ||
+      'unknown';
+
+    // Check rate limiting
+    const { data: rateLimitResult, error: rateLimitError } = await supabase
+      .rpc('check_newsletter_rate_limit', { client_ip: clientIP });
+
+    if (rateLimitError) {
+      console.error("Rate limit check error:", rateLimitError);
+      return new Response(
+        JSON.stringify({ error: "Service temporarily unavailable" }),
+        { status: 503, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    if (!rateLimitResult) {
+      console.log(`Rate limit exceeded for IP: ${clientIP}`);
+      return new Response(
+        JSON.stringify({ error: "Too many requests. Please try again later." }),
+        { status: 429, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    // Validate email format (additional security)
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    if (!emailRegex.test(email)) {
+      return new Response(
+        JSON.stringify({ error: "Invalid email format" }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    // Check if already subscribed (limited query, no data exposure)
     const { data: existing } = await supabase
       .from('newsletter_subscribers')
       .select('id')
       .eq('email', email.toLowerCase())
-      .single();
+      .maybeSingle();
 
     if (existing) {
+      // Don't reveal existing subscription details for security
+      console.log(`Duplicate subscription attempt for email: ${email.substring(0, 3)}***`);
       return new Response(
-        JSON.stringify({ message: "Already subscribed", alreadySubscribed: true }),
+        JSON.stringify({ message: "Successfully processed your subscription!" }),
         { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
@@ -61,7 +99,7 @@ const handler = async (req: Request): Promise<Response> => {
         email: email.toLowerCase(),
         name,
         source,
-        ip,
+        ip: clientIP,
         user_agent: userAgent
       });
 
