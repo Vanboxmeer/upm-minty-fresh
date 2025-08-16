@@ -6,41 +6,25 @@ import { Card } from "@/components/ui/card";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import DOMPurify from 'dompurify';
 import { useBlogPosts, type BlogPost } from "@/hooks/useBlogPosts";
+import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
 
-const setMeta = (title: string, description: string, canonical: string, imageUrl?: string) => {
-  document.title = title;
-
-  const ensureTag = (selector: string, el: HTMLElement) => {
-    const existing = document.head.querySelector(selector);
-    if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
-    document.head.appendChild(el);
-  };
-
-  const metaDesc = document.createElement("meta");
-  metaDesc.name = "description";
-  metaDesc.content = description;
-  ensureTag('meta[name="description"]', metaDesc);
-
-  const linkCanonical = document.createElement("link");
-  linkCanonical.rel = "canonical";
-  linkCanonical.href = canonical;
-  ensureTag('link[rel="canonical"]', linkCanonical);
-
-  const jsonLd: any = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: title,
+const setMeta = (post: BlogPost) => {
+  const title = post.title;
+  const description = post.excerpt || post.content?.substring(0, 160) || '';
+  const imageUrl = post.featured_image ? `https://unitedpressmedia.com${post.featured_image}` : 'https://unitedpressmedia.com/lovable-uploads/4ed87a93-4a52-47a8-a969-1b8e2ddac6d9.png';
+  
+  updateMetaTags({
+    title: `${title} | UPM Blog`,
     description,
-    image: imageUrl,
-    author: { '@type': 'Organization', name: 'UPM - Digital Marketing Agency' },
-    publisher: { '@type': 'Organization', name: 'UPM' },
-    mainEntityOfPage: canonical,
-  };
-
-  const script = document.createElement('script');
-  script.type = 'application/ld+json';
-  script.text = JSON.stringify(jsonLd);
-  ensureTag('script[type="application/ld+json"]', script);
+    keywords: post.seo_keywords?.join(', ') || "web3 marketing, crypto marketing, digital marketing, KOL, press release",
+    canonical: `https://unitedpressmedia.com/blog/${post.slug}`,
+    ogTitle: title,
+    ogDescription: description,
+    ogType: "article",
+    ogImage: imageUrl,
+    twitterCard: "summary_large_image",
+    structuredData: generateStructuredData('article', post)
+  });
 };
 
 const BlogPost = () => {
@@ -58,12 +42,7 @@ const BlogPost = () => {
         setPost(postData as BlogPost);
         
         if (postData) {
-          setMeta(
-            `${postData.title} | UPM Blog`,
-            postData.excerpt || postData.content?.substring(0, 160) || '',
-            `${window.location.origin}/blog/${postData.slug}`,
-            postData.featured_image || undefined
-          );
+          setMeta(postData as BlogPost);
         }
       } catch (error) {
         console.error('Failed to fetch post:', error);

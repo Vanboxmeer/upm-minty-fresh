@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Header from "@/components/Header";
 import Services from "@/components/Services";
 import PackageSelector from "@/components/PackageSelector";
@@ -8,6 +9,7 @@ import { CheckCircle, Users, Newspaper, Mic } from "lucide-react";
 import kolCollaborationsImg from "@/assets/services/kol-collaborations.jpg";
 import pressReleaseImg from "@/assets/services/press-release-services.jpg";
 import featuresInterviewsImg from "@/assets/services/features-interviews.jpg";
+import { updateMetaTags } from "@/utils/seoUtils";
 const ServicesPage = () => {
   const serviceDetails = [{
     icon: Users,

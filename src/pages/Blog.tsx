@@ -5,30 +5,24 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Link } from "react-router-dom";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
+import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
 
 const Blog = () => {
   const { fetchPublicPosts, posts, loading } = useBlogPosts();
 
   useEffect(() => {
-    const title = "UPM Blog | Web3 and Crypto Marketing Guides";
-    const description = "Educational articles on Web3, crypto marketing, KOLs, PR, and growth.";
-    document.title = title;
-
-    const ensureTag = (selector: string, el: HTMLElement) => {
-      const existing = document.head.querySelector(selector);
-      if (existing && existing.parentNode) existing.parentNode.removeChild(existing as Node);
-      document.head.appendChild(el);
-    };
-
-    const metaDesc = document.createElement("meta");
-    metaDesc.name = "description";
-    metaDesc.content = description;
-    ensureTag('meta[name="description"]', metaDesc);
-
-    const linkCanonical = document.createElement("link");
-    linkCanonical.rel = "canonical";
-    linkCanonical.href = `${window.location.origin}/blog`;
-    ensureTag('link[rel="canonical"]', linkCanonical);
+    // SEO optimization for blog page
+    updateMetaTags({
+      title: "UPM Blog | Web3 and Crypto Marketing Guides",
+      description: "Expert insights on Web3 growth, KOL collaborations, PR distribution, and crypto marketing strategies. Educational articles by digital marketing professionals.",
+      keywords: "web3 marketing, crypto marketing blog, KOL guides, press release distribution, digital marketing insights, blockchain marketing",
+      canonical: "https://unitedpressmedia.com/blog",
+      ogTitle: "UPM Blog: Web3 and Crypto Marketing",
+      ogDescription: "Expert insights on Web3 growth, KOL collaborations, PR distribution, and crypto marketing strategies.",
+      ogType: "website",
+      ogImage: "https://unitedpressmedia.com/lovable-uploads/4ed87a93-4a52-47a8-a969-1b8e2ddac6d9.png",
+      twitterCard: "summary_large_image",
+    });
   }, []);
 
   useEffect(() => {
