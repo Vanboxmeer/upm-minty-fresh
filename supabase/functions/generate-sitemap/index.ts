@@ -53,7 +53,7 @@ serve(async (req) => {
     // Add static routes
     staticRoutes.forEach(route => {
       sitemap += '  <url>\n'
-      sitemap += `    <loc>${baseUrl}/${route.url}</loc>\n`
+      sitemap += `    <loc>${baseUrl}${route.url ? '/' + route.url : ''}</loc>\n`
       sitemap += `    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n`
       sitemap += `    <changefreq>${route.changefreq}</changefreq>\n`
       sitemap += `    <priority>${route.priority}</priority>\n`

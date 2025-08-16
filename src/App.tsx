@@ -20,7 +20,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
-import Sitemap from "./pages/Sitemap";
+import SitemapXML from "./pages/SitemapXML";
 
 // Admin imports
 import { BlogDashboard } from "./pages/admin/BlogDashboard";
@@ -49,12 +49,12 @@ const App = () => (
           <Route path="/payment/dominate" element={<PaymentDominate />} />
           <Route path="/about" element={<About />} />
           <Route path="/help-center" element={<HelpCenter />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-of-service" element={<TermsOfService />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/sitemap.xml" element={<Sitemap />} />
-          
-          {/* Admin Routes */}
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-of-service" element={<TermsOfService />} />
+              <Route path="/sitemap.xml" element={<SitemapXML />} />
+           <Route path="/contact" element={<Contact />} />
+           
+           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/blog" element={<ProtectedRoute><BlogDashboard /></ProtectedRoute>} />
           <Route path="/admin/blog/new" element={<ProtectedRoute><BlogPostCreate /></ProtectedRoute>} />
