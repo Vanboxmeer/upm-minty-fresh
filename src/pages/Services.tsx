@@ -15,21 +15,21 @@ const ServicesPage = () => {
     icon: Users,
     title: "KOL Collaborations",
     description: "Collaborate with influencers and key opinion leaders who have a direct connection with your target audience.",
-    features: ["Access to verified influencer network of 500+ KOLs", "Audience matching based on demographics and interests", "Performance tracking and ROI measurement", "Content creation and campaign management", "Real-time engagement analytics", "Multi-platform coverage (Twitter, YouTube, Telegram)"],
+    features: ["Access to verified influencer network of 500+ KOLs", "Audience matching based on demographics and interests", "Performance tracking and ROI measurement", "Content creation and campaign management", "Multi-platform coverage (Twitter, YouTube, Telegram)"],
     pricing: "Starting from $5K packages",
     image: kolCollaborationsImg
   }, {
     icon: Newspaper,
     title: "Press Release Services",
     description: "Distribute press releases to keep your investors and community up to date with important news and milestone events.",
-    features: ["Distribution to 200+ major crypto publications", "Investor-focused messaging and positioning", "Timeline and milestone coverage", "Community engagement amplification", "SEO-optimized content", "Follow-up media outreach"],
+    features: ["Distribution to 200+ major crypto publications", "Investor-focused messaging and positioning", "Timeline and milestone coverage", "SEO-optimized content"],
     pricing: "Included in all packages",
     image: pressReleaseImg
   }, {
     icon: Mic,
     title: "Features, Interviews, Spaces",
     description: "Get featured in top media, have your CEO as a guest on a popular show, or co-host a community event.",
-    features: ["Placement in top-tier crypto media outlets", "Executive interview opportunities", "Twitter Spaces and podcast hosting", "Community event organization", "Thought leadership positioning", "Media training and preparation"],
+    features: ["Placement in top-tier crypto media outlets", "Executive interview opportunities", "Twitter Spaces and podcast hosting", "Community event organization", "Thought leadership positioning"],
     pricing: "Premium packages from $25K",
     image: featuresInterviewsImg
   }];
