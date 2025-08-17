@@ -22,14 +22,16 @@ const PageLoader = () => {
 
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-background">
-      {/* Logo with fill animation */}
-      {logoLoaded && (
-        <img 
-          src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
-          alt="UPM Logo" 
-          className="w-24 h-24 md:w-32 md:h-32 object-contain animate-logo-fill"
-        />
-      )}
+      {/* Logo with fill animation - always reserve space */}
+      <div className="w-24 h-24 md:w-32 md:h-32 flex items-center justify-center">
+        {logoLoaded && (
+          <img 
+            src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
+            alt="UPM Logo" 
+            className="w-full h-full object-contain animate-logo-fill"
+          />
+        )}
+      </div>
     </div>
   );
 };
