@@ -11,7 +11,7 @@ const Services = () => {
   }, {
     title: "Press Release Services",
     description: "Distribute press releases to keep your investors and community up to date with important news and milestone events.",
-    features: ["Major publication distribution", "Investor-focused messaging", "Timeline milestone coverage", "Community engagement boost"]
+    features: ["Major publication distribution", "Investor-focused messaging", "Niche specific PR bundles (DeFi, NFT, AI, Tech)", "Fast turn around"]
   }, {
     title: "Features, Interviews, Spaces",
     description: "Get featured in top media, have your CEO as a guest on a popular show, or co-host a community event.",
