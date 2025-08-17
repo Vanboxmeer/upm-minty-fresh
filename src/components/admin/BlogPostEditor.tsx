@@ -86,7 +86,18 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
     },
   });
 
+  const watchPublishDate = form.watch('publish_date');
+  const watchStatus = form.watch('status');
   const watchTitle = form.watch('title');
+  
+  // Check if post is scheduled for future
+  const isScheduled = watchPublishDate && new Date(watchPublishDate) > new Date();
+  
+  // Determine display status
+  const getStatusDisplay = () => {
+    if (isScheduled) return 'Scheduled';
+    return watchStatus;
+  };
 
   // Auto-generate slug from title
   useEffect(() => {
@@ -168,14 +179,32 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
         ? data.seo_keywords.split(',').map(k => k.trim()).filter(Boolean)
         : [];
 
+      let finalStatus = data.status;
+      let publishDate: string | null = null;
+
+      if (data.publish_date) {
+        // datetime-local input gives us local time, convert properly to UTC
+        const localDate = new Date(data.publish_date);
+        publishDate = localDate.toISOString();
+        
+        // If publish date is in the future, automatically set status to draft
+        if (localDate > new Date()) {
+          finalStatus = 'draft';
+          toast({
+            title: 'Post Scheduled',
+            description: `Post scheduled for ${localDate.toLocaleString()}. Status set to draft until publish time.`,
+          });
+        }
+      } else if (data.status === 'published') {
+        // If no publish date but status is published, set publish date to now
+        publishDate = new Date().toISOString();
+      }
+
       const postData = {
         ...data,
+        status: finalStatus,
         seo_keywords: keywords,
-        publish_date: data.publish_date ? (() => {
-          // datetime-local input gives us local time, convert properly to UTC
-          const localDate = new Date(data.publish_date);
-          return localDate.toISOString();
-        })() : (data.status === 'published' ? new Date().toISOString() : null),
+        publish_date: publishDate,
       };
 
       await onSave(postData);
@@ -199,8 +228,8 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
           <h2 className="text-2xl font-bold">
             {post ? 'Edit Post' : 'Create New Post'}
           </h2>
-          <Badge variant={form.watch('status') === 'published' ? 'default' : 'secondary'}>
-            {form.watch('status')}
+          <Badge variant={isScheduled ? 'outline' : (watchStatus === 'published' ? 'default' : 'secondary')}>
+            {getStatusDisplay()}
           </Badge>
         </div>
         <div className="flex items-center gap-2">
@@ -411,22 +440,33 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                     )}
                   />
 
-                  <FormField
-                    control={form.control}
-                    name="publish_date"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Publish Date</FormLabel>
-                        <FormControl>
-                          <Input 
-                            type="datetime-local" 
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                   <FormField
+                     control={form.control}
+                     name="publish_date"
+                     render={({ field }) => (
+                       <FormItem>
+                         <FormLabel>
+                           Publish Date
+                           {isScheduled && (
+                             <span className="text-sm text-orange-600 ml-2">(Scheduled)</span>
+                           )}
+                         </FormLabel>
+                         <FormControl>
+                           <Input 
+                             type="datetime-local" 
+                             {...field}
+                             className={isScheduled ? 'border-orange-300 bg-orange-50' : ''}
+                           />
+                         </FormControl>
+                         {isScheduled && (
+                           <p className="text-sm text-orange-600">
+                             Post will be published automatically at {new Date(watchPublishDate).toLocaleString()}
+                           </p>
+                         )}
+                         <FormMessage />
+                       </FormItem>
+                     )}
+                   />
                 </CardContent>
               </Card>
 
