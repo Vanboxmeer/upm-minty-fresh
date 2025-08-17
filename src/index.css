@@ -163,4 +163,20 @@ All colors MUST be HSL.
   .hover-scale {
     @apply transition-transform duration-300 hover:scale-105;
   }
+
+  /* Logo fill animation */
+  @keyframes logo-fill {
+    0% {
+      opacity: 0.3;
+      filter: brightness(0.4) saturate(0.5);
+    }
+    100% {
+      opacity: 1;
+      filter: brightness(1) saturate(1);
+    }
+  }
+
+  .animate-logo-fill {
+    animation: logo-fill 1.2s ease-out forwards;
+  }
 }
