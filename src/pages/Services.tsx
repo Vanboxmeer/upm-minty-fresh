@@ -22,7 +22,7 @@ const ServicesPage = () => {
     icon: Newspaper,
     title: "Press Release Services",
     description: "Distribute press releases to keep your investors and community up to date with important news and milestone events.",
-    features: ["Distribution to 200+ major crypto publications", "Investor-focused messaging and positioning", "Timeline and milestone coverage", "SEO-optimized content"],
+    features: ["Distribution to 200+ major tech and crypto publications", "Investor-focused messaging and positioning", "Timeline and milestone coverage", "SEO-optimized content"],
     pricing: "Included in all packages",
     image: pressReleaseImg
   }, {
