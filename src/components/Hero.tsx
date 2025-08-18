@@ -1,6 +1,15 @@
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-bg.jpg";
+import { useTypewriter } from "@/hooks/useTypewriter";
 const Hero = () => {
+  const brandTypes = ["AI Brands", "Web3 Brands", "Gaming Brands", "VR Brands", "Crypto Brands"];
+  const currentBrand = useTypewriter({
+    words: brandTypes,
+    typeSpeed: 100,
+    deleteSpeed: 50,
+    delayBetweenWords: 2000,
+  });
+
   const scrollToCoveragePackages = () => {
     // Navigate to home if not there, then scroll
     if (window.location.pathname !== '/') {
@@ -26,9 +35,10 @@ const Hero = () => {
       <div className="relative container mx-auto px-4 py-12 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in">
-            Growth Platform Built for{" "}
+            Digital Marketing Services for{" "}
             <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
-              Digital Marketing
+              {currentBrand}
+              <span className="animate-pulse">|</span>
             </span>
           </h1>
           
