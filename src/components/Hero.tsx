@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-bg.jpg";
 import { useTypewriter } from "@/hooks/useTypewriter";
+import BlockchainBackground from "./BlockchainBackground";
 const Hero = () => {
   const brandTypes = ["AI Brands", "Web3 Brands", "Gaming Brands", "VR Brands", "Crypto Brands"];
   const currentBrand = useTypewriter({
@@ -26,10 +27,11 @@ const Hero = () => {
     }
   };
   return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <BlockchainBackground />
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
       backgroundImage: `url(${heroImage})`
     }}>
-        <div className="absolute inset-0 bg-gradient-to-r from-background/90 to-background/70"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 to-background/80"></div>
       </div>
       
       <div className="relative container mx-auto px-4 py-12 text-center">
