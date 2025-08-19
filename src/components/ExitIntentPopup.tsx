@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Check, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -16,6 +17,8 @@ interface ExitIntentPopupProps {
 
 const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
   const [selectedPackage, setSelectedPackage] = useState<string>("");
+  const [selectedSubscription, setSelectedSubscription] = useState<string>("");
+  const [billingFrequency, setBillingFrequency] = useState<string>("monthly");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -46,6 +49,45 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
     }
   ];
 
+  const subscriptionPlans = [
+    {
+      name: "On Demand",
+      subtitle: "(non member)",
+      price: "Free",
+      monthlyPrice: 0,
+      annualPrice: 0,
+      description: "Perfect for testing our services",
+      features: ["Discovery media deck", "Campaign builder form", "Quote builder assistance"],
+      excludedFeatures: ["KPI tracking", "Dedicated account manager", "Membership pricing"],
+      popular: false,
+      hasBilling: false
+    },
+    {
+      name: "Silver Membership",
+      subtitle: "3.45% service fee",
+      price: "$250",
+      monthlyPrice: 250,
+      annualPrice: 2500,
+      description: "Medium sized campaigns with reduced fees",
+      features: ["Members media deck", "Campaign builder", "KPI tracking", "Dedicated account manager"],
+      excludedFeatures: [],
+      popular: true,
+      hasBilling: true
+    },
+    {
+      name: "Gold Membership",
+      subtitle: "1% service fee",
+      price: "$995",
+      monthlyPrice: 995,
+      annualPrice: 9950,
+      description: "Large campaigns requiring administrative work",
+      features: ["Members media deck", "Campaign builder", "KPI tracking", "Dedicated account manager"],
+      excludedFeatures: [],
+      popular: false,
+      hasBilling: true
+    }
+  ];
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -61,13 +103,37 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
     setIsLoading(true);
 
     try {
+      let message = "I'm interested in your digital marketing services. Please contact me with more details.";
+      
+      if (selectedPackage || selectedSubscription) {
+        message = `I'm interested in the following selection:\n\n`;
+        
+        if (selectedPackage) {
+          const packageData = packages.find(p => p.name === selectedPackage);
+          message += `Coverage Package: ${selectedPackage} - ${packageData?.price}\n`;
+        }
+        
+        if (selectedSubscription) {
+          const subscriptionData = subscriptionPlans.find(s => s.name === selectedSubscription);
+          message += `Subscription Level: ${selectedSubscription}\n`;
+          
+          if (subscriptionData?.hasBilling) {
+            message += `Billing: ${billingFrequency} - $${billingFrequency === "monthly" 
+              ? subscriptionData.monthlyPrice 
+              : subscriptionData.annualPrice}\n`;
+          }
+        }
+        
+        message += `\nPlease contact me with more details.`;
+      }
+
       const { error } = await supabase.functions.invoke('send-contact-email', {
         body: {
           firstName,
           lastName,
           email,
           phone,
-          message: selectedPackage ? `I'm interested in the ${selectedPackage} package. Please contact me with more details.` : "I'm interested in your digital marketing services. Please contact me with more details."
+          message
         }
       });
 
@@ -90,6 +156,8 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
       setEmail("");
       setPhone("");
       setSelectedPackage("");
+      setSelectedSubscription("");
+      setBillingFrequency("monthly");
       setSubscribeToNewsletter(false);
       onClose();
 
@@ -115,6 +183,7 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
         </DialogHeader>
         
         <div className="grid md:grid-cols-2 gap-6">
+        <div className="space-y-6">
           {/* Package Selection */}
           <div>
             <h3 className="text-lg font-semibold mb-4">Select a Package</h3>
@@ -153,6 +222,62 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
               ))}
             </div>
           </div>
+
+          {/* Subscription Selection */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Select Subscription</h3>
+            <div className="space-y-2">
+              {subscriptionPlans.map((plan) => (
+                <Card
+                  key={plan.name}
+                  className={`cursor-pointer transition-all ${
+                    selectedSubscription === plan.name
+                      ? "ring-2 ring-primary bg-primary/5"
+                      : "hover:bg-muted/50"
+                  }`}
+                  onClick={() => setSelectedSubscription(plan.name)}
+                >
+                  <CardContent className="p-3">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-medium">{plan.name}</span>
+                          {plan.popular && <Badge variant="secondary">Popular</Badge>}
+                        </div>
+                        <p className="text-xs text-muted-foreground">{plan.subtitle}</p>
+                      </div>
+                      <span className="font-bold text-primary">{plan.price}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* Billing Frequency for Paid Plans */}
+          {selectedSubscription && subscriptionPlans.find(p => p.name === selectedSubscription)?.hasBilling && (
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Billing Frequency</h3>
+              <Tabs value={billingFrequency} onValueChange={setBillingFrequency}>
+                <TabsList className="grid w-full grid-cols-2">
+                  <TabsTrigger value="monthly">Monthly</TabsTrigger>
+                  <TabsTrigger value="annual">Annual</TabsTrigger>
+                </TabsList>
+                <TabsContent value="monthly" className="mt-2">
+                  <div className="text-center p-2">
+                    <span className="font-medium">${subscriptionPlans.find(p => p.name === selectedSubscription)?.monthlyPrice}/month</span>
+                  </div>
+                </TabsContent>
+                <TabsContent value="annual" className="mt-2">
+                  <div className="text-center p-2">
+                    <span className="font-medium">${subscriptionPlans.find(p => p.name === selectedSubscription)?.annualPrice}/year</span>
+                    <div className="text-xs text-green-600">Save ${((subscriptionPlans.find(p => p.name === selectedSubscription)?.monthlyPrice || 0) * 12) - (subscriptionPlans.find(p => p.name === selectedSubscription)?.annualPrice || 0)}</div>
+                  </div>
+                </TabsContent>
+              </Tabs>
+            </div>
+          )}
+        </div>
 
           {/* Contact Form */}
           <div>
@@ -204,9 +329,18 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
                 </label>
               </div>
 
-              {selectedPackage && (
-                <div className="p-3 bg-primary/10 rounded-md">
-                  <p className="text-sm font-medium">Selected Package: {selectedPackage}</p>
+              {(selectedPackage || selectedSubscription) && (
+                <div className="p-3 bg-primary/10 rounded-md space-y-1">
+                  <p className="text-sm font-medium">Your Selection:</p>
+                  {selectedPackage && (
+                    <p className="text-sm">Package: {selectedPackage}</p>
+                  )}
+                  {selectedSubscription && (
+                    <p className="text-sm">Subscription: {selectedSubscription}</p>
+                  )}
+                  {selectedSubscription && subscriptionPlans.find(s => s.name === selectedSubscription)?.hasBilling && (
+                    <p className="text-sm">Billing: {billingFrequency}</p>
+                  )}
                 </div>
               )}
 
@@ -215,7 +349,7 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
                 className="w-full"
                 disabled={isLoading}
               >
-                {isLoading ? "Sending..." : "Get My Custom Quote"}
+                {isLoading ? "Sending..." : "Send Request"}
               </Button>
             </form>
           </div>
