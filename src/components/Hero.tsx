@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-bg.jpg";
 import { useTypewriter } from "@/hooks/useTypewriter";
+import InteractiveBackground from "./InteractiveBackground";
 const Hero = () => {
   const brandTypes = ["AI Brands", "Web3 Brands", "Gaming Brands", "VR Brands", "Crypto Brands"];
   const currentBrand = useTypewriter({
@@ -26,13 +27,17 @@ const Hero = () => {
     }
   };
   return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Static background as fallback */}
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
       backgroundImage: `url(${heroImage})`
     }}>
-        <div className="absolute inset-0 bg-gradient-to-r from-background/90 to-background/70"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 to-background/85"></div>
       </div>
       
-      <div className="relative container mx-auto px-4 py-12 text-center">
+      {/* Interactive 3D background */}
+      <InteractiveBackground />
+      
+      <div className="relative container mx-auto px-4 py-12 text-center z-10">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in">
             Digital Marketing Services for{" "}
