@@ -7,9 +7,13 @@ import BlogSection from "@/components/BlogSection";
 import PackageSelector from "@/components/PackageSelector";
 import Footer from "@/components/Footer";
 import PageLoader from "@/components/PageLoader";
+import ExitIntentPopup from "@/components/ExitIntentPopup";
+import { useExitIntent } from "@/hooks/useExitIntent";
 import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
 
 const Index = () => {
+  const { showExitIntent, hideExitIntent } = useExitIntent();
+  
   useEffect(() => {
     // SEO optimization for homepage
     updateMetaTags({
@@ -41,6 +45,7 @@ const Index = () => {
         <PackageSelector />
         <Footer />
       </div>
+      <ExitIntentPopup isOpen={showExitIntent} onClose={hideExitIntent} />
     </>
   );
 };
