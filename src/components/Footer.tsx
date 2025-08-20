@@ -4,7 +4,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Linkedin, X } from "lucide-react";
+import { Linkedin, Twitter } from "lucide-react";
 const Footer = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -233,7 +233,7 @@ const Footer = () => {
                 className="text-white/70 hover:text-primary transition-colors"
                 aria-label="Follow us on X (Twitter)"
               >
-                <X size={20} />
+                <Twitter size={20} />
               </a>
             </div>
           </div>
