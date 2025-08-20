@@ -5,32 +5,32 @@ const FeaturedInMedia = () => {
     {
       name: "Forbes",
       logo: "/lovable-uploads/29431995-0b17-4c1d-947c-4fdf64ed3e61.png",
-      textBased: false
+      bgColor: "bg-black"
     },
     {
       name: "Bloomberg",
       logo: "/lovable-uploads/fd291aa5-c279-4d45-8e13-115ec774c798.png",
-      textBased: false
+      bgColor: "bg-[#5845ff]"
     },
     {
       name: "Inc.",
       logo: "/lovable-uploads/ed714aff-3f87-4a5b-9963-9db61287904a.png",
-      textBased: false
+      bgColor: "bg-black"
     },
     {
       name: "Cointelegraph",
       logo: "/lovable-uploads/868451f0-4647-4708-83e3-63e492a35970.png",
-      textBased: false
+      bgColor: "bg-white"
     },
     {
       name: "CoinDesk",
       logo: "/lovable-uploads/5c44e521-7873-410d-a0bc-d2de4d624b5f.png",
-      textBased: false
+      bgColor: "bg-[#2e2e2e]"
     },
     {
       name: "Entrepreneur",
       logo: "/lovable-uploads/ee6cba84-1b90-4044-a6b7-92d005185929.png",
-      textBased: false
+      bgColor: "bg-white"
     }
   ];
 
@@ -54,7 +54,7 @@ const FeaturedInMedia = () => {
                 visibleItems.has(index) ? 'animate-fade-in hover-scale' : 'opacity-0 translate-y-8'
               }`}
             >
-              <div className="w-48 h-24 md:w-56 md:h-28 rounded-[15px] border border-muted flex items-center justify-center bg-card hover:border-primary/50 transition-colors overflow-hidden">
+              <div className={`w-48 h-24 md:w-56 md:h-28 rounded-[15px] border border-muted flex items-center justify-center ${outlet.bgColor} hover:border-primary/50 transition-colors overflow-hidden`}>
                 <img 
                   src={outlet.logo} 
                   alt={`${outlet.name} logo`}
