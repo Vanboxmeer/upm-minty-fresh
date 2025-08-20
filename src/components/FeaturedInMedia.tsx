@@ -10,7 +10,7 @@ const FeaturedInMedia = () => {
     {
       name: "Bloomberg",
       logo: "/lovable-uploads/fd291aa5-c279-4d45-8e13-115ec774c798.png",
-      bgColor: "bg-[#1565c0]"
+      bgColor: "bg-[#2800d7]"
     },
     {
       name: "Inc.",
@@ -25,7 +25,7 @@ const FeaturedInMedia = () => {
     {
       name: "CoinDesk",
       logo: "/lovable-uploads/5c44e521-7873-410d-a0bc-d2de4d624b5f.png",
-      bgColor: "bg-[#f7931a]"
+      bgColor: "bg-[#242424]"
     },
     {
       name: "Entrepreneur",
