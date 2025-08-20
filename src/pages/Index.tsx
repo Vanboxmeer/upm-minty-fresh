@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import TrustedBy from "@/components/TrustedBy";
 import Services from "@/components/Services";
+import FeaturedInMedia from "@/components/FeaturedInMedia";
 import BlogSection from "@/components/BlogSection";
 import PackageSelector from "@/components/PackageSelector";
 import Footer from "@/components/Footer";
@@ -41,6 +42,7 @@ const Index = () => {
         <Hero />
         <TrustedBy />
         <Services />
+        <FeaturedInMedia />
         <BlogSection />
         <PackageSelector />
         <Footer />
