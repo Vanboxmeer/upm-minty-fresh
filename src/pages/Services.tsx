@@ -6,9 +6,9 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Users, Newspaper, Mic } from "lucide-react";
-import kolCollaborationsImg from "@/assets/services/kol-collaborations.jpg";
-import pressReleaseImg from "@/assets/services/press-release-services.jpg";
-import featuresInterviewsImg from "@/assets/services/features-interviews.jpg";
+import kolCollaborationsImg from "/lovable-uploads/ecd96ef3-208b-4ecb-a825-eebccedf3db8.png";
+import pressReleaseImg from "/lovable-uploads/1b902ab0-3eb5-424d-8b98-de9e2da377c8.png";
+import featuresInterviewsImg from "/lovable-uploads/8d2ae042-e00e-4b60-acfe-8d2f6c8edbb2.png";
 import { updateMetaTags } from "@/utils/seoUtils";
 const ServicesPage = () => {
   const serviceDetails = [{
