@@ -4,33 +4,33 @@ const FeaturedInMedia = () => {
   const mediaOutlets = [
     {
       name: "Forbes",
-      logo: "Forbes",
-      textBased: true
+      logo: "/lovable-uploads/29431995-0b17-4c1d-947c-4fdf64ed3e61.png",
+      textBased: false
     },
     {
       name: "Bloomberg",
-      logo: "Bloomberg",
-      textBased: true
+      logo: "/lovable-uploads/fd291aa5-c279-4d45-8e13-115ec774c798.png",
+      textBased: false
     },
     {
       name: "Inc.",
-      logo: "Inc.",
-      textBased: true
+      logo: "/lovable-uploads/ed714aff-3f87-4a5b-9963-9db61287904a.png",
+      textBased: false
     },
     {
       name: "Cointelegraph",
-      logo: "Cointelegraph",
-      textBased: true
+      logo: "/lovable-uploads/868451f0-4647-4708-83e3-63e492a35970.png",
+      textBased: false
     },
     {
       name: "CoinDesk",
-      logo: "CoinDesk",
-      textBased: true
+      logo: "/lovable-uploads/5c44e521-7873-410d-a0bc-d2de4d624b5f.png",
+      textBased: false
     },
     {
       name: "Entrepreneur",
-      logo: "Entrepreneur",
-      textBased: true
+      logo: "/lovable-uploads/ee6cba84-1b90-4044-a6b7-92d005185929.png",
+      textBased: false
     }
   ];
 
@@ -54,10 +54,12 @@ const FeaturedInMedia = () => {
                 visibleItems.has(index) ? 'animate-fade-in hover-scale' : 'opacity-0 translate-y-8'
               }`}
             >
-              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-2 border-muted flex items-center justify-center bg-card hover:border-primary/50 transition-colors">
-                <span className="text-lg md:text-xl font-semibold text-foreground text-center px-4">
-                  {outlet.logo}
-                </span>
+              <div className="w-48 h-24 md:w-56 md:h-28 rounded-[15px] border border-muted flex items-center justify-center bg-card hover:border-primary/50 transition-colors overflow-hidden">
+                <img 
+                  src={outlet.logo} 
+                  alt={`${outlet.name} logo`}
+                  className="w-full h-full object-contain p-2"
+                />
               </div>
             </div>
           ))}
