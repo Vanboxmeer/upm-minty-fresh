@@ -10,7 +10,7 @@ const FeaturedInMedia = () => {
     {
       name: "Bloomberg",
       logo: "/lovable-uploads/fd291aa5-c279-4d45-8e13-115ec774c798.png",
-      bgColor: "bg-[#5845ff]"
+      bgColor: "bg-[#1565c0]"
     },
     {
       name: "Inc.",
@@ -25,12 +25,22 @@ const FeaturedInMedia = () => {
     {
       name: "CoinDesk",
       logo: "/lovable-uploads/5c44e521-7873-410d-a0bc-d2de4d624b5f.png",
-      bgColor: "bg-[#2e2e2e]"
+      bgColor: "bg-[#f7931a]"
     },
     {
       name: "Entrepreneur",
       logo: "/lovable-uploads/ee6cba84-1b90-4044-a6b7-92d005185929.png",
       bgColor: "bg-white"
+    },
+    {
+      name: "VentureBeat",
+      logo: "/lovable-uploads/d8186eef-d27e-4865-bf9b-5675b807aa7e.png",
+      bgColor: "bg-black"
+    },
+    {
+      name: "IBT",
+      logo: "/lovable-uploads/5ebf1b92-19e9-4a1b-b624-010e03564938.png",
+      bgColor: "bg-black"
     }
   ];
 
