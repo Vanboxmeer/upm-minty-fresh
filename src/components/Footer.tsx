@@ -4,6 +4,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { Linkedin, X } from "lucide-react";
 const Footer = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -212,9 +213,29 @@ const Footer = () => {
             <div className="flex items-center space-x-2 mb-4">
               <div className="text-2xl font-bold text-primary">UPM</div>
             </div>
-            <p className="text-sm opacity-80">
+            <p className="text-sm opacity-80 mb-4">
               United Press Media - Your trusted partner for digital marketing success.
             </p>
+            <div className="flex space-x-3">
+              <a 
+                href="https://www.linkedin.com/company/upm-network/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-white/70 hover:text-primary transition-colors"
+                aria-label="Follow us on LinkedIn"
+              >
+                <Linkedin size={20} />
+              </a>
+              <a 
+                href="https://x.com/WatchCryptoNews" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-white/70 hover:text-primary transition-colors"
+                aria-label="Follow us on X (Twitter)"
+              >
+                <X size={20} />
+              </a>
+            </div>
           </div>
           
           <div>
