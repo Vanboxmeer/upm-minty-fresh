@@ -1,5 +1,5 @@
 export const generateStructuredData = (type: 'organization' | 'website' | 'article', data: any) => {
-  const baseUrl = 'https://unitedpressmedia.com';
+  const baseUrl = 'https://unitedpress.media';
   
   const schemas: Record<string, any> = {
     organization: {
@@ -88,7 +88,11 @@ export const updateMetaTags = (config: {
   ogDescription?: string;
   ogImage?: string;
   ogType?: string;
+  ogUrl?: string;
   twitterCard?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
+  twitterImage?: string;
   structuredData?: any;
 }) => {
   // Update title
@@ -137,9 +141,25 @@ export const updateMetaTags = (config: {
     updateMetaTag('meta[property="og:type"]', config.ogType, 'property');
   }
   
+  if (config.ogUrl) {
+    updateMetaTag('meta[property="og:url"]', config.ogUrl, 'property');
+  }
+  
   // Update Twitter Card tags
   if (config.twitterCard) {
     updateMetaTag('meta[name="twitter:card"]', config.twitterCard);
+  }
+  
+  if (config.twitterTitle) {
+    updateMetaTag('meta[name="twitter:title"]', config.twitterTitle);
+  }
+  
+  if (config.twitterDescription) {
+    updateMetaTag('meta[name="twitter:description"]', config.twitterDescription);
+  }
+  
+  if (config.twitterImage) {
+    updateMetaTag('meta[name="twitter:image"]', config.twitterImage);
   }
   
   // Update canonical link

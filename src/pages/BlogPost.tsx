@@ -11,18 +11,26 @@ import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
 const setMeta = (post: BlogPost) => {
   const title = post.title;
   const description = post.excerpt || post.content?.substring(0, 160) || '';
-  const imageUrl = post.featured_image ? `https://unitedpressmedia.com${post.featured_image}` : 'https://unitedpressmedia.com/lovable-uploads/4ed87a93-4a52-47a8-a969-1b8e2ddac6d9.png';
+  const baseUrl = 'https://unitedpress.media';
+  const imageUrl = post.featured_image ? 
+    (post.featured_image.startsWith('http') ? post.featured_image : `${baseUrl}${post.featured_image}`) : 
+    `${baseUrl}/lovable-uploads/4ed87a93-4a52-47a8-a969-1b8e2ddac6d9.png`;
+  const postUrl = `${baseUrl}/blog/${post.slug}`;
   
   updateMetaTags({
     title: `${title} | UPM Blog`,
     description,
     keywords: post.seo_keywords?.join(', ') || "web3 marketing, crypto marketing, digital marketing, KOL, press release",
-    canonical: `https://unitedpressmedia.com/blog/${post.slug}`,
+    canonical: postUrl,
     ogTitle: title,
     ogDescription: description,
     ogType: "article",
     ogImage: imageUrl,
+    ogUrl: postUrl,
     twitterCard: "summary_large_image",
+    twitterTitle: title,
+    twitterDescription: description,
+    twitterImage: imageUrl,
     structuredData: generateStructuredData('article', post)
   });
 };
