@@ -2,3 +2,12 @@ project_id = "ftjdmvdyeetiubmziwav"
 
 [functions.send-contact-email]
 verify_jwt = false
+
+[functions.subscribe-newsletter]
+verify_jwt = false
+
+[functions.generate-sitemap]
+verify_jwt = false
+
+[functions.rss-feed]
+verify_jwt = false

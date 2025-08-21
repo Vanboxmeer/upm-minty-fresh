@@ -1,73 +1,46 @@
 import { useEffect } from 'react';
-import { useBlogPosts } from '@/hooks/useBlogPosts';
+import { supabase } from '@/integrations/supabase/client';
 
 const RSSFeed = () => {
-  const { posts, fetchPublicPosts } = useBlogPosts();
-
   useEffect(() => {
-    const generateRSSFeed = async () => {
-      await fetchPublicPosts();
-    };
-
-    generateRSSFeed();
-  }, [fetchPublicPosts]);
-
-  useEffect(() => {
-    if (posts.length > 0) {
-      const rssXML = generateRSSXML(posts);
-      
-      // Set content type to RSS
-      const blob = new Blob([rssXML], { type: 'application/rss+xml' });
-      const url = URL.createObjectURL(blob);
-      
-      // Replace current page with RSS content
-      window.location.replace(url);
-    }
-  }, [posts]);
-
-  const generateRSSXML = (blogPosts: any[]) => {
-    const siteUrl = window.location.origin;
-    const now = new Date().toUTCString();
-    
-    const rssItems = blogPosts
-      .slice(0, 20) // Limit to 20 most recent posts
-      .map(post => {
-        const postUrl = `${siteUrl}/blog/${post.slug}`;
-        const pubDate = new Date(post.publish_date || post.created_at).toUTCString();
+    const fetchRSSFeed = async () => {
+      try {
+        // Call the RSS feed edge function
+        const { data, error } = await supabase.functions.invoke('rss-feed');
         
-        return `
-    <item>
-      <title><![CDATA[${post.title}]]></title>
-      <description><![CDATA[${post.meta_description || post.excerpt || ''}]]></description>
-      <link>${postUrl}</link>
-      <guid isPermaLink="true">${postUrl}</guid>
-      <pubDate>${pubDate}</pubDate>
-      <category><![CDATA[${post.category || 'Digital Marketing'}]]></category>
-      ${post.author ? `<author>${post.author}</author>` : ''}
-    </item>`;
-      })
-      .join('');
-
-    return `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+        if (error) {
+          console.error('Error fetching RSS feed:', error);
+          // Fallback to a simple XML response
+          const fallbackXML = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
   <channel>
-    <title><![CDATA[UPM - Digital Marketing Blog]]></title>
-    <description><![CDATA[Latest insights on digital marketing, press release distribution, and media collaborations from UPM]]></description>
-    <link>${siteUrl}</link>
-    <atom:link href="${siteUrl}/rss" rel="self" type="application/rss+xml"/>
-    <language>en-us</language>
-    <lastBuildDate>${now}</lastBuildDate>
-    <managingEditor>info@upm.com (UPM Team)</managingEditor>
-    <webMaster>info@upm.com (UPM Team)</webMaster>
-    <ttl>60</ttl>
-    <image>
-      <url>${siteUrl}/favicon.ico</url>
-      <title>UPM Blog</title>
-      <link>${siteUrl}</link>
-    </image>${rssItems}
+    <title>UPM Digital Marketing Blog</title>
+    <description>Latest insights on digital marketing</description>
+    <link>https://unitedpress.media</link>
   </channel>
 </rss>`;
-  };
+          
+          const blob = new Blob([fallbackXML], { type: 'application/rss+xml' });
+          const url = URL.createObjectURL(blob);
+          window.location.replace(url);
+          return;
+        }
+
+        // Create blob with RSS XML content
+        const blob = new Blob([data], { type: 'application/rss+xml' });
+        const url = URL.createObjectURL(blob);
+        
+        // Replace current page with RSS content
+        window.location.replace(url);
+      } catch (error) {
+        console.error('Failed to fetch RSS feed:', error);
+        // Redirect to 404 if RSS generation fails
+        window.location.href = '/404';
+      }
+    };
+
+    fetchRSSFeed();
+  }, []);
 
   return (
     <div className="flex items-center justify-center min-h-screen">
