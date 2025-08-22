@@ -28,7 +28,8 @@ import RSSFeed from "./pages/RSSFeed";
 import { BlogDashboard } from "./pages/admin/BlogDashboard";
 import { BlogPostCreate } from "./pages/admin/BlogPostCreate";
 import { BlogPostEdit } from "./pages/admin/BlogPostEdit";
-import { AdminLogin } from "./pages/admin/AdminLogin";
+import AdminLogin from "./pages/admin/AdminLogin";
+import AffiliateDashboard from "./pages/admin/AffiliateDashboard";
 
 const queryClient = new QueryClient();
 
@@ -62,6 +63,7 @@ const App = () => (
            
            {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={<ProtectedRoute><AffiliateDashboard /></ProtectedRoute>} />
           <Route path="/admin/blog" element={<ProtectedRoute><BlogDashboard /></ProtectedRoute>} />
           <Route path="/admin/blog/new" element={<ProtectedRoute><BlogPostCreate /></ProtectedRoute>} />
           <Route path="/admin/blog/edit/:id" element={<ProtectedRoute><BlogPostEdit /></ProtectedRoute>} />

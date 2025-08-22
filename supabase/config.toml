@@ -14,3 +14,6 @@ verify_jwt = false
 
 [functions.process-affiliate-application]
 verify_jwt = false
+
+[functions.send-affiliate-notification]
+verify_jwt = true

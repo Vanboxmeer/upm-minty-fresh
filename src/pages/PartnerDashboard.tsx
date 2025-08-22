@@ -48,16 +48,30 @@ const PartnerDashboard = () => {
     setIsLoading(true);
 
     try {
-      // Check if affiliate exists
+      // Check if affiliate exists and is approved
       const { data: affiliateData, error: affiliateError } = await supabase
         .from('affiliates')
         .select('*')
         .eq('affiliate_email', email)
-        .eq('status', 'active')
-        .single();
+        .eq('status', 'approved')
+        .maybeSingle();
 
       if (affiliateError || !affiliateData) {
-        throw new Error('Affiliate not found or inactive');
+        // Check if affiliate exists with different status
+        const { data: statusCheck } = await supabase
+          .from('affiliates')
+          .select('status')
+          .eq('affiliate_email', email)
+          .maybeSingle();
+
+        if (statusCheck) {
+          if (statusCheck.status === 'pending') {
+            throw new Error('Your affiliate application is still pending review. You will receive an email once it has been processed.');
+          } else if (statusCheck.status === 'declined') {
+            throw new Error('Your affiliate application was not approved. Please contact support for more information.');
+          }
+        }
+        throw new Error('Affiliate account not found. Please apply for the affiliate program first.');
       }
 
       setAffiliate(affiliateData);
@@ -83,7 +97,7 @@ const PartnerDashboard = () => {
     } catch (error: any) {
       toast({
         title: "Access Denied",
-        description: "Affiliate account not found or inactive. Please contact support.",
+        description: error.message,
         variant: "destructive",
       });
     } finally {
