@@ -303,8 +303,8 @@ const Footer = () => {
               <li><a href="/help-center" className="hover:text-primary transition-colors">Help Center</a></li>
               <li><a href="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</a></li>
               <li><a href="/terms-of-service" className="hover:text-primary transition-colors">Terms of Service</a></li>
-              <li><a href="/affiliate-signup" className="hover:text-primary transition-colors">Affiliate Program</a></li>
-              <li><a href="/partner-dashboard" className="hover:text-primary transition-colors">Partner Login</a></li>
+              {/* <li><a href="/affiliate-signup" className="hover:text-primary transition-colors">Affiliate Program</a></li> */}
+              {/* <li><a href="/partner-dashboard" className="hover:text-primary transition-colors">Partner Login</a></li> */}
             </ul>
           </div>
         </div>
