@@ -14,14 +14,44 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_users: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string
+          password_hash: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          password_hash: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          password_hash?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       affiliates: {
         Row: {
           affiliate_email: string
           affiliate_name: string
+          application_date: string | null
+          approved_date: string | null
           commission_rate: number | null
           company: string | null
           created_at: string
           id: string
+          notes: string | null
           referral_code: string
           signup_date: string
           status: string
@@ -30,10 +60,13 @@ export type Database = {
         Insert: {
           affiliate_email: string
           affiliate_name: string
+          application_date?: string | null
+          approved_date?: string | null
           commission_rate?: number | null
           company?: string | null
           created_at?: string
           id?: string
+          notes?: string | null
           referral_code: string
           signup_date?: string
           status?: string
@@ -42,10 +75,13 @@ export type Database = {
         Update: {
           affiliate_email?: string
           affiliate_name?: string
+          application_date?: string | null
+          approved_date?: string | null
           commission_rate?: number | null
           company?: string | null
           created_at?: string
           id?: string
+          notes?: string | null
           referral_code?: string
           signup_date?: string
           status?: string
