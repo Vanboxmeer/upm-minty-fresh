@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      affiliates: {
+        Row: {
+          affiliate_email: string
+          affiliate_name: string
+          commission_rate: number | null
+          company: string | null
+          created_at: string
+          id: string
+          referral_code: string
+          signup_date: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          affiliate_email: string
+          affiliate_name: string
+          commission_rate?: number | null
+          company?: string | null
+          created_at?: string
+          id?: string
+          referral_code: string
+          signup_date?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          affiliate_email?: string
+          affiliate_name?: string
+          commission_rate?: number | null
+          company?: string | null
+          created_at?: string
+          id?: string
+          referral_code?: string
+          signup_date?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       audit_logs: {
         Row: {
           action: string
@@ -173,6 +212,86 @@ export type Database = {
         }
         Relationships: []
       }
+      referral_stats: {
+        Row: {
+          affiliate_id: string
+          commission_earned: number | null
+          created_at: string
+          id: string
+          last_referral_date: string | null
+          successful_referrals: number | null
+          total_referrals: number | null
+          updated_at: string
+        }
+        Insert: {
+          affiliate_id: string
+          commission_earned?: number | null
+          created_at?: string
+          id?: string
+          last_referral_date?: string | null
+          successful_referrals?: number | null
+          total_referrals?: number | null
+          updated_at?: string
+        }
+        Update: {
+          affiliate_id?: string
+          commission_earned?: number | null
+          created_at?: string
+          id?: string
+          last_referral_date?: string | null
+          successful_referrals?: number | null
+          total_referrals?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "referral_stats_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "affiliates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      referrals: {
+        Row: {
+          created_at: string
+          id: string
+          notes: string | null
+          referral_date: string
+          referred_user_email: string
+          referred_user_name: string
+          referrer_code: string | null
+          referrer_email: string | null
+          referrer_name: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          referral_date?: string
+          referred_user_email: string
+          referred_user_name: string
+          referrer_code?: string | null
+          referrer_email?: string | null
+          referrer_name: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          referral_date?: string
+          referred_user_email?: string
+          referred_user_name?: string
+          referrer_code?: string | null
+          referrer_email?: string | null
+          referrer_name?: string
+          status?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -185,6 +304,10 @@ export type Database = {
       cleanup_newsletter_rate_limits: {
         Args: Record<PropertyKey, never>
         Returns: undefined
+      }
+      generate_referral_code: {
+        Args: Record<PropertyKey, never>
+        Returns: string
       }
       generate_slug: {
         Args: { title: string }
