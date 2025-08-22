@@ -58,7 +58,6 @@ const Header = () => {
             <a href="/services" className="text-foreground hover:text-primary transition-colors">Services</a>
             <button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer">Contact</button>
             <a href="/blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
-            <a href="/partner-dashboard" className="text-foreground hover:text-primary transition-colors">Partner Login</a>
             <button onClick={scrollToCoveragePackages} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer">Start a Campaign</button>
           </nav>
           
@@ -84,7 +83,6 @@ const Header = () => {
             <a href="/services" className="text-foreground hover:text-primary transition-colors">Services</a>
             <button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer text-left">Contact</button>
             <a href="/blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
-            <a href="/partner-dashboard" className="text-foreground hover:text-primary transition-colors">Partner Login</a>
             <button onClick={scrollToCoveragePackages} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer text-left">Start a Campaign</button>
             <div className="flex flex-col space-y-2 pt-4 border-t border-border">
               <Button variant="cta" size="sm" onClick={scrollToMembership}>Start Subscription</Button>
