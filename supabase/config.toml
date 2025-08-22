@@ -11,3 +11,6 @@ verify_jwt = false
 
 [functions.rss-feed]
 verify_jwt = false
+
+[functions.process-affiliate-application]
+verify_jwt = false

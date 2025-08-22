@@ -11,6 +11,8 @@ const Footer = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
+  const [referrerName, setReferrerName] = useState("");
+  const [referrerCode, setReferrerCode] = useState("");
   const [subscribeToNewsletter, setSubscribeToNewsletter] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectionSummary, setSelectionSummary] = useState("");
@@ -63,6 +65,23 @@ const Footer = () => {
     setIsLoading(true);
 
     try {
+      // Save referral data if provided
+      if (referrerName || referrerCode) {
+        try {
+          await supabase.from('referrals').insert({
+            referrer_name: referrerName || 'Unknown',
+            referrer_email: referrerCode.includes('@') ? referrerCode : null,
+            referrer_code: !referrerCode.includes('@') ? referrerCode : null,
+            referred_user_name: `${firstName} ${lastName}`,
+            referred_user_email: email,
+            notes: `Contact form submission: ${message}`,
+          });
+        } catch (referralError) {
+          console.error("Referral tracking error:", referralError);
+          // Don't fail the main form if referral tracking fails
+        }
+      }
+
       const { error } = await supabase.functions.invoke('send-contact-email', {
         body: {
           firstName,
@@ -70,6 +89,8 @@ const Footer = () => {
           email,
           phone,
           message: selectionSummary ? `SELECTED: ${selectionSummary}\n\n${message}` : message,
+          referrerName: referrerName || null,
+          referrerCode: referrerCode || null,
         },
       });
 
@@ -103,6 +124,8 @@ const Footer = () => {
       setEmail("");
       setPhone("");
       setMessage("");
+      setReferrerName("");
+      setReferrerCode("");
       setSubscribeToNewsletter(false);
       setSelectionSummary("");
     } catch (error) {
@@ -165,6 +188,22 @@ const Footer = () => {
               className="w-full p-3 rounded-md bg-white/20 border border-white/30 text-white placeholder:text-white/70 min-h-[120px] resize-none" 
               required
             />
+            
+            {/* Referral Fields */}
+            <div className="grid md:grid-cols-2 gap-4 mt-4">
+              <Input 
+                placeholder="Referrer Name (Optional)" 
+                value={referrerName}
+                onChange={(e) => setReferrerName(e.target.value)}
+                className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
+              />
+              <Input 
+                placeholder="Referrer Email/Code (Optional)" 
+                value={referrerCode}
+                onChange={(e) => setReferrerCode(e.target.value)}
+                className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
+              />
+            </div>
             
             {/* Newsletter Subscription Checkbox */}
             <div className="flex items-center space-x-2 mt-4">
@@ -264,6 +303,7 @@ const Footer = () => {
               <li><a href="/help-center" className="hover:text-primary transition-colors">Help Center</a></li>
               <li><a href="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</a></li>
               <li><a href="/terms-of-service" className="hover:text-primary transition-colors">Terms of Service</a></li>
+              <li><a href="/affiliate-signup" className="hover:text-primary transition-colors">Affiliate Program</a></li>
             </ul>
           </div>
         </div>

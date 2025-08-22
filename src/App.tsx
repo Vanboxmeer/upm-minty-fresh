@@ -19,6 +19,8 @@ import HelpCenter from "./pages/HelpCenter";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Contact from "./pages/Contact";
+import AffiliateSignup from "./pages/AffiliateSignup";
+import PartnerDashboard from "./pages/PartnerDashboard";
 import NotFound from "./pages/NotFound";
 import RSSFeed from "./pages/RSSFeed";
 
@@ -55,6 +57,8 @@ const App = () => (
                <Route path="/feed" element={<RSSFeed />} />
                
             <Route path="/contact" element={<Contact />} />
+            <Route path="/affiliate-signup" element={<AffiliateSignup />} />
+            <Route path="/partner-dashboard" element={<PartnerDashboard />} />
            
            {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
