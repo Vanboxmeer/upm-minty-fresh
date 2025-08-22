@@ -15,6 +15,8 @@ interface ContactEmailRequest {
   email: string;
   phone: string;
   message: string;
+  referrerName?: string;
+  referrerCode?: string;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -24,7 +26,7 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { firstName, lastName, email, phone, message }: ContactEmailRequest = await req.json();
+    const { firstName, lastName, email, phone, message, referrerName, referrerCode }: ContactEmailRequest = await req.json();
 
     console.log("Sending contact email:", { firstName, lastName, email });
 
@@ -38,6 +40,10 @@ const handler = async (req: Request): Promise<Response> => {
         <p><strong>Name:</strong> ${firstName} ${lastName}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Phone:</strong> ${phone}</p>
+        ${referrerName || referrerCode ? `
+        <p><strong>Referrer Name:</strong> ${referrerName || 'Not provided'}</p>
+        <p><strong>Referrer Email/Code:</strong> ${referrerCode || 'Not provided'}</p>
+        ` : ''}
         <p><strong>Message:</strong></p>
         <p>${message.replace(/\n/g, '<br>')}</p>
         <hr>
