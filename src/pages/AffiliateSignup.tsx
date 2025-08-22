@@ -36,20 +36,10 @@ const AffiliateSignup = () => {
     setIsSubmitting(true);
 
     try {
-      // Generate referral code
-      const { data: codeData, error: codeError } = await supabase.rpc('generate_referral_code');
-      
-      if (codeError) {
-        throw codeError;
-      }
-
-      // Insert affiliate
-      const { error } = await supabase
-        .from('affiliates')
-        .insert({
-          ...formData,
-          referral_code: codeData
-        });
+      // Call the edge function to process the application
+      const { error } = await supabase.functions.invoke('process-affiliate-application', {
+        body: formData
+      });
 
       if (error) throw error;
 
