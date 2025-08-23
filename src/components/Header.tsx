@@ -3,21 +3,6 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const scrollToMembership = () => {
-    // Navigate to home if not there, then scroll
-    if (window.location.pathname !== '/') {
-      window.location.href = '/#package-selector';
-    } else {
-      const packageSection = document.querySelector('[data-section="package-selector"]');
-      if (packageSection) {
-        const offsetTop = packageSection.getBoundingClientRect().top + window.pageYOffset - 80;
-        window.scrollTo({
-          top: offsetTop,
-          behavior: 'smooth'
-        });
-      }
-    }
-  };
   const scrollToCoveragePackages = () => {
     // Navigate to home if not there, then scroll
     if (window.location.pathname !== '/') {
@@ -58,11 +43,10 @@ const Header = () => {
             <a href="/services" className="text-foreground hover:text-primary transition-colors">Services</a>
             <button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer">Contact</button>
             <a href="/blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
-            <button onClick={scrollToCoveragePackages} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer">Start a Campaign</button>
           </nav>
           
           <div className="flex items-center space-x-4">
-            <Button variant="cta" size="sm" onClick={scrollToMembership}>Start Subscription</Button>
+            <Button variant="cta" size="sm" onClick={scrollToCoveragePackages}>Start a Campaign</Button>
           </div>
         </div>
         
@@ -83,9 +67,8 @@ const Header = () => {
             <a href="/services" className="text-foreground hover:text-primary transition-colors">Services</a>
             <button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer text-left">Contact</button>
             <a href="/blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
-            <button onClick={scrollToCoveragePackages} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer text-left">Start a Campaign</button>
             <div className="flex flex-col space-y-2 pt-4 border-t border-border">
-              <Button variant="cta" size="sm" onClick={scrollToMembership}>Start Subscription</Button>
+              <Button variant="cta" size="sm" onClick={scrollToCoveragePackages}>Start a Campaign</Button>
             </div>
           </nav>
         </div>}
