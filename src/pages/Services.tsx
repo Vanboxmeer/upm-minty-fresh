@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Header from "@/components/Header";
 import Services from "@/components/Services";
+import PaidAdvertising from "@/components/PaidAdvertising";
 import PackageSelector from "@/components/PackageSelector";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -111,6 +112,7 @@ const ServicesPage = () => {
         </div>
       </section>
 
+      <PaidAdvertising />
       <PackageSelector />
       <Footer />
     </div>;
