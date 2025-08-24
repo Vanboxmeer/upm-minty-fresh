@@ -20,8 +20,7 @@ const PackageSelector = () => {
         "Collaborations with micro-influencers",
         "Feature placements in industry publications",
         "Social media amplification",
-        "Web3 directory listing services",
-        "Targeted email campaigns"
+        "Web3 directory listing services"
       ],
       popular: false
     },
