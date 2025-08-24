@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import TrustedBy from "@/components/TrustedBy";
 import Services from "@/components/Services";
 import InfluencerPlatforms from "@/components/InfluencerPlatforms";
+import PaidAdvertising from "@/components/PaidAdvertising";
 import FeaturedInMedia from "@/components/FeaturedInMedia";
 import BlogSection from "@/components/BlogSection";
 import PackageSelector from "@/components/PackageSelector";
@@ -44,6 +45,7 @@ const Index = () => {
         <TrustedBy />
         <Services />
         <InfluencerPlatforms />
+        <PaidAdvertising />
         <FeaturedInMedia />
         <BlogSection />
         <PackageSelector />
