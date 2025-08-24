@@ -27,6 +27,7 @@ const Pricing = () => {
       "Feature placement in 2-3 tier 2 crypto publications",
       "Social media amplification across key platforms",
       "Basic analytics and performance reporting",
+      "Web3 directory listing services",
       "Email campaign to targeted investor lists"
     ],
     cta: "Order Package",
@@ -43,6 +44,7 @@ const Pricing = () => {
       "Feature articles in Forbes, CoinDesk, and Decrypt",
       "Podcast appearances on leading crypto shows",
       "Community AMA hosting and event coordination",
+      "Web3 directory listing services",
       "Dedicated account manager and priority support",
       "Advanced analytics with ROI tracking"
     ],
@@ -61,6 +63,7 @@ const Pricing = () => {
       "Speaking slots at major industry conferences",
       "Exclusive media tours and investor roadshows",
       "Custom content creation and thought leadership articles",
+      "Web3 directory listing services",
       "White-glove service with 24/7 priority support",
       "Direct access to tier-1 journalists and editors"
     ],
