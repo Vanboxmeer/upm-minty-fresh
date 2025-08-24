@@ -1,6 +1,6 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Card } from "@/components/ui/card";
-import { Send, Shield, Target, TrendingUp, Users, Zap } from "lucide-react";
+import { Send, Shield, Target, TrendingUp, Users, Zap, Globe } from "lucide-react";
 
 const PaidAdvertising = () => {
   const { elementRef, isVisible } = useScrollAnimation();
@@ -28,6 +28,18 @@ const PaidAdvertising = () => {
         "Rewarded User Attention",
         "Web3-Savvy Users",
         "Performance Tracking"
+      ]
+    },
+    {
+      name: "Native Ads",
+      icon: Globe,
+      color: "text-green-500",
+      description: "Seamless advertising on niche-specific industry sites",
+      features: [
+        "Banner & Display Ads",
+        "Branded Content Links",
+        "Niche Site Placements",
+        "Native Content Integration"
       ]
     }
   ];
@@ -75,7 +87,7 @@ const PaidAdvertising = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {platforms.map((platform, index) => {
             const Icon = platform.icon;
             return (
