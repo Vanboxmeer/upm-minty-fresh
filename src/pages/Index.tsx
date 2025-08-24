@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import TrustedBy from "@/components/TrustedBy";
 import Services from "@/components/Services";
+import InfluencerPlatforms from "@/components/InfluencerPlatforms";
 import FeaturedInMedia from "@/components/FeaturedInMedia";
 import BlogSection from "@/components/BlogSection";
 import PackageSelector from "@/components/PackageSelector";
@@ -42,6 +43,7 @@ const Index = () => {
         <Hero />
         <TrustedBy />
         <Services />
+        <InfluencerPlatforms />
         <FeaturedInMedia />
         <BlogSection />
         <PackageSelector />
