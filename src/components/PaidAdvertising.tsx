@@ -102,22 +102,22 @@ const PaidAdvertising = () => {
                   transitionDelay: `${index * 100}ms` 
                 }}
               >
-                <div className="flex items-start gap-6">
-                  <div className="p-4 rounded-full bg-muted">
-                    <Icon className={`h-8 w-8 ${platform.color}`} />
+                <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+                  <div className="p-3 sm:p-4 rounded-full bg-muted shrink-0">
+                    <Icon className={`h-6 w-6 sm:h-8 sm:w-8 ${platform.color}`} />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-semibold mb-3 text-foreground">
+                  <div className="flex-1 w-full">
+                    <h3 className="text-xl sm:text-2xl font-semibold mb-3 text-foreground">
                       {platform.name}
                     </h3>
-                    <p className="text-muted-foreground mb-6">
+                    <p className="text-muted-foreground mb-4 sm:mb-6 text-sm sm:text-base">
                       {platform.description}
                     </p>
                     <ul className="space-y-2">
                       {platform.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-center gap-3">
-                          <Zap className="h-4 w-4 text-primary" />
-                          <span className="text-sm text-muted-foreground">{feature}</span>
+                        <li key={idx} className="flex items-start gap-2 sm:gap-3">
+                          <Zap className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                          <span className="text-xs sm:text-sm text-muted-foreground">{feature}</span>
                         </li>
                       ))}
                     </ul>

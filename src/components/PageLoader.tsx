@@ -21,9 +21,9 @@ const PageLoader = () => {
   if (!isLoading) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-background">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-background p-4">
       {/* Logo with fill animation - always reserve space */}
-      <div className="w-24 h-24 md:w-32 md:h-32 flex items-center justify-center relative">
+      <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 flex items-center justify-center relative">
         <img 
           src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
           alt="UPM Logo" 
