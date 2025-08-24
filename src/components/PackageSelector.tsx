@@ -20,6 +20,7 @@ const PackageSelector = () => {
         "Collaborations with micro-influencers",
         "Feature placements in industry publications",
         "Social media amplification",
+        "Web3 directory listing services",
         "Targeted email campaigns"
       ],
       popular: false
@@ -33,7 +34,8 @@ const PackageSelector = () => {
         "Partnerships with a top-tier influencer",
         "Collaborations with multiple micro-influencers",
         "Executive interviews and features in major publications",
-        "Feature articles in leading industry sites"
+        "Feature articles in leading industry sites",
+        "Web3 directory listing services"
       ],
       popular: true
     },
@@ -46,7 +48,8 @@ const PackageSelector = () => {
         "Collaborations with multiple top-tier influencers",
         "Collaborations with small and medium sized content creators",
         "Coverage in multiple tier-1 media publications",
-        "Budget gives room for a longer campaign or larger media blitz"
+        "Budget gives room for a longer campaign or larger media blitz",
+        "Web3 directory listing services"
       ],
       popular: false
     }
