@@ -158,16 +158,6 @@ const PaidAdvertising = () => {
             );
           })}
         </div>
-
-        <div className="text-center mt-16">
-          <div className="inline-flex items-center gap-4 px-8 py-4 bg-card rounded-full border border-border">
-            <span className="text-2xl font-bold text-primary">95%</span>
-            <span className="text-muted-foreground">Campaign Success Rate</span>
-            <div className="w-px h-6 bg-border"></div>
-            <span className="text-2xl font-bold text-primary">3.2x</span>
-            <span className="text-muted-foreground">Average ROI</span>
-          </div>
-        </div>
       </div>
     </section>
   );
