@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-bg.jpg";
 import { useTypewriter } from "@/hooks/useTypewriter";
 const Hero = () => {
   const brandTypes = ["AI Brands", "Web3 Brands", "Gaming Brands", "VR Brands", "Crypto Brands", "Tech Brands"];
@@ -26,10 +25,27 @@ const Hero = () => {
     }
   };
   return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-      backgroundImage: `url(${heroImage})`
-    }}>
-        <div className="absolute inset-0 bg-gradient-to-r from-background/90 to-background/70"></div>
+      {/* Animated Background */}
+      <div className="absolute inset-0">
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-primary-glow/10 animate-pulse"></div>
+        
+        {/* Floating geometric shapes */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-primary/10 rounded-full blur-xl animate-bounce" style={{ animationDelay: '0s', animationDuration: '6s' }}></div>
+          <div className="absolute top-40 right-20 w-20 h-20 bg-primary-glow/20 rounded-full blur-lg animate-bounce" style={{ animationDelay: '2s', animationDuration: '8s' }}></div>
+          <div className="absolute bottom-40 left-1/4 w-24 h-24 bg-accent/15 rounded-full blur-lg animate-bounce" style={{ animationDelay: '4s', animationDuration: '7s' }}></div>
+          <div className="absolute bottom-20 right-1/3 w-40 h-40 bg-primary/5 rounded-full blur-2xl animate-bounce" style={{ animationDelay: '1s', animationDuration: '9s' }}></div>
+          
+          {/* Grid pattern overlay */}
+          <div className="absolute inset-0 opacity-10" style={{
+            backgroundImage: 'radial-gradient(circle at 1px 1px, hsl(var(--primary)) 1px, transparent 0)',
+            backgroundSize: '50px 50px'
+          }}></div>
+        </div>
+        
+        {/* Main gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 to-background/85"></div>
       </div>
       
       <div className="relative container mx-auto px-4 py-12 text-center">
