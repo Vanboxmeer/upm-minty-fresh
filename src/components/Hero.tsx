@@ -25,60 +25,31 @@ const Hero = () => {
     }
   };
   return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Subtle Rainbow Background */}
+      {/* Animated Background */}
       <div className="absolute inset-0">
-        {/* Animated subtle gradient background */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: `
-              linear-gradient(45deg, 
-                rgba(147, 51, 234, 0.1) 0%, 
-                rgba(59, 130, 246, 0.1) 25%, 
-                rgba(16, 185, 129, 0.1) 50%, 
-                rgba(236, 72, 153, 0.1) 75%, 
-                rgba(147, 51, 234, 0.1) 100%
-              )
-            `,
-            backgroundSize: '400% 400%',
-            animation: 'gradientShift 20s ease infinite'
-          }}
-        />
+        {/* Dark base gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
         
-        {/* Dark overlay for contrast */}
-        <div className="absolute inset-0 bg-slate-950/85"></div>
+        {/* Animated color overlays */}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-transparent to-accent/20 animate-pulse"></div>
         
-        {/* Subtle moving gradient overlay */}
-        <div 
-          className="absolute inset-0 opacity-30"
-          style={{
-            background: `
-              linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(147, 51, 234, 0.2) 25%, 
-                rgba(59, 130, 246, 0.2) 50%, 
-                rgba(16, 185, 129, 0.2) 75%, 
-                transparent 100%
-              )
-            `,
-            backgroundSize: '200% 100%',
-            animation: 'slowSlide 30s linear infinite'
-          }}
-        />
+        {/* Floating geometric shapes */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-primary/40 rounded-full blur-xl animate-bounce" style={{ animationDelay: '0s', animationDuration: '6s' }}></div>
+          <div className="absolute top-40 right-20 w-20 h-20 bg-accent/50 rounded-full blur-lg animate-bounce" style={{ animationDelay: '2s', animationDuration: '8s' }}></div>
+          <div className="absolute bottom-40 left-1/4 w-24 h-24 bg-primary/30 rounded-full blur-lg animate-bounce" style={{ animationDelay: '4s', animationDuration: '7s' }}></div>
+          <div className="absolute bottom-20 right-1/3 w-40 h-40 bg-accent/25 rounded-full blur-2xl animate-bounce" style={{ animationDelay: '1s', animationDuration: '9s' }}></div>
+          
+          {/* Subtle grid pattern */}
+          <div className="absolute inset-0 opacity-20" style={{
+            backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)',
+            backgroundSize: '60px 60px'
+          }}></div>
+        </div>
+        
+        {/* Content overlay for readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-slate-900/30"></div>
       </div>
-      
-      <style>{`
-        @keyframes gradientShift {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        
-        @keyframes slowSlide {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-      `}</style>
       
       <div className="relative container mx-auto px-4 py-12 text-center">
         <div className="max-w-4xl mx-auto">
