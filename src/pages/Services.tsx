@@ -11,7 +11,15 @@ import kolCollaborationsImg from "/lovable-uploads/ecd96ef3-208b-4ecb-a825-eebcc
 import pressReleaseImg from "/lovable-uploads/1b902ab0-3eb5-424d-8b98-de9e2da377c8.png";
 import featuresInterviewsImg from "/lovable-uploads/8d2ae042-e00e-4b60-acfe-8d2f6c8edbb2.png";
 import { updateMetaTags } from "@/utils/seoUtils";
+import { useTypewriter } from "@/hooks/useTypewriter";
 const ServicesPage = () => {
+  const brandTypes = ["AI Brands", "Web3 Brands", "Gaming Brands", "VR Brands", "Crypto Brands", "Tech Brands"];
+  const currentBrand = useTypewriter({
+    words: brandTypes,
+    typeSpeed: 100,
+    deleteSpeed: 50,
+    delayBetweenWords: 2000,
+  });
   const serviceDetails = [{
     icon: Users,
     title: "KOL Collaborations",
@@ -42,7 +50,10 @@ const ServicesPage = () => {
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Premium Marketing Services for{" "}
-            <span className="text-primary">Crypto Projects</span>
+            <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+              {currentBrand}
+              <span className="animate-pulse">|</span>
+            </span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
             From KOL collaborations to press releases and media features, we provide 

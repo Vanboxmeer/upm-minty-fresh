@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-bg.jpg";
 import { useTypewriter } from "@/hooks/useTypewriter";
 const Hero = () => {
-  const brandTypes = ["AI Brands", "Web3 Brands", "Gaming Brands", "VR Brands", "Crypto Brands"];
+  const brandTypes = ["AI Brands", "Web3 Brands", "Gaming Brands", "VR Brands", "Crypto Brands", "Tech Brands"];
   const currentBrand = useTypewriter({
     words: brandTypes,
     typeSpeed: 100,
