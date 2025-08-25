@@ -25,66 +25,72 @@ const Hero = () => {
     }
   };
   return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Blockchain Tech AI Background */}
-      <div className="absolute inset-0">
-        {/* Dark tech gradient base */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-950/50 to-slate-900"></div>
-        
-        {/* Hexagonal pattern overlay */}
-        <div className="absolute inset-0 opacity-10" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300D9FF' fill-opacity='0.3'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          backgroundSize: '60px 60px'
-        }}></div>
-        
-        {/* Animated connection lines */}
-        <div className="absolute inset-0">
-          {/* Network nodes */}
-          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style={{ boxShadow: '0 0 20px #00D9FF' }}></div>
-          <div className="absolute top-1/3 right-1/4 w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" style={{ animationDelay: '1s', boxShadow: '0 0 15px #3B82F6' }}></div>
-          <div className="absolute bottom-1/3 left-1/3 w-1.5 h-1.5 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '2s', boxShadow: '0 0 15px #A855F7' }}></div>
-          <div className="absolute bottom-1/4 right-1/3 w-2 h-2 bg-emerald-400 rounded-full animate-pulse" style={{ animationDelay: '0.5s', boxShadow: '0 0 20px #10B981' }}></div>
-          <div className="absolute top-1/2 left-1/2 w-1 h-1 bg-yellow-400 rounded-full animate-pulse" style={{ animationDelay: '1.5s', boxShadow: '0 0 10px #EAB308' }}></div>
+      {/* Rainbow Beam Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 to-slate-900">
+        {/* Animated Rainbow Beams */}
+        {Array.from({ length: 25 }, (_, i) => {
+          const colors = [
+            ['rgb(232, 121, 249)', 'rgb(96, 165, 250)', 'rgb(94, 234, 212)'],
+            ['rgb(232, 121, 249)', 'rgb(94, 234, 212)', 'rgb(96, 165, 250)'],
+            ['rgb(94, 234, 212)', 'rgb(232, 121, 249)', 'rgb(96, 165, 250)'],
+            ['rgb(94, 234, 212)', 'rgb(96, 165, 250)', 'rgb(232, 121, 249)'],
+            ['rgb(96, 165, 250)', 'rgb(94, 234, 212)', 'rgb(232, 121, 249)'],
+            ['rgb(96, 165, 250)', 'rgb(232, 121, 249)', 'rgb(94, 234, 212)']
+          ];
+          const colorSet = colors[Math.floor(Math.random() * colors.length)];
+          const animationDuration = 45 - (45 / 25 / 2 * i);
+          const animationDelay = -(i / 25 * 45);
           
-          {/* Connection lines */}
-          <svg className="absolute inset-0 w-full h-full">
-            <defs>
-              <linearGradient id="line1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style={{ stopColor: '#00D9FF', stopOpacity: 0.6 }} />
-                <stop offset="100%" style={{ stopColor: '#3B82F6', stopOpacity: 0.2 }} />
-              </linearGradient>
-              <linearGradient id="line2" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style={{ stopColor: '#A855F7', stopOpacity: 0.5 }} />
-                <stop offset="100%" style={{ stopColor: '#10B981', stopOpacity: 0.3 }} />
-              </linearGradient>
-            </defs>
-            <line x1="25%" y1="25%" x2="75%" y2="33%" stroke="url(#line1)" strokeWidth="1" opacity="0.6">
-              <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite" />
-            </line>
-            <line x1="33%" y1="67%" x2="67%" y2="75%" stroke="url(#line2)" strokeWidth="1" opacity="0.5">
-              <animate attributeName="opacity" values="0.2;0.7;0.2" dur="4s" repeatCount="indefinite" />
-            </line>
-            <line x1="25%" y1="25%" x2="33%" y2="67%" stroke="url(#line1)" strokeWidth="1" opacity="0.4">
-              <animate attributeName="opacity" values="0.1;0.6;0.1" dur="5s" repeatCount="indefinite" />
-            </line>
-            <line x1="75%" y1="33%" x2="67%" y2="75%" stroke="url(#line2)" strokeWidth="1" opacity="0.3">
-              <animate attributeName="opacity" values="0.2;0.5;0.2" dur="6s" repeatCount="indefinite" />
-            </line>
-          </svg>
-        </div>
+          return (
+            <div
+              key={i}
+              className="absolute top-0 w-0 h-screen origin-top-right"
+              style={{
+                transform: 'rotate(10deg)',
+                boxShadow: `
+                  -130px 0 80px 40px rgba(255, 255, 255, 0.6),
+                  -50px 0 50px 25px ${colorSet[0]},
+                  0 0 50px 25px ${colorSet[1]},
+                  50px 0 50px 25px ${colorSet[2]},
+                  130px 0 80px 40px rgba(255, 255, 255, 0.6)
+                `,
+                animation: `slide ${animationDuration}s linear infinite`,
+                animationDelay: `${animationDelay}s`
+              }}
+            />
+          );
+        })}
         
-        {/* Floating particles */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-10 left-20 w-1 h-1 bg-cyan-300 rounded-full animate-bounce opacity-60" style={{ animationDelay: '0s', animationDuration: '8s' }}></div>
-          <div className="absolute top-32 right-16 w-0.5 h-0.5 bg-blue-300 rounded-full animate-bounce opacity-50" style={{ animationDelay: '2s', animationDuration: '10s' }}></div>
-          <div className="absolute bottom-20 left-32 w-1 h-1 bg-purple-300 rounded-full animate-bounce opacity-40" style={{ animationDelay: '4s', animationDuration: '12s' }}></div>
-          <div className="absolute bottom-40 right-20 w-0.5 h-0.5 bg-emerald-300 rounded-full animate-bounce opacity-60" style={{ animationDelay: '1s', animationDuration: '9s' }}></div>
-          <div className="absolute top-1/2 left-16 w-0.5 h-0.5 bg-yellow-300 rounded-full animate-bounce opacity-50" style={{ animationDelay: '3s', animationDuration: '11s' }}></div>
-          <div className="absolute top-20 right-1/3 w-1 h-1 bg-indigo-300 rounded-full animate-bounce opacity-40" style={{ animationDelay: '5s', animationDuration: '7s' }}></div>
-        </div>
+        {/* Horizontal Light Overlay */}
+        <div 
+          className="absolute bottom-0 left-0 w-full h-0"
+          style={{
+            boxShadow: '0 0 50vh 40vh rgba(255, 255, 255, 0.1)'
+          }}
+        />
+        
+        {/* Vertical Light Overlay */}
+        <div 
+          className="absolute bottom-0 left-0 w-0 h-full"
+          style={{
+            boxShadow: '0 0 35vw 25vw rgba(255, 255, 255, 0.05)'
+          }}
+        />
         
         {/* Gradient overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/40"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-slate-950/30"></div>
       </div>
+      
+      <style>{`
+        @keyframes slide {
+          from {
+            right: -25vw;
+          }
+          to {
+            right: 125vw;
+          }
+        }
+      `}</style>
       
       <div className="relative container mx-auto px-4 py-12 text-center">
         <div className="max-w-4xl mx-auto">
