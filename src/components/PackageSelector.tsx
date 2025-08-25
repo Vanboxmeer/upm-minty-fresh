@@ -122,7 +122,7 @@ const PackageSelector = () => {
   };
 
   return (
-    <div className="py-20 bg-background" data-section="package-selector">
+    <div className="py-20 bg-white" data-section="package-selector">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">

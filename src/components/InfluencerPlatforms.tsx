@@ -45,7 +45,7 @@ const InfluencerPlatforms = () => {
   ];
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div 
           ref={elementRef}

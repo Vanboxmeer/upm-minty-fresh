@@ -21,7 +21,7 @@ const Services = () => {
   const { elementRef: heroRef, isVisible: heroVisible } = useScrollAnimation();
   const { elementRef: cardsRef, isVisible: cardsVisible } = useScrollAnimation({ threshold: 0.2 });
 
-  return <section id="services" className="py-20 bg-background">
+  return <section id="services" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
         <div ref={heroRef} className="grid lg:grid-cols-2 gap-12 items-center mb-16">
           <div className={`transition-all duration-700 ${heroVisible ? 'animate-fade-in' : 'opacity-0 translate-x-[-50px]'}`}>
