@@ -65,6 +65,25 @@ const TermsOfService = () => {
               </section>
 
               <section>
+                <h2 className="text-2xl font-semibold mb-4">VAT Disclaimer</h2>
+                <p>
+                  Prices may be subject to value-added tax (VAT) or other applicable taxes based on your location 
+                  and tax status. VAT rates and regulations vary by country, and it's the customer's responsibility to 
+                  ensure compliance with local tax laws. For more information, please contact us or your local tax 
+                  authority.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="text-2xl font-semibold mb-4">Withholding Tax and Client Responsibility</h2>
+                <p>
+                  Clients are responsible for ensuring compliance with local tax laws and regulations, including VAT 
+                  and withholding tax. As a BVI-registered company, we comply with applicable tax laws and 
+                  regulations in the jurisdictions where we operate.
+                </p>
+              </section>
+
+              <section>
                 <h2 className="text-2xl font-semibold mb-4">Service Delivery and Performance</h2>
                 <h3 className="text-xl font-medium mb-3">Our Commitments</h3>
                 <ul className="list-disc pl-6 space-y-2">
@@ -140,19 +159,20 @@ const TermsOfService = () => {
               </section>
 
               <section>
-                <h2 className="text-2xl font-semibold mb-4">Governing Law</h2>
+                <h2 className="text-2xl font-semibold mb-4">Governing Law and Changes</h2>
                 <p>
-                  These Terms of Service are governed by and construed in accordance with the laws of 
-                  New York State, without regard to its conflict of law principles.
+                  This disclaimer is governed by the laws of the British Virgin Islands. We reserve the right to modify 
+                  this disclaimer at any time without prior notice. Any changes will be effective immediately upon 
+                  posting.
                 </p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-semibold mb-4">Changes to Terms</h2>
+                <h2 className="text-2xl font-semibold mb-4">Contact and Tax Advice</h2>
                 <p>
-                  We reserve the right to modify these terms at any time. Material changes will be 
-                  communicated via email or website notice at least 30 days in advance. Continued 
-                  use of our services after changes constitute acceptance of new terms.
+                  For questions or concerns, please contact us at contact@unitedpress.media. This disclaimer is not 
+                  intended to provide tax advice, and clients should consult their own tax professionals for guidance 
+                  on VAT, withholding tax, and other tax-related matters.
                 </p>
               </section>
 
