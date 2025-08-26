@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -10,6 +11,7 @@ const Footer = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [country, setCountry] = useState("");
   const [message, setMessage] = useState("");
   const [referrerName, setReferrerName] = useState("");
   const [referrerCode, setReferrerCode] = useState("");
@@ -17,6 +19,11 @@ const Footer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectionSummary, setSelectionSummary] = useState("");
   const { toast } = useToast();
+
+  // Countries that BVI can do business with (excluding sanctioned countries)
+  const allowedCountries = [
+    "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+  ];
 
   useEffect(() => {
     // Check URL parameters for package/membership selection
@@ -53,10 +60,10 @@ const Footer = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!firstName || !lastName || !email || !message) {
+    if (!firstName || !lastName || !email || !country || !message) {
       toast({
         title: "Error",
-        description: "Please fill in all required fields",
+        description: "Please fill in all required fields including country",
         variant: "destructive",
       });
       return;
@@ -88,6 +95,7 @@ const Footer = () => {
           lastName,
           email,
           phone,
+          country,
           message: selectionSummary ? `SELECTED: ${selectionSummary}\n\n${message}` : message,
           referrerName: referrerName || null,
           referrerCode: referrerCode || null,
@@ -123,6 +131,7 @@ const Footer = () => {
       setLastName("");
       setEmail("");
       setPhone("");
+      setCountry("");
       setMessage("");
       setReferrerName("");
       setReferrerCode("");
@@ -180,6 +189,20 @@ const Footer = () => {
                 onChange={(e) => setPhone(e.target.value)}
                 className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
               />
+            </div>
+            <div className="mb-4">
+              <Select value={country} onValueChange={setCountry} required>
+                <SelectTrigger className="w-full bg-white/20 border-white/30 text-white">
+                  <SelectValue placeholder="Select your country" className="text-white/70" />
+                </SelectTrigger>
+                <SelectContent className="bg-white border border-gray-200 max-h-64 z-50">
+                  {allowedCountries.map((countryName) => (
+                    <SelectItem key={countryName} value={countryName} className="text-gray-900 hover:bg-gray-100 focus:bg-gray-100">
+                      {countryName}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
             <textarea 
               placeholder="Message" 
