@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -23,9 +24,18 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [country, setCountry] = useState("");
+  const [message, setMessage] = useState("");
+  const [referrerName, setReferrerName] = useState("");
+  const [referrerCode, setReferrerCode] = useState("");
   const [subscribeToNewsletter, setSubscribeToNewsletter] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+
+  // Countries that BVI can do business with (excluding sanctioned countries)
+  const allowedCountries = [
+    "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+  ];
 
   const packages = [
     {
@@ -91,10 +101,10 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!firstName || !lastName || !email) {
+    if (!firstName || !lastName || !email || !country) {
       toast({
         title: "Missing Information",
-        description: "Please fill in all required fields.",
+        description: "Please fill in all required fields including country.",
         variant: "destructive",
       });
       return;
@@ -103,28 +113,28 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
     setIsLoading(true);
 
     try {
-      let message = "I'm interested in your digital marketing services. Please contact me with more details.";
+      let formMessage = message || "I'm interested in your digital marketing services. Please contact me with more details.";
       
       if (selectedPackage || selectedSubscription) {
-        message = `I'm interested in the following selection:\n\n`;
+        formMessage = `I'm interested in the following selection:\n\n`;
         
         if (selectedPackage) {
           const packageData = packages.find(p => p.name === selectedPackage);
-          message += `Coverage Package: ${selectedPackage} - ${packageData?.price}\n`;
+          formMessage += `Coverage Package: ${selectedPackage} - ${packageData?.price}\n`;
         }
         
         if (selectedSubscription) {
           const subscriptionData = subscriptionPlans.find(s => s.name === selectedSubscription);
-          message += `Subscription Level: ${selectedSubscription}\n`;
+          formMessage += `Subscription Level: ${selectedSubscription}\n`;
           
           if (subscriptionData?.hasBilling) {
-            message += `Billing: ${billingFrequency} - $${billingFrequency === "monthly" 
+            formMessage += `Billing: ${billingFrequency} - $${billingFrequency === "monthly" 
               ? subscriptionData.monthlyPrice 
               : subscriptionData.annualPrice}\n`;
           }
         }
         
-        message += `\nPlease contact me with more details.`;
+        formMessage += `\n${message || "Please contact me with more details."}`;
       }
 
       const { error } = await supabase.functions.invoke('send-contact-email', {
@@ -133,7 +143,10 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
           lastName,
           email,
           phone,
-          message
+          country,
+          message: formMessage,
+          referrerName: referrerName || null,
+          referrerCode: referrerCode || null,
         }
       });
 
@@ -141,7 +154,12 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
 
       if (subscribeToNewsletter) {
         await supabase.functions.invoke('subscribe-newsletter', {
-          body: { email }
+          body: {
+            email,
+            name: `${firstName} ${lastName}`,
+            source: "exit-intent-popup",
+            userAgent: navigator.userAgent
+          }
         });
       }
 
@@ -155,6 +173,10 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
       setLastName("");
       setEmail("");
       setPhone("");
+      setCountry("");
+      setMessage("");
+      setReferrerName("");
+      setReferrerCode("");
       setSelectedPackage("");
       setSelectedSubscription("");
       setBillingFrequency("monthly");
@@ -315,6 +337,42 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
                 onChange={(e) => setPhone(e.target.value)}
               />
 
+              <Select value={country} onValueChange={setCountry} required>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select your country *" />
+                </SelectTrigger>
+                <SelectContent className="bg-white border border-gray-200 max-h-64 z-50">
+                  {allowedCountries.map((countryName) => (
+                    <SelectItem key={countryName} value={countryName} className="text-gray-900 hover:bg-gray-100 focus:bg-gray-100">
+                      {countryName}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              <textarea
+                placeholder="Message (Optional)"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                className="w-full p-3 rounded-md border border-input bg-background text-sm min-h-[100px] resize-none"
+              />
+
+              {/* Referral Fields */}
+              <div className="grid grid-cols-2 gap-3">
+                <Input
+                  type="text"
+                  placeholder="Referrer Name (Optional)"
+                  value={referrerName}
+                  onChange={(e) => setReferrerName(e.target.value)}
+                />
+                <Input
+                  type="text"
+                  placeholder="Referrer Email/Code (Optional)"
+                  value={referrerCode}
+                  onChange={(e) => setReferrerCode(e.target.value)}
+                />
+              </div>
+
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="newsletter-popup"
@@ -325,7 +383,7 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
                   htmlFor="newsletter-popup"
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  Subscribe to our newsletter
+                  Subscribe to our marketing newsletter (bi-weekly insights)
                 </label>
               </div>
 
