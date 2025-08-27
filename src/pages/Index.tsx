@@ -11,6 +11,7 @@ import PackageSelector from "@/components/PackageSelector";
 import Footer from "@/components/Footer";
 import PageLoader from "@/components/PageLoader";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
+import TelegramChat from "@/components/TelegramChat";
 import { useExitIntent } from "@/hooks/useExitIntent";
 import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
 
@@ -51,6 +52,7 @@ const Index = () => {
         <PackageSelector />
         <Footer />
       </div>
+      <TelegramChat />
       <ExitIntentPopup isOpen={showExitIntent} onClose={hideExitIntent} />
     </>
   );
