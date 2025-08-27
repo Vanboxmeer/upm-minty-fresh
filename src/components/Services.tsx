@@ -74,22 +74,22 @@ Crypto Projects</span>
         <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => <Card 
               key={index} 
-              className={`border-border hover:shadow-lg transition-all duration-500 hover-scale ${
+              className={`group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5 ${
                 cardsVisible ? 'animate-fade-in' : 'opacity-0 translate-y-8'
               }`}
               style={{ animationDelay: `${index * 150}ms` }}
             >
               <CardHeader>
-                <CardTitle className="text-xl">{service.title}</CardTitle>
+                <CardTitle className="text-xl group-hover:text-primary transition-colors duration-300">{service.title}</CardTitle>
                 <CardDescription className="text-base">
                   {service.description}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2">
-                  {service.features.map((feature, idx) => <li key={idx} className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
-                      <span className="text-sm">{feature}</span>
+                  {service.features.map((feature, idx) => <li key={idx} className="flex items-center gap-2 group/item">
+                      <CheckCircle className="h-4 w-4 text-primary flex-shrink-0 group-hover/item:scale-110 transition-transform duration-200" />
+                      <span className="text-sm group-hover/item:text-primary transition-colors duration-200">{feature}</span>
                     </li>)}
                 </ul>
               </CardContent>

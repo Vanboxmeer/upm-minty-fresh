@@ -141,9 +141,9 @@ const PackageSelector = () => {
             {coveragePackages.map((pkg, index) => (
               <Card 
                 key={index} 
-                className={`transition-all hover:shadow-lg ${
-                  selectedPackage === pkg.name ? 'border-primary bg-primary/5' : ''
-                } ${pkg.popular ? 'border-primary/50' : ''}`}
+                className={`group relative transition-all duration-500 card-hover hover:border-primary/50 ${
+                  selectedPackage === pkg.name ? 'border-primary bg-primary/5 shadow-lg scale-105' : 'hover:shadow-lg'
+                } ${pkg.popular ? 'border-primary/50 ring-2 ring-primary/20' : ''}`}
               >
                 {pkg.popular && (
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
@@ -151,25 +151,25 @@ const PackageSelector = () => {
                   </div>
                 )}
                 
-                <CardHeader className="text-center">
-                  <CardTitle className="text-xl">{pkg.name}</CardTitle>
-                  <div className="text-3xl font-bold text-primary">{pkg.price}</div>
-                  <CardDescription>{pkg.description}</CardDescription>
+                <CardHeader className="text-center relative z-10">
+                  <CardTitle className="text-xl group-hover:text-primary transition-colors duration-300">{pkg.name}</CardTitle>
+                  <div className="text-3xl font-bold text-primary group-hover:scale-110 transition-transform duration-300">{pkg.price}</div>
+                  <CardDescription className="group-hover:text-foreground transition-colors duration-300">{pkg.description}</CardDescription>
                 </CardHeader>
 
                 <CardContent className="space-y-4">
                   <ul className="space-y-2 text-sm">
                     {pkg.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
-                        <Check className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                        <span>{feature}</span>
+                      <li key={idx} className="flex items-start gap-2 group/item">
+                        <Check className="h-4 w-4 text-primary flex-shrink-0 mt-0.5 group-hover/item:scale-110 transition-transform duration-200" />
+                        <span className="group-hover/item:text-primary transition-colors duration-200">{feature}</span>
                       </li>
                     ))}
                   </ul>
                   
                   <Button 
                     variant={selectedPackage === pkg.name ? "default" : "outline"}
-                    className="w-full"
+                    className="w-full group-hover:shadow-lg transition-all duration-300"
                     onClick={() => setSelectedPackage(pkg.name)}
                   >
                     {selectedPackage === pkg.name ? "Selected" : "Select Option"}
@@ -187,9 +187,9 @@ const PackageSelector = () => {
             {subscriptionPlans.map((plan, index) => (
               <Card 
                 key={index} 
-                className={`transition-all hover:shadow-lg ${
-                  selectedSubscription === plan.name ? 'border-primary bg-primary/5' : ''
-                } ${plan.popular ? 'border-primary/50' : ''}`}
+                className={`group relative transition-all duration-500 card-hover hover:border-primary/50 ${
+                  selectedSubscription === plan.name ? 'border-primary bg-primary/5 shadow-lg scale-105' : 'hover:shadow-lg'
+                } ${plan.popular ? 'border-primary/50 ring-2 ring-primary/20' : ''}`}
               >
                 {plan.popular && (
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
@@ -197,11 +197,11 @@ const PackageSelector = () => {
                   </div>
                 )}
                 
-                <CardHeader className="text-center">
-                  <CardTitle className="text-xl">{plan.name}</CardTitle>
-                  <p className="text-sm text-muted-foreground">{plan.subtitle}</p>
-                  <div className="text-3xl font-bold text-primary">{plan.price}</div>
-                  <CardDescription>{plan.description}</CardDescription>
+                <CardHeader className="text-center relative z-10">
+                  <CardTitle className="text-xl group-hover:text-primary transition-colors duration-300">{plan.name}</CardTitle>
+                  <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">{plan.subtitle}</p>
+                  <div className="text-3xl font-bold text-primary group-hover:scale-110 transition-transform duration-300">{plan.price}</div>
+                  <CardDescription className="group-hover:text-foreground transition-colors duration-300">{plan.description}</CardDescription>
                 </CardHeader>
 
                 <CardContent className="space-y-4">
@@ -235,7 +235,7 @@ const PackageSelector = () => {
                   
                   <Button 
                     variant={selectedSubscription === plan.name ? "default" : "outline"}
-                    className="w-full"
+                    className="w-full group-hover:shadow-lg transition-all duration-300"
                     onClick={() => setSelectedSubscription(plan.name)}
                   >
                     {selectedSubscription === plan.name ? "Selected" : "Select Option"}
@@ -284,9 +284,9 @@ const PackageSelector = () => {
 
         {/* Selection Summary and Proceed */}
         {selectedPackage && selectedSubscription && (
-          <div className="max-w-2xl mx-auto">
-            <Card className="p-6 bg-primary/5 border-primary">
-              <h3 className="text-xl font-bold mb-4 text-center">Your Selection Summary</h3>
+          <div className="max-w-2xl mx-auto animate-fade-in">
+            <Card className="p-6 bg-gradient-to-br from-primary/5 to-primary/10 border-primary shadow-lg hover:shadow-xl transition-all duration-300">
+              <h3 className="text-xl font-bold mb-4 text-center text-shimmer">Your Selection Summary</h3>
               <div className="space-y-2 mb-6">
                 <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                   <span>Coverage Package:</span>
@@ -312,7 +312,7 @@ const PackageSelector = () => {
               <Button 
                 variant="hero" 
                 size="lg" 
-                className="w-full"
+                className="w-full pulse-glow"
                 onClick={handleProceed}
               >
                 Proceed to Contact Form

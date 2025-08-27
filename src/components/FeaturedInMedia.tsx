@@ -64,11 +64,11 @@ const FeaturedInMedia = () => {
                 visibleItems.has(index) ? 'animate-fade-in hover-scale' : 'opacity-0 translate-y-8'
               }`}
             >
-              <div className={`w-48 h-24 md:w-56 md:h-28 rounded-[15px] border border-muted flex items-center justify-center ${outlet.bgColor} hover:border-primary/50 transition-colors overflow-hidden`}>
+              <div className={`group w-48 h-24 md:w-56 md:h-28 rounded-[15px] border border-muted flex items-center justify-center ${outlet.bgColor} hover:border-primary/50 card-hover transition-all duration-300 overflow-hidden`}>
                 <img 
                   src={outlet.logo} 
                   alt={`${outlet.name} logo`}
-                  className="w-full h-full object-contain p-2"
+                  className="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
             </div>

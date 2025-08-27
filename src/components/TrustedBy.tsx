@@ -50,12 +50,16 @@ UPM Services</span>
         <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {projects.map((project, index) => <div 
               key={index} 
-              className={`text-center space-y-4 transition-all duration-500 ${
-                visibleItems.has(index) ? 'animate-fade-in hover-scale' : 'opacity-0 translate-y-8'
+              className={`group text-center space-y-4 transition-all duration-500 hover:bg-muted/20 p-6 rounded-lg ${
+                visibleItems.has(index) ? 'animate-fade-in card-hover' : 'opacity-0 translate-y-8'
               }`}
             >
               <div className="flex justify-center mb-4">
-                <img src={project.logo} alt={project.name} className="h-16 w-auto object-contain" />
+                <img 
+                  src={project.logo} 
+                  alt={project.name} 
+                  className="h-16 w-auto object-contain transition-all duration-300 group-hover:scale-110 group-hover:filter group-hover:brightness-110" 
+                />
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {project.description}
