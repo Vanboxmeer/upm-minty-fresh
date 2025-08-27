@@ -64,7 +64,7 @@ const Hero = () => {
           <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto animate-fade-in">UPM helps you get in front of the right audience through powerful kol collaborations, PR distribution, native ad placements, and earned tier 1 media features.</p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
-            <Button variant="hero" size="lg" className="px-8 py-6 text-lg button-glow pulse-glow group" onClick={scrollToCoveragePackages}>
+            <Button variant="hero" size="lg" className="px-8 py-6 text-lg group" onClick={scrollToCoveragePackages}>
               <span className="group-hover:scale-110 transition-transform duration-200">Start a Campaign</span>
             </Button>
             <Button variant="outline" size="lg" className="px-8 py-6 text-lg hover:bg-white/10 hover:border-white hover:text-white transition-all duration-300 button-glow group" asChild>
