@@ -334,7 +334,12 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-white/20 mt-12 pt-8 text-center">
-          <p className="text-sm opacity-60">© 2025 United Press Media. All rights reserved.</p>
+          <p className="text-sm opacity-60">
+            © 2025 UnitedPress.Media - by using our website or services you agree to our{" "}
+            <a href="/terms-of-service" className="text-primary hover:underline">
+              terms of service
+            </a>
+          </p>
         </div>
       </div>
     </footer>;
