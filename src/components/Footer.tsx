@@ -5,7 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Linkedin, Twitter } from "lucide-react";
+import { Linkedin, X, Send } from "lucide-react";
 const Footer = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -295,7 +295,16 @@ const Footer = () => {
                 className="text-white/70 hover:text-primary transition-colors"
                 aria-label="Follow us on X (Twitter)"
               >
-                <Twitter size={20} />
+                <X size={20} />
+              </a>
+              <a 
+                href="http://t.me/unitedpressmedia" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-white/70 hover:text-primary transition-colors"
+                aria-label="Join our Telegram"
+              >
+                <Send size={20} />
               </a>
             </div>
           </div>
