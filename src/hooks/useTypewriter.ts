@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface UseTypewriterProps {
   words: string[];
@@ -17,41 +17,70 @@ export const useTypewriter = ({
   const [currentText, setCurrentText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-
-  const type = useCallback(() => {
-    const currentWord = words[currentWordIndex];
-    
-    if (isPaused) {
-      setTimeout(() => setIsPaused(false), delayBetweenWords);
-      return;
-    }
-
-    if (!isDeleting) {
-      // Typing
-      if (currentText.length < currentWord.length) {
-        setCurrentText(currentWord.substring(0, currentText.length + 1));
-      } else {
-        // Word is complete, pause before deleting
-        setIsPaused(true);
-        setTimeout(() => setIsDeleting(true), delayBetweenWords);
-        return;
-      }
-    } else {
-      // Deleting
-      if (currentText.length > 0) {
-        setCurrentText(currentText.substring(0, currentText.length - 1));
-      } else {
-        // Deletion complete, move to next word
-        setIsDeleting(false);
-        setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length);
-      }
-    }
-  }, [currentText, currentWordIndex, isDeleting, isPaused, words, delayBetweenWords]);
+  
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    const timer = setTimeout(type, isDeleting ? deleteSpeed : typeSpeed);
-    return () => clearTimeout(timer);
-  }, [type, isDeleting, typeSpeed, deleteSpeed]);
+    const type = () => {
+      const currentWord = words[currentWordIndex];
+      
+      if (isPaused) {
+        return;
+      }
+
+      if (!isDeleting) {
+        // Typing
+        if (currentText.length < currentWord.length) {
+          setCurrentText(currentWord.substring(0, currentText.length + 1));
+        } else {
+          // Word is complete, pause before deleting
+          setIsPaused(true);
+          pauseTimeoutRef.current = setTimeout(() => {
+            setIsDeleting(true);
+            setIsPaused(false);
+          }, delayBetweenWords);
+          return;
+        }
+      } else {
+        // Deleting
+        if (currentText.length > 0) {
+          setCurrentText(currentText.substring(0, currentText.length - 1));
+        } else {
+          // Deletion complete, move to next word
+          setIsDeleting(false);
+          setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length);
+        }
+      }
+    };
+
+    if (!isPaused) {
+      timeoutRef.current = setTimeout(type, isDeleting ? deleteSpeed : typeSpeed);
+    }
+
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+      if (pauseTimeoutRef.current) {
+        clearTimeout(pauseTimeoutRef.current);
+        pauseTimeoutRef.current = null;
+      }
+    };
+  }, [currentText, currentWordIndex, isDeleting, isPaused, words, typeSpeed, deleteSpeed, delayBetweenWords]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      if (pauseTimeoutRef.current) {
+        clearTimeout(pauseTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return currentText;
 };
