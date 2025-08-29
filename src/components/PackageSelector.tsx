@@ -150,19 +150,23 @@ const PackageSelector = () => {
     
     if (!packageData || !subscriptionData) return;
 
-    // Create comprehensive summary
+    // Create comprehensive summary with converted prices
     let summary = `SELECTED PACKAGE & SUBSCRIPTION:\n\n`;
-    summary += `Coverage Package: ${packageData.name} - ${packageData.price}\n`;
+    summary += `Coverage Package: ${packageData.name} - ${formatPrice(packageData.price)}\n`;
     summary += `Description: ${packageData.description}\n\n`;
     
     summary += `Subscription Level: ${subscriptionData.name}\n`;
     if (subscriptionData.hasBilling && billingFrequency === "annual") {
-      summary += `Billing: Annual - $${subscriptionData.annualPrice} (Save $${(subscriptionData.monthlyPrice * 12) - subscriptionData.annualPrice})\n`;
+      summary += `Billing: Annual - ${formatPrice(`$${subscriptionData.annualPrice}`)} (Save ${formatPrice(`$${(subscriptionData.monthlyPrice * 12) - subscriptionData.annualPrice}`)})\n`;
     } else if (subscriptionData.hasBilling) {
-      summary += `Billing: Monthly - $${subscriptionData.monthlyPrice}\n`;
+      summary += `Billing: Monthly - ${formatPrice(`$${subscriptionData.monthlyPrice}`)}\n`;
     }
     summary += `Service Fee: ${subscriptionData.subtitle}\n`;
-    summary += `Subscription Details: ${subscriptionData.description}\n\n`;
+    summary += `Subscription Details: ${subscriptionData.description}\n`;
+    if (selectedCurrency !== 'USD') {
+      summary += `\nPrices displayed in: ${selectedCurrency}\n`;
+    }
+    summary += `\n`;
 
     const encodedSummary = encodeURIComponent(summary);
     window.location.href = `/?selection=${encodedSummary}#contact-form`;
@@ -273,7 +277,7 @@ const PackageSelector = () => {
                 <CardHeader className="text-center relative z-10">
                   <CardTitle className="text-xl group-hover:text-primary transition-colors duration-300">{plan.name}</CardTitle>
                   <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">{plan.subtitle}</p>
-                  <div className="text-3xl font-bold text-primary group-hover:scale-110 transition-transform duration-300">{plan.price}</div>
+                  <div className="text-3xl font-bold text-primary group-hover:scale-110 transition-transform duration-300">{formatPrice(plan.price)}</div>
                   <CardDescription className="group-hover:text-foreground transition-colors duration-300">{plan.description}</CardDescription>
                 </CardHeader>
 
@@ -334,7 +338,7 @@ const PackageSelector = () => {
                   <Card className="p-4 text-center">
                     <h4 className="font-semibold">Monthly Billing</h4>
                     <div className="text-2xl font-bold text-primary">
-                      ${subscriptionPlans.find(p => p.name === selectedSubscription)?.monthlyPrice}/month
+                      {formatPrice(`$${subscriptionPlans.find(p => p.name === selectedSubscription)?.monthlyPrice}`)}/month
                     </div>
                   </Card>
                 </TabsContent>
@@ -343,10 +347,10 @@ const PackageSelector = () => {
                   <Card className="p-4 text-center">
                     <h4 className="font-semibold">Annual Billing</h4>
                     <div className="text-2xl font-bold text-primary">
-                      ${subscriptionPlans.find(p => p.name === selectedSubscription)?.annualPrice}/year
+                      {formatPrice(`$${subscriptionPlans.find(p => p.name === selectedSubscription)?.annualPrice}`)}/year
                     </div>
                     <div className="text-sm text-green-600 font-medium">
-                      Save ${((subscriptionPlans.find(p => p.name === selectedSubscription)?.monthlyPrice || 0) * 12) - (subscriptionPlans.find(p => p.name === selectedSubscription)?.annualPrice || 0)}
+                      Save {formatPrice(`$${((subscriptionPlans.find(p => p.name === selectedSubscription)?.monthlyPrice || 0) * 12) - (subscriptionPlans.find(p => p.name === selectedSubscription)?.annualPrice || 0)}`)}
                     </div>
                   </Card>
                 </TabsContent>
@@ -363,7 +367,7 @@ const PackageSelector = () => {
               <div className="space-y-2 mb-6">
                 <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                   <span>Coverage Package:</span>
-                  <span className="font-semibold">{selectedPackage} - {coveragePackages.find(p => p.name === selectedPackage)?.price}</span>
+                  <span className="font-semibold">{selectedPackage} - {formatPrice(coveragePackages.find(p => p.name === selectedPackage)?.price || "")}</span>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                   <span>Subscription Level:</span>
@@ -373,11 +377,17 @@ const PackageSelector = () => {
                   <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                     <span>Billing:</span>
                     <span className="font-semibold capitalize">
-                      {billingFrequency} - ${billingFrequency === "monthly" 
+                      {billingFrequency} - {formatPrice(`$${billingFrequency === "monthly" 
                         ? subscriptionPlans.find(p => p.name === selectedSubscription)?.monthlyPrice
                         : subscriptionPlans.find(p => p.name === selectedSubscription)?.annualPrice
-                      }
+                      }`)}
                     </span>
+                  </div>
+                )}
+                {selectedCurrency !== 'USD' && (
+                  <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
+                    <span>Currency:</span>
+                    <span className="font-semibold">{selectedCurrency}</span>
                   </div>
                 )}
               </div>
