@@ -11,36 +11,12 @@ const PackageSelector = () => {
   const [selectedSubscription, setSelectedSubscription] = useState<string>("");
   const [billingFrequency, setBillingFrequency] = useState<string>("monthly");
   const [selectedCurrency, setSelectedCurrency] = useState<'USD' | 'BTC' | 'ETH' | 'SOL'>('USD');
-  const [cryptoPrices, setCryptoPrices] = useState<{BTC: number, ETH: number, SOL: number}>({
-    BTC: 0,
-    ETH: 0,
-    SOL: 0
-  });
-
-  useEffect(() => {
-    const fetchCryptoPrices = async () => {
-      try {
-        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd');
-        const data = await response.json();
-        setCryptoPrices({
-          BTC: data.bitcoin?.usd || 0,
-          ETH: data.ethereum?.usd || 0,
-          SOL: data.solana?.usd || 0
-        });
-        console.log('Crypto prices fetched:', {
-          BTC: data.bitcoin?.usd || 0,
-          ETH: data.ethereum?.usd || 0,
-          SOL: data.solana?.usd || 0
-        });
-      } catch (error) {
-        console.error('Failed to fetch crypto prices:', error);
-      }
-    };
-
-    fetchCryptoPrices();
-    const interval = setInterval(fetchCryptoPrices, 60000); // Update every minute
-    return () => clearInterval(interval);
-  }, []);
+  // Using static crypto prices for reliable conversion
+  const cryptoPrices = {
+    BTC: 70000, // Approximate current BTC price
+    ETH: 2500,  // Approximate current ETH price
+    SOL: 140    // Approximate current SOL price
+  };
 
   const formatPrice = (usdPrice: string) => {
     if (!usdPrice) return '';
@@ -200,7 +176,7 @@ const PackageSelector = () => {
         {/* Currency Toggle */}
         <div className="flex justify-center mb-12">
           <div className="text-center">
-            <h3 className="text-lg font-semibold mb-4">Choose Currency Display</h3>
+            <h3 className="text-lg font-semibold mb-4">Choose Preferred Payment</h3>
             <ToggleGroup 
               type="single" 
               value={selectedCurrency} 
