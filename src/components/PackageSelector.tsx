@@ -2,13 +2,60 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Check, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const PackageSelector = () => {
   const [selectedPackage, setSelectedPackage] = useState<string>("");
   const [selectedSubscription, setSelectedSubscription] = useState<string>("");
   const [billingFrequency, setBillingFrequency] = useState<string>("monthly");
+  const [selectedCurrency, setSelectedCurrency] = useState<'USD' | 'BTC' | 'ETH' | 'SOL'>('USD');
+  const [cryptoPrices, setCryptoPrices] = useState<{BTC: number, ETH: number, SOL: number}>({
+    BTC: 0,
+    ETH: 0,
+    SOL: 0
+  });
+
+  useEffect(() => {
+    const fetchCryptoPrices = async () => {
+      try {
+        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd');
+        const data = await response.json();
+        setCryptoPrices({
+          BTC: data.bitcoin?.usd || 0,
+          ETH: data.ethereum?.usd || 0,
+          SOL: data.solana?.usd || 0
+        });
+      } catch (error) {
+        console.error('Failed to fetch crypto prices:', error);
+      }
+    };
+
+    fetchCryptoPrices();
+    const interval = setInterval(fetchCryptoPrices, 60000); // Update every minute
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatPrice = (usdPrice: string) => {
+    const numericPrice = parseFloat(usdPrice.replace(/[$,]/g, ''));
+    
+    if (selectedCurrency === 'USD') {
+      return usdPrice;
+    }
+    
+    const cryptoPrice = cryptoPrices[selectedCurrency];
+    if (cryptoPrice === 0) return usdPrice;
+    
+    const convertedAmount = numericPrice / cryptoPrice;
+    const symbol = selectedCurrency === 'BTC' ? '₿' : selectedCurrency === 'ETH' ? 'Ξ' : '◎';
+    
+    if (convertedAmount >= 1) {
+      return `${symbol}${convertedAmount.toFixed(2)}`;
+    } else {
+      return `${symbol}${convertedAmount.toFixed(4)}`;
+    }
+  };
 
   const coveragePackages = [
     {
@@ -134,6 +181,32 @@ const PackageSelector = () => {
           </p>
         </div>
 
+        {/* Currency Toggle */}
+        <div className="flex justify-center mb-12">
+          <div className="text-center">
+            <h3 className="text-lg font-semibold mb-4">Choose Currency Display</h3>
+            <ToggleGroup 
+              type="single" 
+              value={selectedCurrency} 
+              onValueChange={(value) => value && setSelectedCurrency(value as 'USD' | 'BTC' | 'ETH' | 'SOL')}
+              className="border rounded-lg p-1 bg-background"
+            >
+              <ToggleGroupItem value="USD" className="data-[state=on]:bg-primary data-[state=on]:text-primary-foreground">
+                USD
+              </ToggleGroupItem>
+              <ToggleGroupItem value="BTC" className="data-[state=on]:bg-primary data-[state=on]:text-primary-foreground">
+                ₿ BTC
+              </ToggleGroupItem>
+              <ToggleGroupItem value="ETH" className="data-[state=on]:bg-primary data-[state=on]:text-primary-foreground">
+                Ξ ETH
+              </ToggleGroupItem>
+              <ToggleGroupItem value="SOL" className="data-[state=on]:bg-primary data-[state=on]:text-primary-foreground">
+                ◎ SOL
+              </ToggleGroupItem>
+            </ToggleGroup>
+          </div>
+        </div>
+
         {/* Coverage Package Selection */}
         <div className="mb-16">
           <h3 className="text-2xl font-bold text-center mb-8">Step 1: Choose Coverage Package</h3>
@@ -153,7 +226,7 @@ const PackageSelector = () => {
                 
                 <CardHeader className="text-center relative z-10">
                   <CardTitle className="text-xl group-hover:text-primary transition-colors duration-300">{pkg.name}</CardTitle>
-                  <div className="text-3xl font-bold text-primary group-hover:scale-110 transition-transform duration-300">{pkg.price}</div>
+                  <div className="text-3xl font-bold text-primary group-hover:scale-110 transition-transform duration-300">{formatPrice(pkg.price)}</div>
                   <CardDescription className="group-hover:text-foreground transition-colors duration-300">{pkg.description}</CardDescription>
                 </CardHeader>
 
