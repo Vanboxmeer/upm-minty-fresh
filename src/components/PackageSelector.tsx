@@ -37,9 +37,9 @@ const PackageSelector = () => {
     }
     
     const convertedAmount = numericPrice / cryptoPrice;
-    const symbol = selectedCurrency === 'BTC' ? '₿' : selectedCurrency === 'ETH' ? 'Ξ' : '◎';
+    const symbol = selectedCurrency === 'BTC' ? 'BTC' : selectedCurrency === 'ETH' ? 'ETH' : 'SOL';
     
-    const formattedPrice = convertedAmount >= 1 ? `${symbol}${convertedAmount.toFixed(2)}` : `${symbol}${convertedAmount.toFixed(4)}`;
+    const formattedPrice = convertedAmount >= 1 ? `${convertedAmount.toFixed(2)} ${symbol}` : `${convertedAmount.toFixed(4)} ${symbol}`;
     console.log('Converted price:', formattedPrice);
     
     return formattedPrice;
@@ -187,13 +187,13 @@ const PackageSelector = () => {
                 USD
               </ToggleGroupItem>
               <ToggleGroupItem value="BTC" className="data-[state=on]:bg-primary data-[state=on]:text-primary-foreground">
-                ₿ BTC
+                BTC
               </ToggleGroupItem>
               <ToggleGroupItem value="ETH" className="data-[state=on]:bg-primary data-[state=on]:text-primary-foreground">
-                Ξ ETH
+                ETH
               </ToggleGroupItem>
               <ToggleGroupItem value="SOL" className="data-[state=on]:bg-primary data-[state=on]:text-primary-foreground">
-                ◎ SOL
+                SOL
               </ToggleGroupItem>
             </ToggleGroup>
           </div>
