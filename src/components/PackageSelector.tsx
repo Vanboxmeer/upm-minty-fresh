@@ -27,6 +27,11 @@ const PackageSelector = () => {
           ETH: data.ethereum?.usd || 0,
           SOL: data.solana?.usd || 0
         });
+        console.log('Crypto prices fetched:', {
+          BTC: data.bitcoin?.usd || 0,
+          ETH: data.ethereum?.usd || 0,
+          SOL: data.solana?.usd || 0
+        });
       } catch (error) {
         console.error('Failed to fetch crypto prices:', error);
       }
@@ -38,6 +43,11 @@ const PackageSelector = () => {
   }, []);
 
   const formatPrice = (usdPrice: string) => {
+    if (!usdPrice) return '';
+    
+    console.log('formatPrice called with:', usdPrice, 'selectedCurrency:', selectedCurrency, 'cryptoPrices:', cryptoPrices);
+    
+    // Extract numeric value from USD price string
     const numericPrice = parseFloat(usdPrice.replace(/[$,]/g, ''));
     
     if (selectedCurrency === 'USD') {
@@ -45,16 +55,18 @@ const PackageSelector = () => {
     }
     
     const cryptoPrice = cryptoPrices[selectedCurrency];
-    if (cryptoPrice === 0) return usdPrice;
+    if (!cryptoPrice || cryptoPrice === 0) {
+      console.log('No crypto price available for', selectedCurrency, 'fallback to USD');
+      return usdPrice; // Fallback to USD if crypto price not available
+    }
     
     const convertedAmount = numericPrice / cryptoPrice;
     const symbol = selectedCurrency === 'BTC' ? '₿' : selectedCurrency === 'ETH' ? 'Ξ' : '◎';
     
-    if (convertedAmount >= 1) {
-      return `${symbol}${convertedAmount.toFixed(2)}`;
-    } else {
-      return `${symbol}${convertedAmount.toFixed(4)}`;
-    }
+    const formattedPrice = convertedAmount >= 1 ? `${symbol}${convertedAmount.toFixed(2)}` : `${symbol}${convertedAmount.toFixed(4)}`;
+    console.log('Converted price:', formattedPrice);
+    
+    return formattedPrice;
   };
 
   const coveragePackages = [
