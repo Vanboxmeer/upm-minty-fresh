@@ -11,11 +11,11 @@ const PackageSelector = () => {
   const [selectedSubscription, setSelectedSubscription] = useState<string>("");
   const [billingFrequency, setBillingFrequency] = useState<string>("monthly");
   const [selectedCurrency, setSelectedCurrency] = useState<'USD' | 'BTC' | 'ETH' | 'SOL'>('USD');
-  // Using static crypto prices for reliable conversion
+  // Using current crypto prices for accurate conversion
   const cryptoPrices = {
-    BTC: 70000, // Approximate current BTC price
-    ETH: 2500,  // Approximate current ETH price
-    SOL: 140    // Approximate current SOL price
+    BTC: 112000, // Current BTC price ~$112k
+    ETH: 4000,   // Current ETH price ~$4k  
+    SOL: 200     // Current SOL price ~$200
   };
 
   const formatPrice = (usdPrice: string) => {
