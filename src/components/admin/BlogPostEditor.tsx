@@ -25,6 +25,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Combobox } from '@/components/ui/combobox';
+import { TagInput } from '@/components/ui/tag-input';
 import { BlogPost } from '@/hooks/useBlogPosts';
 import { Save, Eye, Upload, X } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
@@ -42,7 +44,7 @@ const blogPostSchema = z.object({
   status: z.enum(['draft', 'published']),
   seo_title: z.string().optional(),
   seo_description: z.string().optional(),
-  seo_keywords: z.string().optional(),
+  seo_keywords: z.array(z.string()).optional(),
   read_time: z.string().optional(),
   publish_date: z.string().optional(),
 });
@@ -59,6 +61,9 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
   const [uploading, setUploading] = useState(false);
   const [previewMode, setPreviewMode] = useState(false);
   const [contentMode, setContentMode] = useState<'rich' | 'html'>('rich');
+  const [categories] = useState<string[]>([
+    'Marketing', 'Web3', 'Crypto', 'Press Release', 'Influencer', 'SEO', 'Social Media', 'Content Marketing', 'Paid Advertising', 'Analytics'
+  ]);
   const { toast } = useToast();
   
   const form = useForm<BlogPostFormData>({
@@ -75,7 +80,7 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
       status: post?.status || 'draft',
       seo_title: post?.seo_title || '',
       seo_description: post?.seo_description || '',
-      seo_keywords: post?.seo_keywords?.join(', ') || '',
+      seo_keywords: post?.seo_keywords || [],
       read_time: post?.read_time || '5 min read',
       publish_date: post?.publish_date ? (() => {
         const date = new Date(post.publish_date);
@@ -175,9 +180,7 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
 
   const onSubmit = async (data: BlogPostFormData) => {
     try {
-      const keywords = data.seo_keywords 
-        ? data.seo_keywords.split(',').map(k => k.trim()).filter(Boolean)
-        : [];
+      const keywords = Array.isArray(data.seo_keywords) ? data.seo_keywords : [];
 
       let finalStatus = data.status;
       let publishDate: string | null = null;
@@ -407,20 +410,20 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Category</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="Marketing">Marketing</SelectItem>
-                            <SelectItem value="Web3">Web3</SelectItem>
-                            <SelectItem value="Crypto">Crypto</SelectItem>
-                            <SelectItem value="Press Release">Press Release</SelectItem>
-                            <SelectItem value="Influencer">Influencer</SelectItem>
-                          </SelectContent>
-                        </Select>
+                        <FormControl>
+                          <Combobox
+                            options={categories}
+                            value={field.value}
+                            onValueChange={field.onChange}
+                            placeholder="Select or add category..."
+                            searchPlaceholder="Search categories..."
+                            allowCustom={true}
+                            onAddNew={(newCategory) => {
+                              // In a real app, you might want to persist this to a categories table
+                              console.log('New category added:', newCategory);
+                            }}
+                          />
+                        </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -572,10 +575,18 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                     name="seo_keywords"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Keywords</FormLabel>
+                        <FormLabel>Keywords/Tags</FormLabel>
                         <FormControl>
-                          <Input placeholder="keyword1, keyword2, keyword3" {...field} />
+                          <TagInput
+                            tags={field.value || []}
+                            onTagsChange={field.onChange}
+                            placeholder="Type and press Enter to add keywords..."
+                            maxTags={10}
+                          />
                         </FormControl>
+                        <p className="text-xs text-muted-foreground">
+                          Press Enter or comma to add keywords. Maximum 10 keywords.
+                        </p>
                         <FormMessage />
                       </FormItem>
                     )}
