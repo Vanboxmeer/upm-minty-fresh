@@ -11,12 +11,57 @@ const PackageSelector = () => {
   const [selectedSubscription, setSelectedSubscription] = useState<string>("");
   const [billingFrequency, setBillingFrequency] = useState<string>("monthly");
   const [selectedCurrency, setSelectedCurrency] = useState<'USD' | 'BTC' | 'ETH' | 'SOL'>('USD');
-  // Using current crypto prices for accurate conversion
-  const cryptoPrices = {
-    BTC: 112000, // Current BTC price ~$112k
-    ETH: 4000,   // Current ETH price ~$4k  
-    SOL: 200     // Current SOL price ~$200
-  };
+  const [cryptoPrices, setCryptoPrices] = useState({
+    BTC: 112000, // Default fallback prices
+    ETH: 4000,   
+    SOL: 200     
+  });
+  const [pricesLoading, setPricesLoading] = useState(false);
+
+  // Fetch real-time crypto prices from CoinCap API
+  useEffect(() => {
+    const fetchCryptoPrices = async () => {
+      setPricesLoading(true);
+      try {
+        // Fetch BTC, ETH, and SOL prices from CoinCap API
+        const response = await fetch('https://api.coincap.io/v2/assets?ids=bitcoin,ethereum,solana');
+        const data = await response.json();
+        
+        if (data.data && Array.isArray(data.data)) {
+          const newPrices = { ...cryptoPrices };
+          
+          data.data.forEach((coin: any) => {
+            switch (coin.id) {
+              case 'bitcoin':
+                newPrices.BTC = parseFloat(coin.priceUsd);
+                break;
+              case 'ethereum':
+                newPrices.ETH = parseFloat(coin.priceUsd);
+                break;
+              case 'solana':
+                newPrices.SOL = parseFloat(coin.priceUsd);
+                break;
+            }
+          });
+          
+          setCryptoPrices(newPrices);
+          console.log('Updated crypto prices:', newPrices);
+        }
+      } catch (error) {
+        console.error('Failed to fetch crypto prices:', error);
+        // Keep using fallback prices if API fails
+      } finally {
+        setPricesLoading(false);
+      }
+    };
+
+    fetchCryptoPrices();
+    
+    // Update prices every 5 minutes
+    const interval = setInterval(fetchCryptoPrices, 5 * 60 * 1000);
+    
+    return () => clearInterval(interval);
+  }, []);
 
   const formatPrice = (usdPrice: string) => {
     if (!usdPrice) return '';
