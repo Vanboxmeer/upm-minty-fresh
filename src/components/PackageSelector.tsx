@@ -10,92 +10,8 @@ const PackageSelector = () => {
   const [selectedPackage, setSelectedPackage] = useState<string>("");
   const [selectedSubscription, setSelectedSubscription] = useState<string>("");
   const [billingFrequency, setBillingFrequency] = useState<string>("monthly");
-  const [selectedCurrency, setSelectedCurrency] = useState<'USD' | 'BTC' | 'ETH' | 'SOL'>('USD');
-  const [cryptoPrices, setCryptoPrices] = useState({
-    BTC: 108000, // Updated to current market price ~$108k
-    ETH: 3900,   // Updated to current market price
-    SOL: 210     // Updated to current market price
-  });
-  const [pricesLoading, setPricesLoading] = useState(false);
-
-  // Fetch real-time crypto prices from CoinCap API
-  useEffect(() => {
-    const fetchCryptoPrices = async () => {
-      setPricesLoading(true);
-      try {
-        console.log('Fetching crypto prices from API...');
-        // Fetch BTC, ETH, and SOL prices from CoinCap API
-        const response = await fetch('https://api.coincap.io/v2/assets?ids=bitcoin,ethereum,solana');
-        const data = await response.json();
-        
-        console.log('API Response:', data);
-        
-        if (data.data && Array.isArray(data.data)) {
-          const newPrices = {
-            BTC: 112000, // Keep fallback
-            ETH: 4000,   
-            SOL: 200     
-          };
-          
-          data.data.forEach((coin: any) => {
-            console.log('Processing coin:', coin.id, coin.priceUsd);
-            switch (coin.id) {
-              case 'bitcoin':
-                newPrices.BTC = parseFloat(coin.priceUsd);
-                break;
-              case 'ethereum':
-                newPrices.ETH = parseFloat(coin.priceUsd);
-                break;
-              case 'solana':
-                newPrices.SOL = parseFloat(coin.priceUsd);
-                break;
-            }
-          });
-          
-          setCryptoPrices(newPrices);
-          console.log('Updated crypto prices:', newPrices);
-        }
-      } catch (error) {
-        console.error('Failed to fetch crypto prices:', error);
-        console.log('Using fallback prices');
-        // Keep using fallback prices if API fails
-      } finally {
-        setPricesLoading(false);
-      }
-    };
-
-    fetchCryptoPrices();
-    
-    // Update prices every 2 minutes for more frequent updates
-    const interval = setInterval(fetchCryptoPrices, 2 * 60 * 1000);
-    
-    return () => clearInterval(interval);
-  }, []);
-
   const formatPrice = (usdPrice: string) => {
-    if (!usdPrice) return '';
-    
-    // Extract numeric value from USD price string
-    const numericPrice = parseFloat(usdPrice.replace(/[$,]/g, ''));
-    console.log('formatPrice - USD amount:', numericPrice, 'Currency:', selectedCurrency, 'Current BTC price:', cryptoPrices.BTC);
-    
-    if (selectedCurrency === 'USD') {
-      return usdPrice;
-    }
-    
-    const cryptoPrice = cryptoPrices[selectedCurrency];
-    if (!cryptoPrice || cryptoPrice === 0) {
-      console.log('No crypto price available for', selectedCurrency, 'fallback to USD');
-      return usdPrice; // Fallback to USD if crypto price not available
-    }
-    
-    const convertedAmount = numericPrice / cryptoPrice;
-    const symbol = selectedCurrency;
-    
-    const formattedPrice = convertedAmount >= 1 ? `${convertedAmount.toFixed(3)} ${symbol}` : `${convertedAmount.toFixed(6)} ${symbol}`;
-    console.log('Conversion:', numericPrice, '/', cryptoPrice, '=', convertedAmount, 'Final:', formattedPrice);
-    
-    return formattedPrice;
+    return usdPrice;
   };
 
   const coveragePackages = [
@@ -204,9 +120,6 @@ const PackageSelector = () => {
     }
     summary += `Service Fee: ${subscriptionData.subtitle}\n`;
     summary += `Subscription Details: ${subscriptionData.description}\n`;
-    if (selectedCurrency !== 'USD') {
-      summary += `\nPrices displayed in: ${selectedCurrency}\n`;
-    }
     summary += `\n`;
 
     const encodedSummary = encodeURIComponent(summary);
@@ -226,31 +139,6 @@ const PackageSelector = () => {
           </p>
         </div>
 
-        {/* Currency Toggle */}
-        <div className="flex justify-center mb-12">
-          <div className="text-center">
-            <h3 className="text-lg font-semibold mb-4">Choose Preferred Payment</h3>
-            <ToggleGroup 
-              type="single" 
-              value={selectedCurrency} 
-              onValueChange={(value) => value && setSelectedCurrency(value as 'USD' | 'BTC' | 'ETH' | 'SOL')}
-              className="border rounded-lg p-1 bg-background"
-            >
-              <ToggleGroupItem value="USD" className="data-[state=on]:bg-primary data-[state=on]:text-primary-foreground">
-                USD
-              </ToggleGroupItem>
-              <ToggleGroupItem value="BTC" className="data-[state=on]:bg-primary data-[state=on]:text-primary-foreground">
-                BTC
-              </ToggleGroupItem>
-              <ToggleGroupItem value="ETH" className="data-[state=on]:bg-primary data-[state=on]:text-primary-foreground">
-                ETH
-              </ToggleGroupItem>
-              <ToggleGroupItem value="SOL" className="data-[state=on]:bg-primary data-[state=on]:text-primary-foreground">
-                SOL
-              </ToggleGroupItem>
-            </ToggleGroup>
-          </div>
-        </div>
 
         {/* Coverage Package Selection */}
         <div className="mb-16">
@@ -423,12 +311,6 @@ const PackageSelector = () => {
                         : subscriptionPlans.find(p => p.name === selectedSubscription)?.annualPrice
                       }`)}
                     </span>
-                  </div>
-                )}
-                {selectedCurrency !== 'USD' && (
-                  <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
-                    <span>Currency:</span>
-                    <span className="font-semibold">{selectedCurrency}</span>
                   </div>
                 )}
               </div>

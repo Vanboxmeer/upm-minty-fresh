@@ -6,51 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 const Pricing = () => {
   const navigate = useNavigate();
-  const [selectedCurrency, setSelectedCurrency] = useState<'USD' | 'BTC' | 'ETH' | 'SOL'>('USD');
-  const [cryptoPrices, setCryptoPrices] = useState<{BTC: number, ETH: number, SOL: number}>({
-    BTC: 0,
-    ETH: 0,
-    SOL: 0
-  });
-
-  useEffect(() => {
-    const fetchCryptoPrices = async () => {
-      try {
-        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd');
-        const data = await response.json();
-        setCryptoPrices({
-          BTC: data.bitcoin?.usd || 0,
-          ETH: data.ethereum?.usd || 0,
-          SOL: data.solana?.usd || 0
-        });
-      } catch (error) {
-        console.error('Failed to fetch crypto prices:', error);
-      }
-    };
-
-    fetchCryptoPrices();
-    const interval = setInterval(fetchCryptoPrices, 60000); // Update every minute
-    return () => clearInterval(interval);
-  }, []);
-
   const formatPrice = (usdPrice: string) => {
-    const numericPrice = parseFloat(usdPrice.replace(/[$,]/g, ''));
-    
-    if (selectedCurrency === 'USD') {
-      return usdPrice;
-    }
-    
-    const cryptoPrice = cryptoPrices[selectedCurrency];
-    if (cryptoPrice === 0) return usdPrice;
-    
-    const convertedAmount = numericPrice / cryptoPrice;
-    const symbol = selectedCurrency === 'BTC' ? '₿' : selectedCurrency === 'ETH' ? 'Ξ' : '◎';
-    
-    if (convertedAmount >= 1) {
-      return `${symbol}${convertedAmount.toFixed(2)}`;
-    } else {
-      return `${symbol}${convertedAmount.toFixed(4)}`;
-    }
+    return usdPrice;
   };
   
   const handleOrderPackage = (planName: string) => {
@@ -126,27 +83,6 @@ const Pricing = () => {
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">Choose the perfect plan to accelerate your digital marketing success. All plans include our core distribution network and analytics. If its your first time ordering with UPM please reach out to discuss your coverage requests before placing your order.</p>
           
-          <div className="flex justify-center mb-8">
-            <ToggleGroup 
-              type="single" 
-              value={selectedCurrency} 
-              onValueChange={(value) => value && setSelectedCurrency(value as 'USD' | 'BTC' | 'ETH' | 'SOL')}
-              className="border rounded-lg p-1 bg-background"
-            >
-              <ToggleGroupItem value="USD" className="data-[state=on]:bg-primary data-[state=on]:text-primary-foreground">
-                USD
-              </ToggleGroupItem>
-              <ToggleGroupItem value="BTC" className="data-[state=on]:bg-primary data-[state=on]:text-primary-foreground">
-                ₿ BTC
-              </ToggleGroupItem>
-              <ToggleGroupItem value="ETH" className="data-[state=on]:bg-primary data-[state=on]:text-primary-foreground">
-                Ξ ETH
-              </ToggleGroupItem>
-              <ToggleGroupItem value="SOL" className="data-[state=on]:bg-primary data-[state=on]:text-primary-foreground">
-                ◎ SOL
-              </ToggleGroupItem>
-            </ToggleGroup>
-          </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
