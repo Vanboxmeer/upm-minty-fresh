@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const PageLoader = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [logoLoaded, setLogoLoaded] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     // Simulate minimum loading time and wait for page to be ready
@@ -18,7 +20,8 @@ const PageLoader = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  if (!isLoading) return null;
+  // Don't show loader on mobile devices
+  if (isMobile || !isLoading) return null;
 
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-background">
