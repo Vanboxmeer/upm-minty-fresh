@@ -12,9 +12,9 @@ const PackageSelector = () => {
   const [billingFrequency, setBillingFrequency] = useState<string>("monthly");
   const [selectedCurrency, setSelectedCurrency] = useState<'USD' | 'BTC' | 'ETH' | 'SOL'>('USD');
   const [cryptoPrices, setCryptoPrices] = useState({
-    BTC: 112000, // Default fallback prices
-    ETH: 4000,   
-    SOL: 200     
+    BTC: 108000, // Updated to current market price ~$108k
+    ETH: 3900,   // Updated to current market price
+    SOL: 210     // Updated to current market price
   });
   const [pricesLoading, setPricesLoading] = useState(false);
 
@@ -23,14 +23,22 @@ const PackageSelector = () => {
     const fetchCryptoPrices = async () => {
       setPricesLoading(true);
       try {
+        console.log('Fetching crypto prices from API...');
         // Fetch BTC, ETH, and SOL prices from CoinCap API
         const response = await fetch('https://api.coincap.io/v2/assets?ids=bitcoin,ethereum,solana');
         const data = await response.json();
         
+        console.log('API Response:', data);
+        
         if (data.data && Array.isArray(data.data)) {
-          const newPrices = { ...cryptoPrices };
+          const newPrices = {
+            BTC: 112000, // Keep fallback
+            ETH: 4000,   
+            SOL: 200     
+          };
           
           data.data.forEach((coin: any) => {
+            console.log('Processing coin:', coin.id, coin.priceUsd);
             switch (coin.id) {
               case 'bitcoin':
                 newPrices.BTC = parseFloat(coin.priceUsd);
@@ -49,6 +57,7 @@ const PackageSelector = () => {
         }
       } catch (error) {
         console.error('Failed to fetch crypto prices:', error);
+        console.log('Using fallback prices');
         // Keep using fallback prices if API fails
       } finally {
         setPricesLoading(false);
@@ -57,8 +66,8 @@ const PackageSelector = () => {
 
     fetchCryptoPrices();
     
-    // Update prices every 5 minutes
-    const interval = setInterval(fetchCryptoPrices, 5 * 60 * 1000);
+    // Update prices every 2 minutes for more frequent updates
+    const interval = setInterval(fetchCryptoPrices, 2 * 60 * 1000);
     
     return () => clearInterval(interval);
   }, []);
@@ -66,10 +75,9 @@ const PackageSelector = () => {
   const formatPrice = (usdPrice: string) => {
     if (!usdPrice) return '';
     
-    console.log('formatPrice called with:', usdPrice, 'selectedCurrency:', selectedCurrency, 'cryptoPrices:', cryptoPrices);
-    
     // Extract numeric value from USD price string
     const numericPrice = parseFloat(usdPrice.replace(/[$,]/g, ''));
+    console.log('formatPrice - USD amount:', numericPrice, 'Currency:', selectedCurrency, 'Current BTC price:', cryptoPrices.BTC);
     
     if (selectedCurrency === 'USD') {
       return usdPrice;
@@ -82,10 +90,10 @@ const PackageSelector = () => {
     }
     
     const convertedAmount = numericPrice / cryptoPrice;
-    const symbol = selectedCurrency === 'BTC' ? 'BTC' : selectedCurrency === 'ETH' ? 'ETH' : 'SOL';
+    const symbol = selectedCurrency;
     
-    const formattedPrice = convertedAmount >= 1 ? `${convertedAmount.toFixed(2)} ${symbol}` : `${convertedAmount.toFixed(4)} ${symbol}`;
-    console.log('Converted price:', formattedPrice);
+    const formattedPrice = convertedAmount >= 1 ? `${convertedAmount.toFixed(3)} ${symbol}` : `${convertedAmount.toFixed(6)} ${symbol}`;
+    console.log('Conversion:', numericPrice, '/', cryptoPrice, '=', convertedAmount, 'Final:', formattedPrice);
     
     return formattedPrice;
   };
