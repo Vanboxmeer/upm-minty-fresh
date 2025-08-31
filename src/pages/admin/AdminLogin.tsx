@@ -12,9 +12,9 @@ import { updateMetaTags } from '@/utils/seoUtils';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
   const { user, isLoading, signIn } = useAdminAuth();
   const { toast } = useToast();
 
@@ -43,7 +43,7 @@ const AdminLogin = () => {
     setIsSubmitting(true);
 
     try {
-      const { error } = await signIn(email, password);
+      const { error, message } = await signIn(email);
       
       if (error) {
         setError(error.message);
@@ -53,9 +53,10 @@ const AdminLogin = () => {
           variant: "destructive",
         });
       } else {
+        setEmailSent(true);
         toast({
-          title: "Welcome back!",
-          description: "Successfully logged in to admin dashboard.",
+          title: "Magic Link Sent!",
+          description: message,
         });
       }
     } catch (err: any) {
@@ -81,56 +82,65 @@ const AdminLogin = () => {
           <CardHeader className="text-center">
             <CardTitle className="text-2xl font-bold">Admin Login</CardTitle>
             <CardDescription>
-              Access the affiliate management system
+              {emailSent ? 
+                "Check your email for a magic link to sign in" : 
+                "Enter your admin email to receive a magic link"
+              }
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {error && (
-                <Alert variant="destructive">
-                  <AlertDescription>{error}</AlertDescription>
-                </Alert>
-              )}
-              
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@example.com"
-                />
+            {emailSent ? (
+              <div className="text-center space-y-4">
+                <div className="text-sm text-muted-foreground">
+                  We've sent a magic link to <strong>{email}</strong>
+                </div>
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setEmailSent(false);
+                    setEmail('');
+                  }}
+                  className="w-full"
+                >
+                  Send to Different Email
+                </Button>
               </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                />
-              </div>
-              
-              <Button
-                type="submit"
-                className="w-full"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Signing in...
-                  </>
-                ) : (
-                  'Sign In'
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {error && (
+                  <Alert variant="destructive">
+                    <AlertDescription>{error}</AlertDescription>
+                  </Alert>
                 )}
-              </Button>
-            </form>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="email">Admin Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="admin@example.com"
+                  />
+                </div>
+                
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Sending Magic Link...
+                    </>
+                  ) : (
+                    'Send Magic Link'
+                  )}
+                </Button>
+              </form>
+            )}
           </CardContent>
         </Card>
       </div>

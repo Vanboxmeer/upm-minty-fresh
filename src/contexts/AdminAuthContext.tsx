@@ -6,7 +6,7 @@ interface AdminAuthContextType {
   user: User | null;
   session: Session | null;
   isLoading: boolean;
-  signIn: (email: string, password: string) => Promise<{ error: any }>;
+  signIn: (email: string) => Promise<{ error: any; message?: string }>;
   signOut: () => Promise<void>;
 }
 
@@ -45,7 +45,7 @@ export const AdminAuthProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     return () => subscription.unsubscribe();
   }, []);
 
-  const signIn = async (email: string, password: string) => {
+  const signIn = async (email: string) => {
     setIsLoading(true);
     
     // First check if user is an admin
@@ -60,13 +60,24 @@ export const AdminAuthProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       return { error: new Error('Access denied. Admin account required.') };
     }
 
-    const { error } = await supabase.auth.signInWithPassword({
+    // Send magic link
+    const { error } = await supabase.auth.signInWithOtp({
       email,
-      password,
+      options: {
+        emailRedirectTo: `${window.location.origin}/admin/dashboard`
+      }
     });
     
     setIsLoading(false);
-    return { error };
+    
+    if (error) {
+      return { error };
+    }
+    
+    return { 
+      error: null, 
+      message: 'Check your email for a magic link to sign in!' 
+    };
   };
 
   const signOut = async () => {
