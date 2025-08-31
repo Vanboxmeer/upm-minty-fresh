@@ -28,9 +28,11 @@ import {
 import { Combobox } from '@/components/ui/combobox';
 import { TagInput } from '@/components/ui/tag-input';
 import { BlogPost } from '@/hooks/useBlogPosts';
-import { Save, Eye, Upload, X } from 'lucide-react';
+import { Save, Eye, Upload, X, Smile } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import { EmojiPickerComponent } from './EmojiPicker';
+import { ImageGallery } from './ImageGallery';
 
 const blogPostSchema = z.object({
   title: z.string().min(1, 'Title is required'),
@@ -41,6 +43,12 @@ const blogPostSchema = z.object({
   category: z.string().min(1, 'Category is required'),
   featured_image: z.string().optional(),
   featured_image_alt: z.string().optional(),
+  gallery_images: z.array(z.object({
+    id: z.string(),
+    url: z.string(),
+    alt: z.string(),
+    caption: z.string().optional(),
+  })).optional(),
   status: z.enum(['draft', 'published']),
   seo_title: z.string().optional(),
   seo_description: z.string().optional(),
@@ -61,6 +69,7 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
   const [uploading, setUploading] = useState(false);
   const [previewMode, setPreviewMode] = useState(false);
   const [contentMode, setContentMode] = useState<'rich' | 'html'>('rich');
+  const [cursorPosition, setCursorPosition] = useState<number | null>(null);
   const [categories] = useState<string[]>([
     'Marketing', 'Web3', 'Crypto', 'Press Release', 'Influencer', 'SEO', 'Social Media', 'Content Marketing', 'Paid Advertising', 'Analytics'
   ]);
@@ -77,6 +86,7 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
       category: post?.category || 'Marketing',
       featured_image: post?.featured_image || '',
       featured_image_alt: post?.featured_image_alt || '',
+      gallery_images: (post as any)?.gallery_images || [],
       status: post?.status || 'draft',
       seo_title: post?.seo_title || '',
       seo_description: post?.seo_description || '',
@@ -175,6 +185,23 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
       });
     } finally {
       setUploading(false);
+    }
+  };
+
+  const insertEmojiAtCursor = (emoji: string) => {
+    const content = form.getValues('content');
+    if (contentMode === 'rich') {
+      // For rich text editor, we'll insert at the end for simplicity
+      form.setValue('content', content + emoji);
+    } else {
+      // For HTML mode, insert at cursor position or end
+      if (cursorPosition !== null) {
+        const newContent = content.slice(0, cursorPosition) + emoji + content.slice(cursorPosition);
+        form.setValue('content', newContent);
+        setCursorPosition(cursorPosition + emoji.length);
+      } else {
+        form.setValue('content', content + emoji);
+      }
     }
   };
 
@@ -314,7 +341,13 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                     name="content"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Content</FormLabel>
+                        <div className="flex items-center justify-between">
+                          <FormLabel>Content</FormLabel>
+                          <EmojiPickerComponent 
+                            onEmojiSelect={insertEmojiAtCursor}
+                            className="mb-2"
+                          />
+                        </div>
                         <FormControl>
                           {contentMode === 'rich' ? (
                             <div className="bg-background border rounded-md">
@@ -350,6 +383,9 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                               placeholder="Paste your HTML code here..."
                               rows={15}
                               className="font-mono text-sm"
+                              onSelect={(e: any) => {
+                                setCursorPosition(e.target.selectionStart);
+                              }}
                               {...field}
                             />
                           )}
@@ -531,9 +567,33 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                     )}
                   />
                 </CardContent>
-              </Card>
+               </Card>
 
-              <Card>
+               <Card>
+                 <CardHeader>
+                   <CardTitle>Image Gallery</CardTitle>
+                 </CardHeader>
+                 <CardContent>
+                   <FormField
+                     control={form.control}
+                     name="gallery_images"
+                     render={({ field }) => (
+                       <FormItem>
+                         <FormControl>
+                           <ImageGallery
+                             images={field.value || []}
+                             onImagesChange={field.onChange}
+                             maxImages={10}
+                           />
+                         </FormControl>
+                         <FormMessage />
+                       </FormItem>
+                     )}
+                   />
+                 </CardContent>
+               </Card>
+
+               <Card>
                 <CardHeader>
                   <CardTitle>SEO</CardTitle>
                 </CardHeader>
