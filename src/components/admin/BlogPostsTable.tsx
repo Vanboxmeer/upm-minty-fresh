@@ -106,7 +106,7 @@ export const BlogPostsTable = ({ posts, onDelete, loading }: BlogPostsTableProps
               </TableCell>
               <TableCell>{post.category}</TableCell>
               <TableCell>{post.author}</TableCell>
-              <TableCell>
+               <TableCell>
                 <div>
                   <div className="text-sm">
                     {post.publish_date 
@@ -114,7 +114,13 @@ export const BlogPostsTable = ({ posts, onDelete, loading }: BlogPostsTableProps
                       : format(new Date(post.created_at), 'MMM d, yyyy')
                     }
                   </div>
-                  {post.publish_date && new Date(post.publish_date) > new Date() && post.status === 'published' && (
+                  <div className="text-xs text-muted-foreground">
+                    {post.publish_date 
+                      ? format(new Date(post.publish_date), 'h:mm a')
+                      : format(new Date(post.created_at), 'h:mm a')
+                    }
+                  </div>
+                  {post.publish_date && new Date(post.publish_date) > new Date() && post.status === 'draft' && (
                     <div className="text-xs text-orange-600 font-medium">
                       Scheduled
                     </div>
