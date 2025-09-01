@@ -32,7 +32,7 @@ import { Save, Eye, Upload, X, Smile } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { EmojiPickerComponent } from './EmojiPicker';
-import { ImageGallery } from './ImageGallery';
+import { ImageGallery, type GalleryImage } from './ImageGallery';
 
 const blogPostSchema = z.object({
   title: z.string().min(1, 'Title is required'),
@@ -86,7 +86,9 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
       category: post?.category || 'Marketing',
       featured_image: post?.featured_image || '',
       featured_image_alt: post?.featured_image_alt || '',
-      gallery_images: (post as any)?.gallery_images || [],
+      gallery_images: (post as any)?.gallery_images?.filter((img: any) => 
+        img.id && img.url && img.alt
+      ) || [],
       status: post?.status || 'draft',
       seo_title: post?.seo_title || '',
       seo_description: post?.seo_description || '',
@@ -580,11 +582,11 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                      render={({ field }) => (
                        <FormItem>
                          <FormControl>
-                           <ImageGallery
-                             images={field.value || []}
-                             onImagesChange={field.onChange}
-                             maxImages={10}
-                           />
+                            <ImageGallery
+                              images={(field.value as GalleryImage[]) || []}
+                              onImagesChange={field.onChange}
+                              maxImages={10}
+                            />
                          </FormControl>
                          <FormMessage />
                        </FormItem>
