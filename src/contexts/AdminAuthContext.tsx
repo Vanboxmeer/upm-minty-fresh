@@ -48,16 +48,22 @@ export const AdminAuthProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const signIn = async (email: string) => {
     setIsLoading(true);
     
-    // First check if user is an admin
-    const { data: adminUser, error: adminError } = await supabase
-      .from('admin_users')
-      .select('email')
-      .eq('email', email)
-      .maybeSingle();
+    try {
+      // Use secure edge function to validate admin email
+      const { data: validationResult, error: functionError } = await supabase.functions.invoke(
+        'validate-admin-email',
+        {
+          body: { email }
+        }
+      );
 
-    if (adminError || !adminUser) {
+      if (functionError || !validationResult?.isValid) {
+        setIsLoading(false);
+        return { error: new Error('Access denied. Admin account required.') };
+      }
+    } catch (err) {
       setIsLoading(false);
-      return { error: new Error('Access denied. Admin account required.') };
+      return { error: new Error('Authentication service unavailable.') };
     }
 
     // Send magic link
