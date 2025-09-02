@@ -351,25 +351,27 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                           />
                         </div>
                         <FormControl>
-                          {contentMode === 'rich' ? (
-                            <div className="bg-background border rounded-md">
+                           {contentMode === 'rich' ? (
+                            <div className="bg-background border rounded-md sticky-quill-container">
                               <ReactQuill
                                 theme="snow"
                                 value={field.value}
                                 onChange={field.onChange}
                                 placeholder="Write your blog post content..."
                                 modules={{
-                                  toolbar: [
-                                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                                    ['bold', 'italic', 'underline', 'strike'],
-                                    [{ 'align': [] }],
-                                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                                    [{ 'indent': '-1'}, { 'indent': '+1' }],
-                                    ['blockquote', 'code-block'],
-                                    ['link', 'image'],
-                                    [{ 'color': [] }, { 'background': [] }],
-                                    ['clean']
-                                  ]
+                                  toolbar: {
+                                    container: [
+                                      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                                      ['bold', 'italic', 'underline', 'strike'],
+                                      [{ 'align': [] }],
+                                      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                                      [{ 'indent': '-1'}, { 'indent': '+1' }],
+                                      ['blockquote', 'code-block'],
+                                      ['link', 'image'],
+                                      [{ 'color': [] }, { 'background': [] }],
+                                      ['clean']
+                                    ]
+                                  }
                                 }}
                                 formats={[
                                   'header', 'bold', 'italic', 'underline', 'strike',
@@ -379,6 +381,23 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                                 ]}
                                 style={{ minHeight: '300px' }}
                               />
+                              <style>{`
+                                .sticky-quill-container .ql-toolbar {
+                                  position: sticky;
+                                  top: 0;
+                                  z-index: 50;
+                                  background: hsl(var(--background));
+                                  border-bottom: 1px solid hsl(var(--border));
+                                  border-radius: 6px 6px 0 0;
+                                  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                                }
+                                .sticky-quill-container .ql-container {
+                                  border-top: none;
+                                }
+                                .sticky-quill-container .ql-editor {
+                                  min-height: 300px;
+                                }
+                              `}</style>
                             </div>
                           ) : (
                             <Textarea 
@@ -419,11 +438,20 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            <SelectItem value="draft">Draft</SelectItem>
-                            <SelectItem value="published">Published</SelectItem>
+                            <SelectItem value="draft">
+                              Draft{isScheduled && " (Scheduled)"}
+                            </SelectItem>
+                            <SelectItem value="published">
+                              {isScheduled ? "Publish Now (Override Schedule)" : "Published"}
+                            </SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
+                        {isScheduled && (
+                          <p className="text-sm text-muted-foreground mt-1">
+                            📅 Scheduled for: {new Date(watchPublishDate).toLocaleString()}
+                          </p>
+                        )}
                       </FormItem>
                     )}
                   />
@@ -487,7 +515,7 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                      render={({ field }) => (
                        <FormItem>
                          <FormLabel>
-                           Publish Date
+                           Publish Date (Optional)
                            {isScheduled && (
                              <span className="text-sm text-orange-600 ml-2">(Scheduled)</span>
                            )}
@@ -499,9 +527,13 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                              className={isScheduled ? 'border-orange-300 bg-orange-50' : ''}
                            />
                          </FormControl>
-                         {isScheduled && (
+                         {isScheduled ? (
                            <p className="text-sm text-orange-600">
-                             Post will be published automatically at {new Date(watchPublishDate).toLocaleString()}
+                             📅 Post will be published automatically at {new Date(watchPublishDate).toLocaleString()}
+                           </p>
+                         ) : (
+                           <p className="text-xs text-muted-foreground">
+                             💡 Leave empty to publish immediately. Set a future date to schedule the post.
                            </p>
                          )}
                          <FormMessage />
