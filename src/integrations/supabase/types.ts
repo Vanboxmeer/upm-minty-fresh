@@ -137,6 +137,7 @@ export type Database = {
           excerpt: string | null
           featured_image: string | null
           featured_image_alt: string | null
+          gallery_images: Json | null
           id: string
           publish_date: string | null
           read_time: string | null
@@ -156,6 +157,7 @@ export type Database = {
           excerpt?: string | null
           featured_image?: string | null
           featured_image_alt?: string | null
+          gallery_images?: Json | null
           id?: string
           publish_date?: string | null
           read_time?: string | null
@@ -175,6 +177,7 @@ export type Database = {
           excerpt?: string | null
           featured_image?: string | null
           featured_image_alt?: string | null
+          gallery_images?: Json | null
           id?: string
           publish_date?: string | null
           read_time?: string | null
