@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useParams, Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import NewsletterSignup from "@/components/NewsletterSignup";
+import { SocialShareButtons } from "@/components/SocialShareButtons";
 import DOMPurify from 'dompurify';
 import { useBlogPosts, type BlogPost } from "@/hooks/useBlogPosts";
 import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
@@ -138,6 +139,16 @@ const BlogPost = () => {
               }} 
             />
           </section>
+
+          {/* Social Share Buttons */}
+          <div className="max-w-3xl mx-auto mb-12 flex justify-center">
+            <SocialShareButtons 
+              url={`https://unitedpress.media/blog/${post.slug}`}
+              title={post.title}
+              description={post.excerpt || post.content?.substring(0, 160) || ''}
+              className="border rounded-lg p-4 bg-muted/50"
+            />
+          </div>
 
           {/* Newsletter Signup */}
           <div className="max-w-2xl mx-auto">
