@@ -268,13 +268,6 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
           <Button
             type="button"
             variant="outline"
-            onClick={() => setContentMode(contentMode === 'rich' ? 'html' : 'rich')}
-          >
-            {contentMode === 'rich' ? 'HTML' : 'Rich'}
-          </Button>
-          <Button
-            type="button"
-            variant="outline"
             onClick={() => setPreviewMode(!previewMode)}
           >
             <Eye className="mr-2 h-4 w-4" />
@@ -345,10 +338,20 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                       <FormItem>
                         <div className="flex items-center justify-between">
                           <FormLabel>Content</FormLabel>
-                          <EmojiPickerComponent 
-                            onEmojiSelect={insertEmojiAtCursor}
-                            className="mb-2"
-                          />
+                          <div className="flex items-center gap-2">
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
+                              onClick={() => setContentMode(contentMode === 'rich' ? 'html' : 'rich')}
+                            >
+                              {contentMode === 'rich' ? 'HTML' : 'Rich'}
+                            </Button>
+                            <EmojiPickerComponent 
+                              onEmojiSelect={insertEmojiAtCursor}
+                              className="mb-0"
+                            />
+                          </div>
                         </div>
                         <FormControl>
                            {contentMode === 'rich' ? (
