@@ -21,7 +21,8 @@ export interface BlogPost {
   seo_title?: string | null;
   seo_description?: string | null;
   seo_keywords?: string[] | null;
-  category: string | null;
+  category: string | null; // Keep for backward compatibility
+  categories?: string[] | null; // New multiple categories field
   read_time: string | null;
   created_at: string;
   updated_at: string;

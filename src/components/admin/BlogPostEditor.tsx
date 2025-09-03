@@ -28,7 +28,8 @@ import {
 import { Combobox } from '@/components/ui/combobox';
 import { TagInput } from '@/components/ui/tag-input';
 import { BlogPost } from '@/hooks/useBlogPosts';
-import { Save, Eye, Upload, X, Smile } from 'lucide-react';
+import { useCategories } from '@/hooks/useCategories';
+import { Save, Eye, Upload, X, Smile, Plus } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { EmojiPickerComponent } from './EmojiPicker';
@@ -40,7 +41,7 @@ const blogPostSchema = z.object({
   content: z.string().min(1, 'Content is required'),
   excerpt: z.string().optional(),
   author: z.string().min(1, 'Author is required'),
-  category: z.string().min(1, 'Category is required'),
+  categories: z.array(z.string()).min(1, 'At least one category is required'),
   featured_image: z.string().optional(),
   featured_image_alt: z.string().optional(),
   gallery_images: z.array(z.object({
@@ -70,9 +71,7 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
   const [previewMode, setPreviewMode] = useState(false);
   const [contentMode, setContentMode] = useState<'rich' | 'html'>('rich');
   const [cursorPosition, setCursorPosition] = useState<number | null>(null);
-  const [categories] = useState<string[]>([
-    'Marketing', 'Web3', 'Crypto', 'Press Release', 'Influencer', 'SEO', 'Social Media', 'Content Marketing', 'Paid Advertising', 'Analytics'
-  ]);
+  const { categories, createCategory } = useCategories();
   const { toast } = useToast();
   
   const form = useForm<BlogPostFormData>({
@@ -83,7 +82,7 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
       content: post?.content || '',
       excerpt: post?.excerpt || '',
       author: post?.author || 'UPM Team',
-      category: post?.category || 'Marketing',
+      categories: post?.categories || (post?.category ? [post.category] : ['Marketing']),
       featured_image: post?.featured_image || '',
       featured_image_alt: post?.featured_image_alt || '',
       gallery_images: (post as any)?.gallery_images?.filter((img: any) => 
@@ -237,6 +236,8 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
         status: finalStatus,
         seo_keywords: keywords,
         publish_date: publishDate,
+        // Ensure backward compatibility by setting the first category as the main category
+        category: data.categories?.[0] || 'Marketing',
       };
 
       await onSave(postData);
@@ -475,24 +476,64 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
 
                   <FormField
                     control={form.control}
-                    name="category"
+                    name="categories"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Category</FormLabel>
+                        <FormLabel className="flex items-center justify-between">
+                          Categories
+                          <span className="text-xs text-muted-foreground">
+                            Multiple categories supported
+                          </span>
+                        </FormLabel>
                         <FormControl>
-                          <Combobox
-                            options={categories}
-                            value={field.value}
-                            onValueChange={field.onChange}
-                            placeholder="Select or add category..."
-                            searchPlaceholder="Search categories..."
-                            allowCustom={true}
-                            onAddNew={(newCategory) => {
-                              // In a real app, you might want to persist this to a categories table
-                              console.log('New category added:', newCategory);
-                            }}
-                          />
+                          <div className="space-y-2">
+                            <TagInput
+                              tags={field.value || []}
+                              onTagsChange={async (newTags) => {
+                                // Check for new categories and create them
+                                for (const tagName of newTags) {
+                                  const existingCategory = categories.find(cat => 
+                                    cat.name.toLowerCase() === tagName.toLowerCase()
+                                  );
+                                  
+                                  if (!existingCategory) {
+                                    try {
+                                      await createCategory(tagName);
+                                    } catch (error) {
+                                      console.error('Failed to create category:', error);
+                                    }
+                                  }
+                                }
+                                field.onChange(newTags);
+                              }}
+                              placeholder="Type category name and press Enter..."
+                              maxTags={5}
+                            />
+                            <div className="flex flex-wrap gap-1">
+                              <span className="text-xs text-muted-foreground">Available:</span>
+                              {categories.slice(0, 10).map(cat => (
+                                <Button
+                                  key={cat.id}
+                                  type="button"
+                                  variant="outline"
+                                  size="sm"
+                                  className="h-6 px-2 text-xs"
+                                  onClick={() => {
+                                    const currentTags = field.value || [];
+                                    if (!currentTags.includes(cat.name)) {
+                                      field.onChange([...currentTags, cat.name]);
+                                    }
+                                  }}
+                                >
+                                  {cat.name}
+                                </Button>
+                              ))}
+                            </div>
+                          </div>
                         </FormControl>
+                        <p className="text-xs text-muted-foreground">
+                          Select existing categories or type new ones. New categories will be saved automatically.
+                        </p>
                         <FormMessage />
                       </FormItem>
                     )}

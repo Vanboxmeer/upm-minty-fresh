@@ -131,6 +131,7 @@ export type Database = {
       blog_posts: {
         Row: {
           author: string
+          categories: string[] | null
           category: string | null
           content: string
           created_at: string
@@ -151,6 +152,7 @@ export type Database = {
         }
         Insert: {
           author?: string
+          categories?: string[] | null
           category?: string | null
           content: string
           created_at?: string
@@ -171,6 +173,7 @@ export type Database = {
         }
         Update: {
           author?: string
+          categories?: string[] | null
           category?: string | null
           content?: string
           created_at?: string
@@ -187,6 +190,33 @@ export type Database = {
           slug?: string
           status?: string
           title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      categories: {
+        Row: {
+          color: string | null
+          created_at: string
+          id: string
+          name: string
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          color?: string | null
+          created_at?: string
+          id?: string
+          name: string
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          color?: string | null
+          created_at?: string
+          id?: string
+          name?: string
+          slug?: string
           updated_at?: string
         }
         Relationships: []

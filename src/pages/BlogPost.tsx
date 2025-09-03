@@ -5,6 +5,7 @@ import { useParams, Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { SocialShareButtons } from "@/components/SocialShareButtons";
+import { CategoryBreadcrumbs } from "@/components/CategoryBreadcrumbs";
 import DOMPurify from 'dompurify';
 import { useBlogPosts, type BlogPost } from "@/hooks/useBlogPosts";
 import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
@@ -100,13 +101,20 @@ const BlogPost = () => {
       <main className="container mx-auto px-4 py-16">
         <article>
           <header className="max-w-3xl mx-auto text-center mb-10">
-            <p className="text-xs inline-flex items-center gap-2 rounded-full px-3 py-1 bg-muted mb-4">
-              <span className="font-medium tracking-wide">{post.category}</span>
-              <span className="text-muted-foreground">•</span>
-              <span className="text-muted-foreground">{new Date(post.publish_date || post.created_at).toLocaleDateString()}</span>
-              <span className="text-muted-foreground">•</span>
-              <span className="text-muted-foreground">{post.read_time}</span>
-            </p>
+            <div className="flex flex-col items-center gap-3 mb-4">
+              {/* Multiple Categories Display */}
+              <CategoryBreadcrumbs 
+                categories={post.categories || (post.category ? [post.category] : [])} 
+                size="md"
+                showAll={true}
+                className="justify-center"
+              />
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <span>{new Date(post.publish_date || post.created_at).toLocaleDateString()}</span>
+                <span>•</span>
+                <span>{post.read_time}</span>
+              </div>
+            </div>
             <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">{post.title}</h1>
             {post.excerpt && (
               <p className="text-lg text-muted-foreground">{post.excerpt}</p>

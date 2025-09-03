@@ -24,6 +24,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Edit, Trash2, Eye } from 'lucide-react';
 import { BlogPost } from '@/hooks/useBlogPosts';
+import { CategoryBreadcrumbs } from '@/components/CategoryBreadcrumbs';
 import { useToast } from '@/hooks/use-toast';
 
 interface BlogPostsTableProps {
@@ -80,7 +81,7 @@ export const BlogPostsTable = ({ posts, onDelete, loading }: BlogPostsTableProps
           <TableRow>
             <TableHead>Title</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead>Category</TableHead>
+            <TableHead>Categories</TableHead>
             <TableHead>Author</TableHead>
             <TableHead>Date</TableHead>
             <TableHead className="text-right">Actions</TableHead>
@@ -104,7 +105,13 @@ export const BlogPostsTable = ({ posts, onDelete, loading }: BlogPostsTableProps
                   {post.status}
                 </Badge>
               </TableCell>
-              <TableCell>{post.category}</TableCell>
+              <TableCell>
+                <CategoryBreadcrumbs 
+                  categories={post.categories || (post.category ? [post.category] : [])} 
+                  size="sm"
+                  maxDisplay={2}
+                />
+              </TableCell>
               <TableCell>{post.author}</TableCell>
                <TableCell>
                 <div>

@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Link } from "react-router-dom";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
+import { CategoryBreadcrumbs } from "@/components/CategoryBreadcrumbs";
 import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
 
 const Blog = () => {
@@ -58,9 +59,11 @@ const Blog = () => {
                   </AspectRatio>
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full font-medium">
-                        {post.category}
-                      </span>
+                      <CategoryBreadcrumbs 
+                        categories={post.categories || (post.category ? [post.category] : [])} 
+                        size="sm"
+                        maxDisplay={1}
+                      />
                       <span className="text-xs text-muted-foreground">
                         {new Date(post.publish_date || post.created_at).toLocaleDateString()} • {post.read_time}
                       </span>
