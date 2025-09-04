@@ -6,6 +6,8 @@ import { Card } from "@/components/ui/card";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { SocialShareButtons } from "@/components/SocialShareButtons";
 import { CategoryBreadcrumbs } from "@/components/CategoryBreadcrumbs";
+import { RelatedPosts } from "@/components/RelatedPosts";
+import { BlogNavigation } from "@/components/BlogNavigation";
 import DOMPurify from 'dompurify';
 import { useBlogPosts, type BlogPost } from "@/hooks/useBlogPosts";
 import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
@@ -158,11 +160,17 @@ const BlogPost = () => {
             />
           </div>
 
+          {/* Blog Navigation */}
+          <BlogNavigation currentPost={post} />
+
           {/* Newsletter Signup */}
           <div className="max-w-2xl mx-auto">
             <NewsletterSignup variant="blog" />
           </div>
         </article>
+
+        {/* Related Posts */}
+        <RelatedPosts currentPost={post} />
       </main>
       <Footer />
     </div>

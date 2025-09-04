@@ -222,6 +222,102 @@ export const useBlogPosts = () => {
     }
   };
 
+  const getRelatedPosts = async (currentPostId: string, categories: string[], limit = 3) => {
+    try {
+      const { data: relatedPosts, error } = await supabase
+        .from('blog_posts')
+        .select('*')
+        .eq('status', 'published')
+        .neq('id', currentPostId);
+      
+      if (error) throw error;
+      
+      const now = new Date();
+      
+      // Filter and score posts by category relevance
+      const scoredPosts = (relatedPosts || [])
+        .filter(post => {
+          if (post.publish_date && new Date(post.publish_date) > now) return false;
+          return true;
+        })
+        .map(post => {
+          let score = 0;
+          const postCategories = post.categories || (post.category ? [post.category] : []);
+          
+          // Score based on category matches
+          categories.forEach(category => {
+            if (postCategories.includes(category)) {
+              score += 1;
+            }
+          });
+          
+          return { ...post, score };
+        })
+        .filter(post => post.score > 0) // Only posts with category matches
+        .sort((a, b) => {
+          if (a.score !== b.score) return b.score - a.score; // Higher score first
+          // If same score, sort by publish date
+          const aDate = new Date(a.publish_date || a.created_at);
+          const bDate = new Date(b.publish_date || b.created_at);
+          return bDate.getTime() - aDate.getTime();
+        })
+        .slice(0, limit);
+      
+      return scoredPosts as BlogPost[];
+    } catch (err) {
+      console.error('Failed to fetch related posts:', err);
+      return [];
+    }
+  };
+
+  const getAdjacentPosts = async (currentPost: BlogPost) => {
+    try {
+      const { data: allPosts, error } = await supabase
+        .from('blog_posts')
+        .select('id, title, slug, publish_date, created_at')
+        .eq('status', 'published');
+      
+      if (error) throw error;
+      
+      const now = new Date();
+      
+      // Filter and sort posts by publish date
+      const filteredPosts = (allPosts || [])
+        .filter(post => {
+          if (post.publish_date && new Date(post.publish_date) > now) return false;
+          return post.id !== currentPost.id;
+        })
+        .sort((a, b) => {
+          const aDate = new Date(a.publish_date || a.created_at);
+          const bDate = new Date(b.publish_date || b.created_at);
+          return bDate.getTime() - aDate.getTime();
+        });
+      
+      const currentDate = new Date(currentPost.publish_date || currentPost.created_at);
+      
+      // Find next (older) and previous (newer) posts
+      let nextPost = null;
+      let previousPost = null;
+      
+      for (let i = 0; i < filteredPosts.length; i++) {
+        const postDate = new Date(filteredPosts[i].publish_date || filteredPosts[i].created_at);
+        
+        if (postDate < currentDate && !nextPost) {
+          nextPost = filteredPosts[i];
+        }
+        
+        if (postDate > currentDate) {
+          previousPost = filteredPosts[i];
+        }
+      }
+      
+      return { nextPost, previousPost };
+    } catch (err) {
+      console.error('Failed to fetch adjacent posts:', err);
+      return { nextPost: null, previousPost: null };
+    }
+  };
+
   useEffect(() => {
     fetchPosts();
   }, []);
@@ -240,5 +336,7 @@ export const useBlogPosts = () => {
     updatePost,
     deletePost,
     getPostBySlug,
+    getRelatedPosts,
+    getAdjacentPosts,
   };
 };
