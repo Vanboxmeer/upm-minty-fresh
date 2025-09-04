@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { auditLogger } from '@/utils/auditLogger';
@@ -67,7 +67,7 @@ export const useBlogPosts = () => {
   };
 
   // Separate method for public posts (published + not in future)
-  const fetchPublicPosts = async (resetPagination = true) => {
+  const fetchPublicPosts = useCallback(async (resetPagination = true) => {
     try {
       setLoading(true);
       const { data: allPosts, error } = await supabase
@@ -110,7 +110,7 @@ export const useBlogPosts = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   const loadMore = () => {
     setLoadingMore(true);

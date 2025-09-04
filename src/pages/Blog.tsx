@@ -30,7 +30,7 @@ const Blog = () => {
 
   useEffect(() => {
     fetchPublicPosts(true); // Reset pagination on initial load
-  }, [fetchPublicPosts]);
+  }, []); // Empty dependency array since fetchPublicPosts is now memoized
 
   return (
     <div className="min-h-screen bg-background">
