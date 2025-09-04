@@ -29,7 +29,7 @@ const Blog = () => {
   }, []);
 
   useEffect(() => {
-    fetchPublicPosts();
+    fetchPublicPosts(true); // Reset pagination on initial load
   }, [fetchPublicPosts]);
 
   return (

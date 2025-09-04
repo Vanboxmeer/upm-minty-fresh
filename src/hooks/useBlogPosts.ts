@@ -67,7 +67,7 @@ export const useBlogPosts = () => {
   };
 
   // Separate method for public posts (published + not in future)
-  const fetchPublicPosts = async () => {
+  const fetchPublicPosts = async (resetPagination = true) => {
     try {
       setLoading(true);
       const { data: allPosts, error } = await supabase
@@ -99,9 +99,12 @@ export const useBlogPosts = () => {
       });
       
       setPosts(sortedPosts as BlogPost[]);
-      // Set initial displayed posts (first 12)
-      setDisplayedPosts(sortedPosts.slice(0, INITIAL_POSTS) as BlogPost[]);
-      setCurrentPage(1);
+      
+      // Only reset displayed posts if explicitly requested (initial load)
+      if (resetPagination) {
+        setDisplayedPosts(sortedPosts.slice(0, INITIAL_POSTS) as BlogPost[]);
+        setCurrentPage(1);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch posts');
     } finally {
