@@ -3,13 +3,15 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
 import { CategoryBreadcrumbs } from "@/components/CategoryBreadcrumbs";
 import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
+import { Loader2 } from "lucide-react";
 
 const Blog = () => {
-  const { fetchPublicPosts, posts, loading } = useBlogPosts();
+  const { fetchPublicPosts, displayedPosts, loading, loadingMore, hasMorePosts, loadMore } = useBlogPosts();
 
   useEffect(() => {
     // SEO optimization for blog page
@@ -44,8 +46,8 @@ const Blog = () => {
 
         <div className="mb-8">
           <h2 className="text-2xl font-semibold mb-6">Latest Articles</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {posts.map((post) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {displayedPosts.map((post) => (
               <Card key={post.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
                 <div className="h-2 bg-primary"></div>
                 <Link to={`/blog/${post.slug}`} className="block focus:outline-none">
@@ -81,6 +83,27 @@ const Blog = () => {
               </Card>
             ))}
           </div>
+
+          {hasMorePosts && (
+            <div className="text-center">
+              <Button 
+                onClick={loadMore}
+                disabled={loadingMore}
+                variant="outline"
+                size="lg"
+                className="min-w-32"
+              >
+                {loadingMore ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Loading...
+                  </>
+                ) : (
+                  'Load More'
+                )}
+              </Button>
+            </div>
+          )}
         </div>
       </main>
 

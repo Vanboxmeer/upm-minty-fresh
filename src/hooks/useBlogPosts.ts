@@ -30,9 +30,14 @@ export interface BlogPost {
 
 export const useBlogPosts = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [displayedPosts, setDisplayedPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
   const { user } = useAdminAuth();
   const [error, setError] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const INITIAL_POSTS = 12;
+  const POSTS_PER_LOAD = 6;
 
   const fetchPosts = async (onlyPublished = false) => {
     try {
@@ -94,12 +99,34 @@ export const useBlogPosts = () => {
       });
       
       setPosts(sortedPosts as BlogPost[]);
+      // Set initial displayed posts (first 12)
+      setDisplayedPosts(sortedPosts.slice(0, INITIAL_POSTS) as BlogPost[]);
+      setCurrentPage(1);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch posts');
     } finally {
       setLoading(false);
     }
   };
+
+  const loadMore = () => {
+    setLoadingMore(true);
+    
+    // Calculate how many posts to show next
+    const currentCount = displayedPosts.length;
+    const nextCount = currentCount + POSTS_PER_LOAD;
+    
+    // Add more posts to displayed posts
+    const newDisplayedPosts = posts.slice(0, nextCount);
+    
+    setTimeout(() => {
+      setDisplayedPosts(newDisplayedPosts);
+      setCurrentPage(prev => prev + 1);
+      setLoadingMore(false);
+    }, 300); // Small delay for better UX
+  };
+
+  const hasMorePosts = displayedPosts.length < posts.length;
 
   const createPost = async (postData: Omit<BlogPost, 'id' | 'created_at' | 'updated_at'>) => {
     try {
@@ -198,8 +225,12 @@ export const useBlogPosts = () => {
 
   return {
     posts,
+    displayedPosts,
     loading,
+    loadingMore,
     error,
+    hasMorePosts,
+    loadMore,
     fetchPosts,
     fetchPublicPosts,
     createPost,
