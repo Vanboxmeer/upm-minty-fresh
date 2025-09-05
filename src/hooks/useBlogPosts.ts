@@ -226,7 +226,7 @@ export const useBlogPosts = () => {
 
   const getRelatedPosts = async (currentPostId: string, categories: string[], limit = 3) => {
     try {
-      const { data: relatedPosts, error } = await supabase
+      const { data: allPosts, error } = await supabase
         .from('blog_posts')
         .select('*')
         .eq('status', 'published')
@@ -236,36 +236,98 @@ export const useBlogPosts = () => {
       
       const now = new Date();
       
-      // Filter and score posts by category relevance
-      const scoredPosts = (relatedPosts || [])
+      // Filter out future posts
+      const availablePosts = (allPosts || [])
         .filter(post => {
           if (post.publish_date && new Date(post.publish_date) > now) return false;
           return true;
-        })
-        .map(post => {
-          let score = 0;
-          const postCategories = post.categories || (post.category ? [post.category] : []);
-          
-          // Score based on category matches
-          categories.forEach(category => {
-            if (postCategories.includes(category)) {
-              score += 1;
-            }
-          });
-          
-          return { ...post, score };
-        })
-        .filter(post => post.score > 0) // Only posts with category matches
-        .sort((a, b) => {
-          if (a.score !== b.score) return b.score - a.score; // Higher score first
-          // If same score, sort by publish date
-          const aDate = new Date(a.publish_date || a.created_at);
-          const bDate = new Date(b.publish_date || b.created_at);
-          return bDate.getTime() - aDate.getTime();
-        })
-        .slice(0, limit);
+        });
+
+      let relatedPosts: BlogPost[] = [];
       
-      return scoredPosts as BlogPost[];
+      // First, try to find posts with matching categories
+      if (categories.length > 0) {
+        const categoryMatches = availablePosts
+          .map(post => {
+            let score = 0;
+            const postCategories = post.categories || (post.category ? [post.category] : []);
+            
+            categories.forEach(category => {
+              if (postCategories.includes(category)) {
+                score += 1;
+              }
+            });
+            
+            return { ...post, score };
+          })
+          .filter(post => post.score > 0)
+          .sort((a, b) => {
+            if (a.score !== b.score) return b.score - a.score;
+            const aDate = new Date(a.publish_date || a.created_at);
+            const bDate = new Date(b.publish_date || b.created_at);
+            return bDate.getTime() - aDate.getTime();
+          });
+        
+        relatedPosts = categoryMatches.slice(0, limit) as BlogPost[];
+      }
+      
+      // If we don't have enough posts, try to find posts with matching tags (seo_keywords)
+      if (relatedPosts.length < limit) {
+        const usedIds = new Set(relatedPosts.map(p => p.id));
+        const remainingPosts = availablePosts.filter(p => !usedIds.has(p.id));
+        
+        // Get current post's keywords to match against
+        const { data: currentPostData } = await supabase
+          .from('blog_posts')
+          .select('seo_keywords')
+          .eq('id', currentPostId)
+          .single();
+        
+        const currentKeywords = currentPostData?.seo_keywords || [];
+        
+        if (currentKeywords.length > 0) {
+          const tagMatches = remainingPosts
+            .map(post => {
+              let score = 0;
+              const postKeywords = post.seo_keywords || [];
+              
+              currentKeywords.forEach(keyword => {
+                if (postKeywords.includes(keyword)) {
+                  score += 1;
+                }
+              });
+              
+              return { ...post, score };
+            })
+            .filter(post => post.score > 0)
+            .sort((a, b) => {
+              if (a.score !== b.score) return b.score - a.score;
+              const aDate = new Date(a.publish_date || a.created_at);
+              const bDate = new Date(b.publish_date || b.created_at);
+              return bDate.getTime() - aDate.getTime();
+            });
+          
+          const neededCount = limit - relatedPosts.length;
+          relatedPosts = [...relatedPosts, ...tagMatches.slice(0, neededCount)] as BlogPost[];
+        }
+      }
+      
+      // If we still don't have enough, fill with random recent posts
+      if (relatedPosts.length < limit) {
+        const usedIds = new Set(relatedPosts.map(p => p.id));
+        const remainingPosts = availablePosts
+          .filter(p => !usedIds.has(p.id))
+          .sort((a, b) => {
+            const aDate = new Date(a.publish_date || a.created_at);
+            const bDate = new Date(b.publish_date || b.created_at);
+            return bDate.getTime() - aDate.getTime();
+          });
+        
+        const neededCount = limit - relatedPosts.length;
+        relatedPosts = [...relatedPosts, ...remainingPosts.slice(0, neededCount)] as BlogPost[];
+      }
+      
+      return relatedPosts.slice(0, limit);
     } catch (err) {
       console.error('Failed to fetch related posts:', err);
       return [];
@@ -283,8 +345,8 @@ export const useBlogPosts = () => {
       
       const now = new Date();
       
-      // Filter and sort posts by publish date
-      const filteredPosts = (allPosts || [])
+      // Filter and sort posts by publish date (newest first)
+      const sortedPosts = (allPosts || [])
         .filter(post => {
           if (post.publish_date && new Date(post.publish_date) > now) return false;
           return post.id !== currentPost.id;
@@ -295,25 +357,39 @@ export const useBlogPosts = () => {
           return bDate.getTime() - aDate.getTime();
         });
       
+      // Find current post's position in the sorted list
       const currentDate = new Date(currentPost.publish_date || currentPost.created_at);
+      let currentIndex = -1;
       
-      // Find next (older) and previous (newer) posts
-      let nextPost = null;
-      let previousPost = null;
-      
-      for (let i = 0; i < filteredPosts.length; i++) {
-        const postDate = new Date(filteredPosts[i].publish_date || filteredPosts[i].created_at);
-        
-        if (postDate < currentDate && !nextPost) {
-          nextPost = filteredPosts[i];
-        }
-        
-        if (postDate > currentDate) {
-          previousPost = filteredPosts[i];
+      // Find where current post would be in the sorted list
+      for (let i = 0; i < sortedPosts.length; i++) {
+        const postDate = new Date(sortedPosts[i].publish_date || sortedPosts[i].created_at);
+        if (postDate <= currentDate) {
+          currentIndex = i;
+          break;
         }
       }
       
-      return { nextPost, previousPost };
+      // Previous post (newer) is before current in sorted list
+      const previousPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
+      
+      // Next post (older) is after current in sorted list
+      const nextPost = currentIndex >= 0 && currentIndex < sortedPosts.length - 1 
+        ? sortedPosts[currentIndex + 1] 
+        : sortedPosts[currentIndex >= 0 ? currentIndex : 0] || null;
+      
+      return { 
+        nextPost: nextPost ? {
+          id: nextPost.id,
+          title: nextPost.title,
+          slug: nextPost.slug
+        } : null,
+        previousPost: previousPost ? {
+          id: previousPost.id,
+          title: previousPost.title,
+          slug: previousPost.slug
+        } : null
+      };
     } catch (err) {
       console.error('Failed to fetch adjacent posts:', err);
       return { nextPost: null, previousPost: null };
