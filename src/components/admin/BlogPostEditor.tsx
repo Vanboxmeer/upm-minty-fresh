@@ -334,6 +334,31 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
 
                   <FormField
                     control={form.control}
+                    name="seo_keywords"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Keyword Tags</FormLabel>
+                        <FormControl>
+                          <div key="keywords-tag-input">
+                            <TagInput
+                              tags={field.value || []}
+                              onTagsChange={field.onChange}
+                              placeholder="Type keyword and press Enter..."
+                              maxTags={10}
+                              className="keywords-tag-input"
+                            />
+                          </div>
+                        </FormControl>
+                        <p className="text-xs text-muted-foreground">
+                          Press Enter or comma to add keywords. Maximum 10 keywords.
+                        </p>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
                     name="content"
                     render={({ field }) => (
                       <FormItem>
@@ -487,28 +512,31 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                         </FormLabel>
                         <FormControl>
                           <div className="space-y-2">
-                            <TagInput
-                              tags={field.value || []}
-                              onTagsChange={async (newTags) => {
-                                // Check for new categories and create them
-                                for (const tagName of newTags) {
-                                  const existingCategory = categories.find(cat => 
-                                    cat.name.toLowerCase() === tagName.toLowerCase()
-                                  );
-                                  
-                                  if (!existingCategory) {
-                                    try {
-                                      await createCategory(tagName);
-                                    } catch (error) {
-                                      console.error('Failed to create category:', error);
+                            <div key="categories-tag-input">
+                              <TagInput
+                                tags={field.value || []}
+                                onTagsChange={async (newTags) => {
+                                  // Check for new categories and create them
+                                  for (const tagName of newTags) {
+                                    const existingCategory = categories.find(cat => 
+                                      cat.name.toLowerCase() === tagName.toLowerCase()
+                                    );
+                                    
+                                    if (!existingCategory) {
+                                      try {
+                                        await createCategory(tagName);
+                                      } catch (error) {
+                                        console.error('Failed to create category:', error);
+                                      }
                                     }
                                   }
-                                }
-                                field.onChange(newTags);
-                              }}
-                              placeholder="Type category name and press Enter..."
-                              maxTags={5}
-                            />
+                                  field.onChange(newTags);
+                                }}
+                                placeholder="Type category name and press Enter..."
+                                maxTags={5}
+                                className="categories-tag-input"
+                              />
+                            </div>
                             <div className="flex flex-wrap gap-1">
                               <span className="text-xs text-muted-foreground">Available:</span>
                               {categories.slice(0, 10).map(cat => (
@@ -708,27 +736,6 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                     )}
                   />
 
-                  <FormField
-                    control={form.control}
-                    name="seo_keywords"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Keywords/Tags</FormLabel>
-                        <FormControl>
-                          <TagInput
-                            tags={field.value || []}
-                            onTagsChange={field.onChange}
-                            placeholder="Type and press Enter to add keywords..."
-                            maxTags={10}
-                          />
-                        </FormControl>
-                        <p className="text-xs text-muted-foreground">
-                          Press Enter or comma to add keywords. Maximum 10 keywords.
-                        </p>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
                 </CardContent>
               </Card>
             </div>
