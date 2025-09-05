@@ -137,12 +137,14 @@ export const useBlogPosts = () => {
         .from('blog_posts')
         .insert(postData)
         .select()
-        .single();
+        .maybeSingle();
       
       if (error) throw error;
+      if (!data) throw new Error('Failed to create post - no data returned');
       await fetchPosts();
       return data;
     } catch (err) {
+      console.error('Create post error:', err);
       throw new Error(err instanceof Error ? err.message : 'Failed to create post');
     }
   };

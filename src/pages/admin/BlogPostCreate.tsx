@@ -15,6 +15,8 @@ export const BlogPostCreate = () => {
     try {
       await createPost(data);
       navigate('/admin/blog');
+    } catch (error) {
+      console.error('Error saving post:', error);
     } finally {
       setLoading(false);
     }
