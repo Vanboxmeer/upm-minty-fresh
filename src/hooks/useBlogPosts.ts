@@ -345,11 +345,11 @@ export const useBlogPosts = () => {
       
       const now = new Date();
       
-      // Filter and sort posts by publish date (newest first)
-      const sortedPosts = (allPosts || [])
+      // Filter out future posts and sort by publish date (newest first)
+      const validPosts = (allPosts || [])
         .filter(post => {
           if (post.publish_date && new Date(post.publish_date) > now) return false;
-          return post.id !== currentPost.id;
+          return true; // Include all valid posts, including current
         })
         .sort((a, b) => {
           const aDate = new Date(a.publish_date || a.created_at);
@@ -357,26 +357,18 @@ export const useBlogPosts = () => {
           return bDate.getTime() - aDate.getTime();
         });
       
-      // Find current post's position in the sorted list
-      const currentDate = new Date(currentPost.publish_date || currentPost.created_at);
-      let currentIndex = -1;
+      // Find current post's index in the sorted array
+      const currentIndex = validPosts.findIndex(post => post.id === currentPost.id);
       
-      // Find where current post would be in the sorted list
-      for (let i = 0; i < sortedPosts.length; i++) {
-        const postDate = new Date(sortedPosts[i].publish_date || sortedPosts[i].created_at);
-        if (postDate <= currentDate) {
-          currentIndex = i;
-          break;
-        }
+      if (currentIndex === -1) {
+        return { nextPost: null, previousPost: null };
       }
       
-      // Previous post (newer) is before current in sorted list
-      const previousPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
+      // Previous post (newer) is at index - 1
+      const previousPost = currentIndex > 0 ? validPosts[currentIndex - 1] : null;
       
-      // Next post (older) is after current in sorted list
-      const nextPost = currentIndex >= 0 && currentIndex < sortedPosts.length - 1 
-        ? sortedPosts[currentIndex + 1] 
-        : sortedPosts[currentIndex >= 0 ? currentIndex : 0] || null;
+      // Next post (older) is at index + 1
+      const nextPost = currentIndex < validPosts.length - 1 ? validPosts[currentIndex + 1] : null;
       
       return { 
         nextPost: nextPost ? {
