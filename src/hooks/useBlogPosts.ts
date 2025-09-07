@@ -237,85 +237,57 @@ export const useBlogPosts = () => {
       const now = new Date();
       
       // Filter out future posts
-      const availablePosts = (allPosts || [])
-        .filter(post => {
-          if (post.publish_date && new Date(post.publish_date) > now) return false;
-          return true;
-        });
+      const validPosts = (allPosts || []).filter(post => {
+        if (post.publish_date && new Date(post.publish_date) > now) return false;
+        return true;
+      });
+
+      console.log('Valid posts for related:', validPosts.length);
+      console.log('Current post categories:', categories);
 
       let relatedPosts: BlogPost[] = [];
       
-      // First, try to find posts with matching categories
+      // 1. First priority: Find posts with matching categories
       if (categories.length > 0) {
-        const categoryMatches = availablePosts
-          .map(post => {
-            let score = 0;
-            const postCategories = post.categories || (post.category ? [post.category] : []);
-            
-            categories.forEach(category => {
-              if (postCategories.includes(category)) {
-                score += 1;
-              }
-            });
-            
-            return { ...post, score };
-          })
-          .filter(post => post.score > 0)
-          .sort((a, b) => {
-            if (a.score !== b.score) return b.score - a.score;
-            const aDate = new Date(a.publish_date || a.created_at);
-            const bDate = new Date(b.publish_date || b.created_at);
-            return bDate.getTime() - aDate.getTime();
-          });
+        const categoryMatches = validPosts.filter(post => {
+          const postCategories = post.categories || (post.category ? [post.category] : []);
+          return postCategories.some(cat => categories.includes(cat));
+        });
         
+          console.log('Category matches found:', categoryMatches.length);
         relatedPosts = categoryMatches.slice(0, limit) as BlogPost[];
       }
       
-      // If we don't have enough posts, try to find posts with matching tags (seo_keywords)
+      // 2. Second priority: If we need more, find posts with matching keywords/tags
       if (relatedPosts.length < limit) {
         const usedIds = new Set(relatedPosts.map(p => p.id));
-        const remainingPosts = availablePosts.filter(p => !usedIds.has(p.id));
+        const remainingPosts = validPosts.filter(p => !usedIds.has(p.id));
         
-        // Get current post's keywords to match against
-        const { data: currentPostData } = await supabase
+        const { data: currentPost } = await supabase
           .from('blog_posts')
           .select('seo_keywords')
           .eq('id', currentPostId)
           .single();
         
-        const currentKeywords = currentPostData?.seo_keywords || [];
+        const currentKeywords = currentPost?.seo_keywords || [];
+        console.log('Current post keywords:', currentKeywords);
         
         if (currentKeywords.length > 0) {
-          const tagMatches = remainingPosts
-            .map(post => {
-              let score = 0;
-              const postKeywords = post.seo_keywords || [];
-              
-              currentKeywords.forEach(keyword => {
-                if (postKeywords.includes(keyword)) {
-                  score += 1;
-                }
-              });
-              
-              return { ...post, score };
-            })
-            .filter(post => post.score > 0)
-            .sort((a, b) => {
-              if (a.score !== b.score) return b.score - a.score;
-              const aDate = new Date(a.publish_date || a.created_at);
-              const bDate = new Date(b.publish_date || b.created_at);
-              return bDate.getTime() - aDate.getTime();
-            });
+          const tagMatches = remainingPosts.filter(post => {
+            const postKeywords = post.seo_keywords || [];
+            return postKeywords.some(keyword => currentKeywords.includes(keyword));
+          });
           
+          console.log('Tag matches found:', tagMatches.length);
           const neededCount = limit - relatedPosts.length;
           relatedPosts = [...relatedPosts, ...tagMatches.slice(0, neededCount)] as BlogPost[];
         }
       }
       
-      // If we still don't have enough, fill with random recent posts
+      // 3. Third priority: If we still need more, add recent posts
       if (relatedPosts.length < limit) {
         const usedIds = new Set(relatedPosts.map(p => p.id));
-        const remainingPosts = availablePosts
+        const remainingPosts = validPosts
           .filter(p => !usedIds.has(p.id))
           .sort((a, b) => {
             const aDate = new Date(a.publish_date || a.created_at);
@@ -324,9 +296,11 @@ export const useBlogPosts = () => {
           });
         
         const neededCount = limit - relatedPosts.length;
+        console.log('Adding recent posts:', neededCount);
         relatedPosts = [...relatedPosts, ...remainingPosts.slice(0, neededCount)] as BlogPost[];
       }
       
+      console.log('Final related posts count:', relatedPosts.length);
       return relatedPosts.slice(0, limit);
     } catch (err) {
       console.error('Failed to fetch related posts:', err);
@@ -349,7 +323,7 @@ export const useBlogPosts = () => {
       const validPosts = (allPosts || [])
         .filter(post => {
           if (post.publish_date && new Date(post.publish_date) > now) return false;
-          return true; // Include all valid posts, including current
+          return true;
         })
         .sort((a, b) => {
           const aDate = new Date(a.publish_date || a.created_at);
@@ -357,10 +331,15 @@ export const useBlogPosts = () => {
           return bDate.getTime() - aDate.getTime();
         });
       
+      console.log('All valid posts for navigation:', validPosts.length);
+      console.log('Current post ID:', currentPost.id);
+      
       // Find current post's index in the sorted array
       const currentIndex = validPosts.findIndex(post => post.id === currentPost.id);
+      console.log('Current post index:', currentIndex);
       
       if (currentIndex === -1) {
+        console.log('Current post not found in valid posts');
         return { nextPost: null, previousPost: null };
       }
       
@@ -369,6 +348,9 @@ export const useBlogPosts = () => {
       
       // Next post (older) is at index + 1
       const nextPost = currentIndex < validPosts.length - 1 ? validPosts[currentIndex + 1] : null;
+      
+      console.log('Previous post:', previousPost?.title);
+      console.log('Next post:', nextPost?.title);
       
       return { 
         nextPost: nextPost ? {

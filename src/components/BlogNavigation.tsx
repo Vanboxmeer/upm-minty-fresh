@@ -63,21 +63,21 @@ export const BlogNavigation = ({ currentPost }: BlogNavigationProps) => {
   return (
     <nav className="max-w-3xl mx-auto py-12">
       <div className="flex justify-between items-center gap-4">
-        {nextPost ? (
+        {previousPost ? (
           <Button asChild variant="outline" className="flex items-center gap-2 max-w-[45%]">
-            <Link to={`/blog/${nextPost.slug}`}>
+            <Link to={`/blog/${previousPost.slug}`}>
               <ChevronLeft className="w-4 h-4" />
-              <span className="truncate">{nextPost.title}</span>
+              <span className="truncate">{previousPost.title}</span>
             </Link>
           </Button>
         ) : (
           <div></div>
         )}
         
-        {previousPost ? (
+        {nextPost ? (
           <Button asChild variant="outline" className="flex items-center gap-2 max-w-[45%]">
-            <Link to={`/blog/${previousPost.slug}`}>
-              <span className="truncate">{previousPost.title}</span>
+            <Link to={`/blog/${nextPost.slug}`}>
+              <span className="truncate">{nextPost.title}</span>
               <ChevronRight className="w-4 h-4" />
             </Link>
           </Button>
