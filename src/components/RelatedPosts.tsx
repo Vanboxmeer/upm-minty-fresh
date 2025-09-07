@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { useBlogPosts, type BlogPost } from "@/hooks/useBlogPosts";
+import { supabase } from "@/integrations/supabase/client";
+import type { BlogPost } from "@/hooks/useBlogPosts";
 import { CategoryBreadcrumbs } from "@/components/CategoryBreadcrumbs";
 
 interface RelatedPostsProps {
@@ -10,16 +10,67 @@ interface RelatedPostsProps {
 }
 
 export const RelatedPosts = ({ currentPost }: RelatedPostsProps) => {
-  const { getRelatedPosts } = useBlogPosts();
   const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchRelated = async () => {
+    const fetchRelatedPosts = async () => {
       try {
-        setLoading(true);
-        const categories = currentPost.categories || (currentPost.category ? [currentPost.category] : []);
-        const related = await getRelatedPosts(currentPost.id, categories, 3);
+        // Get all published posts except current one
+        const { data: allPosts } = await supabase
+          .from('blog_posts')
+          .select('*')
+          .eq('status', 'published')
+          .neq('id', currentPost.id);
+
+        if (!allPosts) return;
+
+        // Filter out future posts
+        const now = new Date();
+        const validPosts = allPosts.filter(post => {
+          if (!post.publish_date) return true;
+          return new Date(post.publish_date) <= now;
+        });
+
+        const currentCategories = currentPost.categories || (currentPost.category ? [currentPost.category] : []);
+        const currentKeywords = currentPost.seo_keywords || [];
+        let related: BlogPost[] = [];
+
+        // 1. Find posts with matching categories
+        if (currentCategories.length > 0) {
+          const categoryMatches = validPosts.filter(post => {
+            const postCategories = post.categories || (post.category ? [post.category] : []);
+            return postCategories.some(cat => currentCategories.includes(cat));
+          });
+          related = categoryMatches.slice(0, 3) as BlogPost[];
+        }
+
+        // 2. If we need more, find posts with matching keywords/tags
+        if (related.length < 3 && currentKeywords.length > 0) {
+          const usedIds = new Set(related.map(p => p.id));
+          const keywordMatches = validPosts.filter(post => {
+            if (usedIds.has(post.id)) return false;
+            const postKeywords = post.seo_keywords || [];
+            return postKeywords.some(keyword => currentKeywords.includes(keyword));
+          });
+          const needed = 3 - related.length;
+          related = [...related, ...keywordMatches.slice(0, needed) as BlogPost[]];
+        }
+
+        // 3. If we still need more, add recent posts
+        if (related.length < 3) {
+          const usedIds = new Set(related.map(p => p.id));
+          const recentPosts = validPosts
+            .filter(post => !usedIds.has(post.id))
+            .sort((a, b) => {
+              const aDate = new Date(a.publish_date || a.created_at);
+              const bDate = new Date(b.publish_date || b.created_at);
+              return bDate.getTime() - aDate.getTime();
+            });
+          const needed = 3 - related.length;
+          related = [...related, ...recentPosts.slice(0, needed) as BlogPost[]];
+        }
+
         setRelatedPosts(related);
       } catch (error) {
         console.error('Failed to fetch related posts:', error);
@@ -29,8 +80,8 @@ export const RelatedPosts = ({ currentPost }: RelatedPostsProps) => {
       }
     };
 
-    fetchRelated();
-  }, [currentPost.id, currentPost.categories, currentPost.category, getRelatedPosts]);
+    fetchRelatedPosts();
+  }, [currentPost.id]);
 
   if (loading) {
     return (
