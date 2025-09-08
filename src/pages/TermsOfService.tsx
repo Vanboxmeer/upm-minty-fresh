@@ -59,9 +59,18 @@ const TermsOfService = () => {
                   <li>Payment is required in advance for all services</li>
                   <li>All prices are in USD unless otherwise specified, however payment can be made in crypto and fiat options</li>
                   <li>Refunds are subject to our refund policy outlined below</li>
-                  
                   <li>Late payments may result in service suspension</li>
                 </ul>
+
+                <h3 className="text-xl font-medium mb-3 mt-6">Subscription Fees and Service Fees</h3>
+                <div className="bg-muted p-6 rounded-lg">
+                  <ul className="list-disc pl-6 space-y-2">
+                    <li>The <strong>subscription fee</strong> determines the monthly service fee percentage for your selected plan</li>
+                    <li>This subscription amount is automatically deducted from any campaign retainer each month until the plan is stopped or cancelled</li>
+                    <li>Service fees are <strong>non-reimbursable</strong> and cannot be refunded, even if a campaign is able to be stopped or cancelled</li>
+                    <li>Monthly service fee deductions continue until you formally cancel your subscription plan</li>
+                  </ul>
+                </div>
               </section>
 
               <section>
