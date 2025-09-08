@@ -193,7 +193,7 @@ const TermsOfService = () => {
                 <div className="bg-muted p-6 rounded-lg">
                   <p><strong>United Press Media</strong></p>
                   <p>Email: contact@unitedpress.media</p>
-                  <p>Telegram: <a href="https://t.me/upressagency" className="text-primary hover:underline">@upressagency</a></p>
+                  <p>Telegram: <a href="https://t.me/unitedpressmedia" className="text-primary hover:underline">@unitedpressmedia</a></p>
                 </div>
               </section>
             </div>
