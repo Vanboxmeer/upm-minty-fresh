@@ -13,7 +13,7 @@ import featuresInterviewsImg from "/lovable-uploads/8d2ae042-e00e-4b60-acfe-8d2f
 import { updateMetaTags } from "@/utils/seoUtils";
 import { useTypewriter } from "@/hooks/useTypewriter";
 const ServicesPage = () => {
-  const brandTypes = ["AI Brands", "Web3 Brands", "Gaming Brands", "VR Brands", "Crypto Brands", "Tech Brands"];
+  const brandTypes = ["AI Brands", "Web3 Brands", "GameFi Brands", "VR Brands", "Crypto Brands", "Tech Brands"];
   const currentBrand = useTypewriter({
     words: brandTypes,
     typeSpeed: 100,
