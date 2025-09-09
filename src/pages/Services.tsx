@@ -16,8 +16,8 @@ const ServicesPage = () => {
   const brandTypes = ["AI Brands", "Web3 Brands", "GameFi Brands", "VR Brands", "Crypto Brands", "Tech Brands"];
   const currentBrand = useTypewriter({
     words: brandTypes,
-    typeSpeed: 70,
-    deleteSpeed: 35,
+    typeSpeed: 50,
+    deleteSpeed: 25,
     delayBetweenWords: 2000,
   });
   const serviceDetails = [{
@@ -52,7 +52,7 @@ const ServicesPage = () => {
             Premium Marketing Services for{" "}
             <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent inline-block min-h-[1em]">
               {currentBrand || '\u00A0'}
-              <span className="animate-pulse">|</span>
+              <span className="animate-pulse text-white ml-1 font-thin">|</span>
             </span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
