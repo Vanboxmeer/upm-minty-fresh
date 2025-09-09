@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Link, useSearchParams } from "react-router-dom";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
 import { CategoryBreadcrumbs } from "@/components/CategoryBreadcrumbs";
@@ -13,7 +14,8 @@ import { Loader2 } from "lucide-react";
 const Blog = () => {
   const [searchParams] = useSearchParams();
   const categoryFilter = searchParams.get('category');
-  const { fetchPublicPosts, displayedPosts, loading, loadingMore, hasMorePosts, loadMore } = useBlogPosts();
+  const { fetchPublicPosts, displayedPosts, posts, loading, loadingMore, hasMorePosts, loadMore } = useBlogPosts();
+  const [availableCategories, setAvailableCategories] = useState<string[]>([]);
 
   useEffect(() => {
     // SEO optimization for blog page
@@ -33,6 +35,20 @@ const Blog = () => {
   useEffect(() => {
     fetchPublicPosts(true, categoryFilter || undefined); // Reset pagination on initial load
   }, [categoryFilter, fetchPublicPosts]); // Include categoryFilter and fetchPublicPosts
+
+  // Extract available categories from all posts
+  useEffect(() => {
+    if (posts.length > 0) {
+      const allCategories = new Set<string>();
+      posts.forEach(post => {
+        const postCategories = post.categories || (post.category ? [post.category] : []);
+        postCategories.forEach(cat => {
+          if (cat && cat.trim()) allCategories.add(cat);
+        });
+      });
+      setAvailableCategories(Array.from(allCategories).sort());
+    }
+  }, [posts]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -107,6 +123,38 @@ const Blog = () => {
                   'Load More'
                 )}
               </Button>
+            </div>
+          )}
+
+          {/* Category Filter Section */}
+          {(categoryFilter || availableCategories.length > 0) && (
+            <div className="max-w-4xl mx-auto mt-16 p-6 bg-muted/30 rounded-lg border">
+              <h3 className="text-lg font-semibold mb-4 text-center">
+                {categoryFilter ? 'Browse Other Categories' : 'Browse by Category'}
+              </h3>
+              
+              <div className="flex flex-wrap justify-center gap-2 mb-4">
+                {availableCategories
+                  .filter(cat => cat !== categoryFilter) // Hide current category
+                  .map(category => (
+                    <Link key={category} to={`/blog?category=${encodeURIComponent(category)}`}>
+                      <Badge 
+                        variant="outline" 
+                        className="hover:bg-primary hover:text-primary-foreground transition-colors cursor-pointer px-3 py-1"
+                      >
+                        {category}
+                      </Badge>
+                    </Link>
+                  ))}
+              </div>
+
+              {categoryFilter && (
+                <div className="text-center">
+                  <Button variant="outline" asChild>
+                    <Link to="/blog">View All Blog Posts</Link>
+                  </Button>
+                </div>
+              )}
             </div>
           )}
         </div>
