@@ -129,6 +129,7 @@ export const RelatedPosts = ({ currentPost }: RelatedPostsProps) => {
                     categories={post.categories || (post.category ? [post.category] : [])} 
                     size="sm"
                     showAll={false}
+                    linkTo={(category) => `/blog?category=${encodeURIComponent(category)}`}
                   />
                   <span className="text-xs text-muted-foreground">
                     {new Date(post.publish_date || post.created_at).toLocaleDateString()}

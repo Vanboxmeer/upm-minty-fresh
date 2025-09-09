@@ -110,6 +110,7 @@ const BlogPost = () => {
                 size="md"
                 showAll={true}
                 className="justify-center"
+                linkTo={(category) => `/blog?category=${encodeURIComponent(category)}`}
               />
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 <span>{new Date(post.publish_date || post.created_at).toLocaleDateString()}</span>
