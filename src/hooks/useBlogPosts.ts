@@ -67,7 +67,7 @@ export const useBlogPosts = () => {
   };
 
   // Separate method for public posts (published + not in future)
-  const fetchPublicPosts = useCallback(async (resetPagination = true) => {
+  const fetchPublicPosts = useCallback(async (resetPagination = true, categoryFilter?: string) => {
     try {
       setLoading(true);
       const { data: allPosts, error } = await supabase
@@ -80,15 +80,18 @@ export const useBlogPosts = () => {
       // Get current date/time in UTC to ensure consistent comparison
       const now = new Date();
       
-      // Filter posts client-side to ensure proper date comparison
+      // Filter posts client-side to ensure proper date comparison and category filtering
       const filteredPosts = (allPosts || []).filter(post => {
-        if (!post.publish_date) return true; // Show posts without publish_date
+        // Date filter
+        if (post.publish_date && new Date(post.publish_date) > now) return false;
         
-        // Parse the publish_date and compare with current time
-        const publishDate = new Date(post.publish_date);
+        // Category filter
+        if (categoryFilter) {
+          const postCategories = post.categories || (post.category ? [post.category] : []);
+          return postCategories.some(cat => cat.toLowerCase() === categoryFilter.toLowerCase());
+        }
         
-        // Compare dates (publish_date must be in the past or current moment)
-        return publishDate <= now;
+        return true;
       });
       
       // Sort by publish_date (desc), then created_at (desc)  

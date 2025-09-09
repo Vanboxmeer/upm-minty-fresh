@@ -40,9 +40,12 @@ const BlogSection = () => {
                 </AspectRatio>
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full font-medium">
+                    <Link 
+                      to={`/blog?category=${encodeURIComponent(post.category || '')}`}
+                      className="bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full font-medium hover:bg-primary/80 transition-colors"
+                    >
                       {post.category}
-                    </span>
+                    </Link>
                     <span className="text-xs text-muted-foreground">
                       {new Date(post.publish_date || post.created_at).toLocaleDateString()} • {post.read_time}
                     </span>

@@ -4,13 +4,15 @@ import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
 import { CategoryBreadcrumbs } from "@/components/CategoryBreadcrumbs";
 import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
 import { Loader2 } from "lucide-react";
 
 const Blog = () => {
+  const [searchParams] = useSearchParams();
+  const categoryFilter = searchParams.get('category');
   const { fetchPublicPosts, displayedPosts, loading, loadingMore, hasMorePosts, loadMore } = useBlogPosts();
 
   useEffect(() => {
@@ -29,8 +31,8 @@ const Blog = () => {
   }, []);
 
   useEffect(() => {
-    fetchPublicPosts(true); // Reset pagination on initial load
-  }, []); // Empty dependency array since fetchPublicPosts is now memoized
+    fetchPublicPosts(true, categoryFilter || undefined); // Reset pagination on initial load
+  }, [categoryFilter, fetchPublicPosts]); // Include categoryFilter and fetchPublicPosts
 
   return (
     <div className="min-h-screen bg-background">
@@ -45,7 +47,9 @@ const Blog = () => {
         </div>
 
         <div className="mb-8">
-          <h2 className="text-2xl font-semibold mb-6">Latest Articles</h2>
+          <h2 className="text-2xl font-semibold mb-6">
+            {categoryFilter ? `Articles in "${categoryFilter}"` : 'Latest Articles'}
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {displayedPosts.map((post) => (
               <Card key={post.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
@@ -65,6 +69,7 @@ const Blog = () => {
                         categories={post.categories || (post.category ? [post.category] : [])} 
                         size="sm"
                         maxDisplay={1}
+                        linkTo={(category) => `/blog?category=${encodeURIComponent(category)}`}
                       />
                       <span className="text-xs text-muted-foreground">
                         {new Date(post.publish_date || post.created_at).toLocaleDateString()} • {post.read_time}
