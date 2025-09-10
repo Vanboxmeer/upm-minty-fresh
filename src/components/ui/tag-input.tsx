@@ -10,6 +10,7 @@ interface TagInputProps {
   placeholder?: string
   maxTags?: number
   className?: string
+  id?: string
 }
 
 export function TagInput({
@@ -18,7 +19,9 @@ export function TagInput({
   placeholder = "Add tags...",
   maxTags,
   className,
+  id,
 }: TagInputProps) {
+  const inputId = id || `tag-input-${Math.random().toString(36).substr(2, 9)}`
   const [inputValue, setInputValue] = React.useState("")
   const [isInputFocused, setIsInputFocused] = React.useState(false)
 
@@ -57,7 +60,7 @@ export function TagInput({
         isInputFocused && "ring-2 ring-ring ring-offset-2",
         className
       )}
-      onClick={() => document.getElementById("tag-input")?.focus()}
+      onClick={() => document.getElementById(inputId)?.focus()}
     >
       {tags.map((tag, index) => (
         <Badge
@@ -79,7 +82,7 @@ export function TagInput({
         </Badge>
       ))}
       <Input
-        id="tag-input"
+        id={inputId}
         type="text"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}

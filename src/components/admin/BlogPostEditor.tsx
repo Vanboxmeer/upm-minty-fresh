@@ -82,7 +82,7 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
       content: post?.content || '',
       excerpt: post?.excerpt || '',
       author: post?.author || 'UPM Team',
-      categories: post?.categories || (post?.category ? [post.category] : ['Marketing']),
+      categories: post?.categories || (post?.category ? [post.category] : []),
       featured_image: post?.featured_image || '',
       featured_image_alt: post?.featured_image_alt || '',
       gallery_images: (post as any)?.gallery_images?.filter((img: any) => 
@@ -237,7 +237,7 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
         seo_keywords: keywords,
         publish_date: publishDate,
         // Ensure backward compatibility by setting the first category as the main category
-        category: data.categories?.[0] || 'Marketing',
+        category: data.categories?.[0] || data.categories?.[0] || 'General',
       };
 
       await onSave(postData);
@@ -339,15 +339,16 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                       <FormItem>
                         <FormLabel>Keyword Tags</FormLabel>
                         <FormControl>
-                          <div key="keywords-tag-input">
-                            <TagInput
-                              tags={field.value || []}
-                              onTagsChange={field.onChange}
-                              placeholder="Type keyword and press Enter..."
-                              maxTags={10}
-                              className="keywords-tag-input"
-                            />
-                          </div>
+                           <div key="keywords-tag-input">
+                             <TagInput
+                               id="seo-keywords-input"
+                               tags={field.value || []}
+                               onTagsChange={field.onChange}
+                               placeholder="Type keyword and press Enter..."
+                               maxTags={10}
+                               className="keywords-tag-input"
+                             />
+                           </div>
                         </FormControl>
                         <p className="text-xs text-muted-foreground">
                           Press Enter or comma to add keywords. Maximum 10 keywords.
@@ -512,10 +513,11 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                         </FormLabel>
                         <FormControl>
                           <div className="space-y-2">
-                            <div key="categories-tag-input">
-                              <TagInput
-                                tags={field.value || []}
-                                onTagsChange={async (newTags) => {
+                             <div key="categories-tag-input">
+                               <TagInput
+                                 id="categories-input"
+                                 tags={field.value || []}
+                                 onTagsChange={async (newTags) => {
                                   // Check for new categories and create them
                                   for (const tagName of newTags) {
                                     const existingCategory = categories.find(cat => 
