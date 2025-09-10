@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
 import { FileText, Megaphone, Users, CheckCircle, Clock, Headphones } from "lucide-react";
 
 const About = () => {
@@ -113,12 +114,13 @@ const About = () => {
                   goals and learn how UPM can help you achieve them.
                 </p>
                 <div className="text-center">
-                  <a 
-                    href="/#package-selector" 
-                    className="inline-block bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity"
+                  <Button 
+                    onClick={() => window.location.href = '/#package-selector'}
+                    size="lg"
+                    className="px-8 py-3 text-lg font-semibold"
                   >
                     Start a Campaign
-                  </a>
+                  </Button>
                 </div>
               </section>
             </div>
