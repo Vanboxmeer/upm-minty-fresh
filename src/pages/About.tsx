@@ -115,7 +115,7 @@ const About = () => {
                 <div className="text-center">
                   <a 
                     href="/#contact-form" 
-                    className="inline-block bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity"
+                    className="inline-block bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity"
                   >
                     Contact Us
                   </a>
