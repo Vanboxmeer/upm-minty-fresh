@@ -114,10 +114,10 @@ const About = () => {
                 </p>
                 <div className="text-center">
                   <a 
-                    href="/#contact-form" 
+                    href="/#package-selector" 
                     className="inline-block bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity"
                   >
-                    Contact Us
+                    Start a Campaign
                   </a>
                 </div>
               </section>
