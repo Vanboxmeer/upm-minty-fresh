@@ -1,4 +1,4 @@
-import { MessageCircle } from "lucide-react";
+import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const TelegramChat = () => {
@@ -16,7 +16,7 @@ const TelegramChat = () => {
           rel="noopener noreferrer"
           aria-label="Chat with us on Telegram"
         >
-          <MessageCircle size={24} />
+          <Send size={24} />
         </a>
       </Button>
     </div>
