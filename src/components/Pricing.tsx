@@ -74,6 +74,24 @@ const Pricing = () => {
     ],
     cta: "Order Package",
     popular: false
+  }, {
+    name: "Custom Budget",
+    price: "Custom",
+    period: "$5K - $500K",
+    description: "Tailored marketing package designed for your specific budget requirements",
+    features: [
+      "Customized campaign strategy based on your budget allocation",
+      "Flexible combination of press releases and influencer collaborations",
+      "Scalable media outreach matching your investment level",
+      "Personalized consultation and campaign planning session",
+      "Custom KOL selection based on your target audience",
+      "Adaptable content creation and distribution strategy",
+      "Web3 directory listing services included",
+      "Dedicated account manager for budget optimization",
+      "Performance tracking scaled to your campaign size"
+    ],
+    cta: "Get Custom Quote",
+    popular: false
   }];
   return <section id="coverage-packages" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -85,7 +103,7 @@ const Pricing = () => {
           
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {plans.map((plan, index) => <Card key={index} className={`relative ${plan.popular ? 'border-primary shadow-lg scale-105' : 'border-border'} transition-all hover:shadow-lg`}>
               {plan.popular && <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                   <span className="bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-medium">
@@ -116,7 +134,9 @@ const Pricing = () => {
                   variant={plan.popular ? "hero" : "outline"} 
                   className="w-full" 
                   size="lg"
-                  onClick={() => handleOrderPackage(plan.name)}
+                  onClick={() => plan.name === "Custom Budget" 
+                    ? window.location.href = "/#contact-form" 
+                    : handleOrderPackage(plan.name)}
                 >
                   {plan.cta}
                 </Button>

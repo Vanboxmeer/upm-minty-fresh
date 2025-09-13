@@ -29,6 +29,7 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
   const [referrerName, setReferrerName] = useState("");
   const [referrerCode, setReferrerCode] = useState("");
   const [subscribeToNewsletter, setSubscribeToNewsletter] = useState(false);
+  const [customBudget, setCustomBudget] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
@@ -56,6 +57,12 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
       price: "$100,000", 
       description: "Maximum exposure package",
       features: ["500+ media outlets", "Multiple top-tier influencers", "Tier-1 media coverage"]
+    },
+    {
+      name: "Custom Budget",
+      price: "Custom",
+      description: "Tailored package for your budget",
+      features: ["Customized campaign ($5K-$500K)", "Flexible mix of services", "Personalized strategy"]
     }
   ];
 
@@ -120,7 +127,11 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
         
         if (selectedPackage) {
           const packageData = packages.find(p => p.name === selectedPackage);
-          formMessage += `Coverage Package: ${selectedPackage} - ${packageData?.price}\n`;
+          if (selectedPackage === "Custom Budget" && customBudget) {
+            formMessage += `Coverage Package: ${selectedPackage} - $${Number(customBudget).toLocaleString()}\n`;
+          } else {
+            formMessage += `Coverage Package: ${selectedPackage} - ${packageData?.price}\n`;
+          }
         }
         
         if (selectedSubscription) {
@@ -180,6 +191,7 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
       setSelectedPackage("");
       setSelectedSubscription("");
       setBillingFrequency("monthly");
+      setCustomBudget("");
       setSubscribeToNewsletter(false);
       onClose();
 
@@ -239,6 +251,21 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
                         </li>
                       ))}
                     </ul>
+                    
+                    {pkg.name === "Custom Budget" && selectedPackage === pkg.name && (
+                      <div className="mt-3">
+                        <Input
+                          type="number"
+                          placeholder="Enter budget (5,000 - 500,000)"
+                          value={customBudget}
+                          onChange={(e) => setCustomBudget(e.target.value)}
+                          min="5000"
+                          max="500000"
+                          className="w-full text-sm"
+                        />
+                        <p className="text-xs text-muted-foreground mt-1">Min: $5K | Max: $500K</p>
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               ))}
@@ -391,7 +418,11 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
                 <div className="p-3 bg-primary/10 rounded-md space-y-1">
                   <p className="text-sm font-medium">Your Selection:</p>
                   {selectedPackage && (
-                    <p className="text-sm">Package: {selectedPackage}</p>
+                    <p className="text-sm">
+                      Package: {selectedPackage === "Custom Budget" && customBudget 
+                        ? `${selectedPackage} - $${Number(customBudget).toLocaleString()}` 
+                        : selectedPackage}
+                    </p>
                   )}
                   {selectedSubscription && (
                     <p className="text-sm">Subscription: {selectedSubscription}</p>

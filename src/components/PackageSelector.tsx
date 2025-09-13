@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Input } from "@/components/ui/input";
 import { Check, X } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -10,6 +11,7 @@ const PackageSelector = () => {
   const [selectedPackage, setSelectedPackage] = useState<string>("");
   const [selectedSubscription, setSelectedSubscription] = useState<string>("");
   const [billingFrequency, setBillingFrequency] = useState<string>("monthly");
+  const [customBudget, setCustomBudget] = useState<string>("");
   const formatPrice = (usdPrice: string) => {
     return usdPrice;
   };
@@ -52,6 +54,20 @@ const PackageSelector = () => {
         "Collaborations with small and medium sized content creators",
         "Coverage in multiple tier-1 media publications",
         "Budget gives room for a longer campaign or larger media blitz",
+        "Web3 directory listing services"
+      ],
+      popular: false
+    },
+    {
+      name: "Custom Budget",
+      price: "Custom",
+      description: "Tailored marketing package for your specific budget requirements. Use your budget for things such as:",
+      features: [
+        "Customized campaign based on your budget ($5K - $500K)",
+        "Flexible mix of press releases, influencer collaborations",
+        "Scalable media outreach matching your investment",
+        "Personalized strategy consultation",
+        "Custom KOL selection and content creation",
         "Web3 directory listing services"
       ],
       popular: false
@@ -109,7 +125,12 @@ const PackageSelector = () => {
 
     // Create comprehensive summary with converted prices
     let summary = `SELECTED PACKAGE & SUBSCRIPTION:\n\n`;
-    summary += `Coverage Package: ${packageData.name} - ${formatPrice(packageData.price)}\n`;
+    
+    if (packageData.name === "Custom Budget" && customBudget) {
+      summary += `Coverage Package: ${packageData.name} - $${Number(customBudget).toLocaleString()}\n`;
+    } else {
+      summary += `Coverage Package: ${packageData.name} - ${formatPrice(packageData.price)}\n`;
+    }
     summary += `Description: ${packageData.description}\n\n`;
     
     summary += `Subscription Level: ${subscriptionData.name}\n`;
@@ -143,7 +164,7 @@ const PackageSelector = () => {
         {/* Coverage Package Selection */}
         <div className="mb-16">
           <h3 className="text-2xl font-bold text-center mb-8">Step 1: Choose Coverage Package</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {coveragePackages.map((pkg, index) => (
               <Card 
                 key={index} 
@@ -172,6 +193,22 @@ const PackageSelector = () => {
                       </li>
                     ))}
                   </ul>
+                  
+                  {pkg.name === "Custom Budget" && selectedPackage === pkg.name && (
+                    <div className="mt-4">
+                      <label className="block text-sm font-medium mb-2">Your Budget ($USD)</label>
+                      <Input
+                        type="number"
+                        placeholder="Enter budget (5,000 - 500,000)"
+                        value={customBudget}
+                        onChange={(e) => setCustomBudget(e.target.value)}
+                        min="5000"
+                        max="500000"
+                        className="w-full"
+                      />
+                      <p className="text-xs text-muted-foreground mt-1">Minimum: $5,000 | Maximum: $500,000</p>
+                    </div>
+                  )}
                   
                   <Button 
                     variant={selectedPackage === pkg.name ? "default" : "outline"}
@@ -296,7 +333,11 @@ const PackageSelector = () => {
               <div className="space-y-2 mb-6">
                 <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                   <span>Coverage Package:</span>
-                  <span className="font-semibold">{selectedPackage} - {formatPrice(coveragePackages.find(p => p.name === selectedPackage)?.price || "")}</span>
+                  <span className="font-semibold">
+                    {selectedPackage} - {selectedPackage === "Custom Budget" && customBudget 
+                      ? `$${Number(customBudget).toLocaleString()}` 
+                      : formatPrice(coveragePackages.find(p => p.name === selectedPackage)?.price || "")}
+                  </span>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                   <span>Subscription Level:</span>
