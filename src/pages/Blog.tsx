@@ -56,9 +56,15 @@ const Blog = () => {
       
       <main className="container mx-auto px-4 py-16">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">UPM: A Web3 and Crypto Blog</h1>
+          <div className="flex justify-center mb-8">
+            <img 
+              src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
+              alt="UPM Logo" 
+              className="h-20 w-auto transition-transform duration-200 hover:scale-105" 
+            />
+          </div>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Trends, Stories, KOL partnerships, PR, and impactful brand building.
+            Explore the Convergence of Web3, AI, VR, and GameFi
           </p>
         </div>
 
