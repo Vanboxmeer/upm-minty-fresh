@@ -78,10 +78,10 @@ const Pricing = () => {
     name: "Custom Budget",
     price: "Custom",
     period: "$5K - $500K",
-    description: "Tailored marketing package designed for your specific budget requirements",
+    description: "Your account manager will work with you to shortlist mixed media options that utilize your full budget",
     features: [
-      "Customized campaign strategy based on your budget allocation",
-      "Flexible combination of press releases and influencer collaborations",
+      "Account manager shortlists options to maximize your budget allocation",
+      "Mixed media package combining press releases and influencer collaborations",
       "Scalable media outreach matching your investment level",
       "Custom KOL selection based on your target audience",
       "Adaptable content creation and distribution strategy",

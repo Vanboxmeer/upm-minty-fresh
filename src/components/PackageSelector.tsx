@@ -61,10 +61,10 @@ const PackageSelector = () => {
     {
       name: "Custom Budget",
       price: "Custom",
-      description: "Tailored marketing package for your specific budget requirements. Use your budget for things such as:",
+      description: "Your account manager will work with you to shortlist mixed media options that utilize your full budget. Use your budget for things such as:",
       features: [
-        "Customized campaign based on your budget ($5K - $500K)",
-        "Flexible mix of press releases, influencer collaborations",
+        "Account manager shortlists options to use your full budget ($5K - $500K)",
+        "Mixed media package combining press releases & influencer collaborations",
         "Scalable media outreach matching your investment",
         "Custom KOL selection and content creation",
         "Web3 directory listing services"
