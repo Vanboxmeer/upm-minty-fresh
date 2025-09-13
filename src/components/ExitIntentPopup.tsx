@@ -62,7 +62,7 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
       name: "Custom Budget",
       price: "Custom",
       description: "Tailored package for your budget",
-      features: ["Customized campaign ($5K-$500K)", "Flexible mix of services", "Personalized strategy"]
+      features: ["Customized campaign ($5K-$500K)", "Flexible mix of services", "Custom KOL selection"]
     }
   ];
 

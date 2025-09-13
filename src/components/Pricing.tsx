@@ -83,7 +83,6 @@ const Pricing = () => {
       "Customized campaign strategy based on your budget allocation",
       "Flexible combination of press releases and influencer collaborations",
       "Scalable media outreach matching your investment level",
-      "Personalized consultation and campaign planning session",
       "Custom KOL selection based on your target audience",
       "Adaptable content creation and distribution strategy",
       "Web3 directory listing services included",

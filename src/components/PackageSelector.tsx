@@ -66,7 +66,6 @@ const PackageSelector = () => {
         "Customized campaign based on your budget ($5K - $500K)",
         "Flexible mix of press releases, influencer collaborations",
         "Scalable media outreach matching your investment",
-        "Personalized strategy consultation",
         "Custom KOL selection and content creation",
         "Web3 directory listing services"
       ],
