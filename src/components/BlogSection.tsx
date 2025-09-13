@@ -21,7 +21,7 @@ const BlogSection = () => {
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Latest from Our Blog</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Fresh insights on Web3 and crypto marketing, handpicked by our team.
+            News, trends, and innovation in Web3, AI, VR, and GameFi.
           </p>
         </div>
 
