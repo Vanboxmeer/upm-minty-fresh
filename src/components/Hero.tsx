@@ -54,7 +54,7 @@ const Hero = () => {
       <div className="relative container mx-auto px-4 py-12 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in text-white">
-            Digital Marketing Services for{" "}
+            Media Partner for{" "}
             <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent inline-block min-h-[1em]">
               {currentBrand || '\u00A0'}
               <span className="animate-pulse text-white ml-1 font-thin">|</span>
