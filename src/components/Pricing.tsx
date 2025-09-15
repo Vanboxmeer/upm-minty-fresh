@@ -123,25 +123,27 @@ const Pricing = () => {
 
               <CardContent className="flex flex-col flex-1">
                 <ul className="space-y-3 mb-8">
-                  {plan.features.map((feature, idx) => <li key={idx} className="flex items-center gap-3">
+                  {plan.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-center gap-3">
                       <Check className="h-5 w-5 text-primary flex-shrink-0" />
                       <span className="text-sm">{feature}</span>
-                    </li>)}
+                    </li>
+                  ))}
                 </ul>
 
-                <div className="mt-auto">
-                  <Button 
-                    variant={plan.popular ? "hero" : "outline"} 
-                    className="w-full" 
-                    size="lg"
-                    onClick={() => plan.name === "Custom Budget" 
-                      ? window.location.href = "/#contact-form" 
-                      : handleOrderPackage(plan.name)}
-                  >
-                    {plan.cta}
-                  </Button>
-                </div>
               </CardContent>
+              <CardFooter className="pt-4">
+                <Button 
+                  variant={plan.popular ? "hero" : "outline"} 
+                  className="w-full" 
+                  size="lg"
+                  onClick={() => plan.name === "Custom Budget" 
+                    ? window.location.href = "/#contact-form" 
+                    : handleOrderPackage(plan.name)}
+                >
+                  {plan.cta}
+                </Button>
+              </CardFooter>
             </Card>)}
         </div>
       </div>

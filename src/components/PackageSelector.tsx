@@ -209,16 +209,16 @@ const PackageSelector = () => {
                     </div>
                   )}
                   
-                  <div className="mt-auto pt-4">
-                    <Button 
-                      variant={selectedPackage === pkg.name ? "default" : "outline"}
-                      className="w-full group-hover:shadow-lg transition-all duration-300"
-                      onClick={() => setSelectedPackage(pkg.name)}
-                    >
-                      {selectedPackage === pkg.name ? "Selected" : "Select Option"}
-                    </Button>
-                  </div>
                 </CardContent>
+                <CardFooter className="pt-4">
+                  <Button 
+                    variant={selectedPackage === pkg.name ? "default" : "outline"}
+                    className="w-full group-hover:shadow-lg transition-all duration-300"
+                    onClick={() => setSelectedPackage(pkg.name)}
+                  >
+                    {selectedPackage === pkg.name ? "Selected" : "Select Option"}
+                  </Button>
+                </CardFooter>
               </Card>
             ))}
           </div>
@@ -277,16 +277,16 @@ const PackageSelector = () => {
                     )}
                   </div>
                   
-                  <div className="mt-auto pt-4">
-                    <Button 
-                      variant={selectedSubscription === plan.name ? "default" : "outline"}
-                      className="w-full group-hover:shadow-lg transition-all duration-300"
-                      onClick={() => setSelectedSubscription(plan.name)}
-                    >
-                      {selectedSubscription === plan.name ? "Selected" : "Select Option"}
-                    </Button>
-                  </div>
                 </CardContent>
+                <CardFooter className="pt-4">
+                  <Button 
+                    variant={selectedSubscription === plan.name ? "default" : "outline"}
+                    className="w-full group-hover:shadow-lg transition-all duration-300"
+                    onClick={() => setSelectedSubscription(plan.name)}
+                  >
+                    {selectedSubscription === plan.name ? "Selected" : "Select Option"}
+                  </Button>
+                </CardFooter>
               </Card>
             ))}
           </div>
