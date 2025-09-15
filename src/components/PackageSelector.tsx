@@ -163,11 +163,11 @@ const PackageSelector = () => {
         {/* Coverage Package Selection */}
         <div className="mb-16">
           <h3 className="text-2xl font-bold text-center mb-8">Step 1: Choose Coverage Package</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto items-stretch">
             {coveragePackages.map((pkg, index) => (
               <Card 
                 key={index} 
-                className={`group relative flex flex-col transition-all duration-500 card-hover hover:border-primary/50 ${
+                className={`group relative flex flex-col h-full transition-all duration-500 card-hover hover:border-primary/50 ${
                   selectedPackage === pkg.name ? 'border-primary bg-primary/5 shadow-lg scale-105' : 'hover:shadow-lg'
                 } ${pkg.popular ? 'border-primary/50 ring-2 ring-primary/20' : ''}`}
               >
@@ -227,11 +227,11 @@ const PackageSelector = () => {
         {/* Subscription Level Selection */}
         <div className="mb-16">
           <h3 className="text-2xl font-bold text-center mb-8">Step 2: Choose Subscription Level</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
             {subscriptionPlans.map((plan, index) => (
               <Card 
                 key={index} 
-                className={`group relative flex flex-col transition-all duration-500 card-hover hover:border-primary/50 ${
+                className={`group relative flex flex-col h-full transition-all duration-500 card-hover hover:border-primary/50 ${
                   selectedSubscription === plan.name ? 'border-primary bg-primary/5 shadow-lg scale-105' : 'hover:shadow-lg'
                 } ${plan.popular ? 'border-primary/50 ring-2 ring-primary/20' : ''}`}
               >
