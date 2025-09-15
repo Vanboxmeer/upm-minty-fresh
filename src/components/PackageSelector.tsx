@@ -168,7 +168,7 @@ const PackageSelector = () => {
               <Card 
                 key={index} 
                 className={`group relative flex flex-col h-full transition-all duration-500 card-hover hover:border-primary/50 ${
-                  selectedPackage === pkg.name ? 'border-primary bg-primary/5 shadow-lg scale-105' : 'hover:shadow-lg'
+                  selectedPackage === pkg.name ? 'border-primary bg-primary/5 shadow-lg' : 'hover:shadow-lg'
                 } ${pkg.popular ? 'border-primary/50 ring-2 ring-primary/20' : ''}`}
               >
                 {pkg.popular && (
@@ -232,7 +232,7 @@ const PackageSelector = () => {
               <Card 
                 key={index} 
                 className={`group relative flex flex-col h-full transition-all duration-500 card-hover hover:border-primary/50 ${
-                  selectedSubscription === plan.name ? 'border-primary bg-primary/5 shadow-lg scale-105' : 'hover:shadow-lg'
+                  selectedSubscription === plan.name ? 'border-primary bg-primary/5 shadow-lg' : 'hover:shadow-lg'
                 } ${plan.popular ? 'border-primary/50 ring-2 ring-primary/20' : ''}`}
               >
                 {plan.popular && (
