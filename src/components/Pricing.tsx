@@ -103,7 +103,7 @@ const Pricing = () => {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-          {plans.map((plan, index) => <Card key={index} className={`relative ${plan.popular ? 'border-primary shadow-lg scale-105' : 'border-border'} transition-all hover:shadow-lg`}>
+          {plans.map((plan, index) => <Card key={index} className={`relative flex flex-col ${plan.popular ? 'border-primary shadow-lg scale-105' : 'border-border'} transition-all hover:shadow-lg`}>
               {plan.popular && <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                   <span className="bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-medium">
                     Most Popular
@@ -121,7 +121,7 @@ const Pricing = () => {
                 </CardDescription>
               </CardHeader>
 
-              <CardContent>
+              <CardContent className="flex flex-col flex-1">
                 <ul className="space-y-3 mb-8">
                   {plan.features.map((feature, idx) => <li key={idx} className="flex items-center gap-3">
                       <Check className="h-5 w-5 text-primary flex-shrink-0" />
@@ -129,16 +129,18 @@ const Pricing = () => {
                     </li>)}
                 </ul>
 
-                <Button 
-                  variant={plan.popular ? "hero" : "outline"} 
-                  className="w-full" 
-                  size="lg"
-                  onClick={() => plan.name === "Custom Budget" 
-                    ? window.location.href = "/#contact-form" 
-                    : handleOrderPackage(plan.name)}
-                >
-                  {plan.cta}
-                </Button>
+                <div className="mt-auto">
+                  <Button 
+                    variant={plan.popular ? "hero" : "outline"} 
+                    className="w-full" 
+                    size="lg"
+                    onClick={() => plan.name === "Custom Budget" 
+                      ? window.location.href = "/#contact-form" 
+                      : handleOrderPackage(plan.name)}
+                  >
+                    {plan.cta}
+                  </Button>
+                </div>
               </CardContent>
             </Card>)}
         </div>
