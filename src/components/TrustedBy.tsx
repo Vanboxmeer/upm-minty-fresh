@@ -42,8 +42,8 @@ const TrustedBy = () => {
       <div className="container mx-auto px-4">
         <div className={`text-center mb-12 transition-all duration-700 ${isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
-            TOP Projects in AI, Crypto Gaming, and Web3 Utilize <span className="text-primary">
-UPM Services</span>
+            TOP Projects in AI, Crypto Gaming, and Web3 Choose <span className="text-primary">
+UPM as Media Partner</span>
           </h2>
         </div>
         
