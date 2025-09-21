@@ -366,82 +366,39 @@ const Footer = () => {
                 
                 {/* Billing Frequency for Paid Plans */}
                 {selectedSubscription && selectedSubscription.hasBilling && (
-                  <div className="mt-2">
-                    <Select value={billingFrequency} onValueChange={setBillingFrequency}>
-                      <SelectTrigger className="bg-white/20 border-white/30 text-white">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent className="bg-white border border-gray-200 z-50">
-                        <SelectItem value="monthly" className="text-gray-900 hover:bg-gray-100">
-                          Monthly - ${selectedSubscription.monthlyPrice}/month
-                        </SelectItem>
-                        <SelectItem value="annual" className="text-gray-900 hover:bg-gray-100">
-                          Annual - ${selectedSubscription.annualPrice}/year (Save ${(selectedSubscription.monthlyPrice * 12) - selectedSubscription.annualPrice})
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
+                  <div className="mt-3">
+                    <label className="block text-sm font-medium mb-2 text-white">Billing:</label>
+                    <Tabs value={billingFrequency} onValueChange={setBillingFrequency} className="w-full">
+                      <TabsList className="grid w-full grid-cols-2 bg-white/10 border border-white/20">
+                        <TabsTrigger 
+                          value="monthly" 
+                          className="data-[state=active]:bg-primary data-[state=active]:text-white text-white/70"
+                        >
+                          Monthly
+                        </TabsTrigger>
+                        <TabsTrigger 
+                          value="annual" 
+                          className="data-[state=active]:bg-primary data-[state=active]:text-white text-white/70"
+                        >
+                          Annual
+                        </TabsTrigger>
+                      </TabsList>
+                    </Tabs>
+                    <div className="mt-2 text-sm text-white/80">
+                      {billingFrequency === 'monthly' ? (
+                        <span>${selectedSubscription.monthlyPrice}/month</span>
+                      ) : (
+                        <span>${selectedSubscription.annualPrice}/year <span className="text-green-400">(Save ${(selectedSubscription.monthlyPrice * 12) - selectedSubscription.annualPrice})</span></span>
+                      )}
+                    </div>
                   </div>
                 )}
               </div>
             </div>
             
-            <p className="text-xs mt-3 opacity-80">
-              Select your preferred package and subscription level from the dropdowns above.
-            </p>
-          </div>
-
-          <form onSubmit={handleSubmit}>
-            {/* Basic Contact Information */}
-            <div className="grid md:grid-cols-2 gap-4 mb-4">
-              <Input 
-                placeholder="First Name" 
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
-                required
-              />
-              <Input 
-                placeholder="Last Name" 
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
-                required
-              />
-            </div>
-            <div className="grid md:grid-cols-2 gap-4 mb-4">
-              <Input 
-                placeholder="Email" 
-                type="email" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
-                required
-              />
-              <Input 
-                placeholder="Phone" 
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
-              />
-            </div>
-            <div className="mb-4">
-              <Select value={country} onValueChange={setCountry} required>
-                <SelectTrigger className="w-full bg-white/20 border-white/30 text-white">
-                  <SelectValue placeholder="Select your country" className="text-white/70" />
-                </SelectTrigger>
-                <SelectContent className="bg-white border border-gray-200 max-h-64 z-50">
-                  {allowedCountries.map((countryName) => (
-                    <SelectItem key={countryName} value={countryName} className="text-gray-900 hover:bg-gray-100 focus:bg-gray-100">
-                      {countryName}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
             {/* Campaign Details Section */}
             {(selectedPackage || selectedSubscription) && (
-              <div className="mb-6 p-4 bg-white/5 rounded-lg border border-white/20">
+              <div className="mt-6 p-4 bg-white/5 rounded-lg border border-white/20">
                 <div className="flex items-center justify-between mb-4">
                   <h4 className="text-lg font-medium flex items-center gap-2">
                     <Target className="h-5 w-5" />
@@ -670,6 +627,61 @@ const Footer = () => {
                 )}
               </div>
             )}
+            
+            <p className="text-xs mt-3 opacity-80">
+              Select your preferred package and subscription level from the dropdowns above.
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit}>
+            {/* Basic Contact Information */}
+            <div className="grid md:grid-cols-2 gap-4 mb-4">
+              <Input 
+                placeholder="First Name" 
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
+                required
+              />
+              <Input 
+                placeholder="Last Name" 
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
+                required
+              />
+            </div>
+            <div className="grid md:grid-cols-2 gap-4 mb-4">
+              <Input 
+                placeholder="Email" 
+                type="email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
+                required
+              />
+              <Input 
+                placeholder="Phone" 
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
+              />
+            </div>
+            <div className="mb-4">
+              <Select value={country} onValueChange={setCountry} required>
+                <SelectTrigger className="w-full bg-white/20 border-white/30 text-white">
+                  <SelectValue placeholder="Select your country" className="text-white/70" />
+                </SelectTrigger>
+                <SelectContent className="bg-white border border-gray-200 max-h-64 z-50">
+                  {allowedCountries.map((countryName) => (
+                    <SelectItem key={countryName} value={countryName} className="text-gray-900 hover:bg-gray-100 focus:bg-gray-100">
+                      {countryName}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
 
             {/* Message */}
             <textarea 
