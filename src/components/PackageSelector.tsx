@@ -365,7 +365,7 @@ const PackageSelector = () => {
                 className="w-full pulse-glow"
                 onClick={handleProceed}
               >
-                Proceed to Contact Form
+                Add details to contact form
               </Button>
             </Card>
           </div>
