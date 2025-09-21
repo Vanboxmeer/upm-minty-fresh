@@ -156,7 +156,7 @@ const Footer = () => {
 
   const contentNeedOptions = [
     "Press Releases", "Blog Articles", "Social Media Content", "Video Content",
-    "Infographics", "Case Studies", "White Papers", "Email Campaigns"
+    "Features", "Case Studies", "Organic Earned Media", "Email Campaigns"
   ];
 
   const channelOptions = [
