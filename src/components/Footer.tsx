@@ -68,6 +68,38 @@ const Footer = () => {
     "Media Coverage", "Community Growth", "Conversion Rate", "ROI"
   ];
 
+  const targetAudienceOptions = [
+    "Crypto Investors", "DeFi Users", "NFT Collectors", "GameFi Players", 
+    "Retail Investors", "Institutional Investors", "Developers", "General Public",
+    "Millennials", "Gen Z", "Tech Enthusiasts", "Early Adopters"
+  ];
+
+  const geographicOptions = [
+    "Global", "North America", "Europe", "Asia Pacific", "Latin America",
+    "United States", "Canada", "United Kingdom", "Germany", "France",
+    "Japan", "South Korea", "Singapore", "Australia", "Brazil"
+  ];
+
+  const campaignDurationOptions = [
+    "1-2 weeks", "3-4 weeks", "1-2 months", "3-6 months", 
+    "6-12 months", "12+ months", "Ongoing"
+  ];
+
+  const budgetRangeOptions = [
+    "Under $5,000", "$5,000 - $25,000", "$25,000 - $100,000", 
+    "$100,000 - $500,000", "Over $500,000"
+  ];
+
+  const industryOptions = [
+    "DeFi", "NFTs", "Gaming", "Infrastructure", "Trading/Exchange", 
+    "Wallet", "Blockchain", "Metaverse", "AI", "Other"
+  ];
+
+  const urgencyOptions = [
+    "ASAP (within 1 week)", "Within 2 weeks", "Within 1 month", 
+    "Within 3 months", "Flexible timing"
+  ];
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -348,33 +380,82 @@ const Footer = () => {
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-4">
-                      <Input
-                        placeholder="Target Audience"
-                        value={campaignData.targetAudience || ""}
-                        onChange={(e) => updateCampaignField('targetAudience', e.target.value)}
-                        className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
-                      />
-                      <Input
-                        placeholder="Geographic Focus"
-                        value={campaignData.geographicTarget || ""}
-                        onChange={(e) => updateCampaignField('geographicTarget', e.target.value)}
-                        className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
-                      />
-                      <Input
-                        placeholder="Campaign Duration"
-                        value={campaignData.campaignDuration || ""}
-                        onChange={(e) => updateCampaignField('campaignDuration', e.target.value)}
-                        className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
-                      />
+                      <div>
+                        <label className="block text-sm font-medium mb-2 text-white/90">Target Audience</label>
+                        <Select value={campaignData.targetAudience || ""} onValueChange={(value) => updateCampaignField('targetAudience', value)}>
+                          <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                            <SelectValue placeholder="Select target audience" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-white border border-gray-200 max-h-64 z-50">
+                            {targetAudienceOptions.map((audience) => (
+                              <SelectItem key={audience} value={audience} className="text-gray-900 hover:bg-gray-100">
+                                {audience}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      
+                      <div>
+                        <label className="block text-sm font-medium mb-2 text-white/90">Geographic Focus</label>
+                        <Select value={campaignData.geographicTarget || ""} onValueChange={(value) => updateCampaignField('geographicTarget', value)}>
+                          <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                            <SelectValue placeholder="Select geographic focus" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-white border border-gray-200 max-h-64 z-50">
+                            {geographicOptions.map((geo) => (
+                              <SelectItem key={geo} value={geo} className="text-gray-900 hover:bg-gray-100">
+                                {geo}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      
+                      <div>
+                        <label className="block text-sm font-medium mb-2 text-white/90">Campaign Duration</label>
+                        <Select value={campaignData.campaignDuration || ""} onValueChange={(value) => updateCampaignField('campaignDuration', value)}>
+                          <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                            <SelectValue placeholder="Select duration" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-white border border-gray-200 max-h-64 z-50">
+                            {campaignDurationOptions.map((duration) => (
+                              <SelectItem key={duration} value={duration} className="text-gray-900 hover:bg-gray-100">
+                                {duration}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
                     </div>
 
-                    <Input
-                      type="date"
-                      placeholder="Launch Date"
-                      value={campaignData.launchDate || ""}
-                      onChange={(e) => updateCampaignField('launchDate', e.target.value)}
-                      className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
-                    />
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-2 text-white/90">Launch Date</label>
+                        <Input
+                          type="date"
+                          value={campaignData.launchDate || ""}
+                          onChange={(e) => updateCampaignField('launchDate', e.target.value)}
+                          className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
+                        />
+                      </div>
+                      
+                      <div>
+                        <label className="block text-sm font-medium mb-2 text-white/90">Project Category/Industry</label>
+                        <Select value={campaignData.industry || ""} onValueChange={(value) => updateCampaignField('industry', value)}>
+                          <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                            <SelectValue placeholder="Select industry" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-white border border-gray-200 max-h-64 z-50">
+                            {industryOptions.map((industry) => (
+                              <SelectItem key={industry} value={industry} className="text-gray-900 hover:bg-gray-100">
+                                {industry}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
 
                     <div>
                       <label className="block text-sm font-medium mb-2 text-white/90">Preferred Channels</label>

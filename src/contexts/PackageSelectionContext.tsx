@@ -33,6 +33,7 @@ export interface CampaignData {
   contentNeeds?: string[];
   preferredChannels?: string[];
   successMetrics?: string[];
+  industry?: string;
   additionalRequirements?: string;
 }
 
@@ -114,6 +115,7 @@ export const PackageSelectionProvider = ({ children }: PackageSelectionProviderP
       if (campaignData.projectName) summary += `Project Name: ${campaignData.projectName}\n`;
       if (campaignData.website) summary += `Website: ${campaignData.website}\n`;
       if (campaignData.projectDescription) summary += `Project Description: ${campaignData.projectDescription}\n`;
+      if (campaignData.industry) summary += `Industry/Category: ${campaignData.industry}\n`;
       if (campaignData.marketingObjectives?.length) summary += `Marketing Objectives: ${campaignData.marketingObjectives.join(', ')}\n`;
       if (campaignData.targetAudience) summary += `Target Audience: ${campaignData.targetAudience}\n`;
       if (campaignData.geographicTarget) summary += `Geographic Focus: ${campaignData.geographicTarget}\n`;
