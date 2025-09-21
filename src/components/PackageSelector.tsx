@@ -6,12 +6,15 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Input } from "@/components/ui/input";
 import { Check, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import CampaignDetailsForm, { CampaignFormData } from "./CampaignDetailsForm";
 
 const PackageSelector = () => {
   const [selectedPackage, setSelectedPackage] = useState<string>("");
   const [selectedSubscription, setSelectedSubscription] = useState<string>("");
   const [billingFrequency, setBillingFrequency] = useState<string>("monthly");
   const [customBudget, setCustomBudget] = useState<string>("");
+  const [showCampaignForm, setShowCampaignForm] = useState<boolean>(false);
+  const [campaignDetails, setCampaignDetails] = useState<CampaignFormData | null>(null);
   const formatPrice = (usdPrice: string) => {
     return usdPrice;
   };
@@ -116,7 +119,20 @@ const PackageSelector = () => {
     if (!selectedPackage || !selectedSubscription) {
       return;
     }
+    
+    setShowCampaignForm(true);
+  };
 
+  const handleCampaignFormSubmit = (formData: CampaignFormData) => {
+    setCampaignDetails(formData);
+    proceedToContact(formData);
+  };
+
+  const handleSkipCampaignForm = () => {
+    proceedToContact(null);
+  };
+
+  const proceedToContact = (formData: CampaignFormData | null) => {
     const packageData = coveragePackages.find(p => p.name === selectedPackage);
     const subscriptionData = subscriptionPlans.find(s => s.name === selectedSubscription);
     
@@ -142,22 +158,48 @@ const PackageSelector = () => {
     summary += `Subscription Details: ${subscriptionData.description}\n`;
     summary += `\n`;
 
+    // Add campaign details if provided
+    if (formData) {
+      summary += `CAMPAIGN DETAILS:\n\n`;
+      
+      if (formData.projectName) summary += `Project Name: ${formData.projectName}\n`;
+      if (formData.website) summary += `Website: ${formData.website}\n`;
+      if (formData.projectDescription) summary += `Project Description: ${formData.projectDescription}\n`;
+      if (formData.marketingObjectives?.length) summary += `Marketing Objectives: ${formData.marketingObjectives.join(', ')}\n`;
+      if (formData.targetAudience) summary += `Target Audience: ${formData.targetAudience}\n`;
+      if (formData.geographicTarget) summary += `Geographic Focus: ${formData.geographicTarget}\n`;
+      if (formData.launchDate) summary += `Launch Date: ${formData.launchDate}\n`;
+      if (formData.campaignDuration) summary += `Campaign Duration: ${formData.campaignDuration}\n`;
+      if (formData.contentNeeds?.length) summary += `Content Needs: ${formData.contentNeeds.join(', ')}\n`;
+      if (formData.preferredChannels?.length) summary += `Preferred Channels: ${formData.preferredChannels.join(', ')}\n`;
+      if (formData.successMetrics?.length) summary += `Success Metrics: ${formData.successMetrics.join(', ')}\n`;
+      if (formData.additionalRequirements) summary += `Additional Requirements: ${formData.additionalRequirements}\n`;
+      summary += `\n`;
+    }
+
     const encodedSummary = encodeURIComponent(summary);
     window.location.href = `/?selection=${encodedSummary}#contact-form`;
   };
 
   return (
-    <div className="py-20 bg-white" data-section="package-selector">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Choose Your Media Package Budget & Subscription Level
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Select both a coverage package and subscription level to get started. 
-            Choose your marketing package below and use your budget for the listed activities.
-          </p>
-        </div>
+    <>
+      {showCampaignForm ? (
+        <CampaignDetailsForm
+          onSubmit={handleCampaignFormSubmit}
+          onSkip={handleSkipCampaignForm}
+        />
+      ) : (
+        <div className="py-20 bg-white" data-section="package-selector">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Choose Your Media Package Budget & Subscription Level
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Select both a coverage package and subscription level to get started. 
+                Choose your marketing package below and use your budget for the listed activities.
+              </p>
+            </div>
 
 
         {/* Coverage Package Selection */}
@@ -372,6 +414,8 @@ const PackageSelector = () => {
         )}
       </div>
     </div>
+    )}
+    </>
   );
 };
 
