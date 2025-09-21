@@ -2,26 +2,22 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Input } from "@/components/ui/input";
 import { Check, X } from "lucide-react";
-import { useState, useEffect } from "react";
-import CampaignDetailsForm, { CampaignFormData } from "./CampaignDetailsForm";
+import { useEffect } from "react";
+import { usePackageSelection } from "@/contexts/PackageSelectionContext";
 
 const PackageSelector = () => {
-  const [selectedPackage, setSelectedPackage] = useState<string>("");
-  const [selectedSubscription, setSelectedSubscription] = useState<string>("");
-  const [billingFrequency, setBillingFrequency] = useState<string>("monthly");
-  const [customBudget, setCustomBudget] = useState<string>("");
-  const [showCampaignForm, setShowCampaignForm] = useState<boolean>(false);
-  const [campaignDetails, setCampaignDetails] = useState<CampaignFormData | null>(null);
-
-  // Auto-trigger campaign form when both selections are made
-  useEffect(() => {
-    if (selectedPackage && selectedSubscription) {
-      setShowCampaignForm(true);
-    }
-  }, [selectedPackage, selectedSubscription]);
+  const {
+    selectedPackage,
+    selectedSubscription,
+    billingFrequency,
+    customBudget,
+    setSelectedPackage,
+    setSelectedSubscription,
+    setBillingFrequency,
+    setCustomBudget,
+  } = usePackageSelection();
 
   const formatPrice = (usdPrice: string) => {
     return usdPrice;
@@ -123,84 +119,38 @@ const PackageSelector = () => {
     }
   ];
 
-  const handleCampaignFormSubmit = (formData: CampaignFormData) => {
-    setCampaignDetails(formData);
-    proceedToContact(formData);
+  // Auto-scroll to contact form when both selections are made
+  useEffect(() => {
+    if (selectedPackage && selectedSubscription) {
+      setTimeout(() => {
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+          contactForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 500);
+    }
+  }, [selectedPackage, selectedSubscription]);
+
+  const handlePackageSelect = (pkg: any) => {
+    setSelectedPackage(pkg);
   };
 
-  const handleSkipCampaignForm = () => {
-    proceedToContact(null);
-  };
-
-  const proceedToContact = (formData: CampaignFormData | null) => {
-    const packageData = coveragePackages.find(p => p.name === selectedPackage);
-    const subscriptionData = subscriptionPlans.find(s => s.name === selectedSubscription);
-    
-    if (!packageData || !subscriptionData) return;
-
-    // Create comprehensive summary with converted prices
-    let summary = `SELECTED PACKAGE & SUBSCRIPTION:\n\n`;
-    
-    if (packageData.name === "Custom Budget" && customBudget) {
-      summary += `Coverage Package: ${packageData.name} - $${Number(customBudget).toLocaleString()}\n`;
-    } else {
-      summary += `Coverage Package: ${packageData.name} - ${formatPrice(packageData.price)}\n`;
-    }
-    summary += `Description: ${packageData.description}\n\n`;
-    
-    summary += `Subscription Level: ${subscriptionData.name}\n`;
-    if (subscriptionData.hasBilling && billingFrequency === "annual") {
-      summary += `Billing: Annual - ${formatPrice(`$${subscriptionData.annualPrice}`)} (Save ${formatPrice(`$${(subscriptionData.monthlyPrice * 12) - subscriptionData.annualPrice}`)})\n`;
-    } else if (subscriptionData.hasBilling) {
-      summary += `Billing: Monthly - ${formatPrice(`$${subscriptionData.monthlyPrice}`)}\n`;
-    }
-    summary += `Service Fee: ${subscriptionData.subtitle}\n`;
-    summary += `Subscription Details: ${subscriptionData.description}\n`;
-    summary += `\n`;
-
-    // Add campaign details if provided
-    if (formData) {
-      summary += `CAMPAIGN DETAILS:\n\n`;
-      
-      if (formData.projectName) summary += `Project Name: ${formData.projectName}\n`;
-      if (formData.website) summary += `Website: ${formData.website}\n`;
-      if (formData.projectDescription) summary += `Project Description: ${formData.projectDescription}\n`;
-      if (formData.marketingObjectives?.length) summary += `Marketing Objectives: ${formData.marketingObjectives.join(', ')}\n`;
-      if (formData.targetAudience) summary += `Target Audience: ${formData.targetAudience}\n`;
-      if (formData.geographicTarget) summary += `Geographic Focus: ${formData.geographicTarget}\n`;
-      if (formData.launchDate) summary += `Launch Date: ${formData.launchDate}\n`;
-      if (formData.campaignDuration) summary += `Campaign Duration: ${formData.campaignDuration}\n`;
-      if (formData.contentNeeds?.length) summary += `Content Needs: ${formData.contentNeeds.join(', ')}\n`;
-      if (formData.preferredChannels?.length) summary += `Preferred Channels: ${formData.preferredChannels.join(', ')}\n`;
-      if (formData.successMetrics?.length) summary += `Success Metrics: ${formData.successMetrics.join(', ')}\n`;
-      if (formData.additionalRequirements) summary += `Additional Requirements: ${formData.additionalRequirements}\n`;
-      summary += `\n`;
-    }
-
-    const encodedSummary = encodeURIComponent(summary);
-    window.location.href = `/?selection=${encodedSummary}#contact-form`;
+  const handleSubscriptionSelect = (sub: any) => {
+    setSelectedSubscription(sub);
   };
 
   return (
-    <>
-      {showCampaignForm ? (
-        <CampaignDetailsForm
-          onSubmit={handleCampaignFormSubmit}
-          onSkip={handleSkipCampaignForm}
-        />
-      ) : (
-        <div className="py-20 bg-white" data-section="package-selector">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Choose Your Media Package Budget & Subscription Level
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                Select both a coverage package and subscription level to get started. 
-                Choose your marketing package below and use your budget for the listed activities.
-              </p>
-            </div>
-
+    <div className="py-20 bg-white" data-section="package-selector">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Choose Your Media Package Budget & Subscription Level
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Select both a coverage package and subscription level to get started. 
+            Choose your marketing package below and use your budget for the listed activities.
+          </p>
+        </div>
 
         {/* Coverage Package Selection */}
         <div className="mb-16">
@@ -210,7 +160,7 @@ const PackageSelector = () => {
               <Card 
                 key={index} 
                 className={`group relative flex flex-col h-full transition-all duration-500 card-hover hover:border-primary/50 ${
-                  selectedPackage === pkg.name ? 'border-primary bg-primary/5 shadow-lg' : 'hover:shadow-lg'
+                  selectedPackage?.name === pkg.name ? 'border-primary bg-primary/5 shadow-lg' : 'hover:shadow-lg'
                 } ${pkg.popular ? 'border-primary/50 ring-2 ring-primary/20' : ''}`}
               >
                 {pkg.popular && (
@@ -235,7 +185,7 @@ const PackageSelector = () => {
                     ))}
                   </ul>
                   
-                  {pkg.name === "Custom Budget" && selectedPackage === pkg.name && (
+                  {pkg.name === "Custom Budget" && selectedPackage?.name === pkg.name && (
                     <div className="mt-4">
                       <label className="block text-sm font-medium mb-2">Your Budget ($USD)</label>
                       <Input
@@ -254,17 +204,17 @@ const PackageSelector = () => {
                 </CardContent>
                 <CardFooter className="pt-4">
                   <Button 
-                    variant={selectedPackage === pkg.name ? "default" : "outline"}
+                    variant={selectedPackage?.name === pkg.name ? "default" : "outline"}
                     className="w-full group-hover:shadow-lg transition-all duration-300"
-                    onClick={() => setSelectedPackage(pkg.name)}
+                    onClick={() => handlePackageSelect(pkg)}
                   >
-                    {selectedPackage === pkg.name ? "Selected" : "Select Option"}
+                    {selectedPackage?.name === pkg.name ? "Selected" : "Select Option"}
                   </Button>
                 </CardFooter>
               </Card>
             ))}
           </div>
-        </div> 
+        </div>
 
         {/* Subscription Level Selection */}
         <div className="mb-16">
@@ -274,7 +224,7 @@ const PackageSelector = () => {
               <Card 
                 key={index} 
                 className={`group relative flex flex-col h-full transition-all duration-500 card-hover hover:border-primary/50 ${
-                  selectedSubscription === plan.name ? 'border-primary bg-primary/5 shadow-lg' : 'hover:shadow-lg'
+                  selectedSubscription?.name === plan.name ? 'border-primary bg-primary/5 shadow-lg' : 'hover:shadow-lg'
                 } ${plan.popular ? 'border-primary/50 ring-2 ring-primary/20' : ''}`}
               >
                 {plan.popular && (
@@ -322,11 +272,11 @@ const PackageSelector = () => {
                 </CardContent>
                 <CardFooter className="pt-4">
                   <Button 
-                    variant={selectedSubscription === plan.name ? "default" : "outline"}
+                    variant={selectedSubscription?.name === plan.name ? "default" : "outline"}
                     className="w-full group-hover:shadow-lg transition-all duration-300"
-                    onClick={() => setSelectedSubscription(plan.name)}
+                    onClick={() => handleSubscriptionSelect(plan)}
                   >
-                    {selectedSubscription === plan.name ? "Selected" : "Select Option"}
+                    {selectedSubscription?.name === plan.name ? "Selected" : "Select Option"}
                   </Button>
                 </CardFooter>
               </Card>
@@ -335,7 +285,7 @@ const PackageSelector = () => {
         </div>
 
         {/* Billing Frequency for Paid Plans */}
-        {selectedSubscription && subscriptionPlans.find(p => p.name === selectedSubscription)?.hasBilling && (
+        {selectedSubscription && selectedSubscription.hasBilling && (
           <div className="mb-16">
             <h3 className="text-2xl font-bold text-center mb-8">Step 3: Choose Billing Frequency</h3>
             <div className="max-w-md mx-auto">
@@ -349,7 +299,7 @@ const PackageSelector = () => {
                   <Card className="p-4 text-center">
                     <h4 className="font-semibold">Monthly Billing</h4>
                     <div className="text-2xl font-bold text-primary">
-                      {formatPrice(`$${subscriptionPlans.find(p => p.name === selectedSubscription)?.monthlyPrice}`)}/month
+                      {formatPrice(`$${selectedSubscription.monthlyPrice}`)}/month
                     </div>
                   </Card>
                 </TabsContent>
@@ -358,10 +308,10 @@ const PackageSelector = () => {
                   <Card className="p-4 text-center">
                     <h4 className="font-semibold">Annual Billing</h4>
                     <div className="text-2xl font-bold text-primary">
-                      {formatPrice(`$${subscriptionPlans.find(p => p.name === selectedSubscription)?.annualPrice}`)}/year
+                      {formatPrice(`$${selectedSubscription.annualPrice}`)}/year
                     </div>
                     <div className="text-sm text-green-600 font-medium">
-                      Save {formatPrice(`$${(subscriptionPlans.find(p => p.name === selectedSubscription)?.monthlyPrice || 0) * 12 - (subscriptionPlans.find(p => p.name === selectedSubscription)?.annualPrice || 0)}`)} per year
+                      Save {formatPrice(`$${(selectedSubscription.monthlyPrice * 12) - selectedSubscription.annualPrice}`)} per year
                     </div>
                   </Card>
                 </TabsContent>
@@ -369,10 +319,17 @@ const PackageSelector = () => {
             </div>
           </div>
         )}
+
+        {/* Scroll prompt */}
+        {selectedPackage && selectedSubscription && (
+          <div className="text-center">
+            <div className="inline-flex items-center gap-2 text-primary animate-bounce">
+              <span className="text-lg font-medium">📝 Scroll down to fill out your details and add campaign information</span>
+            </div>
           </div>
-        </div>
-      )}
-    </>
+        )}
+      </div>
+    </div>
   );
 };
 

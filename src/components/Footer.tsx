@@ -2,10 +2,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Linkedin, Twitter, Send } from "lucide-react";
+import { Linkedin, Twitter, Send, Calendar, Globe, Target, Users, Zap, BarChart3 } from "lucide-react";
+import { usePackageSelection } from "@/contexts/PackageSelectionContext";
+
 const Footer = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -17,45 +22,51 @@ const Footer = () => {
   const [referrerCode, setReferrerCode] = useState("");
   const [subscribeToNewsletter, setSubscribeToNewsletter] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectionSummary, setSelectionSummary] = useState("");
+  const [showCampaignDetails, setShowCampaignDetails] = useState(false);
   const { toast } = useToast();
+
+  const {
+    selectedPackage,
+    selectedSubscription,
+    billingFrequency,
+    customBudget,
+    campaignData,
+    updateCampaignField,
+    getSelectionSummary,
+  } = usePackageSelection();
 
   // Countries that BVI can do business with (excluding sanctioned countries)
   const allowedCountries = [
     "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
   ];
 
+  // Set default message when package is selected
   useEffect(() => {
-    // Check URL parameters for package/membership selection
-    const urlParams = new URLSearchParams(window.location.search);
-    const packageSelection = urlParams.get('package');
-    const membershipSelection = urlParams.get('membership');
-    const generalSelection = urlParams.get('selection');
-    
-    // Safe decode function to handle malformed URIs
-    const safeDecodeURIComponent = (str: string): string => {
-      try {
-        return decodeURIComponent(str);
-      } catch (error) {
-        console.warn('Failed to decode URI component:', str, error);
-        return str; // Return original string if decoding fails
-      }
-    };
-    
-    if (packageSelection) {
-      const decodedSelection = safeDecodeURIComponent(packageSelection);
-      setSelectionSummary(decodedSelection);
-      setMessage("I'm interested in this package. Please contact me with more details.");
-    } else if (membershipSelection) {
-      const decodedSelection = safeDecodeURIComponent(membershipSelection);
-      setSelectionSummary(decodedSelection);
-      setMessage("I'm interested in this membership plan. Please contact me with more details.");
-    } else if (generalSelection) {
-      const decodedSelection = safeDecodeURIComponent(generalSelection);
-      setSelectionSummary(decodedSelection);
-      setMessage("I'm interested in this plan. Please contact me with more details.");
+    if (selectedPackage && selectedSubscription) {
+      setMessage("I'm interested in this package/plan. Please contact me with more details.");
     }
-  }, []);
+  }, [selectedPackage, selectedSubscription]);
+
+  const marketingObjectiveOptions = [
+    "Brand Awareness", "Lead Generation", "Community Building", "Token Launch",
+    "Partnership Announcements", "Product Launch", "Thought Leadership", "Crisis Management"
+  ];
+
+  const contentNeedOptions = [
+    "Press Releases", "Blog Articles", "Social Media Content", "Video Content",
+    "Infographics", "Case Studies", "White Papers", "Email Campaigns"
+  ];
+
+  const channelOptions = [
+    "Tier-1 Media (Forbes, Reuters, etc.)", "Crypto Media (CoinDesk, CoinTelegraph, etc.)",
+    "Social Media Platforms", "Industry Publications", "Podcasts", "YouTube",
+    "LinkedIn", "Twitter/X", "Telegram", "Discord"
+  ];
+
+  const successMetricOptions = [
+    "Website Traffic", "Social Media Engagement", "Brand Mentions", "Lead Generation",
+    "Media Coverage", "Community Growth", "Conversion Rate", "ROI"
+  ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -89,6 +100,7 @@ const Footer = () => {
         }
       }
 
+      const selectionSummary = getSelectionSummary();
       const { error } = await supabase.functions.invoke('send-contact-email', {
         body: {
           firstName,
@@ -96,7 +108,7 @@ const Footer = () => {
           email,
           phone,
           country,
-          message: selectionSummary ? `SELECTED: ${selectionSummary}\n\n${message}` : message,
+          message: selectionSummary ? `${selectionSummary}\n\n${message}` : message,
           referrerName: referrerName || null,
           referrerCode: referrerCode || null,
         },
@@ -136,7 +148,6 @@ const Footer = () => {
       setReferrerName("");
       setReferrerCode("");
       setSubscribeToNewsletter(false);
-      setSelectionSummary("");
     } catch (error) {
       console.error("Error sending message:", error);
       toast({
@@ -151,13 +162,47 @@ const Footer = () => {
 
   return <footer className="bg-foreground text-background">
       <div className="container mx-auto px-4 py-16">
-        {/* CTA Section */}
-        
-
         {/* Contact Form */}
-        <div id="contact-form" className="bg-white/10 rounded-lg p-8 mb-16 max-w-2xl mx-auto">
+        <div id="contact-form" className="bg-white/10 rounded-lg p-8 mb-16 max-w-4xl mx-auto">
           <h3 className="text-2xl font-bold mb-6 text-center">Get In Touch</h3>
+          
+          {/* Package Selection Summary */}
+          {(selectedPackage || selectedSubscription) && (
+            <div className="mb-8 p-4 bg-primary/20 rounded-lg border border-primary/30">
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="text-lg font-semibold text-primary">Your Current Selection</h4>
+                <Badge variant="secondary">Live Preview</Badge>
+              </div>
+              <div className="grid md:grid-cols-2 gap-4 text-sm">
+                {selectedPackage && (
+                  <div>
+                    <p className="font-medium">Coverage Package:</p>
+                    <p className="text-primary">
+                      {selectedPackage.name} - {selectedPackage.name === "Custom Budget" && customBudget 
+                        ? `$${Number(customBudget).toLocaleString()}` 
+                        : selectedPackage.price}
+                    </p>
+                  </div>
+                )}
+                {selectedSubscription && (
+                  <div>
+                    <p className="font-medium">Subscription:</p>
+                    <p className="text-primary">
+                      {selectedSubscription.name} - {billingFrequency === "monthly" 
+                        ? `$${selectedSubscription.monthlyPrice}/month`
+                        : `$${selectedSubscription.annualPrice}/year`}
+                    </p>
+                  </div>
+                )}
+              </div>
+              <p className="text-xs mt-2 opacity-80">
+                You can change your selection above and this will update automatically.
+              </p>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit}>
+            {/* Basic Contact Information */}
             <div className="grid md:grid-cols-2 gap-4 mb-4">
               <Input 
                 placeholder="First Name" 
@@ -204,11 +249,202 @@ const Footer = () => {
                 </SelectContent>
               </Select>
             </div>
+
+            {/* Campaign Details Section */}
+            {(selectedPackage || selectedSubscription) && (
+              <div className="mb-6 p-4 bg-white/5 rounded-lg border border-white/20">
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="text-lg font-medium flex items-center gap-2">
+                    <Target className="h-5 w-5" />
+                    Campaign Details (Optional)
+                  </h4>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowCampaignDetails(!showCampaignDetails)}
+                    className="text-primary hover:text-primary/80"
+                  >
+                    {showCampaignDetails ? "Hide Details" : "Add Details"}
+                  </Button>
+                </div>
+                
+                {showCampaignDetails && (
+                  <div className="space-y-4">
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <Input
+                        placeholder="Project/Company Name"
+                        value={campaignData.projectName || ""}
+                        onChange={(e) => updateCampaignField('projectName', e.target.value)}
+                        className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
+                      />
+                      <Input
+                        placeholder="Website URL"
+                        value={campaignData.website || ""}
+                        onChange={(e) => updateCampaignField('website', e.target.value)}
+                        className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
+                      />
+                    </div>
+                    
+                    <textarea
+                      placeholder="Brief project description"
+                      value={campaignData.projectDescription || ""}
+                      onChange={(e) => updateCampaignField('projectDescription', e.target.value)}
+                      className="w-full p-3 rounded-md bg-white/20 border border-white/30 text-white placeholder:text-white/70 min-h-[80px] resize-none"
+                    />
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-2 text-white/90">Marketing Objectives</label>
+                        <div className="grid grid-cols-2 gap-2">
+                          {marketingObjectiveOptions.map((objective) => (
+                            <div key={objective} className="flex items-center space-x-2">
+                              <Checkbox
+                                id={`objective-${objective}`}
+                                checked={campaignData.marketingObjectives?.includes(objective) || false}
+                                onCheckedChange={(checked) => {
+                                  const current = campaignData.marketingObjectives || [];
+                                  if (checked) {
+                                    updateCampaignField('marketingObjectives', [...current, objective]);
+                                  } else {
+                                    updateCampaignField('marketingObjectives', current.filter(o => o !== objective));
+                                  }
+                                }}
+                                className="border-white/30 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                              />
+                              <label htmlFor={`objective-${objective}`} className="text-xs text-white/90">
+                                {objective}
+                              </label>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium mb-2 text-white/90">Content Needs</label>
+                        <div className="grid grid-cols-2 gap-2">
+                          {contentNeedOptions.map((content) => (
+                            <div key={content} className="flex items-center space-x-2">
+                              <Checkbox
+                                id={`content-${content}`}
+                                checked={campaignData.contentNeeds?.includes(content) || false}
+                                onCheckedChange={(checked) => {
+                                  const current = campaignData.contentNeeds || [];
+                                  if (checked) {
+                                    updateCampaignField('contentNeeds', [...current, content]);
+                                  } else {
+                                    updateCampaignField('contentNeeds', current.filter(c => c !== content));
+                                  }
+                                }}
+                                className="border-white/30 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                              />
+                              <label htmlFor={`content-${content}`} className="text-xs text-white/90">
+                                {content}
+                              </label>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-4">
+                      <Input
+                        placeholder="Target Audience"
+                        value={campaignData.targetAudience || ""}
+                        onChange={(e) => updateCampaignField('targetAudience', e.target.value)}
+                        className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
+                      />
+                      <Input
+                        placeholder="Geographic Focus"
+                        value={campaignData.geographicTarget || ""}
+                        onChange={(e) => updateCampaignField('geographicTarget', e.target.value)}
+                        className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
+                      />
+                      <Input
+                        placeholder="Campaign Duration"
+                        value={campaignData.campaignDuration || ""}
+                        onChange={(e) => updateCampaignField('campaignDuration', e.target.value)}
+                        className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
+                      />
+                    </div>
+
+                    <Input
+                      type="date"
+                      placeholder="Launch Date"
+                      value={campaignData.launchDate || ""}
+                      onChange={(e) => updateCampaignField('launchDate', e.target.value)}
+                      className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
+                    />
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2 text-white/90">Preferred Channels</label>
+                      <div className="grid grid-cols-2 gap-2">
+                        {channelOptions.map((channel) => (
+                          <div key={channel} className="flex items-center space-x-2">
+                            <Checkbox
+                              id={`channel-${channel}`}
+                              checked={campaignData.preferredChannels?.includes(channel) || false}
+                              onCheckedChange={(checked) => {
+                                const current = campaignData.preferredChannels || [];
+                                if (checked) {
+                                  updateCampaignField('preferredChannels', [...current, channel]);
+                                } else {
+                                  updateCampaignField('preferredChannels', current.filter(c => c !== channel));
+                                }
+                              }}
+                              className="border-white/30 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                            />
+                            <label htmlFor={`channel-${channel}`} className="text-xs text-white/90">
+                              {channel}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2 text-white/90">Success Metrics</label>
+                      <div className="grid grid-cols-2 gap-2">
+                        {successMetricOptions.map((metric) => (
+                          <div key={metric} className="flex items-center space-x-2">
+                            <Checkbox
+                              id={`metric-${metric}`}
+                              checked={campaignData.successMetrics?.includes(metric) || false}
+                              onCheckedChange={(checked) => {
+                                const current = campaignData.successMetrics || [];
+                                if (checked) {
+                                  updateCampaignField('successMetrics', [...current, metric]);
+                                } else {
+                                  updateCampaignField('successMetrics', current.filter(m => m !== metric));
+                                }
+                              }}
+                              className="border-white/30 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                            />
+                            <label htmlFor={`metric-${metric}`} className="text-xs text-white/90">
+                              {metric}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <textarea
+                      placeholder="Additional requirements or notes"
+                      value={campaignData.additionalRequirements || ""}
+                      onChange={(e) => updateCampaignField('additionalRequirements', e.target.value)}
+                      className="w-full p-3 rounded-md bg-white/20 border border-white/30 text-white placeholder:text-white/70 min-h-[80px] resize-none"
+                    />
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Message */}
             <textarea 
               placeholder="Message" 
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="w-full p-3 rounded-md bg-white/20 border border-white/30 text-white placeholder:text-white/70 min-h-[120px] resize-none" 
+              className="w-full p-3 rounded-md bg-white/20 border border-white/30 text-white placeholder:text-white/70 min-h-[120px] resize-none mb-4" 
               required
             />
             
@@ -253,18 +489,12 @@ const Footer = () => {
               {isLoading ? "Sending..." : "Send Message"}
             </Button>
           </form>
-          {selectionSummary && (
-            <div className="mt-4 p-3 bg-primary/20 rounded-md border border-primary/30">
-              <p className="text-sm font-medium mb-1">Your Selection Summary:</p>
-              <p className="text-xs opacity-80 whitespace-pre-line">{selectionSummary.replace(/\n\n$/, '')}</p>
-            </div>
-          )}
+          
           <div className="mt-4 text-center">
             <p className="text-sm opacity-80">
               Or reach us on Telegram: <a href="https://t.me/unitedpressmedia" className="text-primary hover:underline">@unitedpressmedia</a>
               <br />
               Or send us an Email: <a href="mailto:unitedpress.media@gmail.com" className="text-primary hover:underline">unitedpress.media@gmail.com</a>
-              {selectionSummary && <span className="block mt-1 text-xs opacity-60">You can forward your selection details to our Telegram for quick assistance.</span>}
             </p>
           </div>
         </div>
@@ -336,8 +566,6 @@ const Footer = () => {
               <li><a href="/help-center" className="hover:text-primary transition-colors">Help Center</a></li>
               <li><a href="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</a></li>
               <li><a href="/terms-of-service" className="hover:text-primary transition-colors">Terms of Service</a></li>
-              {/* <li><a href="/affiliate-signup" className="hover:text-primary transition-colors">Affiliate Program</a></li> */}
-              {/* <li><a href="/partner-dashboard" className="hover:text-primary transition-colors">Partner Login</a></li> */}
             </ul>
           </div>
         </div>

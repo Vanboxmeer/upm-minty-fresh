@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "@/components/ScrollToTop";
 import { AdminAuthProvider } from "@/contexts/AdminAuthContext";
+import { PackageSelectionProvider } from "@/contexts/PackageSelectionContext";
 import { ProtectedRoute } from "@/components/admin/ProtectedRoute";
 import Index from "./pages/Index";
 import Services from "./pages/Services";
@@ -41,8 +42,9 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AdminAuthProvider>
-          <ScrollToTop />
-          <Routes>
+          <PackageSelectionProvider>
+            <ScrollToTop />
+            <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/services" element={<Services />} />
           <Route path="/blog" element={<Blog />} />
@@ -72,7 +74,8 @@ const App = () => (
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
-          </Routes>
+            </Routes>
+          </PackageSelectionProvider>
         </AdminAuthProvider>
       </BrowserRouter>
     </TooltipProvider>
