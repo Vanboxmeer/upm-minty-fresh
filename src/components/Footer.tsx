@@ -33,7 +33,109 @@ const Footer = () => {
     campaignData,
     updateCampaignField,
     getSelectionSummary,
+    setSelectedPackage,
+    setSelectedSubscription,
+    setBillingFrequency,
+    setCustomBudget,
   } = usePackageSelection();
+
+  // Coverage packages data
+  const coveragePackages = [
+    {
+      name: "Growth",
+      price: "$5,000",
+      description: "Perfect for emerging projects looking to establish market presence. Use your budget for things such as:",
+      features: [
+        "Press release distribution to key outlets",
+        "Collaborations with micro-influencers",
+        "Feature placements in industry publications",
+        "Social media amplification",
+        "Web3 directory listing services"
+      ],
+      popular: false
+    },
+    {
+      name: "Scale",
+      price: "$25,000",
+      description: "Comprehensive marketing for projects ready to scale significantly. Use your budget for things such as:",
+      features: [
+        "Global press release distribution",
+        "Partnerships with a top-tier influencer",
+        "Collaborations with multiple micro-influencers",
+        "Executive interviews and features in major publications",
+        "Feature articles in leading industry sites",
+        "Web3 directory listing services"
+      ],
+      popular: true
+    },
+    {
+      name: "Dominate",
+      price: "$100,000",
+      description: "Maximum exposure package for industry-leading projects. Use your budget for things such as:",
+      features: [
+        "Global media outreach to 500+ outlets",
+        "Collaborations with multiple top-tier influencers",
+        "Collaborations with small and medium sized content creators",
+        "Coverage in multiple tier-1 media publications",
+        "Budget gives room for a longer campaign or larger media blitz",
+        "Web3 directory listing services"
+      ],
+      popular: false
+    },
+    {
+      name: "Custom Budget",
+      price: "Custom",
+      description: "Your account manager will work with you to shortlist mixed media options that utilize your full budget. Use your budget for things such as:",
+      features: [
+        "Account manager shortlists options to use your full budget ($5K - $500K)",
+        "Mixed media package combining press releases & influencer collaborations",
+        "Scalable media outreach matching your investment",
+        "Custom KOL selection and content creation",
+        "Web3 directory listing services"
+      ],
+      popular: false
+    }
+  ];
+
+  // Subscription plans data
+  const subscriptionPlans = [
+    {
+      name: "On Demand",
+      subtitle: "(non member)",
+      price: "Free",
+      monthlyPrice: 0,
+      annualPrice: 0,
+      description: "Perfect for testing our services before committing to membership",
+      features: ["Discovery media deck", "Campaign builder form", "Quote builder and shortlisting assistance", "Order facilitation"],
+      excludedFeatures: ["KPI tracking", "Dedicated account manager and campaign advisor", "Managed Brave Ads and Telegram Ads", "Press negotiations", "Membership pricing"],
+      popular: false,
+      hasBilling: false
+    },
+    {
+      name: "Silver Membership",
+      subtitle: "3.45% service fee",
+      price: "$250",
+      monthlyPrice: 250,
+      annualPrice: 2500, // 10 months pricing
+      description: "Designed for medium sized campaigns with reduced service fees",
+      features: ["Members media deck", "Campaign builder", "Order facilitation", "Quote builder and shortlist assistance", "KPI tracking", "Dedicated account manager and campaign advisor", "Managed Brave Ads and Telegram Ads", "KOL communications", "Press negotiations", "Silver members pricing - service fees reduced to just 3.45%"],
+      excludedFeatures: [],
+      popular: true,
+      hasBilling: true
+    },
+    {
+      name: "Gold Membership",
+      subtitle: "1% service fee",
+      price: "$995",
+      monthlyPrice: 995,
+      annualPrice: 9950, // 10 months pricing
+      description: "Designed for large and highly active marketing campaigns requiring administrative work",
+      features: ["Members media deck", "Campaign builder", "Order facilitation", "Quote builder and shortlist assistance", "KPI tracking", "Dedicated account manager and campaign advisor", "Managed Brave Ads and Telegram Ads", "KOL communications", "Press negotiations", "Gold members pricing - service fees reduced to just 1%"],
+      excludedFeatures: [],
+      popular: false,
+      hasBilling: true
+    }
+  ];
 
   // Countries that BVI can do business with (excluding sanctioned countries)
   const allowedCountries = [
@@ -199,39 +301,94 @@ const Footer = () => {
           <h3 className="text-2xl font-bold mb-6 text-center">Get In Touch</h3>
           
           {/* Package Selection Summary */}
-          {(selectedPackage || selectedSubscription) && (
-            <div className="mb-8 p-4 bg-primary/20 rounded-lg border border-primary/30">
-              <div className="flex items-center justify-between mb-3">
-                <h4 className="text-lg font-semibold text-primary">Your Current Selection</h4>
-                <Badge variant="secondary">Live Preview</Badge>
-              </div>
-              <div className="grid md:grid-cols-2 gap-4 text-sm">
-                {selectedPackage && (
-                  <div>
-                    <p className="font-medium">Coverage Package:</p>
-                    <p className="text-primary">
-                      {selectedPackage.name} - {selectedPackage.name === "Custom Budget" && customBudget 
-                        ? `$${Number(customBudget).toLocaleString()}` 
-                        : selectedPackage.price}
-                    </p>
-                  </div>
-                )}
-                {selectedSubscription && (
-                  <div>
-                    <p className="font-medium">Subscription:</p>
-                    <p className="text-primary">
-                      {selectedSubscription.name} - {billingFrequency === "monthly" 
-                        ? `$${selectedSubscription.monthlyPrice}/month`
-                        : `$${selectedSubscription.annualPrice}/year`}
-                    </p>
-                  </div>
-                )}
-              </div>
-              <p className="text-xs mt-2 opacity-80">
-                You can change your selection above and this will update automatically.
-              </p>
+          <div className="mb-8 p-4 bg-primary/20 rounded-lg border border-primary/30">
+            <div className="flex items-center justify-between mb-3">
+              <h4 className="text-lg font-semibold text-primary">Your Package Selection</h4>
+              <Badge variant="secondary">Live Preview</Badge>
             </div>
-          )}
+            
+            <div className="grid md:grid-cols-2 gap-4">
+              {/* Coverage Package Selector */}
+              <div>
+                <label className="block text-sm font-medium mb-2 text-white">Coverage Package:</label>
+                <Select 
+                  value={selectedPackage?.name || ""} 
+                  onValueChange={(value) => {
+                    const pkg = coveragePackages.find(p => p.name === value);
+                    if (pkg) setSelectedPackage(pkg);
+                  }}
+                >
+                  <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                    <SelectValue placeholder="Select coverage package" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border border-gray-200 max-h-64 z-50">
+                    {coveragePackages.map((pkg) => (
+                      <SelectItem key={pkg.name} value={pkg.name} className="text-gray-900 hover:bg-gray-100">
+                        {pkg.name} - {pkg.price}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {selectedPackage?.name === "Custom Budget" && (
+                  <Input
+                    type="number"
+                    placeholder="Enter budget ($5,000 - $500,000)"
+                    value={customBudget}
+                    onChange={(e) => setCustomBudget(e.target.value)}
+                    min="5000"
+                    max="500000"
+                    className="mt-2 bg-white/20 border-white/30 text-white placeholder:text-white/70"
+                  />
+                )}
+              </div>
+
+              {/* Subscription Selector */}
+              <div>
+                <label className="block text-sm font-medium mb-2 text-white">Subscription Level:</label>
+                <Select 
+                  value={selectedSubscription?.name || ""} 
+                  onValueChange={(value) => {
+                    const sub = subscriptionPlans.find(s => s.name === value);
+                    if (sub) setSelectedSubscription(sub);
+                  }}
+                >
+                  <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                    <SelectValue placeholder="Select subscription level" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border border-gray-200 max-h-64 z-50">
+                    {subscriptionPlans.map((plan) => (
+                      <SelectItem key={plan.name} value={plan.name} className="text-gray-900 hover:bg-gray-100">
+                        {plan.name} - {plan.price}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                
+                {/* Billing Frequency for Paid Plans */}
+                {selectedSubscription && selectedSubscription.hasBilling && (
+                  <div className="mt-2">
+                    <Select value={billingFrequency} onValueChange={setBillingFrequency}>
+                      <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white border border-gray-200 z-50">
+                        <SelectItem value="monthly" className="text-gray-900 hover:bg-gray-100">
+                          Monthly - ${selectedSubscription.monthlyPrice}/month
+                        </SelectItem>
+                        <SelectItem value="annual" className="text-gray-900 hover:bg-gray-100">
+                          Annual - ${selectedSubscription.annualPrice}/year (Save ${(selectedSubscription.monthlyPrice * 12) - selectedSubscription.annualPrice})
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            <p className="text-xs mt-3 opacity-80">
+              Select your preferred package and subscription level from the dropdowns above.
+            </p>
+          </div>
 
           <form onSubmit={handleSubmit}>
             {/* Basic Contact Information */}
