@@ -165,10 +165,6 @@ const Footer = () => {
     "LinkedIn", "Twitter/X", "Telegram", "Discord"
   ];
 
-  const successMetricOptions = [
-    "Website Traffic", "Social Media Engagement", "Brand Mentions", "Lead Generation",
-    "Media Coverage", "Community Growth", "Conversion Rate", "ROI"
-  ];
 
   const targetAudienceOptions = [
     "Crypto Investors", "DeFi Users", "NFT Collectors", "GameFi Players", 
@@ -599,31 +595,6 @@ const Footer = () => {
                       </div>
                     </div>
 
-                    <div>
-                      <label className="block text-sm font-medium mb-2 text-white/90">Success Metrics</label>
-                      <div className="grid grid-cols-2 gap-2">
-                        {successMetricOptions.map((metric) => (
-                          <div key={metric} className="flex items-center space-x-2">
-                            <Checkbox
-                              id={`metric-${metric}`}
-                              checked={campaignData.successMetrics?.includes(metric) || false}
-                              onCheckedChange={(checked) => {
-                                const current = campaignData.successMetrics || [];
-                                if (checked) {
-                                  updateCampaignField('successMetrics', [...current, metric]);
-                                } else {
-                                  updateCampaignField('successMetrics', current.filter(m => m !== metric));
-                                }
-                              }}
-                              className="border-white/30 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
-                            />
-                            <label htmlFor={`metric-${metric}`} className="text-xs text-white/90">
-                              {metric}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
 
                   </div>
                 )}
