@@ -283,51 +283,6 @@ const PackageSelector = () => {
             ))}
           </div>
         </div>
-
-        {/* Billing Frequency for Paid Plans */}
-        {selectedSubscription && selectedSubscription.hasBilling && (
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold text-center mb-8">Step 3: Choose Billing Frequency</h3>
-            <div className="max-w-md mx-auto">
-              <Tabs value={billingFrequency} onValueChange={setBillingFrequency}>
-                <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="monthly">Monthly</TabsTrigger>
-                  <TabsTrigger value="annual">Annual</TabsTrigger>
-                </TabsList>
-                
-                <TabsContent value="monthly" className="mt-4">
-                  <Card className="p-4 text-center">
-                    <h4 className="font-semibold">Monthly Billing</h4>
-                    <div className="text-2xl font-bold text-primary">
-                      {formatPrice(`$${selectedSubscription.monthlyPrice}`)}/month
-                    </div>
-                  </Card>
-                </TabsContent>
-                
-                <TabsContent value="annual" className="mt-4">
-                  <Card className="p-4 text-center">
-                    <h4 className="font-semibold">Annual Billing</h4>
-                    <div className="text-2xl font-bold text-primary">
-                      {formatPrice(`$${selectedSubscription.annualPrice}`)}/year
-                    </div>
-                    <div className="text-sm text-green-600 font-medium">
-                      Save {formatPrice(`$${(selectedSubscription.monthlyPrice * 12) - selectedSubscription.annualPrice}`)} per year
-                    </div>
-                  </Card>
-                </TabsContent>
-              </Tabs>
-            </div>
-          </div>
-        )}
-
-        {/* Scroll prompt */}
-        {selectedPackage && selectedSubscription && (
-          <div className="text-center">
-            <div className="inline-flex items-center gap-2 text-primary animate-bounce">
-              <span className="text-lg font-medium">📝 Scroll down to fill out your details and add campaign information</span>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
