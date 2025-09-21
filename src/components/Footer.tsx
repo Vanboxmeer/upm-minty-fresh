@@ -295,7 +295,7 @@ const Footer = () => {
                     variant="ghost"
                     size="sm"
                     onClick={() => setShowCampaignDetails(!showCampaignDetails)}
-                    className="text-primary hover:text-primary/80"
+                    className="text-white hover:text-white hover:bg-white/10 border border-white/20"
                   >
                     {showCampaignDetails ? "Hide Details" : "Add Details"}
                   </Button>
@@ -509,12 +509,6 @@ const Footer = () => {
                       </div>
                     </div>
 
-                    <textarea
-                      placeholder="Additional requirements or notes"
-                      value={campaignData.additionalRequirements || ""}
-                      onChange={(e) => updateCampaignField('additionalRequirements', e.target.value)}
-                      className="w-full p-3 rounded-md bg-white/20 border border-white/30 text-white placeholder:text-white/70 min-h-[80px] resize-none"
-                    />
                   </div>
                 )}
               </div>
