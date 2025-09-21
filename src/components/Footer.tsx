@@ -16,6 +16,7 @@ const Footer = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [telegram, setTelegram] = useState("");
   const [country, setCountry] = useState("");
   const [message, setMessage] = useState("");
   const [referrerName, setReferrerName] = useState("");
@@ -238,6 +239,7 @@ const Footer = () => {
           lastName,
           email,
           phone,
+          telegram,
           country,
           message: selectionSummary ? `${selectionSummary}\n\n${message}` : message,
           referrerName: referrerName || null,
@@ -274,6 +276,7 @@ const Footer = () => {
       setLastName("");
       setEmail("");
       setPhone("");
+      setTelegram("");
       setCountry("");
       setMessage("");
       setReferrerName("");
@@ -635,6 +638,14 @@ const Footer = () => {
                 placeholder="Phone" 
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
+                className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
+              />
+            </div>
+            <div className="mb-4">
+              <Input 
+                placeholder="Telegram - @handle" 
+                value={telegram}
+                onChange={(e) => setTelegram(e.target.value)}
                 className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
               />
             </div>
