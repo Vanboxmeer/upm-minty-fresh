@@ -15,6 +15,14 @@ const PackageSelector = () => {
   const [customBudget, setCustomBudget] = useState<string>("");
   const [showCampaignForm, setShowCampaignForm] = useState<boolean>(false);
   const [campaignDetails, setCampaignDetails] = useState<CampaignFormData | null>(null);
+
+  // Auto-trigger campaign form when both selections are made
+  useEffect(() => {
+    if (selectedPackage && selectedSubscription) {
+      setShowCampaignForm(true);
+    }
+  }, [selectedPackage, selectedSubscription]);
+
   const formatPrice = (usdPrice: string) => {
     return usdPrice;
   };
@@ -114,14 +122,6 @@ const PackageSelector = () => {
       hasBilling: true
     }
   ];
-
-  const handleProceed = () => {
-    if (!selectedPackage || !selectedSubscription) {
-      return;
-    }
-    
-    setShowCampaignForm(true);
-  };
 
   const handleCampaignFormSubmit = (formData: CampaignFormData) => {
     setCampaignDetails(formData);
@@ -264,7 +264,7 @@ const PackageSelector = () => {
               </Card>
             ))}
           </div>
-        </div>
+        </div> 
 
         {/* Subscription Level Selection */}
         <div className="mb-16">
@@ -361,7 +361,7 @@ const PackageSelector = () => {
                       {formatPrice(`$${subscriptionPlans.find(p => p.name === selectedSubscription)?.annualPrice}`)}/year
                     </div>
                     <div className="text-sm text-green-600 font-medium">
-                      Save {formatPrice(`$${((subscriptionPlans.find(p => p.name === selectedSubscription)?.monthlyPrice || 0) * 12) - (subscriptionPlans.find(p => p.name === selectedSubscription)?.annualPrice || 0)}`)}
+                      Save {formatPrice(`$${(subscriptionPlans.find(p => p.name === selectedSubscription)?.monthlyPrice || 0) * 12 - (subscriptionPlans.find(p => p.name === selectedSubscription)?.annualPrice || 0)}`)} per year
                     </div>
                   </Card>
                 </TabsContent>
@@ -369,52 +369,9 @@ const PackageSelector = () => {
             </div>
           </div>
         )}
-
-        {/* Selection Summary and Proceed */}
-        {selectedPackage && selectedSubscription && (
-          <div className="max-w-2xl mx-auto animate-fade-in">
-            <Card className="p-6 bg-gradient-to-br from-primary/5 to-primary/10 border-primary shadow-lg hover:shadow-xl transition-all duration-300">
-              <h3 className="text-xl font-bold mb-4 text-center text-shimmer">Your Selection Summary</h3>
-              <div className="space-y-2 mb-6">
-                <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
-                  <span>Coverage Package:</span>
-                  <span className="font-semibold">
-                    {selectedPackage} - {selectedPackage === "Custom Budget" && customBudget 
-                      ? `$${Number(customBudget).toLocaleString()}` 
-                      : formatPrice(coveragePackages.find(p => p.name === selectedPackage)?.price || "")}
-                  </span>
-                </div>
-                <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
-                  <span>Subscription Level:</span>
-                  <span className="font-semibold">{selectedSubscription}</span>
-                </div>
-                {subscriptionPlans.find(p => p.name === selectedSubscription)?.hasBilling && (
-                  <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
-                    <span>Billing:</span>
-                    <span className="font-semibold capitalize">
-                      {billingFrequency} - {formatPrice(`$${billingFrequency === "monthly" 
-                        ? subscriptionPlans.find(p => p.name === selectedSubscription)?.monthlyPrice
-                        : subscriptionPlans.find(p => p.name === selectedSubscription)?.annualPrice
-                      }`)}
-                    </span>
-                  </div>
-                )}
-              </div>
-              
-              <Button 
-                variant="hero" 
-                size="lg" 
-                className="w-full pulse-glow"
-                onClick={handleProceed}
-              >
-                Add details to contact form
-              </Button>
-            </Card>
           </div>
-        )}
-      </div>
-    </div>
-    )}
+        </div>
+      )}
     </>
   );
 };
