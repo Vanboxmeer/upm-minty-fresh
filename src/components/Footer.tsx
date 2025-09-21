@@ -304,7 +304,6 @@ const Footer = () => {
           <div className="mb-8 p-4 bg-primary/20 rounded-lg border border-primary/30">
             <div className="flex items-center justify-between mb-3">
               <h4 className="text-lg font-semibold text-primary">Your Package Selection</h4>
-              <Badge variant="secondary">Live Preview</Badge>
             </div>
             
             <div className="grid md:grid-cols-2 gap-4">
@@ -400,10 +399,13 @@ const Footer = () => {
             {(selectedPackage || selectedSubscription) && (
               <div className="mt-6 p-4 bg-white/5 rounded-lg border border-white/20">
                 <div className="flex items-center justify-between mb-4">
-                  <h4 className="text-lg font-medium flex items-center gap-2">
-                    <Target className="h-5 w-5" />
-                    Campaign Details (Optional)
-                  </h4>
+                  <div>
+                    <h4 className="text-lg font-medium flex items-center gap-2">
+                      <Target className="h-5 w-5" />
+                      Campaign Details (Optional)
+                    </h4>
+                    <p className="text-sm text-white/70 mt-1">Share more details about the campaign you're looking to run</p>
+                  </div>
                   <Button
                     type="button"
                     variant="ghost"
@@ -628,9 +630,6 @@ const Footer = () => {
               </div>
             )}
             
-            <p className="text-xs mt-3 opacity-80">
-              Select your preferred package and subscription level from the dropdowns above.
-            </p>
           </div>
 
           <form onSubmit={handleSubmit}>
