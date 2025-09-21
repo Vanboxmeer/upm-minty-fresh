@@ -58,12 +58,6 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				// Retro color palette
-				'neon-green': 'hsl(var(--neon-green))',
-				'neon-blue': 'hsl(var(--neon-blue))',
-				'electric-yellow': 'hsl(var(--electric-yellow))',
-				'hot-pink': 'hsl(var(--hot-pink))',
-				'cyber-purple': 'hsl(var(--cyber-purple))',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -115,10 +109,7 @@ export default {
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'logo-fill': 'logo-fill 1.2s ease-out',
-				'shimmer': 'shimmer 3s ease-in-out infinite',
-				'neon-flicker': 'neon-flicker 2s infinite alternate',
-				'border-glow': 'border-glow 3s ease-in-out infinite alternate'
+				'logo-fill': 'logo-fill 1.2s ease-out'
 			}
 		}
 	},
