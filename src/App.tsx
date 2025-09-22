@@ -9,6 +9,7 @@ import { PackageSelectionProvider } from "@/contexts/PackageSelectionContext";
 import { ProtectedRoute } from "@/components/admin/ProtectedRoute";
 import Index from "./pages/Index";
 import Services from "./pages/Services";
+import Creators from "./pages/Creators";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import CaseStudies from "./pages/CaseStudies";
@@ -47,6 +48,7 @@ const App = () => (
             <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/creators" element={<Creators />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/case-studies" element={<CaseStudies />} />
