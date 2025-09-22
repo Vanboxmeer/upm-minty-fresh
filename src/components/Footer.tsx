@@ -642,32 +642,6 @@ const Footer = () => {
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium mb-2 text-white/90">Preferred Coverage Types</label>
-                      <div className="grid grid-cols-2 gap-2">
-                        {['Press Release', 'Media Features', 'Social Media Posts', 'Video Content', 'Blog Articles', 'Sponsored Content', 'Product Reviews', 'Event Coverage'].map((type) => (
-                          <div key={type} className="flex items-center space-x-2">
-                            <Checkbox
-                              id={`coverage-${type}`}
-                              checked={creatorData.preferredCoverageTypes?.includes(type) || false}
-                              onCheckedChange={(checked) => {
-                                const current = creatorData.preferredCoverageTypes || [];
-                                if (checked) {
-                                  updateCreatorField('preferredCoverageTypes', [...current, type]);
-                                } else {
-                                  updateCreatorField('preferredCoverageTypes', current.filter(t => t !== type));
-                                }
-                              }}
-                              className="border-white/30 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
-                            />
-                            <label htmlFor={`coverage-${type}`} className="text-xs text-white/90">
-                              {type}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <div>
                       <label className="block text-sm font-medium mb-2 text-white/90">What are you interested in?</label>
                       <div className="grid grid-cols-2 gap-2">
                         {['Web3 Quest Development', 'KOL Collaborations', 'Brand Sponsorships', 'Coverage Requests', 'Web3 Directory Listings', 'Community Building', 'Content Partnerships', 'Media Placements'].map((interest) => (
