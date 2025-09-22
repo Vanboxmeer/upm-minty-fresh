@@ -1,5 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { useState } from "react";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,7 +46,27 @@ const Header = () => {
         <div className="hidden md:flex items-center space-x-8">
           <nav className="flex items-center space-x-8">
             <a href="/" className="text-foreground hover:text-primary transition-colors">Home</a>
-            <a href="/services" className="text-foreground hover:text-primary transition-colors">Services</a>
+            
+            {/* Services Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1 text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer">
+                Services
+                <ChevronDown className="h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="min-w-[160px]">
+                <DropdownMenuItem asChild>
+                  <a href="/services" className="w-full cursor-pointer">
+                    Brands
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <a href="/creators" className="w-full cursor-pointer">
+                    Creators
+                  </a>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            
             <button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer">Contact</button>
             <a href="/blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
           </nav>
@@ -64,7 +90,16 @@ const Header = () => {
       {isMenuOpen && <div className="md:hidden bg-background border-t border-border">
           <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
             <a href="/" className="text-foreground hover:text-primary transition-colors">Home</a>
-            <a href="/services" className="text-foreground hover:text-primary transition-colors">Services</a>
+            
+            {/* Mobile Services Menu */}
+            <div className="flex flex-col space-y-2">
+              <span className="text-foreground font-medium">Services</span>
+              <div className="pl-4 space-y-2">
+                <a href="/services" className="text-foreground hover:text-primary transition-colors block">Brands</a>
+                <a href="/creators" className="text-foreground hover:text-primary transition-colors block">Creators</a>
+              </div>
+            </div>
+            
             <button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer text-left">Contact</button>
             <a href="/blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
             <div className="flex flex-col space-y-2 pt-4 border-t border-border">
