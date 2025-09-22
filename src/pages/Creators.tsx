@@ -24,35 +24,32 @@ const CreatorsPage = () => {
       
       {/* Hero Section */}
       <section className="relative py-24 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${creatorsHeroBg})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/85 to-background/95" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-secondary/10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-dark via-primary to-primary-electric opacity-90" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,hsl(var(--primary-neon))_0%,transparent_50%)] opacity-30"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,hsl(var(--primary-electric))_0%,transparent_50%)] opacity-30"></div>
         
         <div className="container mx-auto px-4 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 bg-primary/10 backdrop-blur-sm border border-primary/30 rounded-full px-6 py-3 mb-8">
-            <Sparkles className="h-5 w-5 text-primary" />
-            <span className="text-sm font-semibold text-foreground">Exclusive Creator Network</span>
+          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8">
+            <Sparkles className="h-5 w-5 text-white" />
+            <span className="text-sm font-semibold text-white">Creator Network</span>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
-            Unlock Your{" "}
-            <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-              Creator Potential
+          <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight text-white">
+            Services for{" "}
+            <span className="bg-gradient-to-r from-white via-primary-glow to-white bg-clip-text text-transparent">
+              Creators & Publishers
             </span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-4xl mx-auto mb-10 leading-relaxed">
-            Join an elite network where premium brands actively seek creators like you. 
-            The higher your commitment, the more exclusive opportunities we unlock for your growth.
+          <p className="text-xl text-white/90 max-w-4xl mx-auto mb-10 leading-relaxed">
+            We help creators and publishers grow their audience through quest services, collaboration opportunities, 
+            sponsorships, and coverage requests.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-10">
             <Button 
-              variant="cta" 
+              variant="secondary" 
               size="lg" 
-              className="text-lg px-8 py-4"
+              className="text-lg px-8 py-4 bg-white text-primary hover:bg-white/90"
               onClick={() => {
                 const pricingSection = document.querySelector('#creator-pricing');
                 if (pricingSection) {
@@ -64,22 +61,22 @@ const CreatorsPage = () => {
                 }
               }}
             >
-              Explore Premium Tiers
+              View Pricing Plans
             </Button>
             <Button 
               variant="outline" 
               size="lg" 
-              className="text-lg px-8 py-4 border-2"
+              className="text-lg px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-primary"
               onClick={() => {
                 window.open('/affiliate-signup', '_blank');
               }}
             >
-              Start Free - Join Referral Network
+              Join Referral Program
             </Button>
           </div>
           
-          <p className="text-sm text-muted-foreground/80">
-            ✨ Zero commitment entry • Premium partnerships • Revenue sharing available
+          <p className="text-sm text-white/70">
+            ✨ Start free with our referral program • Earn revenue share • Get promoted to clients
           </p>
         </div>
       </section>
@@ -89,154 +86,69 @@ const CreatorsPage = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-              Exclusive Creator <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Advantages</span>
+              Our <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Services</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Access premium brand partnerships and unlock revenue streams that scale with your influence and commitment.
+              We help creators and publishers grow through strategic partnerships and promotional opportunities.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 mb-20">
-            <Card className="group p-8 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 border-primary/20 bg-gradient-to-br from-card via-card/95 to-primary/5 hover:scale-105">
-              <CardHeader className="pb-6">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="p-4 bg-gradient-to-br from-primary/20 to-primary-glow/30 rounded-2xl group-hover:scale-110 transition-transform duration-300">
-                    <Users className="h-8 w-8 text-primary" />
-                  </div>
-                  <CardTitle className="text-xl font-bold text-foreground">Premium Brand Access</CardTitle>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <Card className="group p-6 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 border-primary/20 bg-gradient-to-br from-card via-card/95 to-primary/5 hover:scale-105">
+              <CardHeader className="pb-4">
+                <div className="p-4 bg-gradient-to-br from-primary/20 to-primary-glow/30 rounded-2xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <Zap className="h-8 w-8 text-primary" />
                 </div>
+                <CardTitle className="text-xl font-bold text-foreground">Quest Services</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground mb-6 text-base leading-relaxed">
-                  Get fast-tracked to exclusive brand partnerships that others can't access. Higher tiers unlock premium clients.
+                <p className="text-muted-foreground text-base leading-relaxed">
+                  Web3 quest integration and community engagement solutions for creators and brands.
                 </p>
-                <ul className="space-y-4">
-                  <li className="flex items-center gap-3 group-hover:translate-x-2 transition-transform duration-300">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
-                    <span className="font-medium text-foreground">Priority brand matching</span>
-                  </li>
-                  <li className="flex items-center gap-3 group-hover:translate-x-2 transition-transform duration-300 delay-75">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
-                    <span className="font-medium text-foreground">Exclusive campaign invitations</span>
-                  </li>
-                  <li className="flex items-center gap-3 group-hover:translate-x-2 transition-transform duration-300 delay-150">
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
-                    <span className="font-medium text-foreground">Higher-paying opportunities</span>
-                  </li>
-                </ul>
               </CardContent>
             </Card>
 
-            <Card className="group p-8 hover:shadow-2xl hover:shadow-secondary/10 transition-all duration-500 border-secondary/20 bg-gradient-to-br from-card via-card/95 to-secondary/5 hover:scale-105">
-              <CardHeader className="pb-6">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="p-4 bg-gradient-to-br from-secondary/20 to-secondary-glow/30 rounded-2xl group-hover:scale-110 transition-transform duration-300">
-                    <Newspaper className="h-8 w-8 text-secondary" />
-                  </div>
-                  <CardTitle className="text-xl font-bold text-foreground">Media Amplification</CardTitle>
+            <Card className="group p-6 hover:shadow-2xl hover:shadow-secondary/10 transition-all duration-500 border-secondary/20 bg-gradient-to-br from-card via-card/95 to-secondary/5 hover:scale-105">
+              <CardHeader className="pb-4">
+                <div className="p-4 bg-gradient-to-br from-secondary/20 to-secondary-glow/30 rounded-2xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <Users className="h-8 w-8 text-secondary" />
                 </div>
+                <CardTitle className="text-xl font-bold text-foreground">Collaboration Opportunities</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground mb-6 text-base leading-relaxed">
-                  Expand your reach through our premium publication network and strategic directory placements.
+                <p className="text-muted-foreground text-base leading-relaxed">
+                  Connect with brands and other creators for strategic partnerships and joint ventures.
                 </p>
-                <ul className="space-y-4">
-                  <li className="flex items-center gap-3 group-hover:translate-x-2 transition-transform duration-300">
-                    <CheckCircle className="h-5 w-5 text-secondary flex-shrink-0" />
-                    <span className="font-medium text-foreground">Web3 directory features</span>
-                  </li>
-                  <li className="flex items-center gap-3 group-hover:translate-x-2 transition-transform duration-300 delay-75">
-                    <CheckCircle className="h-5 w-5 text-secondary flex-shrink-0" />
-                    <span className="font-medium text-foreground">Cross-platform syndication</span>
-                  </li>
-                  <li className="flex items-center gap-3 group-hover:translate-x-2 transition-transform duration-300 delay-150">
-                    <CheckCircle className="h-5 w-5 text-secondary flex-shrink-0" />
-                    <span className="font-medium text-foreground">Strategic content placement</span>
-                  </li>
-                </ul>
               </CardContent>
             </Card>
 
-            <Card className="group p-8 hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 border-accent/20 bg-gradient-to-br from-card via-card/95 to-accent/5 hover:scale-105">
-              <CardHeader className="pb-6">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="p-4 bg-gradient-to-br from-accent/20 to-accent-glow/30 rounded-2xl group-hover:scale-110 transition-transform duration-300">
-                    <Target className="h-8 w-8 text-accent" />
-                  </div>
-                  <CardTitle className="text-xl font-bold text-foreground">Revenue Optimization</CardTitle>
+            <Card className="group p-6 hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 border-accent/20 bg-gradient-to-br from-card via-card/95 to-accent/5 hover:scale-105">
+              <CardHeader className="pb-4">
+                <div className="p-4 bg-gradient-to-br from-accent/20 to-accent-glow/30 rounded-2xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <Crown className="h-8 w-8 text-accent" />
                 </div>
+                <CardTitle className="text-xl font-bold text-foreground">Sponsorships</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground mb-6 text-base leading-relaxed">
-                  Multiple revenue streams and strategic partnerships that grow with your subscription tier.
+                <p className="text-muted-foreground text-base leading-relaxed">
+                  Get matched with relevant brands looking for creators in your niche and audience size.
                 </p>
-                <ul className="space-y-4">
-                  <li className="flex items-center gap-3 group-hover:translate-x-2 transition-transform duration-300">
-                    <CheckCircle className="h-5 w-5 text-accent flex-shrink-0" />
-                    <span className="font-medium text-foreground">Strategic collaborations</span>
-                  </li>
-                  <li className="flex items-center gap-3 group-hover:translate-x-2 transition-transform duration-300 delay-75">
-                    <CheckCircle className="h-5 w-5 text-accent flex-shrink-0" />
-                    <span className="font-medium text-foreground">Commission opportunities</span>
-                  </li>
-                  <li className="flex items-center gap-3 group-hover:translate-x-2 transition-transform duration-300 delay-150">
-                    <CheckCircle className="h-5 w-5 text-accent flex-shrink-0" />
-                    <span className="font-medium text-foreground">Referral program benefits</span>
-                  </li>
-                </ul>
               </CardContent>
             </Card>
-          </div>
 
-          {/* Web3 Quests Feature */}
-          <div className="relative bg-gradient-to-br from-card via-primary/10 to-secondary/10 backdrop-blur-sm rounded-3xl p-12 border border-primary/30 overflow-hidden">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,hsl(var(--primary))_0%,transparent_50%)] opacity-20"></div>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,hsl(var(--secondary))_0%,transparent_50%)] opacity-20"></div>
-            
-            <div className="grid md:grid-cols-2 gap-12 items-center relative z-10">
-              <div>
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="p-4 bg-gradient-to-br from-primary/30 to-secondary/30 rounded-2xl">
-                    <Zap className="h-10 w-10 text-primary" />
-                  </div>
-                  <h3 className="text-3xl font-bold text-foreground">
-                    Web3 Quest Integration
-                  </h3>
+            <Card className="group p-6 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 border-primary/20 bg-gradient-to-br from-card via-card/95 to-primary/5 hover:scale-105">
+              <CardHeader className="pb-4">
+                <div className="p-4 bg-gradient-to-br from-primary/20 to-primary-glow/30 rounded-2xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <Newspaper className="h-8 w-8 text-primary" />
                 </div>
-                <p className="text-muted-foreground mb-8 text-lg leading-relaxed">
-                  Transform your community engagement with cutting-edge Web3 quests. We connect your quests 
-                  with premium brands and include them in our exclusive recommendation engine.
+                <CardTitle className="text-xl font-bold text-foreground">Coverage Requests</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground text-base leading-relaxed">
+                  Media placement and press coverage to amplify your brand and reach new audiences.
                 </p>
-                <ul className="space-y-5">
-                  <li className="flex items-center gap-4 hover:translate-x-3 transition-transform duration-300">
-                    <CheckCircle className="h-6 w-6 text-primary flex-shrink-0" />
-                    <span className="font-semibold text-foreground text-lg">Featured in brand directories</span>
-                  </li>
-                  <li className="flex items-center gap-4 hover:translate-x-3 transition-transform duration-300 delay-75">
-                    <CheckCircle className="h-6 w-6 text-primary flex-shrink-0" />
-                    <span className="font-semibold text-foreground text-lg">Priority client recommendations</span>
-                  </li>
-                  <li className="flex items-center gap-4 hover:translate-x-3 transition-transform duration-300 delay-150">
-                    <CheckCircle className="h-6 w-6 text-primary flex-shrink-0" />
-                    <span className="font-semibold text-foreground text-lg">Premium tier advantages</span>
-                  </li>
-                </ul>
-              </div>
-              <div className="text-center">
-                <div className="relative inline-flex items-center justify-center w-48 h-48 mb-8">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-accent rounded-full opacity-30 animate-pulse"></div>
-                  <div className="absolute inset-4 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center shadow-2xl">
-                    <Mic className="h-24 w-24 text-white drop-shadow-xl" />
-                  </div>
-                </div>
-                <h4 className="text-2xl font-bold mb-4 text-foreground">
-                  Ready to Level Up?
-                </h4>
-                <p className="text-muted-foreground text-lg">
-                  Join the elite creator network today
-                </p>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -297,11 +209,10 @@ const CreatorsPage = () => {
       <section className="py-24 bg-gradient-to-r from-background via-primary/5 to-secondary/10">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-8 text-foreground">
-            Ready to Join the <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Elite Network</span>?
+            Ready to Get <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Started</span>?
           </h2>
           <p className="text-xl text-muted-foreground max-w-4xl mx-auto mb-12 leading-relaxed">
-            Join thousands of successful creators who've accelerated their growth through our premium network. 
-            Your next breakthrough collaboration is waiting.
+            Join our creator network and start getting connected with brands looking for creators like you.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Button 
@@ -319,7 +230,7 @@ const CreatorsPage = () => {
                 }
               }}
             >
-              Start Your Journey Today
+              Get Started Today
             </Button>
             <Button 
               variant="outline" 
@@ -336,11 +247,11 @@ const CreatorsPage = () => {
                 }
               }}
             >
-              Compare Plans
+              View Pricing
             </Button>
           </div>
           <p className="text-sm text-muted-foreground/80 mt-6">
-            🚀 Premium partnerships await • Exclusive opportunities • Proven results
+            🚀 Start with our free referral program • Earn revenue share • Get promoted to clients
           </p>
         </div>
       </section>

@@ -12,19 +12,8 @@ const creatorPlans = [
     monthlyPrice: 45,
     annualPrice: 450,
     description: "Essential services to launch your creator career",
-    features: [
-      "Access to sponsor network",
-      "Basic media placements",
-      "Content syndication support",
-      "Monthly strategy calls",
-      "Discord community access",
-      "Basic analytics dashboard"
-    ],
-    excludedFeatures: [
-      "Priority placement",
-      "Dedicated account manager",
-      "Custom quest development"
-    ],
+    features: [],
+    excludedFeatures: [],
     popular: false,
     hasBilling: true,
     icon: Users,
@@ -37,20 +26,8 @@ const creatorPlans = [
     monthlyPrice: 95,
     annualPrice: 950,
     description: "Advanced tools for established creators looking to scale",
-    features: [
-      "Everything in Starter",
-      "Priority sponsor matching",
-      "Premium media placements",
-      "Web3 directory listings",
-      "Basic quest development",
-      "Bi-weekly strategy calls",
-      "Revenue optimization",
-      "Cross-platform syndication"
-    ],
-    excludedFeatures: [
-      "Dedicated account manager",
-      "Custom brand partnerships"
-    ],
+    features: [],
+    excludedFeatures: [],
     popular: true,
     hasBilling: true,
     icon: Crown,
@@ -63,17 +40,7 @@ const creatorPlans = [
     monthlyPrice: 195,
     annualPrice: 1950,
     description: "Premium service with dedicated support and custom solutions",
-    features: [
-      "Everything in Pro",
-      "Dedicated account manager",
-      "Custom quest development",
-      "Premium brand partnerships",
-      "White-label solutions",
-      "Weekly strategy sessions",
-      "Custom analytics reports",
-      "Priority support (24/7)",
-      "Exclusive network events"
-    ],
+    features: [],
     excludedFeatures: [],
     popular: false,
     hasBilling: true,
@@ -197,14 +164,16 @@ const CreatorPricing = () => {
                 </CardHeader>
 
                 <CardContent className="space-y-6">
-                  <ul className="space-y-3">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center gap-3">
-                        <CheckCircle className="h-4 w-4 text-secondary flex-shrink-0" />
-                        <span className="text-sm">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  {plan.features.length > 0 && (
+                    <ul className="space-y-3">
+                      {plan.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-center gap-3">
+                          <CheckCircle className="h-4 w-4 text-secondary flex-shrink-0" />
+                          <span className="text-sm">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
 
                   <Button
                     onClick={() => handleSelectPlan(plan)}
