@@ -34,9 +34,9 @@ All colors MUST be HSL.
     --muted: 210 40% 98%;
     --muted-foreground: 215.4 16.3% 30%;
 
-    --accent: 170 100% 60%;
+    --accent: 220 100% 65%;
     --accent-foreground: 0 0% 100%;
-    --accent-glow: 170 100% 75%;
+    --accent-glow: 220 100% 80%;
 
     /* Missing gradient variables */
     --primary-gradient-start: 195 100% 50%;
@@ -118,9 +118,9 @@ All colors MUST be HSL.
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 170 100% 60%;
+    --accent: 220 100% 65%;
     --accent-foreground: 0 0% 100%;
-    --accent-glow: 170 100% 75%;
+    --accent-glow: 220 100% 80%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
