@@ -372,8 +372,44 @@ const Footer = () => {
               <h4 className="text-lg font-semibold text-primary">I'm interested in</h4>
             </div>
             
-            <div className="grid md:grid-cols-2 gap-4">
-              {/* Coverage Package Selector */}
+            {/* User Type Selector */}
+            <div className="mb-6">
+              <label className="block text-sm font-medium mb-3 text-white">I am a:</label>
+              <div className="flex gap-4">
+                <Button
+                  type="button"
+                  variant={userType === 'brand' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => {
+                    setUserType('brand');
+                    setSelectedSubscription(null);
+                    setSelectedPackage(null);
+                  }}
+                  className="text-sm"
+                >
+                  Brand/Company
+                </Button>
+                <Button
+                  type="button"
+                  variant={userType === 'creator' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => {
+                    setUserType('creator');
+                    setSelectedSubscription(null);
+                    setSelectedPackage(null);
+                  }}
+                  className="text-sm"
+                >
+                  Creator/Publisher
+                </Button>
+              </div>
+            </div>
+            
+            {/* Show fields only after user type is selected */}
+            {userType && (
+            <div className={userType === 'brand' ? 'grid md:grid-cols-2 gap-4' : ''}>
+              {/* Coverage Package Selector - Only for brands */}
+              {userType === 'brand' && (
               <div>
                 <label className="block text-sm font-medium mb-2 text-white">Coverage Package:</label>
                 <Select 
@@ -386,9 +422,9 @@ const Footer = () => {
                   <SelectTrigger className="bg-white/20 border-white/30 text-white">
                     <SelectValue placeholder="Select coverage package" />
                   </SelectTrigger>
-                  <SelectContent className="bg-white border border-gray-200 max-h-64 z-50">
+                  <SelectContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 max-h-64 z-[100]">
                     {coveragePackages.map((pkg) => (
-                      <SelectItem key={pkg.name} value={pkg.name} className="text-gray-900 hover:bg-gray-100">
+                      <SelectItem key={pkg.name} value={pkg.name} className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
                         {pkg.name} - {pkg.price}
                       </SelectItem>
                     ))}
@@ -406,6 +442,7 @@ const Footer = () => {
                   />
                 )}
               </div>
+              )}
 
               {/* Subscription Selector */}
               <div>
