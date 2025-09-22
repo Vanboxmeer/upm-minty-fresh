@@ -44,12 +44,17 @@ const AffiliateSignup = () => {
       if (error) throw error;
 
       toast({
-        title: "Application Submitted!",
-        description: "Your affiliate application has been submitted. We'll review it and get back to you soon.",
+        title: "Account Created Successfully!",
+        description: "Your affiliate account is ready. Redirecting to your dashboard...",
       });
 
       // Reset form
       setFormData({ affiliate_name: '', affiliate_email: '', company: '' });
+      
+      // Redirect to partner dashboard after a short delay
+      setTimeout(() => {
+        window.location.href = `/partner-dashboard?email=${encodeURIComponent(formData.affiliate_email)}`;
+      }, 2000);
     } catch (error: any) {
       toast({
         title: "Error",

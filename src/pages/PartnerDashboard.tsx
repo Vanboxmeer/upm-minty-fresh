@@ -41,59 +41,84 @@ const PartnerDashboard = () => {
       keywords: 'affiliate dashboard, partner portal, referral tracking, commissions',
       canonical: 'https://unitedpress.media/partner-dashboard'
     });
+
+    // Check for email parameter in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const emailParam = urlParams.get('email');
+    if (emailParam) {
+      setEmail(emailParam);
+      // Auto-login if email parameter is provided
+      handleAutoLogin(emailParam);
+    }
   }, []);
+
+  const handleAutoLogin = async (emailAddress: string) => {
+    setIsLoading(true);
+    try {
+      await performLogin(emailAddress);
+    } catch (error) {
+      // If auto-login fails, just show the login form
+      console.log('Auto-login failed, showing login form');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const performLogin = async (emailAddress: string) => {
+    // Check if affiliate exists and is approved
+    const { data: affiliateData, error: affiliateError } = await supabase
+      .from('affiliates')
+      .select('*')
+      .eq('affiliate_email', emailAddress)
+      .eq('status', 'approved')
+      .maybeSingle();
+
+    if (affiliateError || !affiliateData) {
+      // Check if affiliate exists with different status
+      const { data: statusCheck } = await supabase
+        .from('affiliates')
+        .select('status')
+        .eq('affiliate_email', emailAddress)
+        .maybeSingle();
+
+      if (statusCheck) {
+        if (statusCheck.status === 'pending') {
+          throw new Error('Your affiliate application is still pending review. You will receive an email once it has been processed.');
+        } else if (statusCheck.status === 'declined') {
+          throw new Error('Your affiliate application was not approved. Please contact support for more information.');
+        }
+      }
+      throw new Error('Affiliate account not found. Please apply for the affiliate program first.');
+    }
+
+    setAffiliate(affiliateData);
+    
+    // Fetch stats
+    const { data: statsData, error: statsError } = await supabase
+      .from('referral_stats')
+      .select('*')
+      .eq('affiliate_id', affiliateData.id)
+      .maybeSingle();
+
+    if (statsData) {
+      setStats(statsData);
+    } else {
+      setStats({ total_referrals: 0, successful_referrals: 0, commission_earned: 0 });
+    }
+
+    setIsAuthenticated(true);
+    toast({
+      title: "Welcome back!",
+      description: "Successfully accessed your affiliate dashboard.",
+    });
+  };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      // Check if affiliate exists and is approved
-      const { data: affiliateData, error: affiliateError } = await supabase
-        .from('affiliates')
-        .select('*')
-        .eq('affiliate_email', email)
-        .eq('status', 'approved')
-        .maybeSingle();
-
-      if (affiliateError || !affiliateData) {
-        // Check if affiliate exists with different status
-        const { data: statusCheck } = await supabase
-          .from('affiliates')
-          .select('status')
-          .eq('affiliate_email', email)
-          .maybeSingle();
-
-        if (statusCheck) {
-          if (statusCheck.status === 'pending') {
-            throw new Error('Your affiliate application is still pending review. You will receive an email once it has been processed.');
-          } else if (statusCheck.status === 'declined') {
-            throw new Error('Your affiliate application was not approved. Please contact support for more information.');
-          }
-        }
-        throw new Error('Affiliate account not found. Please apply for the affiliate program first.');
-      }
-
-      setAffiliate(affiliateData);
-      
-      // Fetch stats
-      const { data: statsData, error: statsError } = await supabase
-        .from('referral_stats')
-        .select('*')
-        .eq('affiliate_id', affiliateData.id)
-        .single();
-
-      if (statsData) {
-        setStats(statsData);
-      } else {
-        setStats({ total_referrals: 0, successful_referrals: 0, commission_earned: 0 });
-      }
-
-      setIsAuthenticated(true);
-      toast({
-        title: "Welcome back!",
-        description: "Successfully accessed your affiliate dashboard.",
-      });
+      await performLogin(email);
     } catch (error: any) {
       toast({
         title: "Access Denied",

@@ -13,10 +13,12 @@ import PageLoader from "@/components/PageLoader";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 import TelegramChat from "@/components/TelegramChat";
 import { useExitIntent } from "@/hooks/useExitIntent";
+import { useReferralTracking } from "@/hooks/useReferralTracking";
 import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
 
 const Index = () => {
   const { showExitIntent, hideExitIntent } = useExitIntent();
+  useReferralTracking(); // Track referral visits
   
   useEffect(() => {
     // SEO optimization for homepage

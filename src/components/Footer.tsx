@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { useReferralTracking } from "@/hooks/useReferralTracking";
 import { supabase } from "@/integrations/supabase/client";
 import { Linkedin, Twitter, Send, Calendar, Globe, Target, Users, Zap, BarChart3 } from "lucide-react";
 import { usePackageSelection } from "@/contexts/PackageSelectionContext";
@@ -27,6 +28,7 @@ const Footer = () => {
   const [showCampaignDetails, setShowCampaignDetails] = useState(false);
   const [showCreatorDetails, setShowCreatorDetails] = useState(false);
   const { toast } = useToast();
+  const { trackConversion, getReferralCode } = useReferralTracking();
 
   const {
     selectedPackage,
@@ -282,7 +284,13 @@ const Footer = () => {
     setIsLoading(true);
 
     try {
-      // Save referral data if provided
+      // Track referral conversion automatically
+      const trackedReferralCode = getReferralCode();
+      if (trackedReferralCode) {
+        await trackConversion(`${firstName} ${lastName}`, email, 'contact_form');
+      }
+
+      // Save manual referral data if provided (for backwards compatibility)
       if (referrerName || referrerCode) {
         try {
           await supabase.from('referrals').insert({
@@ -294,7 +302,7 @@ const Footer = () => {
             notes: `Contact form submission: ${message}`,
           });
         } catch (referralError) {
-          console.error("Referral tracking error:", referralError);
+          console.error("Manual referral tracking error:", referralError);
           // Don't fail the main form if referral tracking fails
         }
       }

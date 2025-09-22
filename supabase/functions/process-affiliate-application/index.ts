@@ -34,14 +34,16 @@ serve(async (req) => {
     // Check if affiliate already exists
     const { data: existingAffiliate } = await supabaseClient
       .from('affiliates')
-      .select('id')
+      .select('id, status')
       .eq('affiliate_email', affiliate_email)
-      .single();
+      .maybeSingle();
 
     if (existingAffiliate) {
       return new Response(
         JSON.stringify({ 
-          error: 'An affiliate account with this email already exists'
+          error: 'An affiliate account with this email already exists',
+          existing_status: existingAffiliate.status,
+          affiliate_id: existingAffiliate.id
         }),
         {
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -69,7 +71,7 @@ serve(async (req) => {
         affiliate_email,
         company,
         referral_code,
-        status: 'pending' // Default to pending for manual review
+        status: 'approved' // Auto-approve for immediate access
       })
       .select()
       .single();
