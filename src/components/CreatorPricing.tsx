@@ -13,7 +13,8 @@ const creatorPlans = [
     annualPrice: 450,
     description: "Get listed in the UPM media deck",
     features: [
-      "Get recommendations/shortlisted on campaigns"
+      "Get listed in the UPM media deck",
+      "Get recommended to clients with active marketing campaigns"
     ],
     excludedFeatures: [],
     popular: false,
@@ -29,7 +30,8 @@ const creatorPlans = [
     annualPrice: 950,
     description: "KOL collaboration requests",
     features: [
-      "Get recommendations/shortlisted on campaigns",
+      "Get listed in the UPM media deck",
+      "Get recommended to clients with active marketing campaigns",
       "KOL collaboration requests"
     ],
     excludedFeatures: [],
@@ -46,7 +48,8 @@ const creatorPlans = [
     annualPrice: 1950,
     description: "Directory listings and Community quest listings",
     features: [
-      "Get recommendations/shortlisted on campaigns",
+      "Get listed in the UPM media deck",
+      "Get recommended to clients with active marketing campaigns",
       "KOL collaboration requests",
       "Directory listings",
       "Community quest listings"
