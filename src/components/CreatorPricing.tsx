@@ -150,7 +150,7 @@ const CreatorPricing = () => {
                 )}
 
                 <CardHeader className="pb-3 lg:pb-4 text-center">
-                  <div className={`inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 rounded-2xl bg-gradient-to-br ${plan.gradient} mb-3 lg:mb-4 mx-auto`}>
+                  <div className={`inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 rounded-2xl bg-gradient-to-br ${plan.gradient} shadow-lg border-2 border-current/20 mb-3 lg:mb-4 mx-auto`}>
                     <Icon className="h-6 w-6 lg:h-8 lg:w-8 text-white" />
                   </div>
                   
