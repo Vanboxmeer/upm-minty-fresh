@@ -12,6 +12,7 @@ import { Linkedin, Twitter, Send, Calendar, Globe, Target, Users, Zap, BarChart3
 import { usePackageSelection } from "@/contexts/PackageSelectionContext";
 
 const Footer = () => {
+  console.log("Footer component loading, userType:", userType);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -442,7 +443,6 @@ const Footer = () => {
                   />
                 )}
               </div>
-              )}
 
               {/* Subscription Selector */}
               <div>
