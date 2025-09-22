@@ -39,8 +39,8 @@ const CreatorsPage = () => {
             </span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Join our media network and unlock new opportunities for growth, monetization, 
-            and community engagement in the Web3 space.
+            The more you pay, the more we promote you to our client base by adding you to shortlists and referrals. 
+            Join our referral program for revenue sharing and no subscription fees if you're active.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
@@ -77,7 +77,7 @@ const CreatorsPage = () => {
               What We Offer
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Comprehensive services designed to help creators and publishers monetize their audience and grow their reach.
+              Simple, transparent service: we promote you to our clients based on your subscription level and provide referral opportunities.
             </p>
           </div>
 
@@ -93,20 +93,20 @@ const CreatorsPage = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-4 text-sm">
-                  Connect with brands and projects looking for quality media placements and collaborations.
+                  We add you to client shortlists and refer you to brands based on your subscription level.
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-center gap-3 group-hover:translate-x-1 transition-transform duration-300">
                     <CheckCircle className="h-4 w-4 text-secondary flex-shrink-0" />
-                    <span className="text-sm">Access to brand network</span>
+                    <span className="text-sm">Client shortlist inclusion</span>
                   </li>
                   <li className="flex items-center gap-3 group-hover:translate-x-1 transition-transform duration-300 delay-75">
                     <CheckCircle className="h-4 w-4 text-secondary flex-shrink-0" />
-                    <span className="text-sm">Sponsored content opportunities</span>
+                    <span className="text-sm">Direct brand referrals</span>
                   </li>
                   <li className="flex items-center gap-3 group-hover:translate-x-1 transition-transform duration-300 delay-150">
                     <CheckCircle className="h-4 w-4 text-secondary flex-shrink-0" />
-                    <span className="text-sm">Revenue sharing programs</span>
+                    <span className="text-sm">Higher subscription = more promotion</span>
                   </li>
                 </ul>
               </CardContent>
@@ -123,20 +123,20 @@ const CreatorsPage = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-4 text-sm">
-                  Amplify your content reach through our publication network and directory listings.
+                  Access our publication network and get featured in web3 directories.
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-center gap-3 group-hover:translate-x-1 transition-transform duration-300">
                     <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
-                    <span className="text-sm">Web3 directory listings</span>
+                    <span className="text-sm">Web3 directory inclusion</span>
                   </li>
                   <li className="flex items-center gap-3 group-hover:translate-x-1 transition-transform duration-300 delay-75">
                     <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
-                    <span className="text-sm">Content syndication</span>
+                    <span className="text-sm">Publication network access</span>
                   </li>
                   <li className="flex items-center gap-3 group-hover:translate-x-1 transition-transform duration-300 delay-150">
                     <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
-                    <span className="text-sm">Cross-platform distribution</span>
+                    <span className="text-sm">Content listing opportunities</span>
                   </li>
                 </ul>
               </CardContent>
@@ -153,20 +153,20 @@ const CreatorsPage = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-4 text-sm">
-                  Partner with other creators and brands for cross-promotional campaigns.
+                  Opportunities to collaborate with other network members and our clients.
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-center gap-3 group-hover:translate-x-1 transition-transform duration-300">
                     <CheckCircle className="h-4 w-4 text-accent flex-shrink-0" />
-                    <span className="text-sm">Creator partnerships</span>
+                    <span className="text-sm">Network introductions</span>
                   </li>
                   <li className="flex items-center gap-3 group-hover:translate-x-1 transition-transform duration-300 delay-75">
                     <CheckCircle className="h-4 w-4 text-accent flex-shrink-0" />
-                    <span className="text-sm">Cross-promotional campaigns</span>
+                    <span className="text-sm">Collaboration matching</span>
                   </li>
                   <li className="flex items-center gap-3 group-hover:translate-x-1 transition-transform duration-300 delay-150">
                     <CheckCircle className="h-4 w-4 text-accent flex-shrink-0" />
-                    <span className="text-sm">Joint content creation</span>
+                    <span className="text-sm">Referral program benefits</span>
                   </li>
                 </ul>
               </CardContent>
@@ -189,25 +189,25 @@ const CreatorsPage = () => {
                   </h3>
                 </div>
                 <p className="text-muted-foreground mb-6 text-lg leading-relaxed">
-                  Launch engaging quests and reward systems to grow and maintain your community. 
-                  Web3 quests are becoming essential for creator growth and community engagement.
+                  Web3 quests help creators reward their communities and drive engagement. 
+                  We can include your quests in our client recommendations and directories.
                 </p>
                 <ul className="space-y-4">
                   <li className="flex items-center gap-3 hover:translate-x-2 transition-transform duration-300">
                     <CheckCircle className="h-5 w-5 text-secondary flex-shrink-0" />
-                    <span className="font-medium">Custom quest design and implementation</span>
+                    <span className="font-medium">Quest directory inclusion</span>
                   </li>
                   <li className="flex items-center gap-3 hover:translate-x-2 transition-transform duration-300 delay-75">
                     <CheckCircle className="h-5 w-5 text-secondary flex-shrink-0" />
-                    <span className="font-medium">Token-based reward mechanisms</span>
+                    <span className="font-medium">Client quest recommendations</span>
                   </li>
                   <li className="flex items-center gap-3 hover:translate-x-2 transition-transform duration-300 delay-150">
                     <CheckCircle className="h-5 w-5 text-secondary flex-shrink-0" />
-                    <span className="font-medium">Community engagement analytics</span>
+                    <span className="font-medium">Network promotion of your quests</span>
                   </li>
                   <li className="flex items-center gap-3 hover:translate-x-2 transition-transform duration-300 delay-225">
                     <CheckCircle className="h-5 w-5 text-secondary flex-shrink-0" />
-                    <span className="font-medium">Cross-platform quest integration</span>
+                    <span className="font-medium">Higher tiers get priority placement</span>
                   </li>
                 </ul>
               </div>
@@ -241,7 +241,7 @@ const CreatorsPage = () => {
               Why Join Our Network?
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Access exclusive opportunities and grow your creator business with our comprehensive support system.
+              Get promoted to our clients through shortlists and referrals. Revenue sharing available through our referral program.
             </p>
           </div>
 
