@@ -27,9 +27,39 @@ serve(async (req) => {
   }
 
   try {
-    const { affiliate_name, affiliate_email, company, referral_code }: AffiliateApplication = await req.json();
+    const { affiliate_name, affiliate_email, company }: Omit<AffiliateApplication, 'referral_code'> = await req.json();
 
     console.log('Processing affiliate application for:', affiliate_email);
+
+    // Check if affiliate already exists
+    const { data: existingAffiliate } = await supabaseClient
+      .from('affiliates')
+      .select('id')
+      .eq('affiliate_email', affiliate_email)
+      .single();
+
+    if (existingAffiliate) {
+      return new Response(
+        JSON.stringify({ 
+          error: 'An affiliate account with this email already exists'
+        }),
+        {
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 400,
+        }
+      );
+    }
+
+    // Generate a unique referral code using the database function
+    const { data: referralCodeData, error: codeError } = await supabaseClient
+      .rpc('generate_referral_code');
+
+    if (codeError) {
+      console.error('Error generating referral code:', codeError);
+      throw codeError;
+    }
+
+    const referral_code = referralCodeData;
 
     // Insert affiliate application
     const { data: affiliateData, error: affiliateError } = await supabaseClient
