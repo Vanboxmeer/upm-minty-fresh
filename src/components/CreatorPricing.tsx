@@ -122,7 +122,7 @@ const CreatorPricing = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6 lg:gap-8 mb-12">
           {creatorPlans.map((plan, index) => {
             const Icon = plan.icon;
             const displayPrice = billingFrequency === "annual" ? plan.annualPrice : plan.monthlyPrice;
@@ -131,7 +131,7 @@ const CreatorPricing = () => {
             return (
               <Card
                 key={plan.name}
-                className={`relative p-6 transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
+                className={`relative p-4 lg:p-6 transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
                   plan.popular
                     ? "border-primary/50 shadow-xl shadow-primary/20 bg-gradient-to-br from-card via-primary/5 to-secondary/5"
                     : "border-secondary/20 hover:border-primary/30 bg-gradient-to-br from-card to-secondary/5"
@@ -139,7 +139,7 @@ const CreatorPricing = () => {
               >
                 {plan.popular && (
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <div className="bg-gradient-to-r from-primary to-secondary px-4 py-1 rounded-full">
+                    <div className="bg-gradient-to-r from-primary to-secondary px-3 py-1 rounded-full">
                       <span className="text-xs font-semibold text-white flex items-center gap-1">
                         <Sparkles className="h-3 w-3" />
                         Most Popular
@@ -148,18 +148,18 @@ const CreatorPricing = () => {
                   </div>
                 )}
 
-                <CardHeader className="pb-4 text-center">
-                  <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${plan.gradient} mb-4 mx-auto`}>
-                    <Icon className="h-8 w-8 text-white" />
+                <CardHeader className="pb-3 lg:pb-4 text-center">
+                  <div className={`inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 rounded-2xl bg-gradient-to-br ${plan.gradient} mb-3 lg:mb-4 mx-auto`}>
+                    <Icon className="h-6 w-6 lg:h-8 lg:w-8 text-white" />
                   </div>
                   
-                  <CardTitle className="text-xl font-bold">{plan.name}</CardTitle>
+                  <CardTitle className="text-lg lg:text-xl font-bold">{plan.name}</CardTitle>
                   <p className="text-sm text-muted-foreground">{plan.subtitle}</p>
                   
-                  <div className="mt-4">
+                  <div className="mt-3 lg:mt-4">
                     <div className="flex items-baseline justify-center gap-1">
-                      <span className="text-3xl font-bold">${displayPrice}</span>
-                      <span className="text-muted-foreground">
+                      <span className="text-2xl lg:text-3xl font-bold">${displayPrice}</span>
+                      <span className="text-sm text-muted-foreground">
                         /{billingFrequency === "annual" ? "year" : "month"}
                       </span>
                     </div>
@@ -170,16 +170,16 @@ const CreatorPricing = () => {
                     )}
                   </div>
                   
-                  <p className="text-sm text-muted-foreground mt-3">{plan.description}</p>
+                  <p className="text-sm text-muted-foreground mt-2 lg:mt-3 leading-relaxed">{plan.description}</p>
                 </CardHeader>
 
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-4 lg:space-y-6">
                   {plan.features.length > 0 && (
-                    <ul className="space-y-3">
+                    <ul className="space-y-2 lg:space-y-3">
                       {plan.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-center gap-3">
-                          <CheckCircle className="h-4 w-4 text-secondary flex-shrink-0" />
-                          <span className="text-sm">{feature}</span>
+                        <li key={featureIndex} className="flex items-start gap-2 lg:gap-3">
+                          <CheckCircle className="h-4 w-4 text-secondary flex-shrink-0 mt-0.5" />
+                          <span className="text-sm leading-relaxed">{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -189,6 +189,7 @@ const CreatorPricing = () => {
                     onClick={() => handleSelectPlan(plan)}
                     variant={plan.popular ? "cta" : "outline"}
                     className="w-full"
+                    size="sm"
                   >
                     Choose {plan.name}
                   </Button>
