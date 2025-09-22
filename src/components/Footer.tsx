@@ -24,6 +24,7 @@ const Footer = () => {
   const [subscribeToNewsletter, setSubscribeToNewsletter] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showCampaignDetails, setShowCampaignDetails] = useState(false);
+  const [showCreatorDetails, setShowCreatorDetails] = useState(false);
   const { toast } = useToast();
 
   const {
@@ -32,7 +33,9 @@ const Footer = () => {
     billingFrequency,
     customBudget,
     campaignData,
+    creatorData,
     updateCampaignField,
+    updateCreatorField,
     getSelectionSummary,
     setSelectedPackage,
     setSelectedSubscription,
@@ -432,29 +435,160 @@ const Footer = () => {
               </div>
             </div>
             
-            {/* Campaign Details Section */}
+            {/* Dynamic Details Section - Campaign or Creator */}
             {(selectedPackage || selectedSubscription) && (
               <div className="mt-6 p-4 bg-white/5 rounded-lg border border-white/20">
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <h4 className="text-lg font-medium flex items-center gap-2">
                       <Target className="h-5 w-5" />
-                      Campaign Details (Optional)
+                      {selectedSubscription?.name?.includes('Creator') ? 'Creator Details (Optional)' : 'Campaign Details (Optional)'}
                     </h4>
-                    <p className="text-sm text-white/70 mt-1">Share more details about the campaign you're looking to run</p>
+                    <p className="text-sm text-white/70 mt-1">
+                      {selectedSubscription?.name?.includes('Creator') 
+                        ? 'Share your creator profile and collaboration interests'
+                        : 'Share more details about the campaign you\'re looking to run'
+                      }
+                    </p>
                   </div>
                   <Button
                     type="button"
                     variant="ghost"
                     size="sm"
-                    onClick={() => setShowCampaignDetails(!showCampaignDetails)}
+                    onClick={() => {
+                      if (selectedSubscription?.name?.includes('Creator')) {
+                        setShowCreatorDetails(!showCreatorDetails);
+                      } else {
+                        setShowCampaignDetails(!showCampaignDetails);
+                      }
+                    }}
                     className="text-white hover:text-white hover:bg-white/10 border border-white/20"
                   >
-                    {showCampaignDetails ? "Hide Details" : "Add Details"}
+                    {(selectedSubscription?.name?.includes('Creator') ? showCreatorDetails : showCampaignDetails) ? "Hide Details" : "Add Details"}
                   </Button>
                 </div>
                 
-                {showCampaignDetails && (
+                {/* Creator Details Form */}
+                {selectedSubscription?.name?.includes('Creator') && showCreatorDetails && (
+                  <div className="space-y-4">
+                    {/* Social Media Links */}
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <Input
+                        placeholder="Website URL"
+                        value={creatorData.website || ""}
+                        onChange={(e) => updateCreatorField('website', e.target.value)}
+                        className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
+                      />
+                      <Input
+                        placeholder="Twitter/X Handle (@username)"
+                        value={creatorData.twitterX || ""}
+                        onChange={(e) => updateCreatorField('twitterX', e.target.value)}
+                        className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
+                      />
+                    </div>
+                    
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <Input
+                        placeholder="TikTok Handle (@username)"
+                        value={creatorData.tiktok || ""}
+                        onChange={(e) => updateCreatorField('tiktok', e.target.value)}
+                        className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
+                      />
+                      <Input
+                        placeholder="Instagram Handle (@username)"
+                        value={creatorData.instagram || ""}
+                        onChange={(e) => updateCreatorField('instagram', e.target.value)}
+                        className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
+                      />
+                    </div>
+                    
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <Input
+                        placeholder="Telegram Handle (@username)"
+                        value={creatorData.telegram || ""}
+                        onChange={(e) => updateCreatorField('telegram', e.target.value)}
+                        className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
+                      />
+                      <Input
+                        placeholder="Other Social Media"
+                        value={creatorData.otherSocial || ""}
+                        onChange={(e) => updateCreatorField('otherSocial', e.target.value)}
+                        className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
+                      />
+                    </div>
+                    
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <Input
+                        placeholder="Current Rates (e.g., $500 per post)"
+                        value={creatorData.currentRates || ""}
+                        onChange={(e) => updateCreatorField('currentRates', e.target.value)}
+                        className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium mb-2 text-white/90">Preferred Coverage Types</label>
+                      <div className="grid grid-cols-2 gap-2">
+                        {['Press Release', 'Media Features', 'Social Media Posts', 'Video Content', 'Blog Articles', 'Sponsored Content', 'Product Reviews', 'Event Coverage'].map((type) => (
+                          <div key={type} className="flex items-center space-x-2">
+                            <Checkbox
+                              id={`coverage-${type}`}
+                              checked={creatorData.preferredCoverageTypes?.includes(type) || false}
+                              onCheckedChange={(checked) => {
+                                const current = creatorData.preferredCoverageTypes || [];
+                                if (checked) {
+                                  updateCreatorField('preferredCoverageTypes', [...current, type]);
+                                } else {
+                                  updateCreatorField('preferredCoverageTypes', current.filter(t => t !== type));
+                                }
+                              }}
+                              className="border-white/30 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                            />
+                            <label htmlFor={`coverage-${type}`} className="text-xs text-white/90">
+                              {type}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium mb-2 text-white/90">What are you interested in?</label>
+                      <div className="grid grid-cols-2 gap-2">
+                        {['Web3 Quest Development', 'KOL Collaborations', 'Brand Sponsorships', 'Coverage Requests', 'Web3 Directory Listings', 'Community Building', 'Content Partnerships', 'Media Placements'].map((interest) => (
+                          <div key={interest} className="flex items-center space-x-2">
+                            <Checkbox
+                              id={`interest-${interest}`}
+                              checked={creatorData.interestedIn?.includes(interest) || false}
+                              onCheckedChange={(checked) => {
+                                const current = creatorData.interestedIn || [];
+                                if (checked) {
+                                  updateCreatorField('interestedIn', [...current, interest]);
+                                } else {
+                                  updateCreatorField('interestedIn', current.filter(i => i !== interest));
+                                }
+                              }}
+                              className="border-white/30 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                            />
+                            <label htmlFor={`interest-${interest}`} className="text-xs text-white/90">
+                              {interest}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <textarea
+                      placeholder="Past collaborations and partners you've worked with..."
+                      value={creatorData.pastCollaborations || ""}
+                      onChange={(e) => updateCreatorField('pastCollaborations', e.target.value)}
+                      className="w-full p-3 rounded-md bg-white/20 border border-white/30 text-white placeholder:text-white/70 min-h-[80px] resize-none"
+                    />
+                  </div>
+                )}
+                
+                {/* Campaign Details Form */}
+                {!selectedSubscription?.name?.includes('Creator') && showCampaignDetails && (
                   <div className="space-y-4">
                     <div className="grid md:grid-cols-2 gap-4">
                       <Input
@@ -635,7 +769,6 @@ const Footer = () => {
                         ))}
                       </div>
                     </div>
-
 
                   </div>
                 )}

@@ -39,18 +39,34 @@ export interface CampaignData {
   additionalRequirements?: string;
 }
 
+export interface CreatorData {
+  website?: string;
+  twitterX?: string;
+  tiktok?: string;
+  telegram?: string;
+  instagram?: string;
+  otherSocial?: string;
+  currentRates?: string;
+  preferredCoverageTypes?: string[];
+  interestedIn?: string[];
+  pastCollaborations?: string;
+}
+
 interface PackageSelectionContextType {
   selectedPackage: PackageData | null;
   selectedSubscription: SubscriptionData | null;
   billingFrequency: string;
   customBudget: string;
   campaignData: CampaignData;
+  creatorData: CreatorData;
   setSelectedPackage: (pkg: PackageData | null) => void;
   setSelectedSubscription: (sub: SubscriptionData | null) => void;
   setBillingFrequency: (frequency: string) => void;
   setCustomBudget: (budget: string) => void;
   setCampaignData: (data: CampaignData) => void;
+  setCreatorData: (data: CreatorData) => void;
   updateCampaignField: (field: keyof CampaignData, value: any) => void;
+  updateCreatorField: (field: keyof CreatorData, value: any) => void;
   clearSelection: () => void;
   getSelectionSummary: () => string;
 }
@@ -75,9 +91,14 @@ export const PackageSelectionProvider = ({ children }: PackageSelectionProviderP
   const [billingFrequency, setBillingFrequency] = useState<string>("monthly");
   const [customBudget, setCustomBudget] = useState<string>("");
   const [campaignData, setCampaignData] = useState<CampaignData>({});
+  const [creatorData, setCreatorData] = useState<CreatorData>({});
 
   const updateCampaignField = (field: keyof CampaignData, value: any) => {
     setCampaignData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const updateCreatorField = (field: keyof CreatorData, value: any) => {
+    setCreatorData(prev => ({ ...prev, [field]: value }));
   };
 
   const clearSelection = () => {
@@ -86,6 +107,11 @@ export const PackageSelectionProvider = ({ children }: PackageSelectionProviderP
     setBillingFrequency("monthly");
     setCustomBudget("");
     setCampaignData({});
+    setCreatorData({});
+  };
+
+  const isCreatorSubscription = (subscriptionName?: string) => {
+    return subscriptionName?.includes('Creator') || false;
   };
 
   const getSelectionSummary = (): string => {
@@ -110,8 +136,24 @@ export const PackageSelectionProvider = ({ children }: PackageSelectionProviderP
     summary += `Subscription Details: ${selectedSubscription.description || 'Creator subscription plan'}\n`;
     summary += `\n`;
 
-    // Add campaign details if provided
-    if (Object.keys(campaignData).length > 0) {
+    // Add creator details if it's a creator subscription
+    if (isCreatorSubscription(selectedSubscription.name) && Object.keys(creatorData).length > 0) {
+      summary += `CREATOR DETAILS:\n\n`;
+      
+      if (creatorData.website) summary += `Website: ${creatorData.website}\n`;
+      if (creatorData.twitterX) summary += `Twitter/X: ${creatorData.twitterX}\n`;
+      if (creatorData.tiktok) summary += `TikTok: ${creatorData.tiktok}\n`;
+      if (creatorData.telegram) summary += `Telegram: ${creatorData.telegram}\n`;
+      if (creatorData.instagram) summary += `Instagram: ${creatorData.instagram}\n`;
+      if (creatorData.otherSocial) summary += `Other Social: ${creatorData.otherSocial}\n`;
+      if (creatorData.currentRates) summary += `Current Rates: ${creatorData.currentRates}\n`;
+      if (creatorData.preferredCoverageTypes?.length) summary += `Preferred Coverage Types: ${creatorData.preferredCoverageTypes.join(', ')}\n`;
+      if (creatorData.interestedIn?.length) summary += `Interested In: ${creatorData.interestedIn.join(', ')}\n`;
+      if (creatorData.pastCollaborations) summary += `Past Collaborations: ${creatorData.pastCollaborations}\n`;
+      summary += `\n`;
+    }
+    // Add campaign details if provided (for non-creator subscriptions)
+    else if (!isCreatorSubscription(selectedSubscription.name) && Object.keys(campaignData).length > 0) {
       summary += `CAMPAIGN DETAILS:\n\n`;
       
       if (campaignData.projectName) summary += `Project Name: ${campaignData.projectName}\n`;
@@ -139,12 +181,15 @@ export const PackageSelectionProvider = ({ children }: PackageSelectionProviderP
     billingFrequency,
     customBudget,
     campaignData,
+    creatorData,
     setSelectedPackage,
     setSelectedSubscription,
     setBillingFrequency,
     setCustomBudget,
     setCampaignData,
+    setCreatorData,
     updateCampaignField,
+    updateCreatorField,
     clearSelection,
     getSelectionSummary,
   };
