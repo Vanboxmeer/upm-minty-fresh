@@ -192,7 +192,7 @@ const CreatorPricing = () => {
         <div className="text-center bg-gradient-to-r from-card via-secondary/10 to-card backdrop-blur-sm rounded-2xl p-8 border border-secondary/20">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Zap className="h-8 w-8 text-secondary" />
-            <h3 className="text-2xl font-bold">Or Join Our Referral Program - FREE!</h3>
+            <h3 className="text-2xl font-bold">Join Our Referral Program - FREE!</h3>
           </div>
           <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
             Become an active member of our referral program and access all creator services without subscription fees. 
