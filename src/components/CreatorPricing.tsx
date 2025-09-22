@@ -131,10 +131,10 @@ const CreatorPricing = () => {
             return (
               <Card
                 key={plan.name}
-                className={`relative p-4 lg:p-6 transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
+                className={`relative p-4 lg:p-6 card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5 ${
                   plan.popular
-                    ? "border-primary/50 shadow-xl shadow-primary/20 bg-gradient-to-br from-card via-primary/5 to-secondary/5"
-                    : "border-secondary/20 hover:border-primary/30 bg-gradient-to-br from-card to-secondary/5"
+                    ? "border-primary/50 shadow-xl shadow-primary/20"
+                    : "border-border"
                 }`}
               >
                 {plan.popular && (

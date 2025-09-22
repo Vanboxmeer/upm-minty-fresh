@@ -23,128 +23,138 @@ const CreatorsPage = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-dark via-primary to-primary-electric opacity-90" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,hsl(var(--primary-neon))_0%,transparent_50%)] opacity-30"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,hsl(var(--primary-electric))_0%,transparent_50%)] opacity-30"></div>
-        
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8">
-            <Sparkles className="h-5 w-5 text-white" />
-            <span className="text-sm font-semibold text-white">Creator Network</span>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0">
+          {/* Dark base gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"></div>
+          
+          {/* Animated color overlays */}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-transparent to-accent/20 animate-pulse"></div>
+          
+          {/* Floating geometric shapes */}
+          <div className="absolute inset-0">
+            <div className="absolute top-20 left-10 w-32 h-32 bg-primary/40 rounded-full blur-xl animate-bounce" style={{ animationDelay: '0s', animationDuration: '6s' }}></div>
+            <div className="absolute top-40 right-20 w-20 h-20 bg-accent/50 rounded-full blur-lg animate-bounce" style={{ animationDelay: '2s', animationDuration: '8s' }}></div>
+            <div className="absolute bottom-40 left-1/4 w-24 h-24 bg-primary/30 rounded-full blur-lg animate-bounce" style={{ animationDelay: '4s', animationDuration: '7s' }}></div>
+            <div className="absolute bottom-20 right-1/3 w-40 h-40 bg-accent/25 rounded-full blur-2xl animate-bounce" style={{ animationDelay: '1s', animationDuration: '9s' }}></div>
+            
+            {/* Subtle grid pattern */}
+            <div className="absolute inset-0 opacity-20" style={{
+              backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)',
+              backgroundSize: '60px 60px'
+            }}></div>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight text-white">
-            Services for{" "}
-            <span className="bg-gradient-to-r from-white via-primary-glow to-white bg-clip-text text-transparent">
-              Creators & Publishers
-            </span>
-          </h1>
-          <p className="text-xl text-white/90 max-w-4xl mx-auto mb-10 leading-relaxed">
-            We help creators and publishers grow their audience through quest services, collaboration opportunities, 
-            sponsorships, and coverage requests.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-10">
-            <Button 
-              variant="secondary" 
-              size="lg" 
-              className="text-lg px-8 py-4 bg-white text-primary hover:bg-white/90"
-              onClick={() => {
+          {/* Content overlay for readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-slate-900/30"></div>
+        </div>
+        
+        <div className="relative container mx-auto px-4 py-12 text-center">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in text-white">
+              <span className="block">Services for</span>
+              <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+                Creators & Publishers
+              </span>
+            </h1>
+            
+            <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto animate-fade-in">
+              Join our network of creators and unlock exclusive opportunities for collaboration, sponsorships, and revenue growth.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
+              <Button variant="hero" size="lg" className="px-8 py-6 text-lg group" onClick={() => {
                 const pricingSection = document.querySelector('#creator-pricing');
                 if (pricingSection) {
-                  const offsetTop = pricingSection.getBoundingClientRect().top + window.pageYOffset - 80;
-                  window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                  });
+                  pricingSection.scrollIntoView({ behavior: 'smooth' });
                 }
-              }}
-            >
-              View Pricing Plans
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="text-lg px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-primary"
-              onClick={() => {
-                window.open('/affiliate-signup', '_blank');
-              }}
-            >
-              Join Referral Program
-            </Button>
+              }}>
+                <span className="group-hover:scale-110 transition-transform duration-200">View Pricing Plans</span>
+              </Button>
+              
+              <Button variant="outline" size="lg" className="px-8 py-6 text-lg hover:bg-white/10 hover:border-white hover:text-white transition-all duration-300 button-glow group" asChild>
+                <a href="/affiliate-signup">
+                  <span className="group-hover:scale-110 transition-transform duration-200">Join Referral Program</span>
+                </a>
+              </Button>
+            </div>
           </div>
-          
-          <p className="text-sm text-white/70">
-            ✨ Start free with our referral program • Earn revenue share • Get promoted to clients
-          </p>
         </div>
       </section>
 
       {/* Core Services */}
-      <section className="py-24 bg-gradient-to-b from-background to-muted/20">
+      <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-              Our <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Services</span>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Our <span className="text-primary">Core Services</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              We help creators and publishers grow through strategic partnerships and promotional opportunities.
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Comprehensive solutions designed to amplify your reach and maximize your earning potential in the digital space.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <Card className="group p-6 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 border-primary/20 bg-gradient-to-br from-card via-card/95 to-primary/5 hover:scale-105">
-              <CardHeader className="pb-4">
-                <div className="p-4 bg-gradient-to-br from-primary/20 to-primary-glow/30 rounded-2xl mb-4 group-hover:scale-110 transition-transform duration-300">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <Card className="group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5">
+              <CardHeader className="text-center pb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-primary-glow/30 mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
                   <Zap className="h-8 w-8 text-primary" />
                 </div>
-                <CardTitle className="text-xl font-bold text-foreground">Quest Services</CardTitle>
+                <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
+                  Quest Services
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground text-base leading-relaxed">
+                <p className="text-muted-foreground text-center leading-relaxed">
                   Web3 quest integration and community engagement solutions for creators and brands.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="group p-6 hover:shadow-2xl hover:shadow-secondary/10 transition-all duration-500 border-secondary/20 bg-gradient-to-br from-card via-card/95 to-secondary/5 hover:scale-105">
-              <CardHeader className="pb-4">
-                <div className="p-4 bg-gradient-to-br from-secondary/20 to-secondary-glow/30 rounded-2xl mb-4 group-hover:scale-110 transition-transform duration-300">
+            <Card className="group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5">
+              <CardHeader className="text-center pb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-secondary/20 to-secondary-glow/30 mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
                   <Users className="h-8 w-8 text-secondary" />
                 </div>
-                <CardTitle className="text-xl font-bold text-foreground">Collaboration Opportunities</CardTitle>
+                <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
+                  Collaboration Opportunities
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground text-base leading-relaxed">
+                <p className="text-muted-foreground text-center leading-relaxed">
                   Connect with brands and other creators for strategic partnerships and joint ventures.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="group p-6 hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 border-accent/20 bg-gradient-to-br from-card via-card/95 to-accent/5 hover:scale-105">
-              <CardHeader className="pb-4">
-                <div className="p-4 bg-gradient-to-br from-accent/20 to-accent-glow/30 rounded-2xl mb-4 group-hover:scale-110 transition-transform duration-300">
+            <Card className="group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5">
+              <CardHeader className="text-center pb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-accent/20 to-accent-glow/30 mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
                   <Crown className="h-8 w-8 text-accent" />
                 </div>
-                <CardTitle className="text-xl font-bold text-foreground">Sponsorships</CardTitle>
+                <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
+                  Sponsorships
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground text-base leading-relaxed">
+                <p className="text-muted-foreground text-center leading-relaxed">
                   Get matched with relevant brands looking for creators in your niche and audience size.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="group p-6 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 border-primary/20 bg-gradient-to-br from-card via-card/95 to-primary/5 hover:scale-105">
-              <CardHeader className="pb-4">
-                <div className="p-4 bg-gradient-to-br from-primary/20 to-primary-glow/30 rounded-2xl mb-4 group-hover:scale-110 transition-transform duration-300">
+            <Card className="group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5">
+              <CardHeader className="text-center pb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-primary-glow/30 mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
                   <Newspaper className="h-8 w-8 text-primary" />
                 </div>
-                <CardTitle className="text-xl font-bold text-foreground">Coverage Requests</CardTitle>
+                <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
+                  Coverage Requests
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground text-base leading-relaxed">
+                <p className="text-muted-foreground text-center leading-relaxed">
                   Media placement and press coverage to amplify your brand and reach new audiences.
                 </p>
               </CardContent>
@@ -157,102 +167,111 @@ const CreatorsPage = () => {
       <CreatorPricing />
 
       {/* Benefits Section */}
-      <section className="py-24 bg-gradient-to-br from-muted/30 to-primary/5">
+      <section className="py-20 bg-card/30">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-              Why Elite Creators <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Choose Us</span>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Why Choose <span className="text-primary">Our Platform</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Join a network where your investment in growth directly translates to exclusive opportunities and premium partnerships.
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Experience the advantages that set us apart from other creator platforms and maximize your success.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-10">
-            <div className="text-center group hover:scale-105 transition-transform duration-300">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary/20 to-primary-glow/30 rounded-2xl mb-8 group-hover:shadow-lg group-hover:shadow-primary/25 transition-all duration-300">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="text-center group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5 p-8">
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-primary/20 to-primary-glow/30 mb-6 mx-auto group-hover:scale-110 transition-all duration-300 shadow-lg">
                 <Star className="h-10 w-10 text-primary" />
               </div>
-              <h3 className="text-2xl font-bold mb-6 text-foreground">Exclusive Access</h3>
-              <p className="text-muted-foreground text-lg leading-relaxed">
+              <h3 className="text-xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">
+                Exclusive Access
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
                 Access premium brands and campaigns that aren't available anywhere else. 
                 The more you invest, the more exclusive your opportunities become.
               </p>
-            </div>
+            </Card>
 
-            <div className="text-center group hover:scale-105 transition-transform duration-300">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-secondary/20 to-secondary-glow/30 rounded-2xl mb-8 group-hover:shadow-lg group-hover:shadow-secondary/25 transition-all duration-300">
+            <Card className="text-center group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5 p-8">
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-secondary/20 to-secondary-glow/30 mb-6 mx-auto group-hover:scale-110 transition-all duration-300 shadow-lg">
                 <Zap className="h-10 w-10 text-secondary" />
               </div>
-              <h3 className="text-2xl font-bold mb-6 text-foreground">Priority Placement</h3>
-              <p className="text-muted-foreground text-lg leading-relaxed">
+              <h3 className="text-xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">
+                Priority Placement
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
                 Get featured first when brands are looking for creators. Premium tiers receive 
                 priority placement in all client recommendations and shortlists.
               </p>
-            </div>
+            </Card>
 
-            <div className="text-center group hover:scale-105 transition-transform duration-300">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-accent/20 to-accent-glow/30 rounded-2xl mb-8 group-hover:shadow-lg group-hover:shadow-accent/25 transition-all duration-300">
+            <Card className="text-center group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5 p-8">
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-accent/20 to-accent-glow/30 mb-6 mx-auto group-hover:scale-110 transition-all duration-300 shadow-lg">
                 <Target className="h-10 w-10 text-accent" />
               </div>
-              <h3 className="text-2xl font-bold mb-6 text-foreground">Revenue Growth</h3>
-              <p className="text-muted-foreground text-lg leading-relaxed">
+              <h3 className="text-xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">
+                Revenue Growth
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
                 Multiple income streams including direct partnerships, referral commissions, 
                 and exclusive collaboration opportunities that scale with your success.
               </p>
-            </div>
+            </Card>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-r from-background via-primary/5 to-secondary/10">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8 text-foreground">
-            Ready to Get <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Started</span>?
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-4xl mx-auto mb-12 leading-relaxed">
-            Join our creator network and start getting connected with brands looking for creators like you.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Button 
-              variant="cta" 
-              size="lg" 
-              className="text-lg px-10 py-4"
-              onClick={() => {
-                const contactSection = document.querySelector('footer');
-                if (contactSection) {
-                  const offsetTop = contactSection.getBoundingClientRect().top + window.pageYOffset - 80;
-                  window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                  });
-                }
-              }}
-            >
-              Get Started Today
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="text-lg px-10 py-4 border-2"
-              onClick={() => {
-                const pricingSection = document.querySelector('#creator-pricing');
-                if (pricingSection) {
-                  const offsetTop = pricingSection.getBoundingClientRect().top + window.pageYOffset - 80;
-                  window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                  });
-                }
-              }}
-            >
-              View Pricing
-            </Button>
-          </div>
-          <p className="text-sm text-muted-foreground/80 mt-6">
-            🚀 Start with our free referral program • Earn revenue share • Get promoted to clients
-          </p>
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <Card className="max-w-4xl mx-auto text-center bg-gradient-to-br from-card to-card/50 backdrop-blur-sm border-primary/20 shadow-2xl">
+            <CardHeader className="pb-6">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                Ready to <span className="text-primary">Get Started?</span>
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Join thousands of creators who are already earning with our platform. 
+                Get access to exclusive opportunities and start growing your revenue today.
+              </p>
+            </CardHeader>
+            
+            <CardContent className="space-y-8">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Button variant="cta" size="lg" className="px-8 py-6 text-lg" onClick={() => {
+                  const contactSection = document.querySelector('footer');
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}>
+                  Get Started Today
+                </Button>
+                
+                <Button variant="outline" size="lg" className="px-8 py-6 text-lg" onClick={() => {
+                  const pricingSection = document.querySelector('#creator-pricing');
+                  if (pricingSection) {
+                    pricingSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}>
+                  View Pricing
+                </Button>
+              </div>
+              
+              <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4 text-primary" />
+                  <span>No setup fees</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4 text-primary" />
+                  <span>Revenue share opportunities</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4 text-primary" />
+                  <span>Priority client promotion</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
