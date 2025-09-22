@@ -14,7 +14,7 @@ export interface SubscriptionData {
   price: string;
   monthlyPrice: number;
   annualPrice: number;
-  description: string;
+  description?: string;
   features: string[];
   excludedFeatures: string[];
   popular: boolean;
@@ -107,7 +107,7 @@ export const PackageSelectionProvider = ({ children }: PackageSelectionProviderP
       summary += `Billing: Monthly - $${selectedSubscription.monthlyPrice}\n`;
     }
     summary += `Service Fee: ${selectedSubscription.subtitle}\n`;
-    summary += `Subscription Details: ${selectedSubscription.description}\n`;
+    summary += `Subscription Details: ${selectedSubscription.description || 'Creator subscription plan'}\n`;
     summary += `\n`;
 
     // Add campaign details if provided

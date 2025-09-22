@@ -11,7 +11,6 @@ const creatorPlans = [
     price: "$45",
     monthlyPrice: 45,
     annualPrice: 450,
-    description: "Get listed in the UPM media deck",
     features: [
       "Get listed in the UPM media deck",
       "Get recommended to clients with active marketing campaigns"
@@ -28,7 +27,6 @@ const creatorPlans = [
     price: "$95",
     monthlyPrice: 95,
     annualPrice: 950,
-    description: "KOL collaboration requests",
     features: [
       "Get listed in the UPM media deck",
       "Get recommended to clients with active marketing campaigns",
@@ -46,7 +44,6 @@ const creatorPlans = [
     price: "$195",
     monthlyPrice: 195,
     annualPrice: 1950,
-    description: "Directory listings and Community quest listings",
     features: [
       "Get listed in the UPM media deck",
       "Get recommended to clients with active marketing campaigns",
@@ -172,8 +169,6 @@ const CreatorPricing = () => {
                       </p>
                     )}
                   </div>
-                  
-                  <p className="text-sm text-muted-foreground mt-2 lg:mt-3 leading-relaxed">{plan.description}</p>
                 </CardHeader>
 
                 <CardContent className="space-y-4 lg:space-y-6">
