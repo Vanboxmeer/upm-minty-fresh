@@ -56,7 +56,7 @@ export const SocialShareButtons = ({
         variant="outline"
         size="sm"
         onClick={() => handleShare('twitter')}
-        className="flex items-center gap-2 hover:bg-blue-50 hover:border-blue-300"
+        className="flex items-center gap-2 hover:bg-primary/10 hover:border-primary/30"
       >
         <Twitter className="h-4 w-4" />
         <span className="hidden sm:inline">X</span>
@@ -66,7 +66,7 @@ export const SocialShareButtons = ({
         variant="outline"
         size="sm"
         onClick={() => handleShare('linkedin')}
-        className="flex items-center gap-2 hover:bg-blue-50 hover:border-blue-600"
+        className="flex items-center gap-2 hover:bg-primary/10 hover:border-primary/30"
       >
         <Linkedin className="h-4 w-4" />
         <span className="hidden sm:inline">LinkedIn</span>
@@ -76,7 +76,7 @@ export const SocialShareButtons = ({
         variant="outline"
         size="sm"
         onClick={() => handleShare('facebook')}
-        className="flex items-center gap-2 hover:bg-blue-50 hover:border-blue-800"
+        className="flex items-center gap-2 hover:bg-primary/10 hover:border-primary/30"
       >
         <Facebook className="h-4 w-4" />
         <span className="hidden sm:inline">Facebook</span>

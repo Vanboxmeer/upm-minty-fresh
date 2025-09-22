@@ -26,17 +26,17 @@ All colors MUST be HSL.
     --primary-neon: 180 100% 50%;
     --primary-electric: 210 100% 60%;
 
-    /* Blue-based Secondary Colors */
-    --secondary: 210 100% 60%;
+    /* Blue-based Secondary Colors - matching primary */
+    --secondary: 195 100% 50%;
     --secondary-foreground: 0 0% 100%;
-    --secondary-glow: 210 100% 75%;
+    --secondary-glow: 195 100% 70%;
 
     --muted: 210 40% 98%;
     --muted-foreground: 215.4 16.3% 30%;
 
-    --accent: 220 100% 65%;
+    --accent: 195 100% 50%;
     --accent-foreground: 0 0% 100%;
-    --accent-glow: 220 100% 80%;
+    --accent-glow: 195 100% 70%;
 
     /* Missing gradient variables */
     --primary-gradient-start: 195 100% 50%;
@@ -111,16 +111,16 @@ All colors MUST be HSL.
     --primary-glow: 180 100% 70%;
     --primary-neon: 195 100% 60%;
 
-    --secondary: 210 100% 60%;
+    --secondary: 195 100% 50%;
     --secondary-foreground: 0 0% 100%;
-    --secondary-glow: 210 100% 75%;
+    --secondary-glow: 195 100% 70%;
 
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 220 100% 65%;
+    --accent: 195 100% 50%;
     --accent-foreground: 0 0% 100%;
-    --accent-glow: 220 100% 80%;
+    --accent-glow: 195 100% 70%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;

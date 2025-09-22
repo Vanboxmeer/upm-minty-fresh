@@ -138,7 +138,7 @@ const CaseStudies = () => {
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "Press Release":
-        return "bg-blue-500/10 text-blue-400 border-blue-500/20";
+        return "bg-primary/10 text-primary border-primary/20";
       case "Influencer Marketing":
         return "bg-purple-500/10 text-purple-400 border-purple-500/20";
       case "Media Coverage":

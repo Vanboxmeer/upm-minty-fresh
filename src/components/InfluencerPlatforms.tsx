@@ -15,13 +15,13 @@ const InfluencerPlatforms = () => {
     {
       name: "X (Twitter)",
       icon: Twitter,
-      color: "text-blue-400",
+      color: "text-primary",
       description: "Thought leaders and breaking news"
     },
     {
       name: "Telegram",
       icon: Send,
-      color: "text-blue-500",
+      color: "text-primary",
       description: "Community channels and groups"
     },
     {
@@ -39,7 +39,7 @@ const InfluencerPlatforms = () => {
     {
       name: "LinkedIn",
       icon: Linkedin,
-      color: "text-blue-600",
+      color: "text-primary",
       description: "Professional network and B2B content"
     }
   ];

@@ -9,7 +9,7 @@ const PaidAdvertising = () => {
     {
       name: "Telegram Ads",
       icon: Send,
-      color: "text-blue-500",
+      color: "text-primary",
       description: "Reach crypto-native audiences in targeted communities",
       features: [
         "Channel & Group Sponsorships",
