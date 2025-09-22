@@ -12,7 +12,7 @@ import { Linkedin, Twitter, Send, Calendar, Globe, Target, Users, Zap, BarChart3
 import { usePackageSelection } from "@/contexts/PackageSelectionContext";
 
 const Footer = () => {
-  console.log("Footer component loading, userType:", userType);
+  // Footer component initialized
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -45,7 +45,7 @@ const Footer = () => {
     setCustomBudget,
     setUserType,
   } = usePackageSelection();
-
+  console.log("Footer component loading, userType:", userType);
   // Coverage packages data
   const coveragePackages = [
     {
@@ -407,98 +407,150 @@ const Footer = () => {
             </div>
             
             {/* Show fields only after user type is selected */}
-            {userType && (
-            <div className={userType === 'brand' ? 'grid md:grid-cols-2 gap-4' : ''}>
-              {/* Coverage Package Selector - Only for brands */}
-              {userType === 'brand' && (
-              <div>
-                <label className="block text-sm font-medium mb-2 text-white">Coverage Package:</label>
-                <Select 
-                  value={selectedPackage?.name || ""} 
-                  onValueChange={(value) => {
-                    const pkg = coveragePackages.find(p => p.name === value);
-                    if (pkg) setSelectedPackage(pkg);
-                  }}
-                >
-                  <SelectTrigger className="bg-white/20 border-white/30 text-white">
-                    <SelectValue placeholder="Select coverage package" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 max-h-64 z-[100]">
-                    {coveragePackages.map((pkg) => (
-                      <SelectItem key={pkg.name} value={pkg.name} className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
-                        {pkg.name} - {pkg.price}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                {selectedPackage?.name === "Custom Budget" && (
-                  <Input
-                    type="number"
-                    placeholder="Enter budget ($5,000 - $500,000)"
-                    value={customBudget}
-                    onChange={(e) => setCustomBudget(e.target.value)}
-                    min="5000"
-                    max="500000"
-                    className="mt-2 bg-white/20 border-white/30 text-white placeholder:text-white/70"
-                  />
-                )}
-              </div>
-
-              {/* Subscription Selector */}
-              <div>
-                <label className="block text-sm font-medium mb-2 text-white">Subscription Level:</label>
-                <Select 
-                  value={selectedSubscription?.name || ""} 
-                  onValueChange={(value) => {
-                    const sub = subscriptionPlans.find(s => s.name === value);
-                    if (sub) setSelectedSubscription(sub);
-                  }}
-                >
-                  <SelectTrigger className="bg-white/20 border-white/30 text-white">
-                    <SelectValue placeholder="Select subscription level" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white border border-gray-200 max-h-64 z-50">
-                    {subscriptionPlans.map((plan) => (
-                      <SelectItem key={plan.name} value={plan.name} className="text-gray-900 hover:bg-gray-100">
-                        {plan.name} - {plan.price}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                
-                {/* Billing Frequency for Paid Plans */}
-                {selectedSubscription && selectedSubscription.hasBilling && (
-                  <div className="mt-3">
-                    <label className="block text-sm font-medium mb-2 text-white">Billing:</label>
-                    <Tabs value={billingFrequency} onValueChange={setBillingFrequency} className="w-full">
-                      <TabsList className="grid w-full grid-cols-2 bg-white/10 border border-white/20">
-                        <TabsTrigger 
-                          value="monthly" 
-                          className="data-[state=active]:bg-primary data-[state=active]:text-white text-white/70"
-                        >
-                          Monthly
-                        </TabsTrigger>
-                        <TabsTrigger 
-                          value="annual" 
-                          className="data-[state=active]:bg-primary data-[state=active]:text-white text-white/70"
-                        >
-                          Annual
-                        </TabsTrigger>
-                      </TabsList>
-                    </Tabs>
-                    <div className="mt-2 text-sm text-white/80">
-                      {billingFrequency === 'monthly' ? (
-                        <span>${selectedSubscription.monthlyPrice}/month</span>
-                      ) : (
-                        <span>${selectedSubscription.annualPrice}/year <span className="text-green-400">(Save ${(selectedSubscription.monthlyPrice * 12) - selectedSubscription.annualPrice})</span></span>
-                      )}
-                    </div>
+            {userType ? (<>
+              {userType === 'brand' ? (
+                <div className="grid md:grid-cols-2 gap-4">
+                  {/* Coverage Package Selector - Only for brands */}
+                  <div>
+                    <label className="block text-sm font-medium mb-2 text-white">Coverage Package:</label>
+                    <Select 
+                      value={selectedPackage?.name || ""} 
+                      onValueChange={(value) => {
+                        const pkg = coveragePackages.find(p => p.name === value);
+                        if (pkg) setSelectedPackage(pkg);
+                      }}
+                    >
+                      <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                        <SelectValue placeholder="Select coverage package" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 max-h-64 z-[100]">
+                        {coveragePackages.map((pkg) => (
+                          <SelectItem key={pkg.name} value={pkg.name} className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            {pkg.name} - {pkg.price}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    {selectedPackage?.name === "Custom Budget" && (
+                      <Input
+                        type="number"
+                        placeholder="Enter budget ($5,000 - $500,000)"
+                        value={customBudget}
+                        onChange={(e) => setCustomBudget(e.target.value)}
+                        min="5000"
+                        max="500000"
+                        className="mt-2 bg-white/20 border-white/30 text-white placeholder:text-white/70"
+                      />
+                    )}
                   </div>
-                )}
-              </div>
-            </div>
-            
-            {/* Dynamic Details Section - Campaign or Creator */}
+
+                  {/* Brand Subscription Selector */}
+                  <div>
+                    <label className="block text-sm font-medium mb-2 text-white">Subscription Level:</label>
+                    <Select 
+                      value={selectedSubscription?.name || ""} 
+                      onValueChange={(value) => {
+                        const sub = subscriptionPlans.find(s => s.name === value);
+                        if (sub) setSelectedSubscription(sub);
+                      }}
+                    >
+                      <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                        <SelectValue placeholder="Select subscription level" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 max-h-64 z-50">
+                        {filteredSubscriptionPlans.map((plan) => (
+                          <SelectItem key={plan.name} value={plan.name} className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            {plan.name} - {plan.price}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    
+                    {/* Billing Frequency for Paid Plans */}
+                    {selectedSubscription && selectedSubscription.hasBilling && (
+                      <div className="mt-3">
+                        <label className="block text-sm font-medium mb-2 text-white">Billing:</label>
+                        <Tabs value={billingFrequency} onValueChange={setBillingFrequency} className="w-full">
+                          <TabsList className="grid w-full grid-cols-2 bg-white/10 border border-white/20">
+                            <TabsTrigger 
+                              value="monthly" 
+                              className="data-[state=active]:bg-primary data-[state=active]:text-white text-white/70"
+                            >
+                              Monthly
+                            </TabsTrigger>
+                            <TabsTrigger 
+                              value="annual" 
+                              className="data-[state=active]:bg-primary data-[state=active]:text-white text-white/70"
+                            >
+                              Annual
+                            </TabsTrigger>
+                          </TabsList>
+                        </Tabs>
+                        <div className="mt-2 text-sm text-white/80">
+                          {billingFrequency === 'monthly' ? (
+                            <span>${selectedSubscription.monthlyPrice}/month</span>
+                          ) : (
+                            <span>${selectedSubscription.annualPrice}/year <span className="text-green-400">(Save ${(selectedSubscription.monthlyPrice * 12) - selectedSubscription.annualPrice})</span></span>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-white">Creator Plan:</label>
+                  <Select 
+                    value={selectedSubscription?.name || ""} 
+                    onValueChange={(value) => {
+                      const sub = subscriptionPlans.find(s => s.name === value);
+                      if (sub) setSelectedSubscription(sub);
+                    }}
+                  >
+                    <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                      <SelectValue placeholder="Select creator plan" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 max-h-64 z-50">
+                      {filteredSubscriptionPlans.map((plan) => (
+                        <SelectItem key={plan.name} value={plan.name} className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                          {plan.name} - {plan.price}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+
+                  {/* Billing Frequency for Creator Plans */}
+                  {selectedSubscription && selectedSubscription.hasBilling && (
+                    <div className="mt-3">
+                      <label className="block text-sm font-medium mb-2 text-white">Billing:</label>
+                      <Tabs value={billingFrequency} onValueChange={setBillingFrequency} className="w-full">
+                        <TabsList className="grid w-full grid-cols-2 bg-white/10 border border-white/20">
+                          <TabsTrigger 
+                            value="monthly" 
+                            className="data-[state=active]:bg-primary data-[state=active]:text-white text-white/70"
+                          >
+                            Monthly
+                          </TabsTrigger>
+                          <TabsTrigger 
+                            value="annual" 
+                            className="data-[state=active]:bg-primary data-[state=active]:text-white text-white/70"
+                          >
+                            Annual
+                          </TabsTrigger>
+                        </TabsList>
+                      </Tabs>
+                      <div className="mt-2 text-sm text-white/80">
+                        {billingFrequency === 'monthly' ? (
+                          <span>${selectedSubscription.monthlyPrice}/month</span>
+                        ) : (
+                          <span>${selectedSubscription.annualPrice}/year <span className="text-green-400">(Save ${(selectedSubscription.monthlyPrice * 12) - selectedSubscription.annualPrice})</span></span>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </>) : null}
             {(selectedPackage || selectedSubscription) && (
               <div className="mt-6 p-4 bg-white/5 rounded-lg border border-white/20">
                 <div className="flex items-center justify-between mb-4">
