@@ -19,6 +19,8 @@ export interface SubscriptionData {
   excludedFeatures: string[];
   popular: boolean;
   hasBilling: boolean;
+  icon?: any;
+  gradient?: string;
 }
 
 export interface CampaignData {

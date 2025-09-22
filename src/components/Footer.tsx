@@ -135,6 +135,43 @@ const Footer = () => {
       excludedFeatures: [],
       popular: false,
       hasBilling: true
+    },
+    // Creator subscription plans
+    {
+      name: "Creator Starter",
+      subtitle: "Perfect for new creators",
+      price: "$45",
+      monthlyPrice: 45,
+      annualPrice: 450,
+      description: "Essential services to launch your creator career",
+      features: ["Access to sponsor network", "Basic media placements", "Content syndication support", "Monthly strategy calls", "Discord community access", "Basic analytics dashboard"],
+      excludedFeatures: ["Priority placement", "Dedicated account manager", "Custom quest development"],
+      popular: false,
+      hasBilling: true
+    },
+    {
+      name: "Creator Pro",
+      subtitle: "Most popular for growing creators",
+      price: "$95",
+      monthlyPrice: 95,
+      annualPrice: 950,
+      description: "Advanced tools for established creators looking to scale",
+      features: ["Everything in Starter", "Priority sponsor matching", "Premium media placements", "Web3 directory listings", "Basic quest development", "Bi-weekly strategy calls", "Revenue optimization", "Cross-platform syndication"],
+      excludedFeatures: ["Dedicated account manager", "Custom brand partnerships"],
+      popular: false,
+      hasBilling: true
+    },
+    {
+      name: "Creator Elite",
+      subtitle: "For top-tier creators and publishers",
+      price: "$195",
+      monthlyPrice: 195,
+      annualPrice: 1950,
+      description: "Premium service with dedicated support and custom solutions",
+      features: ["Everything in Pro", "Dedicated account manager", "Custom quest development", "Premium brand partnerships", "White-label solutions", "Weekly strategy sessions", "Custom analytics reports", "Priority support (24/7)", "Exclusive network events"],
+      excludedFeatures: [],
+      popular: false,
+      hasBilling: true
     }
   ];
 
@@ -773,6 +810,7 @@ const Footer = () => {
               <li><a href="/services#features--interviews--spaces" className="hover:text-primary transition-colors">Features, Interviews, Spaces</a></li>
               <li><a href="/services" className="hover:text-primary transition-colors">Managed Paid Advertising</a></li>
               <li><a href="/creators" className="hover:text-primary transition-colors">Creator Services</a></li>
+              <li><a href="/affiliate-signup" className="hover:text-secondary transition-colors font-medium">📈 Referral Program</a></li>
               <li><a href="https://watchcrypto.info/about/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Web3 Directory Listings</a></li>
             </ul>
           </div>
