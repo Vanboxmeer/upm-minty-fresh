@@ -11,8 +11,10 @@ const creatorPlans = [
     price: "$45",
     monthlyPrice: 45,
     annualPrice: 450,
-    description: "Essential services to launch your creator career",
-    features: [],
+    description: "Get listed in the UPM media deck",
+    features: [
+      "Get recommendations/shortlisted on campaigns"
+    ],
     excludedFeatures: [],
     popular: false,
     hasBilling: true,
@@ -25,8 +27,11 @@ const creatorPlans = [
     price: "$95",
     monthlyPrice: 95,
     annualPrice: 950,
-    description: "Advanced tools for established creators looking to scale",
-    features: [],
+    description: "KOL collaboration requests",
+    features: [
+      "Get recommendations/shortlisted on campaigns",
+      "KOL collaboration requests"
+    ],
     excludedFeatures: [],
     popular: true,
     hasBilling: true,
@@ -39,8 +44,13 @@ const creatorPlans = [
     price: "$195",
     monthlyPrice: 195,
     annualPrice: 1950,
-    description: "Premium service with dedicated support and custom solutions",
-    features: [],
+    description: "Directory listings and Community quest listings",
+    features: [
+      "Get recommendations/shortlisted on campaigns",
+      "KOL collaboration requests",
+      "Directory listings",
+      "Community quest listings"
+    ],
     excludedFeatures: [],
     popular: false,
     hasBilling: true,
