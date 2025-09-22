@@ -98,8 +98,8 @@ const CreatorsPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <Card className="group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5">
               <CardHeader className="text-center pb-4">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-primary-glow/30 mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                  <Zap className="h-8 w-8 text-primary" />
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/40 to-primary-glow/50 mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
+                  <Zap className="h-8 w-8 text-white" />
                 </div>
                 <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
                   Quest Services
@@ -114,8 +114,8 @@ const CreatorsPage = () => {
 
             <Card className="group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5">
               <CardHeader className="text-center pb-4">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-secondary/20 to-secondary-glow/30 mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                  <Users className="h-8 w-8 text-secondary" />
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-secondary/40 to-secondary-glow/50 mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
+                  <Users className="h-8 w-8 text-white" />
                 </div>
                 <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
                   Collaboration Opportunities
@@ -130,8 +130,8 @@ const CreatorsPage = () => {
 
             <Card className="group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5">
               <CardHeader className="text-center pb-4">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-accent/20 to-accent-glow/30 mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                  <Crown className="h-8 w-8 text-accent" />
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-accent/40 to-accent-glow/50 mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
+                  <Crown className="h-8 w-8 text-white" />
                 </div>
                 <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
                   Sponsorships
@@ -146,8 +146,8 @@ const CreatorsPage = () => {
 
             <Card className="group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5">
               <CardHeader className="text-center pb-4">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-primary-glow/30 mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                  <Newspaper className="h-8 w-8 text-primary" />
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/40 to-primary-glow/50 mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
+                  <Newspaper className="h-8 w-8 text-white" />
                 </div>
                 <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
                   Coverage Requests
@@ -180,8 +180,8 @@ const CreatorsPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <Card className="text-center group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5 p-8">
-              <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-primary/20 to-primary-glow/30 mb-6 mx-auto group-hover:scale-110 transition-all duration-300 shadow-lg">
-                <Star className="h-10 w-10 text-primary" />
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-primary/50 to-primary-glow/60 mb-6 mx-auto group-hover:scale-110 transition-all duration-300 shadow-lg">
+                <Star className="h-10 w-10 text-white" />
               </div>
               <h3 className="text-xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">
                 Exclusive Access
@@ -193,8 +193,8 @@ const CreatorsPage = () => {
             </Card>
 
             <Card className="text-center group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5 p-8">
-              <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-secondary/20 to-secondary-glow/30 mb-6 mx-auto group-hover:scale-110 transition-all duration-300 shadow-lg">
-                <Zap className="h-10 w-10 text-secondary" />
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-secondary/50 to-secondary-glow/60 mb-6 mx-auto group-hover:scale-110 transition-all duration-300 shadow-lg">
+                <Zap className="h-10 w-10 text-white" />
               </div>
               <h3 className="text-xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">
                 Priority Placement
@@ -206,8 +206,8 @@ const CreatorsPage = () => {
             </Card>
 
             <Card className="text-center group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5 p-8">
-              <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-accent/20 to-accent-glow/30 mb-6 mx-auto group-hover:scale-110 transition-all duration-300 shadow-lg">
-                <Target className="h-10 w-10 text-accent" />
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-accent/50 to-accent-glow/60 mb-6 mx-auto group-hover:scale-110 transition-all duration-300 shadow-lg">
+                <Target className="h-10 w-10 text-white" />
               </div>
               <h3 className="text-xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">
                 Revenue Growth
