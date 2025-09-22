@@ -369,7 +369,7 @@ const Footer = () => {
           {/* Package Selection Summary */}
           <div className="mb-8 p-4 bg-primary/20 rounded-lg border border-primary/30">
             <div className="flex items-center justify-between mb-3">
-              <h4 className="text-lg font-semibold text-primary">Your Package Selection</h4>
+              <h4 className="text-lg font-semibold text-primary">I'm interested in</h4>
             </div>
             
             <div className="grid md:grid-cols-2 gap-4">
