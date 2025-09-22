@@ -61,9 +61,10 @@ const creatorPlans = [
 
 const CreatorPricing = () => {
   const [billingFrequency, setBillingFrequency] = useState<"monthly" | "annual">("monthly");
-  const { setSelectedSubscription, setBillingFrequency: setContextBilling } = usePackageSelection();
+  const { setSelectedSubscription, setBillingFrequency: setContextBilling, setUserType } = usePackageSelection();
 
   const handleSelectPlan = (plan: typeof creatorPlans[0]) => {
+    setUserType('creator'); // Set user type to creator
     setSelectedSubscription(plan);
     setContextBilling(billingFrequency);
     

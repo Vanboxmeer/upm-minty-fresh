@@ -34,6 +34,7 @@ const Footer = () => {
     customBudget,
     campaignData,
     creatorData,
+    userType,
     updateCampaignField,
     updateCreatorField,
     getSelectionSummary,
@@ -41,6 +42,7 @@ const Footer = () => {
     setSelectedSubscription,
     setBillingFrequency,
     setCustomBudget,
+    setUserType,
   } = usePackageSelection();
 
   // Coverage packages data
@@ -113,7 +115,8 @@ const Footer = () => {
       features: ["Discovery media deck", "Campaign builder form", "Quote builder and shortlisting assistance", "Order facilitation"],
       excludedFeatures: ["KPI tracking", "Dedicated account manager and campaign advisor", "Managed Brave Ads and Telegram Ads", "Press negotiations", "Membership pricing"],
       popular: false,
-      hasBilling: false
+      hasBilling: false,
+      type: 'brand' as const
     },
     {
       name: "Silver Membership",
@@ -125,7 +128,8 @@ const Footer = () => {
       features: ["Members media deck", "Campaign builder", "Order facilitation", "Quote builder and shortlist assistance", "KPI tracking", "Dedicated account manager and campaign advisor", "Managed Brave Ads and Telegram Ads", "KOL communications", "Press negotiations", "Silver members pricing - service fees reduced to just 3.45%"],
       excludedFeatures: [],
       popular: true,
-      hasBilling: true
+      hasBilling: true,
+      type: 'brand' as const
     },
     {
       name: "Gold Membership",
@@ -137,7 +141,8 @@ const Footer = () => {
       features: ["Members media deck", "Campaign builder", "Order facilitation", "Quote builder and shortlist assistance", "KPI tracking", "Dedicated account manager and campaign advisor", "Managed Brave Ads and Telegram Ads", "KOL communications", "Press negotiations", "Gold members pricing - service fees reduced to just 1%"],
       excludedFeatures: [],
       popular: false,
-      hasBilling: true
+      hasBilling: true,
+      type: 'brand' as const
     },
     // Creator subscription plans
     {
@@ -147,10 +152,11 @@ const Footer = () => {
       monthlyPrice: 45,
       annualPrice: 450,
       description: "Essential services to launch your creator career",
-      features: ["Access to sponsor network", "Basic media placements", "Content syndication support", "Monthly strategy calls", "Discord community access", "Basic analytics dashboard"],
-      excludedFeatures: ["Priority placement", "Dedicated account manager", "Custom quest development"],
+      features: ["Get listed in the UPM media deck", "Get recommended to clients with active marketing campaigns"],
+      excludedFeatures: [],
       popular: false,
-      hasBilling: true
+      hasBilling: true,
+      type: 'creator' as const
     },
     {
       name: "Creator Pro",
@@ -159,10 +165,11 @@ const Footer = () => {
       monthlyPrice: 95,
       annualPrice: 950,
       description: "Advanced tools for established creators looking to scale",
-      features: ["Everything in Starter", "Priority sponsor matching", "Premium media placements", "Web3 directory listings", "Basic quest development", "Bi-weekly strategy calls", "Revenue optimization", "Cross-platform syndication"],
-      excludedFeatures: ["Dedicated account manager", "Custom brand partnerships"],
+      features: ["Get listed in the UPM media deck", "Get recommended to clients with active marketing campaigns", "KOL collaboration requests"],
+      excludedFeatures: [],
       popular: false,
-      hasBilling: true
+      hasBilling: true,
+      type: 'creator' as const
     },
     {
       name: "Creator Elite",
@@ -171,10 +178,11 @@ const Footer = () => {
       monthlyPrice: 195,
       annualPrice: 1950,
       description: "Premium service with dedicated support and custom solutions",
-      features: ["Everything in Pro", "Dedicated account manager", "Custom quest development", "Premium brand partnerships", "White-label solutions", "Weekly strategy sessions", "Custom analytics reports", "Priority support (24/7)", "Exclusive network events"],
+      features: ["Get listed in the UPM media deck", "Get recommended to clients with active marketing campaigns", "KOL collaboration requests", "Directory listings", "Community quest listings"],
       excludedFeatures: [],
       popular: false,
-      hasBilling: true
+      hasBilling: true,
+      type: 'creator' as const
     }
   ];
 
@@ -183,12 +191,30 @@ const Footer = () => {
     "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
   ];
 
+  // Auto-detect user type from URL path
+  useEffect(() => {
+    const path = window.location.pathname;
+    if (path.includes('/creators') && !userType) {
+      setUserType('creator');
+    } else if (path.includes('/services') && !userType) {
+      setUserType('brand');
+    } else if (path === '/' && !userType) {
+      // Default to brand for home page unless already set
+      setUserType('brand');
+    }
+  }, [userType, setUserType]);
+
   // Set default message when package is selected
   useEffect(() => {
     if (selectedPackage && selectedSubscription) {
       setMessage("I'm interested in this package/plan. Please contact me with more details.");
     }
   }, [selectedPackage, selectedSubscription]);
+
+  // Filter subscription plans based on user type
+  const filteredSubscriptionPlans = subscriptionPlans.filter(plan => 
+    plan.type === userType || !plan.type
+  );
 
   const marketingObjectiveOptions = [
     "Brand Awareness", "Lead Generation", "Community Building", "Token Launch",
@@ -442,10 +468,10 @@ const Footer = () => {
                   <div>
                     <h4 className="text-lg font-medium flex items-center gap-2">
                       <Target className="h-5 w-5" />
-                      {selectedSubscription?.name?.includes('Creator') ? 'Creator Details (Optional)' : 'Campaign Details (Optional)'}
+                      {userType === 'creator' ? 'Creator Details (Optional)' : 'Campaign Details (Optional)'}
                     </h4>
                     <p className="text-sm text-white/70 mt-1">
-                      {selectedSubscription?.name?.includes('Creator') 
+                      {userType === 'creator' 
                         ? 'Share your creator profile and collaboration interests'
                         : 'Share more details about the campaign you\'re looking to run'
                       }
@@ -456,7 +482,7 @@ const Footer = () => {
                     variant="ghost"
                     size="sm"
                     onClick={() => {
-                      if (selectedSubscription?.name?.includes('Creator')) {
+                      if (userType === 'creator') {
                         setShowCreatorDetails(!showCreatorDetails);
                       } else {
                         setShowCampaignDetails(!showCampaignDetails);
@@ -464,12 +490,12 @@ const Footer = () => {
                     }}
                     className="text-white hover:text-white hover:bg-white/10 border border-white/20"
                   >
-                    {(selectedSubscription?.name?.includes('Creator') ? showCreatorDetails : showCampaignDetails) ? "Hide Details" : "Add Details"}
+                    {(userType === 'creator' ? showCreatorDetails : showCampaignDetails) ? "Hide Details" : "Add Details"}
                   </Button>
                 </div>
                 
                 {/* Creator Details Form */}
-                {selectedSubscription?.name?.includes('Creator') && showCreatorDetails && (
+                {userType === 'creator' && showCreatorDetails && (
                   <div className="space-y-4">
                     {/* Social Media Links */}
                     <div className="grid md:grid-cols-2 gap-4">
@@ -588,7 +614,7 @@ const Footer = () => {
                 )}
                 
                 {/* Campaign Details Form */}
-                {!selectedSubscription?.name?.includes('Creator') && showCampaignDetails && (
+                {userType === 'brand' && showCampaignDetails && (
                   <div className="space-y-4">
                     <div className="grid md:grid-cols-2 gap-4">
                       <Input
@@ -673,12 +699,12 @@ const Footer = () => {
                           <SelectTrigger className="bg-white/20 border-white/30 text-white">
                             <SelectValue placeholder="Select target audience" />
                           </SelectTrigger>
-                          <SelectContent className="bg-white border border-gray-200 max-h-64 z-50">
-                            {targetAudienceOptions.map((audience) => (
-                              <SelectItem key={audience} value={audience} className="text-gray-900 hover:bg-gray-100">
-                                {audience}
-                              </SelectItem>
-                            ))}
+                    <SelectContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 max-h-64 z-50">
+                      {targetAudienceOptions.map((audience) => (
+                        <SelectItem key={audience} value={audience} className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                          {audience}
+                        </SelectItem>
+                      ))}
                           </SelectContent>
                         </Select>
                       </div>
@@ -689,12 +715,12 @@ const Footer = () => {
                           <SelectTrigger className="bg-white/20 border-white/30 text-white">
                             <SelectValue placeholder="Select geographic focus" />
                           </SelectTrigger>
-                          <SelectContent className="bg-white border border-gray-200 max-h-64 z-50">
-                            {geographicOptions.map((geo) => (
-                              <SelectItem key={geo} value={geo} className="text-gray-900 hover:bg-gray-100">
-                                {geo}
-                              </SelectItem>
-                            ))}
+                    <SelectContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 max-h-64 z-50">
+                      {geographicOptions.map((geo) => (
+                        <SelectItem key={geo} value={geo} className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                          {geo}
+                        </SelectItem>
+                      ))}
                           </SelectContent>
                         </Select>
                       </div>
@@ -705,12 +731,12 @@ const Footer = () => {
                           <SelectTrigger className="bg-white/20 border-white/30 text-white">
                             <SelectValue placeholder="Select duration" />
                           </SelectTrigger>
-                          <SelectContent className="bg-white border border-gray-200 max-h-64 z-50">
-                            {campaignDurationOptions.map((duration) => (
-                              <SelectItem key={duration} value={duration} className="text-gray-900 hover:bg-gray-100">
-                                {duration}
-                              </SelectItem>
-                            ))}
+                    <SelectContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 max-h-64 z-50">
+                      {campaignDurationOptions.map((duration) => (
+                        <SelectItem key={duration} value={duration} className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                          {duration}
+                        </SelectItem>
+                      ))}
                           </SelectContent>
                         </Select>
                       </div>
@@ -733,12 +759,12 @@ const Footer = () => {
                           <SelectTrigger className="bg-white/20 border-white/30 text-white">
                             <SelectValue placeholder="Select industry" />
                           </SelectTrigger>
-                          <SelectContent className="bg-white border border-gray-200 max-h-64 z-50">
-                            {industryOptions.map((industry) => (
-                              <SelectItem key={industry} value={industry} className="text-gray-900 hover:bg-gray-100">
-                                {industry}
-                              </SelectItem>
-                            ))}
+                    <SelectContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 max-h-64 z-50">
+                      {industryOptions.map((industry) => (
+                        <SelectItem key={industry} value={industry} className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                          {industry}
+                        </SelectItem>
+                      ))}
                           </SelectContent>
                         </Select>
                       </div>
@@ -824,9 +850,9 @@ const Footer = () => {
                 <SelectTrigger className="w-full bg-white/20 border-white/30 text-white">
                   <SelectValue placeholder="Select your country" className="text-white/70" />
                 </SelectTrigger>
-                <SelectContent className="bg-white border border-gray-200 max-h-64 z-50">
+                <SelectContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 max-h-64 z-50">
                   {allowedCountries.map((countryName) => (
-                    <SelectItem key={countryName} value={countryName} className="text-gray-900 hover:bg-gray-100 focus:bg-gray-100">
+                    <SelectItem key={countryName} value={countryName} className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-700">
                       {countryName}
                     </SelectItem>
                   ))}

@@ -21,6 +21,7 @@ export interface SubscriptionData {
   hasBilling: boolean;
   icon?: any;
   gradient?: string;
+  type?: 'brand' | 'creator';
 }
 
 export interface CampaignData {
@@ -59,12 +60,14 @@ interface PackageSelectionContextType {
   customBudget: string;
   campaignData: CampaignData;
   creatorData: CreatorData;
+  userType: 'brand' | 'creator' | null;
   setSelectedPackage: (pkg: PackageData | null) => void;
   setSelectedSubscription: (sub: SubscriptionData | null) => void;
   setBillingFrequency: (frequency: string) => void;
   setCustomBudget: (budget: string) => void;
   setCampaignData: (data: CampaignData) => void;
   setCreatorData: (data: CreatorData) => void;
+  setUserType: (type: 'brand' | 'creator' | null) => void;
   updateCampaignField: (field: keyof CampaignData, value: any) => void;
   updateCreatorField: (field: keyof CreatorData, value: any) => void;
   clearSelection: () => void;
@@ -92,6 +95,7 @@ export const PackageSelectionProvider = ({ children }: PackageSelectionProviderP
   const [customBudget, setCustomBudget] = useState<string>("");
   const [campaignData, setCampaignData] = useState<CampaignData>({});
   const [creatorData, setCreatorData] = useState<CreatorData>({});
+  const [userType, setUserType] = useState<'brand' | 'creator' | null>(null);
 
   const updateCampaignField = (field: keyof CampaignData, value: any) => {
     setCampaignData(prev => ({ ...prev, [field]: value }));
@@ -108,6 +112,7 @@ export const PackageSelectionProvider = ({ children }: PackageSelectionProviderP
     setCustomBudget("");
     setCampaignData({});
     setCreatorData({});
+    setUserType(null);
   };
 
   const isCreatorSubscription = (subscriptionName?: string) => {
@@ -182,12 +187,14 @@ export const PackageSelectionProvider = ({ children }: PackageSelectionProviderP
     customBudget,
     campaignData,
     creatorData,
+    userType,
     setSelectedPackage,
     setSelectedSubscription,
     setBillingFrequency,
     setCustomBudget,
     setCampaignData,
     setCreatorData,
+    setUserType,
     updateCampaignField,
     updateCreatorField,
     clearSelection,
