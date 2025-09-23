@@ -27,6 +27,9 @@ const Footer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showCampaignDetails, setShowCampaignDetails] = useState(false);
   const [showCreatorDetails, setShowCreatorDetails] = useState(false);
+  const [isExistingClient, setIsExistingClient] = useState(false);
+  const [existingClientInquiry, setExistingClientInquiry] = useState("");
+  const [campaignId, setCampaignId] = useState("");
   const { toast } = useToast();
   const { trackConversion, getReferralCode } = useReferralTracking();
 
@@ -377,9 +380,6 @@ const Footer = () => {
           
           {/* Package Selection Summary */}
           <div className="mb-8 p-4 bg-primary/20 rounded-lg border border-primary/30">
-            <div className="flex items-center justify-between mb-3">
-              <h4 className="text-lg font-semibold text-primary">I'm interested in</h4>
-            </div>
             
             {/* User Type Selector */}
             <div className="mb-6">
@@ -413,9 +413,65 @@ const Footer = () => {
                 </Button>
               </div>
             </div>
+
+            {/* Existing Client Checkbox */}
+            <div className="flex items-center space-x-2 mb-6">
+              <Checkbox 
+                id="existing-client" 
+                checked={isExistingClient}
+                onCheckedChange={(checked) => setIsExistingClient(checked as boolean)}
+                className="border-white/30 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+              />
+              <label 
+                htmlFor="existing-client" 
+                className="text-sm text-white cursor-pointer"
+              >
+                I am an existing client
+              </label>
+            </div>
             
-            {/* Show fields only after user type is selected */}
-            {userType ? (<>
+            {/* Existing Client Form */}
+            {isExistingClient ? (
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-white">What are you inquiring about?</label>
+                  <Select value={existingClientInquiry} onValueChange={setExistingClientInquiry}>
+                    <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                      <SelectValue placeholder="Select inquiry type" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 max-h-64 z-[100]">
+                      <SelectItem value="existing-campaign" className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        Existing campaign
+                      </SelectItem>
+                      <SelectItem value="account-upgrade" className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        Account upgrade
+                      </SelectItem>
+                      <SelectItem value="report-problem" className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        Report a problem
+                      </SelectItem>
+                      <SelectItem value="other" className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        Other
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                {existingClientInquiry === 'existing-campaign' && (
+                  <div>
+                    <label className="block text-sm font-medium mb-2 text-white">Campaign ID</label>
+                    <Input
+                      placeholder="Enter your campaign ID #"
+                      value={campaignId}
+                      onChange={(e) => setCampaignId(e.target.value)}
+                      className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
+                    />
+                  </div>
+                )}
+              </div>
+            ) :
+            
+            /* Show fields only after user type is selected and not existing client */
+            userType ? (<>
               {userType === 'brand' ? (
                 <div className="grid md:grid-cols-2 gap-4">
                   {/* Coverage Package Selector - Only for brands */}
