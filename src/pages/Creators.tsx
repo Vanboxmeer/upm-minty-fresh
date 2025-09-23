@@ -187,8 +187,7 @@ const CreatorsPage = () => {
                 Exclusive Access
               </h3>
               <p className="text-muted-foreground leading-relaxed">
-                Access premium brands and campaigns that aren't available anywhere else. 
-                The more you invest, the more exclusive your opportunities become.
+                Access premium brands and campaigns that aren't available anywhere else.
               </p>
             </Card>
 
@@ -200,8 +199,7 @@ const CreatorsPage = () => {
                 Priority Placement
               </h3>
               <p className="text-muted-foreground leading-relaxed">
-                Get featured first when brands are looking for creators. Premium tiers receive 
-                priority placement in all client recommendations and shortlists.
+                Get featured first when brands are looking for creators.
               </p>
             </Card>
 
@@ -214,7 +212,7 @@ const CreatorsPage = () => {
               </h3>
               <p className="text-muted-foreground leading-relaxed">
                 Multiple income streams including direct partnerships, referral commissions, 
-                and exclusive collaboration opportunities that scale with your success.
+                and collaboration opportunities.
               </p>
             </Card>
           </div>
