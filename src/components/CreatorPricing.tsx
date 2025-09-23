@@ -186,7 +186,7 @@ const CreatorPricing = () => {
 
                   <Button
                     onClick={() => handleSelectPlan(plan)}
-                    variant={plan.popular ? "cta" : "outline"}
+                    variant={plan.popular ? "cta" : "light"}
                     className="w-full"
                     size="sm"
                   >
@@ -217,11 +217,11 @@ const CreatorPricing = () => {
               Join Referral Program
             </Button>
             <Button
-              variant="outline"
+              variant="light"
               size="lg"
               onClick={() => window.open('/partner-dashboard', '_blank')}
             >
-              Partner Dashboard
+              View Pricing
             </Button>
           </div>
           <p className="text-sm text-muted-foreground mt-4">

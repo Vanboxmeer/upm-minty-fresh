@@ -73,7 +73,7 @@ const CreatorsPage = () => {
                 <span className="group-hover:scale-110 transition-transform duration-200">View Pricing Plans</span>
               </Button>
               
-              <Button variant="outline" size="lg" className="px-8 py-6 text-lg hover:bg-white/10 hover:border-white hover:text-white transition-all duration-300 button-glow group" asChild>
+              <Button variant="outline" size="lg" className="px-8 py-6 text-lg border-white/60 text-white hover:bg-white/10 hover:border-white hover:text-white transition-all duration-300 button-glow group" asChild>
                 <a href="/affiliate-signup">
                   <span className="group-hover:scale-110 transition-transform duration-200">Join Referral Program</span>
                 </a>
@@ -246,7 +246,7 @@ const CreatorsPage = () => {
                   Get Started Today
                 </Button>
                 
-                <Button variant="outline" size="lg" className="px-8 py-6 text-lg" onClick={() => {
+                <Button variant="light" size="lg" className="px-8 py-6 text-lg" onClick={() => {
                   const pricingSection = document.querySelector('#creator-pricing');
                   if (pricingSection) {
                     pricingSection.scrollIntoView({ behavior: 'smooth' });
