@@ -45,7 +45,7 @@ const handleSubmit = async (e: React.FormEvent) => {
 
     toast({
       title: 'Account Created Successfully!',
-      description: 'Your affiliate account is ready. Redirecting to your dashboard...',
+      description: 'Your affiliate account is ready. You can now log in to your partner dashboard.',
     });
 
     const email = formData.affiliate_email;
