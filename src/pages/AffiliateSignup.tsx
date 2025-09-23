@@ -31,40 +31,39 @@ const AffiliateSignup = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    try {
-      // Call the edge function to process the application
-      const { error } = await supabase.functions.invoke('process-affiliate-application', {
-        body: formData
-      });
+  try {
+    const { data, error } = await supabase.functions.invoke('process-affiliate-application', {
+      body: formData,
+    });
 
-      if (error) throw error;
+    if (error) throw new Error(error.message || 'Failed to submit application');
+    if ((data as any)?.error) throw new Error((data as any).error);
 
-      toast({
-        title: "Account Created Successfully!",
-        description: "Your affiliate account is ready. Redirecting to your dashboard...",
-      });
+    toast({
+      title: 'Account Created Successfully!',
+      description: 'Your affiliate account is ready. Redirecting to your dashboard...',
+    });
 
-      // Reset form
-      setFormData({ affiliate_name: '', affiliate_email: '', company: '' });
-      
-      // Redirect to partner dashboard after a short delay
-      setTimeout(() => {
-        window.location.href = `/partner-dashboard?email=${encodeURIComponent(formData.affiliate_email)}`;
-      }, 2000);
-    } catch (error: any) {
-      toast({
-        title: "Error",
-        description: error.message || "Failed to submit application. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+    const email = formData.affiliate_email;
+    setFormData({ affiliate_name: '', affiliate_email: '', company: '' });
+
+    setTimeout(() => {
+      window.location.href = `/partner-dashboard?email=${encodeURIComponent(email)}`;
+    }, 1500);
+  } catch (error: any) {
+    toast({
+      title: 'Error',
+      description: error?.message || 'Failed to submit application. Please try again.',
+      variant: 'destructive',
+    });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <div className="min-h-screen bg-background">
@@ -128,13 +127,16 @@ const AffiliateSignup = () => {
                   />
                 </div>
 
-                <Button
+<Button
                   type="submit"
                   className="w-full"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? 'Submitting...' : 'Submit Application'}
                 </Button>
+                <p className="text-sm text-muted-foreground mt-2">
+                  Already a partner? <a href="/partner-dashboard" className="text-primary hover:underline">Access your dashboard</a>
+                </p>
               </form>
             </CardContent>
           </Card>

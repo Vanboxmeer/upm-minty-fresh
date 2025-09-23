@@ -32,6 +32,8 @@ const PartnerDashboard = () => {
   const [affiliate, setAffiliate] = useState<AffiliateData | null>(null);
   const [stats, setStats] = useState<StatsData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [linkSent, setLinkSent] = useState(false);
+  const [session, setSession] = useState<import('@supabase/supabase-js').Session | null>(null);
   const { toast } = useToast();
 
   React.useEffect(() => {
@@ -42,93 +44,117 @@ const PartnerDashboard = () => {
       canonical: 'https://unitedpress.media/partner-dashboard'
     });
 
-    // Check for email parameter in URL
+    // Prefill email from URL if provided
     const urlParams = new URLSearchParams(window.location.search);
     const emailParam = urlParams.get('email');
     if (emailParam) {
       setEmail(emailParam);
-      // Auto-login if email parameter is provided
-      handleAutoLogin(emailParam);
     }
+
+    // Auth listener FIRST
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, newSession) => {
+      setSession(newSession);
+      const userEmail = newSession?.user?.email ?? null;
+      if (userEmail) {
+        setIsLoading(true);
+        // Defer DB calls to avoid deadlocks
+        setTimeout(() => {
+          loadAffiliate(userEmail)
+            .catch(() => {/* handled in loadAffiliate */})
+            .finally(() => setIsLoading(false));
+        }, 0);
+      }
+    });
+
+    // THEN check existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      const userEmail = session?.user?.email ?? null;
+      if (userEmail) {
+        setIsLoading(true);
+        loadAffiliate(userEmail).finally(() => setIsLoading(false));
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
-  const handleAutoLogin = async (emailAddress: string) => {
-    setIsLoading(true);
-    try {
-      await performLogin(emailAddress);
-    } catch (error) {
-      // If auto-login fails, just show the login form
-      console.log('Auto-login failed, showing login form');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+const loadAffiliate = async (emailAddress: string) => {
+  // Check if affiliate exists and is approved
+  const { data: affiliateData, error: affiliateError } = await supabase
+    .from('affiliates')
+    .select('*')
+    .eq('affiliate_email', emailAddress)
+    .eq('status', 'approved')
+    .maybeSingle();
 
-  const performLogin = async (emailAddress: string) => {
-    // Check if affiliate exists and is approved
-    const { data: affiliateData, error: affiliateError } = await supabase
+  if (affiliateError || !affiliateData) {
+    // Check if affiliate exists with different status
+    const { data: statusCheck } = await supabase
       .from('affiliates')
-      .select('*')
+      .select('status')
       .eq('affiliate_email', emailAddress)
-      .eq('status', 'approved')
       .maybeSingle();
 
-    if (affiliateError || !affiliateData) {
-      // Check if affiliate exists with different status
-      const { data: statusCheck } = await supabase
-        .from('affiliates')
-        .select('status')
-        .eq('affiliate_email', emailAddress)
-        .maybeSingle();
-
-      if (statusCheck) {
-        if (statusCheck.status === 'pending') {
-          throw new Error('Your affiliate application is still pending review. You will receive an email once it has been processed.');
-        } else if (statusCheck.status === 'declined') {
-          throw new Error('Your affiliate application was not approved. Please contact support for more information.');
-        }
+    if (statusCheck) {
+      if (statusCheck.status === 'pending') {
+        throw new Error('Your affiliate application is still pending review. You will receive an email once it has been processed.');
+      } else if (statusCheck.status === 'declined') {
+        throw new Error('Your affiliate application was not approved. Please contact support for more information.');
       }
-      throw new Error('Affiliate account not found. Please apply for the affiliate program first.');
     }
+    throw new Error('Affiliate account not found. Please apply for the affiliate program first.');
+  }
 
-    setAffiliate(affiliateData);
-    
-    // Fetch stats
-    const { data: statsData, error: statsError } = await supabase
-      .from('referral_stats')
-      .select('*')
-      .eq('affiliate_id', affiliateData.id)
-      .maybeSingle();
+  setAffiliate(affiliateData);
+  
+  // Fetch stats
+  const { data: statsData } = await supabase
+    .from('referral_stats')
+    .select('*')
+    .eq('affiliate_id', affiliateData.id)
+    .maybeSingle();
 
-    if (statsData) {
-      setStats(statsData);
-    } else {
-      setStats({ total_referrals: 0, successful_referrals: 0, commission_earned: 0 });
-    }
+  if (statsData) {
+    setStats(statsData);
+  } else {
+    setStats({ total_referrals: 0, successful_referrals: 0, commission_earned: 0 });
+  }
 
-    setIsAuthenticated(true);
-    toast({
-      title: "Welcome back!",
-      description: "Successfully accessed your affiliate dashboard.",
+  setIsAuthenticated(true);
+  toast({
+    title: 'Welcome back!',
+    description: 'Successfully accessed your affiliate dashboard.',
+  });
+};
+
+const handleLogin = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsLoading(true);
+
+  try {
+    const redirectUrl = `${window.location.origin}/partner-dashboard`;
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: { emailRedirectTo: redirectUrl }
     });
-  };
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-
-    try {
-      await performLogin(email);
-    } catch (error: any) {
-      toast({
-        title: "Access Denied",
-        description: error.message,
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    if (error) throw error;
+    setLinkSent(true);
+    toast({
+      title: 'Check your email',
+      description: 'We sent you a secure login link to access your dashboard.',
+    });
+  } catch (error: any) {
+    toast({
+      title: 'Sign-in failed',
+      description: error.message,
+      variant: 'destructive',
+    });
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   const copyToClipboard = (text: string, type: string) => {
     navigator.clipboard.writeText(text);
@@ -163,34 +189,42 @@ const PartnerDashboard = () => {
         <main className="container mx-auto px-4 py-24">
           <div className="max-w-md mx-auto">
             <Card>
-              <CardHeader>
-                <CardTitle>Partner Dashboard Access</CardTitle>
-                <CardDescription>
-                  Enter your affiliate email to access your dashboard
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleLogin} className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email Address</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Enter your affiliate email"
-                    />
-                  </div>
-                  <Button
-                    type="submit"
-                    className="w-full"
-                    disabled={isLoading}
-                  >
-                    {isLoading ? 'Accessing...' : 'Access Dashboard'}
-                  </Button>
-                </form>
-              </CardContent>
+<CardHeader>
+  <CardTitle>Partner Login</CardTitle>
+  <CardDescription>
+    Enter your affiliate email to receive a secure magic link
+  </CardDescription>
+</CardHeader>
+<CardContent>
+  <form onSubmit={handleLogin} className="space-y-4">
+    <div className="space-y-2">
+      <Label htmlFor="email">Email Address</Label>
+      <Input
+        id="email"
+        type="email"
+        required
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Enter your affiliate email"
+      />
+    </div>
+    <Button
+      type="submit"
+      className="w-full"
+      disabled={isLoading}
+    >
+      {isLoading ? 'Sending...' : 'Send Login Link'}
+    </Button>
+    {linkSent && (
+      <p className="text-sm text-muted-foreground">
+        Email sent to <span className="font-medium">{email}</span>. Check your inbox to continue.
+      </p>
+    )}
+    <p className="text-xs text-muted-foreground">
+      New partner? <a href="/affiliate-signup" className="text-primary hover:underline">Apply to the Referral Program</a>
+    </p>
+  </form>
+</CardContent>
             </Card>
           </div>
         </main>
