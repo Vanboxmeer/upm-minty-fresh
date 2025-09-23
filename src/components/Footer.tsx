@@ -379,12 +379,12 @@ const Footer = () => {
           <h3 className="text-2xl font-bold mb-6 text-center">Get In Touch</h3>
           
           {/* Package Selection Summary */}
-          <div className="mb-8 p-4 bg-primary/20 rounded-lg border border-primary/30">
+          <div className="mb-8 p-3 sm:p-4 bg-primary/20 rounded-lg border border-primary/30">
             
             {/* User Type Selector */}
             <div className="mb-6">
               <label className="block text-sm font-medium mb-3 text-white">I am a:</label>
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <Button
                   type="button"
                   variant={userType === 'brand' ? 'default' : 'outline'}
@@ -394,7 +394,7 @@ const Footer = () => {
                     setSelectedSubscription(null);
                     setSelectedPackage(null);
                   }}
-                  className="text-sm"
+                  className="flex-1 text-sm px-3 py-3 transition-all duration-200"
                 >
                   Brand/Company
                 </Button>
@@ -407,7 +407,7 @@ const Footer = () => {
                     setSelectedSubscription(null);
                     setSelectedPackage(null);
                   }}
-                  className="text-sm"
+                  className="flex-1 text-sm px-3 py-3 transition-all duration-200"
                 >
                   Creator/Publisher
                 </Button>
@@ -473,7 +473,7 @@ const Footer = () => {
             /* Show fields only after user type is selected and not existing client */
             userType ? (<>
               {userType === 'brand' ? (
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {/* Coverage Package Selector - Only for brands */}
                   <div>
                     <label className="block text-sm font-medium mb-2 text-white">Coverage Package:</label>
@@ -932,36 +932,36 @@ const Footer = () => {
 
           <form onSubmit={handleSubmit}>
             {/* Basic Contact Information */}
-            <div className="grid md:grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <Input 
                 placeholder="First Name" 
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
+                className="w-full bg-white/20 border-white/30 text-white placeholder:text-white/70" 
                 required
               />
               <Input 
                 placeholder="Last Name" 
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
+                className="w-full bg-white/20 border-white/30 text-white placeholder:text-white/70" 
                 required
               />
             </div>
-            <div className="grid md:grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <Input 
                 placeholder="Email" 
                 type="email" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
+                className="w-full bg-white/20 border-white/30 text-white placeholder:text-white/70" 
                 required
               />
               <Input 
                 placeholder="Phone" 
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
+                className="w-full bg-white/20 border-white/30 text-white placeholder:text-white/70"
               />
             </div>
             <div className="mb-4">
@@ -969,7 +969,7 @@ const Footer = () => {
                 placeholder="Telegram - @handle" 
                 value={telegram}
                 onChange={(e) => setTelegram(e.target.value)}
-                className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
+                className="w-full bg-white/20 border-white/30 text-white placeholder:text-white/70"
               />
             </div>
             <div className="mb-4">
@@ -998,18 +998,18 @@ const Footer = () => {
             />
             
             {/* Referral Fields */}
-            <div className="grid md:grid-cols-2 gap-4 mt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <Input 
                 placeholder="Referrer Name (Optional)" 
                 value={referrerName}
                 onChange={(e) => setReferrerName(e.target.value)}
-                className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
+                className="w-full bg-white/20 border-white/30 text-white placeholder:text-white/70"
               />
               <Input 
                 placeholder="Referrer Email/Code (Optional)" 
                 value={referrerCode}
                 onChange={(e) => setReferrerCode(e.target.value)}
-                className="bg-white/20 border-white/30 text-white placeholder:text-white/70" 
+                className="w-full bg-white/20 border-white/30 text-white placeholder:text-white/70"
               />
             </div>
             
@@ -1032,7 +1032,7 @@ const Footer = () => {
             <Button
               type="submit" 
               variant="hero" 
-              className="w-full mt-4"
+              className="w-full mt-6 py-3 sm:py-4 text-sm sm:text-base font-semibold transition-all duration-300"
               disabled={isLoading}
             >
               {isLoading ? "Sending..." : "Send Message"}
@@ -1049,7 +1049,7 @@ const Footer = () => {
         </div>
 
         {/* Footer Links */}
-        <div className="grid md:grid-cols-4 gap-8 border-t border-white/20 pt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/20 pt-12">
           <div>
             <div className="flex items-center space-x-2 mb-4">
               <div className="text-2xl font-bold text-primary">UPM</div>
