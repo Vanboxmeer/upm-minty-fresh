@@ -24,12 +24,14 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [telegram, setTelegram] = useState("");
   const [country, setCountry] = useState("");
   const [message, setMessage] = useState("");
   const [referrerName, setReferrerName] = useState("");
   const [referrerCode, setReferrerCode] = useState("");
   const [subscribeToNewsletter, setSubscribeToNewsletter] = useState(false);
   const [customBudget, setCustomBudget] = useState<string>("");
+  const [userType, setUserType] = useState<'brand' | 'creator'>('brand');
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
@@ -42,27 +44,56 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
     {
       name: "Growth",
       price: "$5,000",
-      description: "Perfect for emerging projects",
-      features: ["Press release distribution", "Micro-influencer collaborations", "Industry publications"]
+      description: "Perfect for emerging projects looking to establish market presence. Use your budget for things such as:",
+      features: [
+        "Press release distribution to key outlets",
+        "Collaborations with micro-influencers",
+        "Feature placements in industry publications",
+        "Social media amplification",
+        "Web3 directory listing services"
+      ],
+      popular: false
     },
     {
-      name: "Scale", 
+      name: "Scale",
       price: "$25,000",
-      description: "Comprehensive marketing for scaling",
-      features: ["Global press distribution", "Top-tier influencer partnerships", "Major publication features"],
+      description: "Comprehensive marketing for projects ready to scale significantly. Use your budget for things such as:",
+      features: [
+        "Global press release distribution",
+        "Partnerships with a top-tier influencer",
+        "Collaborations with multiple micro-influencers",
+        "Executive interviews and features in major publications",
+        "Feature articles in leading industry sites",
+        "Web3 directory listing services"
+      ],
       popular: true
     },
     {
       name: "Dominate",
-      price: "$100,000", 
-      description: "Maximum exposure package",
-      features: ["500+ media outlets", "Multiple top-tier influencers", "Tier-1 media coverage"]
+      price: "$100,000",
+      description: "Maximum exposure package for industry-leading projects. Use your budget for things such as:",
+      features: [
+        "Global media outreach to 500+ outlets",
+        "Collaborations with multiple top-tier influencers",
+        "Collaborations with small and medium sized content creators",
+        "Coverage in multiple tier-1 media publications",
+        "Budget gives room for a longer campaign or larger media blitz",
+        "Web3 directory listing services"
+      ],
+      popular: false
     },
     {
       name: "Custom Budget",
       price: "Custom",
-      description: "Account manager shortlists mixed media options",
-      features: ["Your budget fully utilized ($5K-$500K)", "Mixed media package options", "Account manager guidance"]
+      description: "Your account manager will work with you to shortlist mixed media options that utilize your full budget. Use your budget for things such as:",
+      features: [
+        "Account manager shortlists options to use your full budget ($5K - $500K)",
+        "Mixed media package combining press releases & influencer collaborations",
+        "Scalable media outreach matching your investment",
+        "Custom KOL selection and content creation",
+        "Web3 directory listing services"
+      ],
+      popular: false
     }
   ];
 
@@ -73,37 +104,85 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
       price: "Free",
       monthlyPrice: 0,
       annualPrice: 0,
-      description: "Perfect for testing our services",
-      features: ["Discovery media deck", "Campaign builder form", "Quote builder assistance"],
-      excludedFeatures: ["KPI tracking", "Dedicated account manager", "Membership pricing"],
+      description: "Perfect for testing our services before committing to membership",
+      features: ["Discovery media deck", "Campaign builder form", "Quote builder and shortlisting assistance", "Order facilitation"],
+      excludedFeatures: ["KPI tracking", "Dedicated account manager and campaign advisor", "Managed Brave Ads and Telegram Ads", "Press negotiations", "Membership pricing"],
       popular: false,
-      hasBilling: false
+      hasBilling: false,
+      type: 'brand' as const
     },
     {
       name: "Silver Membership",
       subtitle: "3.45% service fee",
       price: "$250",
       monthlyPrice: 250,
-      annualPrice: 2500,
-      description: "Medium sized campaigns with reduced fees",
-      features: ["Members media deck", "Campaign builder", "KPI tracking", "Dedicated account manager"],
+      annualPrice: 2500, // 10 months pricing
+      description: "Designed for medium sized campaigns with reduced service fees",
+      features: ["Members media deck", "Campaign builder", "Order facilitation", "Quote builder and shortlist assistance", "KPI tracking", "Dedicated account manager and campaign advisor", "Managed Brave Ads and Telegram Ads", "KOL communications", "Press negotiations", "Silver members pricing - service fees reduced to just 3.45%"],
       excludedFeatures: [],
       popular: true,
-      hasBilling: true
+      hasBilling: true,
+      type: 'brand' as const
     },
     {
       name: "Gold Membership",
       subtitle: "1% service fee",
       price: "$995",
       monthlyPrice: 995,
-      annualPrice: 9950,
-      description: "Large campaigns requiring administrative work",
-      features: ["Members media deck", "Campaign builder", "KPI tracking", "Dedicated account manager"],
+      annualPrice: 9950, // 10 months pricing
+      description: "Designed for large and highly active marketing campaigns requiring administrative work",
+      features: ["Members media deck", "Campaign builder", "Order facilitation", "Quote builder and shortlist assistance", "KPI tracking", "Dedicated account manager and campaign advisor", "Managed Brave Ads and Telegram Ads", "KOL communications", "Press negotiations", "Gold members pricing - service fees reduced to just 1%"],
       excludedFeatures: [],
       popular: false,
-      hasBilling: true
+      hasBilling: true,
+      type: 'brand' as const
+    },
+    // Creator subscription plans
+    {
+      name: "Creator Starter",
+      subtitle: "Perfect for new creators",
+      price: "$45",
+      monthlyPrice: 45,
+      annualPrice: 450,
+      description: "Essential services to launch your creator career",
+      features: ["Get listed in the UPM media deck", "Get recommended to clients with active marketing campaigns"],
+      excludedFeatures: [],
+      popular: false,
+      hasBilling: true,
+      type: 'creator' as const
+    },
+    {
+      name: "Creator Pro",
+      subtitle: "Most popular for growing creators",
+      price: "$95",
+      monthlyPrice: 95,
+      annualPrice: 950,
+      description: "Advanced tools for established creators looking to scale",
+      features: ["Get listed in the UPM media deck", "Get recommended to clients with active marketing campaigns", "KOL collaboration requests"],
+      excludedFeatures: [],
+      popular: true,
+      hasBilling: true,
+      type: 'creator' as const
+    },
+    {
+      name: "Creator Elite",
+      subtitle: "For top-tier creators and publishers",
+      price: "$195",
+      monthlyPrice: 195,
+      annualPrice: 1950,
+      description: "Premium service with dedicated support and custom solutions",
+      features: ["Get listed in the UPM media deck", "Get recommended to clients with active marketing campaigns", "KOL collaboration requests", "Directory listings", "Community quest listings"],
+      excludedFeatures: [],
+      popular: false,
+      hasBilling: true,
+      type: 'creator' as const
     }
   ];
+
+  // Filter subscription plans based on user type
+  const filteredSubscriptionPlans = subscriptionPlans.filter(plan => 
+    plan.type === userType || !plan.type
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -135,7 +214,7 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
         }
         
         if (selectedSubscription) {
-          const subscriptionData = subscriptionPlans.find(s => s.name === selectedSubscription);
+          const subscriptionData = filteredSubscriptionPlans.find(s => s.name === selectedSubscription);
           formMessage += `Subscription Level: ${selectedSubscription}\n`;
           
           if (subscriptionData?.hasBilling) {
@@ -154,6 +233,7 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
           lastName,
           email,
           phone,
+          telegram,
           country,
           message: formMessage,
           referrerName: referrerName || null,
@@ -184,6 +264,7 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
       setLastName("");
       setEmail("");
       setPhone("");
+      setTelegram("");
       setCountry("");
       setMessage("");
       setReferrerName("");
@@ -218,7 +299,40 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
         
         <div className="grid md:grid-cols-2 gap-6">
         <div className="space-y-6">
-          {/* Package Selection */}
+          {/* User Type Selector */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">I am a:</h3>
+            <div className="flex gap-3">
+              <Button
+                type="button"
+                variant={userType === 'brand' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => {
+                  setUserType('brand');
+                  setSelectedSubscription("");
+                  setSelectedPackage("");
+                }}
+                className="flex-1"
+              >
+                Brand/Company
+              </Button>
+              <Button
+                type="button"
+                variant={userType === 'creator' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => {
+                  setUserType('creator');
+                  setSelectedSubscription("");
+                  setSelectedPackage("");
+                }}
+                className="flex-1"
+              >
+                Creator/Influencer
+              </Button>
+            </div>
+          </div>
+          {/* Package Selection - Only show for brands */}
+          {userType === 'brand' && (
           <div>
             <h3 className="text-lg font-semibold mb-4">Select a Package</h3>
             <div className="space-y-3">
@@ -271,12 +385,13 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
               ))}
             </div>
           </div>
+          )}
 
           {/* Subscription Selection */}
           <div>
             <h3 className="text-lg font-semibold mb-4">Select Subscription</h3>
             <div className="space-y-2">
-              {subscriptionPlans.map((plan) => (
+              {filteredSubscriptionPlans.map((plan) => (
                 <Card
                   key={plan.name}
                   className={`cursor-pointer transition-all ${
@@ -304,7 +419,7 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
           </div>
 
           {/* Billing Frequency for Paid Plans */}
-          {selectedSubscription && subscriptionPlans.find(p => p.name === selectedSubscription)?.hasBilling && (
+          {selectedSubscription && filteredSubscriptionPlans.find(p => p.name === selectedSubscription)?.hasBilling && (
             <div>
               <h3 className="text-lg font-semibold mb-4">Billing Frequency</h3>
               <Tabs value={billingFrequency} onValueChange={setBillingFrequency}>
@@ -314,13 +429,13 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
                 </TabsList>
                 <TabsContent value="monthly" className="mt-2">
                   <div className="text-center p-2">
-                    <span className="font-medium">${subscriptionPlans.find(p => p.name === selectedSubscription)?.monthlyPrice}/month</span>
+                    <span className="font-medium">${filteredSubscriptionPlans.find(p => p.name === selectedSubscription)?.monthlyPrice}/month</span>
                   </div>
                 </TabsContent>
                 <TabsContent value="annual" className="mt-2">
                   <div className="text-center p-2">
-                    <span className="font-medium">${subscriptionPlans.find(p => p.name === selectedSubscription)?.annualPrice}/year</span>
-                    <div className="text-xs text-green-600">Save ${((subscriptionPlans.find(p => p.name === selectedSubscription)?.monthlyPrice || 0) * 12) - (subscriptionPlans.find(p => p.name === selectedSubscription)?.annualPrice || 0)}</div>
+                    <span className="font-medium">${filteredSubscriptionPlans.find(p => p.name === selectedSubscription)?.annualPrice}/year</span>
+                    <div className="text-xs text-green-600">Save ${((filteredSubscriptionPlans.find(p => p.name === selectedSubscription)?.monthlyPrice || 0) * 12) - (filteredSubscriptionPlans.find(p => p.name === selectedSubscription)?.annualPrice || 0)}</div>
                   </div>
                 </TabsContent>
               </Tabs>
@@ -362,6 +477,13 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
                 placeholder="Phone Number"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
+              />
+              
+              <Input
+                type="text"
+                placeholder="Telegram Username"
+                value={telegram}
+                onChange={(e) => setTelegram(e.target.value)}
               />
 
               <Select value={country} onValueChange={setCountry} required>
