@@ -134,16 +134,25 @@ const handleLogin = async (e: React.FormEvent) => {
 
   try {
     const redirectUrl = `${window.location.origin}/partner-dashboard`;
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: { emailRedirectTo: redirectUrl }
+    
+    // Use custom affiliate login function instead of generic auth
+    const { data, error } = await supabase.functions.invoke('send-affiliate-login-link', {
+      body: { 
+        email,
+        redirectUrl 
+      }
     });
 
     if (error) throw error;
+    
+    if (data?.error) {
+      throw new Error(data.error);
+    }
+
     setLinkSent(true);
     toast({
-      title: 'Check your email',
-      description: 'We sent you a secure login link to access your dashboard.',
+      title: 'Login link sent!',
+      description: `We sent a secure login link to your UPM affiliate dashboard at ${email}`,
     });
   } catch (error: any) {
     toast({
