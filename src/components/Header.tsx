@@ -67,9 +67,8 @@ const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
             
-<button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer">Contact</button>
+            <button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer">Contact</button>
             <a href="/blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
-            <a href="/partner-dashboard" className="text-foreground hover:text-primary transition-colors">Partner Login</a>
           </nav>
           
           <div className="flex items-center space-x-4">
@@ -103,7 +102,6 @@ const Header = () => {
             
             <button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer text-left">Contact</button>
             <a href="/blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
-            <a href="/partner-dashboard" className="text-foreground hover:text-primary transition-colors">Partner Login</a>
             <div className="flex flex-col space-y-2 pt-4 border-t border-border">
               <Button variant="cta" size="sm" onClick={scrollToCoveragePackages}>Start a Campaign</Button>
             </div>
