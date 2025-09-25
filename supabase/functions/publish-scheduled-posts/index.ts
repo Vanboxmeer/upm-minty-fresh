@@ -86,7 +86,8 @@ Deno.serve(async (req) => {
         }
       } catch (error) {
         console.error(`Error processing post ${post.id}:`, error)
-        errors.push(`Failed to publish "${post.title}": ${error.message}`)
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+        errors.push(`Failed to publish "${post.title}": ${errorMessage}`)
       }
     }
 
@@ -105,10 +106,11 @@ Deno.serve(async (req) => {
 
   } catch (error) {
     console.error('Error in publish-scheduled-posts function:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     return new Response(
       JSON.stringify({ 
         success: false, 
-        error: error.message 
+        error: errorMessage 
       }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },

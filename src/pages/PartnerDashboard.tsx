@@ -123,23 +123,33 @@ const PartnerDashboard = () => {
 
       setAffiliate(affiliateData);
       
-      // Fetch detailed stats using raw query
+      // Fetch detailed stats using direct query
       const { data: detailedStats } = await supabase
-        .rpc('get_affiliate_detailed_stats', { affiliate_code: affiliateData.referral_code });
+        .from('referrals')
+        .select(`
+          *,
+          approved,
+          commission_amount
+        `)
+        .eq('referrer_code', affiliateData.referral_code);
 
-      if (detailedStats && detailedStats.length > 0) {
-        const statsRecord = detailedStats[0];
+      if (detailedStats && Array.isArray(detailedStats) && detailedStats.length > 0) {
+        // Calculate stats from referrals data
+        const totalVisits = detailedStats.length;
+        const approvedConversions = detailedStats.filter(r => r.approved && r.status === 'converted').length;
+        const totalCommission = detailedStats
+          .filter(r => r.approved)
+          .reduce((sum, r) => sum + (Number(r.commission_amount) || 0), 0);
+          
+        const linkVisits = detailedStats.filter(r => r.referral_method === 'link').length;
+        const linkConversions = detailedStats.filter(r => r.referral_method === 'link' && r.approved && r.status === 'converted').length;
+        const domainVisits = detailedStats.filter(r => r.referral_method === 'domain').length;
+        const domainConversions = detailedStats.filter(r => r.referral_method === 'domain' && r.approved && r.status === 'converted').length;
+        
         setStats({
-          total_referrals: statsRecord.total_visits || 0,
-          successful_referrals: statsRecord.approved_conversions || 0,
-          commission_earned: Number(statsRecord.total_commission_earned) || 0,
-          link_visits: statsRecord.link_visits || 0,
-          link_conversions: statsRecord.link_conversions || 0,
-          domain_visits: statsRecord.domain_visits || 0,
-          domain_conversions: statsRecord.domain_conversions || 0,
-          total_visits: statsRecord.total_visits || 0,
-          total_conversions: statsRecord.total_conversions || 0,
-          approved_conversions: statsRecord.approved_conversions || 0
+          total_referrals: totalVisits,
+          successful_referrals: approvedConversions,
+          commission_earned: totalCommission,
         });
       } else {
         setStats({ 
