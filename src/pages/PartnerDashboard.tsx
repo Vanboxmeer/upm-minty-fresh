@@ -23,6 +23,13 @@ interface StatsData {
   total_referrals: number;
   successful_referrals: number;
   commission_earned: number;
+  link_visits?: number;
+  link_conversions?: number;
+  domain_visits?: number;
+  domain_conversions?: number;
+  total_visits?: number;
+  total_conversions?: number;
+  approved_conversions?: number;
 }
 
 interface AffiliateDomain {
@@ -116,17 +123,37 @@ const PartnerDashboard = () => {
 
       setAffiliate(affiliateData);
       
-      // Fetch stats
-      const { data: statsData } = await supabase
-        .from('referral_stats')
-        .select('*')
-        .eq('affiliate_id', affiliateData.id)
-        .maybeSingle();
+      // Fetch detailed stats using raw query
+      const { data: detailedStats } = await supabase
+        .rpc('get_affiliate_detailed_stats', { affiliate_code: affiliateData.referral_code });
 
-      if (statsData) {
-        setStats(statsData);
+      if (detailedStats && detailedStats.length > 0) {
+        const statsRecord = detailedStats[0];
+        setStats({
+          total_referrals: statsRecord.total_visits || 0,
+          successful_referrals: statsRecord.approved_conversions || 0,
+          commission_earned: Number(statsRecord.total_commission_earned) || 0,
+          link_visits: statsRecord.link_visits || 0,
+          link_conversions: statsRecord.link_conversions || 0,
+          domain_visits: statsRecord.domain_visits || 0,
+          domain_conversions: statsRecord.domain_conversions || 0,
+          total_visits: statsRecord.total_visits || 0,
+          total_conversions: statsRecord.total_conversions || 0,
+          approved_conversions: statsRecord.approved_conversions || 0
+        });
       } else {
-        setStats({ total_referrals: 0, successful_referrals: 0, commission_earned: 0 });
+        setStats({ 
+          total_referrals: 0, 
+          successful_referrals: 0, 
+          commission_earned: 0,
+          link_visits: 0,
+          link_conversions: 0,
+          domain_visits: 0,
+          domain_conversions: 0,
+          total_visits: 0,
+          total_conversions: 0,
+          approved_conversions: 0
+        });
       }
 
       // Fetch affiliate domains
@@ -396,26 +423,37 @@ const PartnerDashboard = () => {
           </div>
 
           {/* Stats Cards */}
-          <div className="grid md:grid-cols-3 gap-6 mb-8">
+          <div className="grid md:grid-cols-4 gap-6 mb-8">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Referrals</CardTitle>
-                <div className="h-4 w-4 text-muted-foreground">👥</div>
+                <CardTitle className="text-sm font-medium">Total Visits</CardTitle>
+                <div className="h-4 w-4 text-muted-foreground">👁️</div>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{stats.total_referrals}</div>
-                <p className="text-xs text-muted-foreground">All time referrals</p>
+                <div className="text-2xl font-bold">{stats.total_visits || 0}</div>
+                <p className="text-xs text-muted-foreground">All referral traffic</p>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Successful Referrals</CardTitle>
-                <div className="h-4 w-4 text-muted-foreground">✨</div>
+                <CardTitle className="text-sm font-medium">Total Conversions</CardTitle>
+                <div className="h-4 w-4 text-muted-foreground">🎯</div>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{stats.successful_referrals}</div>
-                <p className="text-xs text-muted-foreground">Converted referrals</p>
+                <div className="text-2xl font-bold">{stats.total_conversions || 0}</div>
+                <p className="text-xs text-muted-foreground">Form submissions</p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Approved Conversions</CardTitle>
+                <div className="h-4 w-4 text-muted-foreground">✅</div>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{stats.approved_conversions || 0}</div>
+                <p className="text-xs text-muted-foreground">Admin approved</p>
               </CardContent>
             </Card>
 
@@ -427,6 +465,55 @@ const PartnerDashboard = () => {
               <CardContent>
                 <div className="text-2xl font-bold">${stats.commission_earned}</div>
                 <p className="text-xs text-muted-foreground">{affiliate?.commission_rate}% commission rate</p>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Detailed Stats by Method */}
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            <Card>
+              <CardHeader>
+                <CardTitle>Referral Link Performance</CardTitle>
+                <CardDescription>Stats from your direct referral link and QR code</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-muted-foreground">Visits</span>
+                  <span className="font-medium">{stats.link_visits || 0}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-muted-foreground">Conversions</span>
+                  <span className="font-medium">{stats.link_conversions || 0}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-muted-foreground">Conversion Rate</span>
+                  <span className="font-medium">
+                    {stats.link_visits > 0 ? ((stats.link_conversions / stats.link_visits) * 100).toFixed(1) : '0'}%
+                  </span>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Domain Tracking Performance</CardTitle>
+                <CardDescription>Stats from your tracked domains</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-muted-foreground">Visits</span>
+                  <span className="font-medium">{stats.domain_visits || 0}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-muted-foreground">Conversions</span>
+                  <span className="font-medium">{stats.domain_conversions || 0}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-muted-foreground">Conversion Rate</span>
+                  <span className="font-medium">
+                    {stats.domain_visits > 0 ? ((stats.domain_conversions / stats.domain_visits) * 100).toFixed(1) : '0'}%
+                  </span>
+                </div>
               </CardContent>
             </Card>
           </div>

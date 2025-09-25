@@ -359,10 +359,15 @@ export type Database = {
       }
       referrals: {
         Row: {
+          approved: boolean | null
+          approved_at: string | null
+          approved_by: string | null
+          commission_amount: number | null
           created_at: string
           id: string
           notes: string | null
           referral_date: string
+          referral_method: string | null
           referred_user_email: string
           referred_user_name: string
           referrer_code: string | null
@@ -373,10 +378,15 @@ export type Database = {
           status: string
         }
         Insert: {
+          approved?: boolean | null
+          approved_at?: string | null
+          approved_by?: string | null
+          commission_amount?: number | null
           created_at?: string
           id?: string
           notes?: string | null
           referral_date?: string
+          referral_method?: string | null
           referred_user_email: string
           referred_user_name: string
           referrer_code?: string | null
@@ -387,10 +397,15 @@ export type Database = {
           status?: string
         }
         Update: {
+          approved?: boolean | null
+          approved_at?: string | null
+          approved_by?: string | null
+          commission_amount?: number | null
           created_at?: string
           id?: string
           notes?: string | null
           referral_date?: string
+          referral_method?: string | null
           referred_user_email?: string
           referred_user_name?: string
           referrer_code?: string | null
