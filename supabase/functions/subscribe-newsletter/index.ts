@@ -1,13 +1,10 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.54.0';
-import { Resend } from "npm:resend@2.0.0";
 
 const supabase = createClient(
   Deno.env.get('SUPABASE_URL') ?? '',
   Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
 );
-
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -113,50 +110,44 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send welcome email
     try {
-      await resend.emails.send({
-        from: "UPM Blog <unitedpress.media@gmail.com>",
-        to: [email],
-        subject: "Welcome to UPM's Marketing Insights Newsletter!",
-        html: `
-          <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif;">
-            <h1 style="color: #1a1a1a; margin-bottom: 24px;">Welcome to UPM's Newsletter!</h1>
-            
-            <p style="color: #4a4a4a; line-height: 1.6; margin-bottom: 16px;">
-              ${name ? `Hi ${name},` : 'Hi there,'}
-            </p>
-            
-            <p style="color: #4a4a4a; line-height: 1.6; margin-bottom: 16px;">
-              Thank you for subscribing to our newsletter! You'll now receive the latest insights on digital marketing, Web3, crypto, and more directly in your inbox.
-            </p>
-            
-            <p style="color: #4a4a4a; line-height: 1.6; margin-bottom: 16px;">
-              What to expect:
-            </p>
-            
-            <ul style="color: #4a4a4a; line-height: 1.6; margin-bottom: 24px;">
-              <li>Bi-weekly marketing insights and strategies</li>
-              <li>Latest trends in Web3 and crypto marketing</li>
-              <li>Case studies and success stories</li>
-              <li>Exclusive tips from our team</li>
-            </ul>
-            
-            <p style="color: #4a4a4a; line-height: 1.6; margin-bottom: 24px;">
-              In the meantime, check out our latest blog posts at <a href="https://unitedpress.media/blog" style="color: #2563eb;">unitedpress.media/blog</a>
-            </p>
-            
-            <div style="border-top: 1px solid #e5e5e5; padding-top: 24px; margin-top: 32px;">
-              <p style="color: #888; font-size: 14px;">
-                Best regards,<br>
-                The UPM Team<br>
-                <a href="https://unitedpress.media" style="color: #2563eb;">United Press Media</a>
-              </p>
-            </div>
-          </div>
-        `,
-      });
+      const resendApiKey = Deno.env.get('RESEND_API_KEY');
+      if (resendApiKey) {
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${resendApiKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            from: "UPM Blog <unitedpress.media@gmail.com>",
+            to: [email],
+            subject: "Welcome to UPM's Marketing Insights Newsletter!",
+            html: `
+              <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+                <h1 style="color: #2563eb; text-align: center;">Welcome to UPM!</h1>
+                <p>Hi ${name || 'there'},</p>
+                <p>Thank you for subscribing to United Press Media's marketing insights newsletter!</p>
+                <p>You'll receive bi-weekly updates with:</p>
+                <ul>
+                  <li>Latest marketing trends and strategies</li>
+                  <li>Case studies from successful campaigns</li>
+                  <li>Industry insights and expert tips</li>
+                  <li>Exclusive offers and updates</li>
+                </ul>
+                <p>Stay tuned for valuable content that will help elevate your marketing game!</p>
+                <p>Best regards,<br>The UPM Team</p>
+                <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
+                <p style="font-size: 12px; color: #666; text-align: center;">
+                  You're receiving this because you subscribed to our newsletter. 
+                  <a href="mailto:unitedpress.media@gmail.com?subject=Unsubscribe">Unsubscribe</a>
+                </p>
+              </div>
+            `,
+          }),
+        });
+      }
     } catch (emailError) {
-      console.error("Email error:", emailError);
-      // Don't fail the subscription if email fails
+      console.error('Error sending welcome email:', emailError);
     }
 
     console.log("Newsletter subscription successful");

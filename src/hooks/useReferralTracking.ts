@@ -16,7 +16,7 @@ export const useReferralTracking = () => {
     }
   }, []);
 
-  const trackReferralVisit = async (referralCode: string) => {
+  const updateReferralTracking = async (referralCode: string, sourceDomain?: string) => {
     try {
       // Get visitor info (anonymous tracking)
       const visitorId = getOrCreateVisitorId();
@@ -29,7 +29,9 @@ export const useReferralTracking = () => {
           referred_user_name: 'Anonymous Visitor',
           referred_user_email: `visitor-${visitorId}@temp.com`,
           referrer_name: 'Unknown', // Will be updated when we find the affiliate
-          status: 'visited'
+          status: 'visited',
+          source_domain: sourceDomain || window.location.hostname,
+          referrer_domain: document.referrer ? new URL(document.referrer).hostname : null
         });
 
       if (error) {
@@ -37,6 +39,35 @@ export const useReferralTracking = () => {
       }
     } catch (error) {
       console.log('Referral tracking error:', error);
+    }
+  };
+
+  const trackReferralVisit = async (referralCode: string) => {
+    await updateReferralTracking(referralCode);
+  };
+
+  const trackDomainReferral = async (domain: string) => {
+    try {
+      const visitorId = getOrCreateVisitorId();
+      
+      // Track domain-based referral
+      const { error } = await supabase
+        .from('referrals')
+        .insert({
+          referrer_code: null,
+          referred_user_name: 'Domain Visitor',
+          referred_user_email: `domain-visitor-${visitorId}@temp.com`,
+          referrer_name: 'Domain Tracking',
+          status: 'visited',
+          source_domain: domain,
+          referrer_domain: document.referrer ? new URL(document.referrer).hostname : null
+        });
+
+      if (error) {
+        console.log('Error tracking domain referral:', error);
+      }
+    } catch (error) {
+      console.log('Domain referral tracking error:', error);
     }
   };
 
@@ -59,22 +90,23 @@ export const useReferralTracking = () => {
 
   const trackConversion = async (customerName: string, customerEmail: string, conversionType: string = 'contact') => {
     const referralCode = getReferralCode();
-    if (!referralCode) return;
-
+    
     try {
-      // Insert conversion tracking
+      // Insert conversion tracking - whether from referral code or direct domain
       const { error } = await supabase
         .from('referrals')
         .insert({
-          referrer_code: referralCode,
+          referrer_code: referralCode || null,
           referred_user_name: customerName,
           referred_user_email: customerEmail,
-          referrer_name: 'To be updated', // Will be updated by trigger
+          referrer_name: referralCode ? 'To be updated' : 'Direct Contact', // Will be updated by trigger if referral code exists
           status: 'converted',
-          notes: `Conversion type: ${conversionType}`
+          notes: `Conversion type: ${conversionType}`,
+          source_domain: window.location.hostname,
+          referrer_domain: document.referrer ? new URL(document.referrer).hostname : null
         });
 
-      if (!error) {
+      if (!error && referralCode) {
         // Clear referral code after successful conversion
         clearReferralCode();
       }
@@ -86,6 +118,7 @@ export const useReferralTracking = () => {
   return {
     getReferralCode,
     clearReferralCode,
-    trackConversion
+    trackConversion,
+    trackDomainReferral
   };
 };

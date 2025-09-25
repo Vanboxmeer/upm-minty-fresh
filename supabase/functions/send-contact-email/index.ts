@@ -1,19 +1,17 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { Resend } from "npm:resend@2.0.0";
-
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.54.0';
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
 interface ContactEmailRequest {
   firstName: string;
   lastName: string;
   email: string;
-  phone: string;
+  phone?: string;
+  telegram?: string;
   country: string;
   message: string;
   referrerName?: string;
@@ -27,61 +25,98 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { firstName, lastName, email, phone, country, message, referrerName, referrerCode }: ContactEmailRequest = await req.json();
+    const { firstName, lastName, email, phone, telegram, country, message, referrerName, referrerCode }: ContactEmailRequest = await req.json();
 
     console.log("Sending contact email:", { firstName, lastName, email });
 
+    // Initialize Supabase client
+    const supabase = createClient(
+      Deno.env.get('SUPABASE_URL') ?? '',
+      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
+    );
+
+    // Store contact inquiry in database
+    const { error: contactError } = await supabase
+      .from('referrals')
+      .insert({
+        referrer_code: referrerCode || null,
+        referred_user_name: `${firstName} ${lastName}`,
+        referred_user_email: email,
+        referrer_name: referrerName || 'Direct Contact',
+        status: 'converted',
+        notes: `Contact form submission: ${message}`,
+        source_domain: req.headers.get('referer') ? new URL(req.headers.get('referer')!).hostname : null
+      });
+
+    if (contactError) {
+      console.error('Error storing contact inquiry:', contactError);
+    }
+
+    // Send emails using Resend API directly
+    const resendApiKey = Deno.env.get('RESEND_API_KEY');
+    if (!resendApiKey) {
+      throw new Error('RESEND_API_KEY not configured');
+    }
+
     // Send notification email to team
-    const teamNotification = await resend.emails.send({
-      from: "UPM Contact Form <noreply@unitedpress.media>",
-      to: ["unitedpress.media@gmail.com"],
-      subject: `New Contact Form Submission from ${firstName} ${lastName}`,
-      html: `
-        <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${firstName} ${lastName}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Country:</strong> ${country}</p>
-        ${referrerName || referrerCode ? `
-        <p><strong>Referrer Name:</strong> ${referrerName || 'Not provided'}</p>
-        <p><strong>Referrer Email/Code:</strong> ${referrerCode || 'Not provided'}</p>
-        ` : ''}
-        <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
-        <hr>
-        <p><em>This email was sent from the UPM contact form.</em></p>
-      `,
+    const teamNotification = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${resendApiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: "UPM Contact Form <noreply@unitedpress.media>",
+        to: ["unitedpress.media@gmail.com"],
+        subject: `New Contact Form Submission from ${firstName} ${lastName}`,
+        html: `
+          <h2>New Contact Form Submission</h2>
+          <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
+          <p><strong>Telegram:</strong> ${telegram || 'Not provided'}</p>
+          <p><strong>Country:</strong> ${country}</p>
+          <p><strong>Referrer:</strong> ${referrerName || 'None'} ${referrerCode ? `(Code: ${referrerCode})` : ''}</p>
+          <p><strong>Message:</strong></p>
+          <p>${message}</p>
+        `,
+      }),
     });
+
+    if (!teamNotification.ok) {
+      const errorText = await teamNotification.text();
+      console.error('Team notification error:', errorText);
+    }
 
     // Send confirmation email to user
-    const userConfirmation = await resend.emails.send({
-      from: "United Press Media <noreply@unitedpress.media>",
-      to: [email],
-      subject: "Thank you for contacting United Press Media",
-      html: `
-        <h2>Thank you for your inquiry!</h2>
-        <p>Dear ${firstName},</p>
-        <p>We have received your message and will get back to you within 24 hours.</p>
-        <p><strong>Your message:</strong></p>
-        <p style="background-color: #f5f5f5; padding: 15px; border-radius: 5px;">${message.replace(/\n/g, '<br>')}</p>
-        <p>Best regards,<br>The United Press Media Team</p>
-        <hr>
-        <p style="font-size: 12px; color: #666;">
-          United Press Media<br>
-          Digital Marketing Services<br>
-          <a href="https://unitedpress.media">unitedpress.media</a>
-        </p>
-      `,
+    const userConfirmation = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${resendApiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: "United Press Media <noreply@unitedpress.media>",
+        to: [email],
+        subject: "Thank you for contacting United Press Media",
+        html: `
+          <h2>Thank you for reaching out!</h2>
+          <p>Hi ${firstName},</p>
+          <p>We've received your message and will get back to you within 24 hours during business days.</p>
+          <p>In the meantime, feel free to explore our services and case studies on our website.</p>
+          <p>Best regards,<br>The UPM Team</p>
+        `,
+      }),
     });
 
-    console.log("Team notification sent:", teamNotification);
-    console.log("User confirmation sent:", userConfirmation);
+    if (!userConfirmation.ok) {
+      const errorText = await userConfirmation.text();
+      console.error('User confirmation error:', errorText);
+    }
 
-    return new Response(JSON.stringify({ 
-      success: true, 
-      teamNotification, 
-      userConfirmation 
-    }), {
+    console.log('Contact emails sent successfully');
+
+    return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: {
         "Content-Type": "application/json",

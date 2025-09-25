@@ -41,6 +41,41 @@ export type Database = {
         }
         Relationships: []
       }
+      affiliate_domains: {
+        Row: {
+          affiliate_id: string
+          created_at: string
+          domain: string
+          id: string
+          tracking_enabled: boolean
+          updated_at: string
+        }
+        Insert: {
+          affiliate_id: string
+          created_at?: string
+          domain: string
+          id?: string
+          tracking_enabled?: boolean
+          updated_at?: string
+        }
+        Update: {
+          affiliate_id?: string
+          created_at?: string
+          domain?: string
+          id?: string
+          tracking_enabled?: boolean
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "affiliate_domains_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "affiliates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       affiliates: {
         Row: {
           affiliate_email: string
@@ -331,8 +366,10 @@ export type Database = {
           referred_user_email: string
           referred_user_name: string
           referrer_code: string | null
+          referrer_domain: string | null
           referrer_email: string | null
           referrer_name: string
+          source_domain: string | null
           status: string
         }
         Insert: {
@@ -343,8 +380,10 @@ export type Database = {
           referred_user_email: string
           referred_user_name: string
           referrer_code?: string | null
+          referrer_domain?: string | null
           referrer_email?: string | null
           referrer_name: string
+          source_domain?: string | null
           status?: string
         }
         Update: {
@@ -355,8 +394,10 @@ export type Database = {
           referred_user_email?: string
           referred_user_name?: string
           referrer_code?: string | null
+          referrer_domain?: string | null
           referrer_email?: string | null
           referrer_name?: string
+          source_domain?: string | null
           status?: string
         }
         Relationships: []

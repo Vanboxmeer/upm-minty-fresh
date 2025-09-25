@@ -16,6 +16,8 @@ interface ExitIntentPopupProps {
   onClose: () => void;
 }
 
+import { useReferralTracking } from "@/hooks/useReferralTracking";
+
 const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
   const [selectedPackage, setSelectedPackage] = useState<string>("");
   const [selectedSubscription, setSelectedSubscription] = useState<string>("");
@@ -34,6 +36,7 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
   const [userType, setUserType] = useState<'brand' | 'creator'>('brand');
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const { trackConversion, getReferralCode } = useReferralTracking();
 
   // Countries that BVI can do business with (excluding sanctioned countries)
   const allowedCountries = [
@@ -199,6 +202,12 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
     setIsLoading(true);
 
     try {
+      // Track referral conversion automatically
+      const trackedReferralCode = getReferralCode();
+      if (trackedReferralCode) {
+        await trackConversion(`${firstName} ${lastName}`, email, 'exit_intent_form');
+      }
+
       let formMessage = message || "I'm interested in your digital marketing services. Please contact me with more details.";
       
       if (selectedPackage || selectedSubscription) {
