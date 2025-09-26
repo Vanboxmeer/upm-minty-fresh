@@ -38,7 +38,7 @@ const TrustedBy = () => {
           </h2>
         </div>
         
-        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => <div 
               key={index} 
               className={`group text-center space-y-4 transition-all duration-500 hover:bg-muted/20 p-6 rounded-lg ${
