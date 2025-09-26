@@ -31,26 +31,11 @@ const Services = () => {
 Crypto Projects</span>
             </h2>
             
-            <p className="text-lg text-muted-foreground mb-6">
+            <p className="text-lg text-muted-foreground mb-8">
               From KOL collaborations to press releases and media features, 
               we provide comprehensive marketing solutions that drive real 
               results for your project.
             </p>
-            
-            <div className="space-y-3 mb-8">
-              <div className="flex items-center gap-3">
-                <CheckCircle className="h-5 w-5 text-primary" />
-                <span>Verified influencer network access</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <CheckCircle className="h-5 w-5 text-primary" />
-                <span>Major publication distribution</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <CheckCircle className="h-5 w-5 text-primary" />
-                <span>Executive media placement</span>
-              </div>
-            </div>
             
             <Button variant="cta" size="lg" onClick={() => {
               const packageSection = document.querySelector('[data-section="package-selector"]');

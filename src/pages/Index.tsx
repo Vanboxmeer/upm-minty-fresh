@@ -45,10 +45,10 @@ const Index = () => {
       <div className="min-h-screen bg-background">
         <Header />
         <Hero />
-        <TrustedBy />
         <Services />
         <InfluencerPlatforms />
         <PaidAdvertising />
+        <TrustedBy />
         <FeaturedInMedia />
         <BlogSection />
         <PackageSelector />
