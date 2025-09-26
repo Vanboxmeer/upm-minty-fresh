@@ -104,11 +104,11 @@ const InfluencerPlatforms = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 px-6 py-4 bg-muted rounded-2xl max-w-md mx-auto">
             <div className="flex items-center gap-2">
               <span className="text-2xl font-bold text-primary">1,500+</span>
-              <span className="text-muted-foreground text-sm">Verified Influencers</span>
+              <span className="text-muted-foreground text-sm">Content Creators</span>
             </div>
             <div className="hidden sm:block w-px h-6 bg-border"></div>
             <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold text-primary">50M+</span>
+              <span className="text-2xl font-bold text-primary">100M+</span>
               <span className="text-muted-foreground text-sm">Combined Reach</span>
             </div>
           </div>
