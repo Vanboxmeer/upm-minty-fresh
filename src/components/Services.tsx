@@ -26,9 +26,9 @@ const Services = () => {
         <div ref={heroRef} className="grid lg:grid-cols-2 gap-12 items-center mb-16">
           <div className={`transition-all duration-700 ${heroVisible ? 'animate-fade-in' : 'opacity-0 translate-x-[-50px]'}`}>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Premium Marketing Services for{" "}
+              Growth Services for Brands in{" "}
               <span className="text-primary">
-Crypto Projects</span>
+AI, GameFi, DeFi, and Web3</span>
             </h2>
             
             <p className="text-lg text-muted-foreground mb-8">

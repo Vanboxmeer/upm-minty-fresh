@@ -49,7 +49,7 @@ const ServicesPage = () => {
       <section className="py-20 bg-gradient-to-br from-background via-primary/5 to-primary/10">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Premium Marketing Services for{" "}
+            Growth Services for Brands in{" "}
             <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent inline-block min-h-[1em]">
               {currentBrand || '\u00A0'}
               <span className="animate-pulse text-white ml-1 font-thin">|</span>
