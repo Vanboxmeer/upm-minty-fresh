@@ -2,10 +2,6 @@ import { useScrollAnimation, useStaggeredAnimation } from "@/hooks/useScrollAnim
 
 const TrustedBy = () => {
   const projects = [{
-    name: "Originality.ai",
-    logo: "/lovable-uploads/22fd7692-dae4-4f2d-84ab-58b4c39c5b0c.png",
-    description: "Originality.AI is a plagiarism checker and AI detector built by a team of content marketing and GPT-3 AI experts"
-  }, {
     name: "Unicrypt",
     logo: "/lovable-uploads/91531968-ee6d-4b3a-8743-b0ac73a6698a.png",
     description: "Unicrypt provides an ever-growing suite of decentralized services."
@@ -29,10 +25,6 @@ const TrustedBy = () => {
     name: "MetalCore",
     logo: "/lovable-uploads/1e9ef986-400b-448c-b35f-801917674404.png",
     description: "MetalCore is an NFT-based, open world, mechanized combat game. Fight alongside your faction in territorial battles on a mineral rich alien planet."
-  }, {
-    name: "Evrylife",
-    logo: "/lovable-uploads/e111a023-8c4a-4f1e-9c22-7a80f265b13e.png",
-    description: "Evrylife is a multi-chain web3 explorer, a type of decentralized social media application."
   }];
 
   const { elementRef: sectionRef, isVisible } = useScrollAnimation();
