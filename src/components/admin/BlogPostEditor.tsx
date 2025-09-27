@@ -237,7 +237,7 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
         seo_keywords: keywords,
         publish_date: publishDate,
         // Ensure backward compatibility by setting the first category as the main category
-        category: data.categories?.[0] || data.categories?.[0] || 'General',
+        category: data.categories?.[0] || 'General',
       };
 
       await onSave(postData);
@@ -246,9 +246,10 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
         description: `Post ${post ? 'updated' : 'created'} successfully`,
       });
     } catch (error) {
+      console.error('Blog post save error:', error);
       toast({
         title: 'Error',
-        description: `Failed to ${post ? 'update' : 'create'} post`,
+        description: `Failed to ${post ? 'update' : 'create'} post: ${error instanceof Error ? error.message : 'Unknown error'}`,
         variant: 'destructive',
       });
     }
