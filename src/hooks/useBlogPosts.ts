@@ -136,19 +136,51 @@ export const useBlogPosts = () => {
 
   const createPost = async (postData: Omit<BlogPost, 'id' | 'created_at' | 'updated_at'>) => {
     try {
+      console.log('Creating post with data:', postData);
+      
+      // Prepare data for database insert
+      const insertData = {
+        title: postData.title,
+        slug: postData.slug,
+        content: postData.content,
+        excerpt: postData.excerpt,
+        author: postData.author,
+        featured_image: postData.featured_image || null,
+        featured_image_alt: postData.featured_image_alt || null,
+        status: postData.status,
+        publish_date: postData.publish_date || null,
+        seo_title: postData.seo_title || null,
+        seo_description: postData.seo_description || null,
+        seo_keywords: postData.seo_keywords || null,
+        category: postData.category || null,
+        categories: postData.categories || null,
+        read_time: postData.read_time || null,
+      };
+      
+      console.log('Insert data prepared:', insertData);
+      
       const { data, error } = await supabase
         .from('blog_posts')
-        .insert(postData)
+        .insert(insertData)
         .select()
         .maybeSingle();
       
-      if (error) throw error;
+      console.log('Supabase response:', { data, error });
+      
+      if (error) {
+        console.error('Supabase error details:', error);
+        throw error;
+      }
       if (!data) throw new Error('Failed to create post - no data returned');
+      
       await fetchPosts();
+      toast.success('Post created successfully!');
       return data;
     } catch (err) {
       console.error('Create post error:', err);
-      throw new Error(err instanceof Error ? err.message : 'Failed to create post');
+      const errorMessage = err instanceof Error ? err.message : 'Failed to create post';
+      toast.error(`Failed to create post: ${errorMessage}`);
+      throw new Error(errorMessage);
     }
   };
 
