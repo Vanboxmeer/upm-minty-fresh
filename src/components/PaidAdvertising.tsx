@@ -1,6 +1,6 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Card } from "@/components/ui/card";
-import { Send, Shield, Target, TrendingUp, Users, Zap, Globe } from "lucide-react";
+import { Send, Shield, Zap, Globe } from "lucide-react";
 
 const PaidAdvertising = () => {
   const { elementRef, isVisible } = useScrollAnimation();
@@ -44,23 +44,6 @@ const PaidAdvertising = () => {
     }
   ];
 
-  const benefits = [
-    {
-      icon: Target,
-      title: "Precision Targeting",
-      description: "Reach your exact audience with advanced targeting options"
-    },
-    {
-      icon: TrendingUp,
-      title: "Optimized Performance",
-      description: "Continuous optimization for maximum ROI and engagement"
-    },
-    {
-      icon: Users,
-      title: "Community Focus",
-      description: "Connect with engaged communities in your niche"
-    }
-  ];
 
   return (
     <section className="py-20 bg-muted/30">
@@ -128,36 +111,6 @@ const PaidAdvertising = () => {
           })}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {benefits.map((benefit, index) => {
-            const Icon = benefit.icon;
-            return (
-              <div 
-                key={benefit.title}
-                className={`text-center transition-all duration-500 ${
-                  isVisible 
-                    ? 'opacity-100 translate-y-0' 
-                    : 'opacity-0 translate-y-10'
-                }`}
-                style={{ 
-                  transitionDelay: `${(index + 2) * 100}ms` 
-                }}
-              >
-                <div className="flex justify-center mb-4">
-                  <div className="p-3 rounded-full bg-primary/10">
-                    <Icon className="h-6 w-6 text-primary" />
-                  </div>
-                </div>
-                <h4 className="text-lg font-semibold mb-2 text-foreground">
-                  {benefit.title}
-                </h4>
-                <p className="text-muted-foreground text-sm">
-                  {benefit.description}
-                </p>
-              </div>
-            );
-          })}
-        </div>
       </div>
     </section>
   );
