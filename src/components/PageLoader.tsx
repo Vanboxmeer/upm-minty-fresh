@@ -31,7 +31,7 @@ const PageLoader = () => {
           src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
           alt="UPM Logo" 
           className={`w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain transition-opacity duration-300 ${
-            logoLoaded ? 'opacity-100 animate-logo-fill' : 'opacity-0'
+            logoLoaded ? 'opacity-100 animate-logo-fill retro-logo-loader' : 'opacity-0'
           }`}
         />
       </div>
