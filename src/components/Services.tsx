@@ -37,7 +37,7 @@ AI, GameFi, DeFi, and Web3</span>
               results for your project.
             </p>
             
-            <Button variant="cta" size="lg" onClick={() => {
+            <Button variant="retro" size="lg" className="group relative overflow-hidden" onClick={() => {
               const packageSection = document.querySelector('[data-section="package-selector"]');
               if (packageSection) {
                 const offsetTop = packageSection.getBoundingClientRect().top + window.pageYOffset - 80;
@@ -48,6 +48,7 @@ AI, GameFi, DeFi, and Web3</span>
               }
             }}>
               Get Started Today
+              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-primary/20 to-transparent group-hover:animate-[synthwave-scan_1s_ease-in-out] pointer-events-none" />
             </Button>
           </div>
           

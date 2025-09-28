@@ -11,6 +11,7 @@ import { useReferralTracking } from "@/hooks/useReferralTracking";
 import { supabase } from "@/integrations/supabase/client";
 import { Linkedin, Twitter, Send, Calendar, Globe, Target, Users, Zap, BarChart3 } from "lucide-react";
 import { usePackageSelection } from "@/contexts/PackageSelectionContext";
+import { ThemeToggle } from "./ThemeToggle";
 
 const Footer = () => {
   // Footer component initialized
@@ -1126,13 +1127,16 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="border-t border-white/20 mt-12 pt-8 text-center">
-          <p className="text-sm opacity-60">
-            © 2025 UnitedPress.Media - by using our website or services you agree to our{" "}
-            <a href="/terms-of-service" className="text-primary hover:underline">
-              terms of service
-            </a>
-          </p>
+        <div className="border-t border-white/20 mt-12 pt-8">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p className="text-sm opacity-60">
+              © 2025 UnitedPress.Media - by using our website or services you agree to our{" "}
+              <a href="/terms-of-service" className="text-primary hover:underline">
+                terms of service
+              </a>
+            </p>
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </footer>;

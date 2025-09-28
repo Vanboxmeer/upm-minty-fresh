@@ -53,53 +53,58 @@ export const SocialShareButtons = ({
       <span className="text-sm font-medium text-muted-foreground mr-2">Share:</span>
       
       <Button
-        variant="outline"
+        variant="retro"
         size="sm"
         onClick={() => handleShare('twitter')}
-        className="flex items-center gap-2 hover:bg-primary/10 hover:border-primary/30"
+        className="flex items-center gap-2 group"
       >
         <Twitter className="h-4 w-4" />
         <span className="hidden sm:inline">X</span>
+        <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-primary/20 to-transparent group-hover:animate-[synthwave-scan_1s_ease-in-out] pointer-events-none" />
       </Button>
 
       <Button
-        variant="outline"
+        variant="retro"
         size="sm"
         onClick={() => handleShare('linkedin')}
-        className="flex items-center gap-2 hover:bg-primary/10 hover:border-primary/30"
+        className="flex items-center gap-2 group"
       >
         <Linkedin className="h-4 w-4" />
         <span className="hidden sm:inline">LinkedIn</span>
+        <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-primary/20 to-transparent group-hover:animate-[synthwave-scan_1s_ease-in-out] pointer-events-none" />
       </Button>
 
       <Button
-        variant="outline"
+        variant="retro"
         size="sm"
         onClick={() => handleShare('facebook')}
-        className="flex items-center gap-2 hover:bg-primary/10 hover:border-primary/30"
+        className="flex items-center gap-2 group"
       >
         <Facebook className="h-4 w-4" />
         <span className="hidden sm:inline">Facebook</span>
+        <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-primary/20 to-transparent group-hover:animate-[synthwave-scan_1s_ease-in-out] pointer-events-none" />
       </Button>
 
       <Button
-        variant="outline"
+        variant="synthwave"
         size="sm"
         onClick={() => handleShare('email')}
-        className="flex items-center gap-2 hover:bg-gray-50 hover:border-gray-400"
+        className="flex items-center gap-2 group"
       >
         <Mail className="h-4 w-4" />
         <span className="hidden sm:inline">Email</span>
+        <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-retro-cyan/20 to-transparent group-hover:animate-[synthwave-scan_1s_ease-in-out] pointer-events-none" />
       </Button>
 
       <Button
-        variant="outline"
+        variant="synthwave"
         size="sm"
         onClick={handleCopyLink}
-        className="flex items-center gap-2 hover:bg-gray-50 hover:border-gray-400"
+        className="flex items-center gap-2 group"
       >
         <Link className="h-4 w-4" />
         <span className="hidden sm:inline">Copy Link</span>
+        <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-retro-cyan/20 to-transparent group-hover:animate-[synthwave-scan_1s_ease-in-out] pointer-events-none" />
       </Button>
     </div>
   );

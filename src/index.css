@@ -212,15 +212,34 @@ All colors MUST be HSL.
     @apply bg-gradient-to-r from-primary via-primary-glow to-primary bg-clip-text text-transparent animate-pulse;
   }
 
-  /* Retro-specific effects */
-  .retro-glow {
-    box-shadow: var(--shadow-neon);
-    transition: var(--transition-retro);
+  /* Dark mode specific enhancements */
+  .dark .retro-glow {
+    box-shadow: 0 0 20px hsl(var(--primary-electric) / 0.3), 0 0 40px hsl(var(--primary-neon) / 0.2);
   }
 
-  .retro-glow:hover {
-    box-shadow: var(--shadow-synthwave);
-    transform: translateY(-2px);
+  .dark .retro-glow:hover {
+    box-shadow: 0 0 30px hsl(var(--primary-electric) / 0.5), 0 0 60px hsl(var(--primary-neon) / 0.3), 0 0 100px hsl(var(--primary-glow) / 0.1);
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  /* Theme-aware text and backgrounds */
+  .dark *:not(.bg-white):not(.text-black):not(.border-black) {
+    color: hsl(var(--foreground));
+  }
+
+  .dark .bg-card {
+    background: hsl(var(--card));
+    border-color: hsl(var(--border));
+  }
+
+  .dark .text-muted-foreground {
+    color: hsl(var(--muted-foreground));
+  }
+
+  /* Enhanced button visibility in both themes */
+  .dark .retro-glow,
+  .dark .synthwave-gradient {
+    backdrop-filter: blur(8px);
   }
 
   .synthwave-gradient {

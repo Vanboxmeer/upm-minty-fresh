@@ -80,9 +80,12 @@ const Header = () => {
             <a href="/blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
           </nav>
           
-          <div className="flex items-center space-x-4">
-            <Button variant="cta" size="sm" onClick={scrollToCoveragePackages}>Start a Campaign</Button>
-          </div>
+            <div className="flex items-center space-x-4">
+              <Button variant="synthwave" size="sm" className="group relative overflow-hidden" onClick={scrollToCoveragePackages}>
+                Start a Campaign
+                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-retro-cyan/20 to-transparent group-hover:animate-[synthwave-scan_1s_ease-in-out] pointer-events-none" />
+              </Button>
+            </div>
         </div>
         
         {/* Mobile Menu Button */}
@@ -112,7 +115,10 @@ const Header = () => {
             <button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer text-left">Contact</button>
             <a href="/blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
             <div className="flex flex-col space-y-2 pt-4 border-t border-border">
-              <Button variant="cta" size="sm" onClick={scrollToCoveragePackages}>Start a Campaign</Button>
+              <Button variant="synthwave" size="sm" className="group relative overflow-hidden" onClick={scrollToCoveragePackages}>
+                Start a Campaign
+                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-retro-cyan/20 to-transparent group-hover:animate-[synthwave-scan_1s_ease-in-out] pointer-events-none" />
+              </Button>
             </div>
           </nav>
         </div>}

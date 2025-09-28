@@ -64,12 +64,14 @@ const Hero = () => {
           <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto animate-fade-in">UPM helps you get in front of the right audience through powerful kol collaborations, PR distribution, native ad placements, and earned tier 1 media features.</p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
-            <Button variant="hero" size="lg" className="px-8 py-6 text-lg group" onClick={scrollToCoveragePackages}>
+            <Button variant="retro" size="lg" className="px-8 py-6 text-lg group relative overflow-hidden" onClick={scrollToCoveragePackages}>
               <span className="group-hover:scale-110 transition-transform duration-200">Start a Campaign</span>
+              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-primary/20 to-transparent group-hover:animate-[synthwave-scan_1s_ease-in-out] pointer-events-none" />
             </Button>
-            <Button variant="outline" size="lg" className="px-8 py-6 text-lg hover:bg-white/10 hover:border-white hover:text-white transition-all duration-300 button-glow group" asChild>
+            <Button variant="synthwave" size="lg" className="px-8 py-6 text-lg group relative overflow-hidden" asChild>
               <a href="/services">
                 <span className="group-hover:scale-110 transition-transform duration-200">View Our Services</span>
+                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-retro-cyan/20 to-transparent group-hover:animate-[synthwave-scan_1s_ease-in-out] pointer-events-none" />
               </a>
             </Button>
           </div>
