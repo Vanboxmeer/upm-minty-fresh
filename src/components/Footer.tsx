@@ -1052,7 +1052,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/20 pt-12">
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <div className="text-2xl font-bold text-primary">UPM</div>
+              <img 
+                src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
+                alt="UPM Logo" 
+                className="h-8 w-auto retro-logo-hover brightness-0 invert" 
+              />
             </div>
             <p className="text-sm opacity-80 mb-4">
               United Press Media - Your trusted partner for digital marketing success.

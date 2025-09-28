@@ -60,7 +60,7 @@ const Blog = () => {
             <img 
               src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
               alt="UPM Logo" 
-              className="h-20 w-auto transition-transform duration-200 hover:scale-105" 
+              className="h-20 w-auto retro-logo-hover" 
             />
           </div>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
