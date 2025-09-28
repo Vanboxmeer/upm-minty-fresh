@@ -46,31 +46,69 @@ const ServicesPage = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-background via-primary/5 to-primary/10">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Growth Services for Brands in{" "}
-            <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent inline-block min-h-[1em]">
-              {currentBrand || '\u00A0'}
-              <span className="animate-pulse text-white ml-1 font-thin">|</span>
-            </span>
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            From KOL collaborations to press releases and media features, we provide 
-            comprehensive marketing solutions with packages ranging from $5K to $100K.
-          </p>
-          <Button variant="cta" size="lg" onClick={() => {
-            const packageSection = document.querySelector('[data-section="package-selector"]');
-            if (packageSection) {
-              const offsetTop = packageSection.getBoundingClientRect().top + window.pageYOffset - 80;
-              window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-              });
-            }
-          }}>
-            View Our Packages
-          </Button>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0">
+          {/* Dark base with blue tones */}
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-blue-900/60 to-slate-900"></div>
+          
+          {/* Animated tech grid overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-secondary/15 animate-pulse" style={{ animationDuration: '4s' }}></div>
+          
+          {/* Floating tech elements */}
+          <div className="absolute inset-0">
+            <div className="absolute top-32 left-16 w-28 h-28 bg-primary/35 rounded-lg blur-xl animate-bounce" style={{ animationDelay: '0s', animationDuration: '5s', transform: 'rotate(45deg)' }}></div>
+            <div className="absolute top-48 right-24 w-16 h-16 bg-secondary/45 rounded-lg blur-lg animate-bounce" style={{ animationDelay: '1.5s', animationDuration: '7s', transform: 'rotate(30deg)' }}></div>
+            <div className="absolute bottom-48 left-1/3 w-20 h-20 bg-primary/40 rounded-lg blur-lg animate-bounce" style={{ animationDelay: '3s', animationDuration: '6s', transform: 'rotate(60deg)' }}></div>
+            <div className="absolute bottom-24 right-1/4 w-36 h-36 bg-secondary/30 rounded-lg blur-2xl animate-bounce" style={{ animationDelay: '2s', animationDuration: '8s', transform: 'rotate(15deg)' }}></div>
+            
+            {/* Circuit pattern overlay */}
+            <div className="absolute inset-0 opacity-10" style={{
+              backgroundImage: `
+                linear-gradient(90deg, rgba(59, 130, 246, 0.3) 50%, transparent 50%),
+                linear-gradient(0deg, rgba(59, 130, 246, 0.3) 50%, transparent 50%)
+              `,
+              backgroundSize: '80px 80px'
+            }}></div>
+            
+            {/* Diagonal lines for tech aesthetic */}
+            <div className="absolute inset-0 opacity-20">
+              <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent transform rotate-12 origin-left"></div>
+              <div className="absolute top-20 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-secondary to-transparent transform -rotate-12 origin-left"></div>
+              <div className="absolute bottom-20 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent transform rotate-6 origin-left"></div>
+            </div>
+          </div>
+          
+          {/* Content overlay for readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-slate-800/40"></div>
+        </div>
+        
+        <div className="relative container mx-auto px-4 py-12 text-center">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in text-white">
+              <span className="block">Services for</span>
+              <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent inline-block min-h-[1em]">
+                {currentBrand || '\u00A0'}
+                <span className="animate-pulse text-white ml-1 font-thin">|</span>
+              </span>
+            </h1>
+            <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-3xl mx-auto animate-fade-in">
+              From KOL collaborations to press releases and media features, we provide 
+              comprehensive marketing solutions with packages ranging from $5K to $100K.
+            </p>
+            <Button variant="hero" size="lg" className="px-8 py-6 text-lg group animate-fade-in" onClick={() => {
+              const packageSection = document.querySelector('[data-section="package-selector"]');
+              if (packageSection) {
+                const offsetTop = packageSection.getBoundingClientRect().top + window.pageYOffset - 80;
+                window.scrollTo({
+                  top: offsetTop,
+                  behavior: 'smooth'
+                });
+              }
+            }}>
+              <span className="group-hover:scale-110 transition-transform duration-200">View Our Packages</span>
+            </Button>
+          </div>
         </div>
       </section>
 
