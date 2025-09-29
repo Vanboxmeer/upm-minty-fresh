@@ -376,7 +376,7 @@ const Footer = () => {
   return <footer className="bg-foreground text-background">
       <div className="container mx-auto px-4 py-16">
         {/* Contact Form */}
-        <div id="contact-form" className="bg-white/10 rounded-lg p-8 mb-16 max-w-4xl mx-auto">
+        <div id="contact-form" className="bg-background/10 rounded-lg p-8 mb-16 max-w-4xl mx-auto">
           <h3 className="text-2xl font-bold mb-6 text-center">Get In Touch</h3>
           
           {/* Package Selection Summary */}
@@ -1050,13 +1050,13 @@ const Footer = () => {
         </div>
 
         {/* Footer Links */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/20 pt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 border-t border-background/20 pt-12">
           <div>
             <div className="flex items-center space-x-2 mb-4">
               <img 
                 src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
                 alt="UPM Logo" 
-                className="h-8 w-auto retro-logo-hover brightness-0 invert" 
+                className="h-8 w-auto retro-logo-hover dark:brightness-0 dark:invert" 
               />
             </div>
             <p className="text-sm opacity-80 mb-4">
@@ -1067,7 +1067,7 @@ const Footer = () => {
                 href="https://www.linkedin.com/company/upm-network/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-white/70 hover:text-primary transition-colors"
+                className="opacity-70 hover:text-primary transition-colors"
                 aria-label="Follow us on LinkedIn"
               >
                 <Linkedin size={20} />
@@ -1076,7 +1076,7 @@ const Footer = () => {
                 href="https://x.com/WatchCryptoNews" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-white/70 hover:text-primary transition-colors"
+                className="opacity-70 hover:text-primary transition-colors"
                 aria-label="Follow us on X (Twitter)"
               >
                 <Twitter size={20} />
@@ -1085,7 +1085,7 @@ const Footer = () => {
                 href="http://t.me/unitedpressmedia" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-white/70 hover:text-primary transition-colors"
+                className="opacity-70 hover:text-primary transition-colors"
                 aria-label="Join our Telegram"
               >
                 <Send size={20} />
@@ -1127,7 +1127,7 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="border-t border-white/20 mt-12 pt-8">
+        <div className="border-t border-background/20 mt-12 pt-8">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-sm opacity-60">
               © 2025 UnitedPress.Media - by using our website or services you agree to our{" "}

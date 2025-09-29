@@ -236,6 +236,29 @@ All colors MUST be HSL.
     color: hsl(var(--muted-foreground));
   }
 
+  /* Footer form elements theme support */
+  footer input,
+  footer textarea,
+  footer select,
+  footer label {
+    color: hsl(var(--background)) !important;
+  }
+
+  footer input::placeholder,
+  footer textarea::placeholder {
+    color: hsl(var(--background) / 0.7) !important;
+  }
+
+  footer input,
+  footer textarea {
+    background: hsl(var(--background) / 0.2) !important;
+    border-color: hsl(var(--background) / 0.3) !important;
+  }
+
+  footer button[type="button"] {
+    border-color: hsl(var(--background) / 0.3);
+  }
+
   /* Enhanced button visibility in both themes */
   .dark .retro-glow,
   .dark .synthwave-gradient {
