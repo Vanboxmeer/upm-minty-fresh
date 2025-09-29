@@ -373,11 +373,11 @@ const Footer = () => {
     }
   };
 
-  return <footer className="bg-foreground text-background">
+  return <footer className="bg-gray-900 text-white">
       <div className="container mx-auto px-4 py-16">
         {/* Contact Form */}
-        <div id="contact-form" className="bg-background/10 rounded-lg p-8 mb-16 max-w-4xl mx-auto">
-          <h3 className="text-2xl font-bold mb-6 text-center">Get In Touch</h3>
+        <div id="contact-form" className="bg-gray-800/50 rounded-lg p-8 mb-16 max-w-4xl mx-auto border border-gray-700">
+          <h3 className="text-2xl font-bold mb-6 text-center text-white">Get In Touch</h3>
           
           {/* Package Selection Summary */}
           <div className="mb-8 p-3 sm:p-4 bg-primary/20 rounded-lg border border-primary/30">

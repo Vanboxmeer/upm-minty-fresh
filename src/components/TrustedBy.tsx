@@ -30,10 +30,10 @@ const TrustedBy = () => {
   const { elementRef: sectionRef, isVisible } = useScrollAnimation();
   const { containerRef: gridRef, visibleItems } = useStaggeredAnimation(150);
 
-  return <section ref={sectionRef} className="py-16 bg-muted/30">
+  return <section ref={sectionRef} className="py-16 bg-white dark:bg-white">
       <div className="container mx-auto px-4">
         <div className={`text-center mb-12 transition-all duration-700 ${isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">
             Trusted by <span className="text-primary">Leading Web3 Projects</span>
           </h2>
         </div>
@@ -41,7 +41,7 @@ const TrustedBy = () => {
         <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => <div 
               key={index} 
-              className={`group text-center space-y-4 transition-all duration-500 hover:bg-muted/20 p-6 rounded-lg ${
+              className={`group text-center space-y-4 transition-all duration-500 hover:bg-gray-50 p-6 rounded-lg ${
                 visibleItems.has(index) ? 'animate-fade-in card-hover' : 'opacity-0 translate-y-8'
               }`}
             >
@@ -52,7 +52,7 @@ const TrustedBy = () => {
                   className="h-16 w-auto object-contain transition-all duration-300 group-hover:scale-110 group-hover:filter group-hover:brightness-110" 
                 />
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="text-sm text-gray-600 leading-relaxed">
                 {project.description}
               </p>
             </div>)}
