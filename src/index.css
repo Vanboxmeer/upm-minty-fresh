@@ -222,11 +222,6 @@ All colors MUST be HSL.
     transform: translateY(-2px) scale(1.02);
   }
 
-  /* Theme-aware text and backgrounds */
-  .dark *:not(.bg-white):not(.text-black):not(.border-black) {
-    color: hsl(var(--foreground));
-  }
-
   .dark .bg-card {
     background: hsl(var(--card));
     border-color: hsl(var(--border));

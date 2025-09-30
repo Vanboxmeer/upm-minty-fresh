@@ -8,6 +8,7 @@ import {
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import confetti from "canvas-confetti";
+import { ThemeToggle } from "@/components/ThemeToggle";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const scrollToCoveragePackages = () => {
@@ -47,7 +48,7 @@ const Header = () => {
       <div className="container mx-auto px-4 py-2 flex items-center justify-between">
         <div className="flex items-center">
           <a href="/" className="block" onMouseEnter={handleLogoHover}>
-            <img src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" alt="UPM Logo" className="h-12 w-auto retro-logo-hover" />
+            <img src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" alt="UPM Logo" className="h-12 w-auto retro-logo-hover opacity-100 filter-none mix-blend-normal" />
           </a>
         </div>
         
@@ -81,6 +82,7 @@ const Header = () => {
           </nav>
           
             <div className="flex items-center space-x-4">
+              <ThemeToggle />
               <Button variant="synthwave" size="sm" className="group relative overflow-hidden" onClick={scrollToCoveragePackages}>
                 Start a Campaign
                 <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-retro-cyan/20 to-transparent group-hover:animate-[synthwave-scan_1s_ease-in-out] pointer-events-none" />
@@ -115,6 +117,7 @@ const Header = () => {
             <button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer text-left">Contact</button>
             <a href="/blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
             <div className="flex flex-col space-y-2 pt-4 border-t border-border">
+              <ThemeToggle />
               <Button variant="synthwave" size="sm" className="group relative overflow-hidden" onClick={scrollToCoveragePackages}>
                 Start a Campaign
                 <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-retro-cyan/20 to-transparent group-hover:animate-[synthwave-scan_1s_ease-in-out] pointer-events-none" />
