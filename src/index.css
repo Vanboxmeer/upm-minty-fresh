@@ -378,8 +378,7 @@ All colors MUST be HSL.
 
   /* Keep logo bright and visible in dark mode */
   .dark .retro-logo-hover {
-    filter: none !important;
-    opacity: 1 !important;
+    filter: brightness(1.2) contrast(1.1);
   }
 
   .dark .retro-logo-hover:hover {
@@ -387,7 +386,7 @@ All colors MUST be HSL.
     filter:
       drop-shadow(-4px -2px 0 hsl(var(--primary)))
       drop-shadow(4px 2px 0 hsl(var(--retro-purple)))
-      brightness(1.1) contrast(1.05);
+      brightness(1.3) contrast(1.15);
   }
 
   /* Animated variant for loader */
