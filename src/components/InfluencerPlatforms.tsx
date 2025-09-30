@@ -45,7 +45,7 @@ const InfluencerPlatforms = () => {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white dark:bg-slate-900">
       <div className="container mx-auto px-4">
         <div 
           ref={elementRef}
@@ -63,9 +63,9 @@ const InfluencerPlatforms = () => {
             ensuring your message reaches the right audience on every major platform.
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
-            <span className="px-4 py-2 bg-primary/10 rounded-full">Web2 Creators</span>
-            <span className="px-4 py-2 bg-primary/10 rounded-full">Web3 KOLs</span>
-            <span className="px-4 py-2 bg-primary/10 rounded-full">Cross-Platform Reach</span>
+            <span className="px-4 py-2 bg-primary/10 dark:bg-primary/20 rounded-full">Web2 Creators</span>
+            <span className="px-4 py-2 bg-primary/10 dark:bg-primary/20 rounded-full">Web3 KOLs</span>
+            <span className="px-4 py-2 bg-primary/10 dark:bg-primary/20 rounded-full">Cross-Platform Reach</span>
           </div>
         </div>
 

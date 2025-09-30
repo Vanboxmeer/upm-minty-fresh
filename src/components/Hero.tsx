@@ -55,9 +55,9 @@ const Hero = () => {
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in text-white">
             <span className="block">Media Partner for</span>
-            <span className="neon-gradient bg-clip-text text-transparent inline-block min-h-[1em] retro-text-glow">
+            <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent inline-block min-h-[1em]">
               {currentBrand || '\u00A0'}
-              <span className="animate-pulse text-retro-cyan ml-1 font-thin">|</span>
+              <span className="animate-pulse text-primary ml-1 font-thin">|</span>
             </span>
           </h1>
           

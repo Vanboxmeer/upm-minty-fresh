@@ -11,7 +11,6 @@ import { useReferralTracking } from "@/hooks/useReferralTracking";
 import { supabase } from "@/integrations/supabase/client";
 import { Linkedin, Twitter, Send, Calendar, Globe, Target, Users, Zap, BarChart3 } from "lucide-react";
 import { usePackageSelection } from "@/contexts/PackageSelectionContext";
-import { ThemeToggle } from "./ThemeToggle";
 
 const Footer = () => {
   // Footer component initialized
@@ -1135,7 +1134,6 @@ const Footer = () => {
                 terms of service
               </a>
             </p>
-            <ThemeToggle />
           </div>
         </div>
       </div>
