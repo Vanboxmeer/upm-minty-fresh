@@ -30,11 +30,11 @@ const TrustedBy = () => {
   const { elementRef: sectionRef, isVisible } = useScrollAnimation();
   const { containerRef: gridRef, visibleItems } = useStaggeredAnimation(150);
 
-  return <section ref={sectionRef} className="py-16 bg-white dark:bg-white">
+  return <section ref={sectionRef} className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className={`text-center mb-12 transition-all duration-700 ${isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">
-            Trusted by <span className="text-primary">Leading Web3 Projects</span>
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 !text-gray-900">
+            Trusted by <span className="!text-primary">Leading Web3 Projects</span>
           </h2>
         </div>
         
@@ -52,7 +52,7 @@ const TrustedBy = () => {
                   className="h-16 w-auto object-contain transition-all duration-300 group-hover:scale-110 group-hover:filter group-hover:brightness-110" 
                 />
               </div>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-sm !text-gray-600 leading-relaxed">
                 {project.description}
               </p>
             </div>)}
