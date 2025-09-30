@@ -13,15 +13,15 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
-          "border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300",
+          "border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 font-semibold",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-primary/10 hover:text-primary",
         link: "text-primary underline-offset-4 hover:underline",
         hero: "bg-gradient-to-r from-primary to-primary-glow text-primary-foreground hover:shadow-lg hover:scale-105 transition-all duration-300",
         cta: "bg-primary text-primary-foreground hover:bg-primary-dark shadow-lg hover:shadow-xl transition-all duration-300",
-        retro: "relative overflow-hidden bg-gradient-to-r from-primary/20 to-primary-glow/20 border-2 border-primary/50 text-primary hover:bg-gradient-to-r hover:from-primary/30 hover:to-primary-glow/30 hover:border-primary hover:scale-105 hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 retro-glow",
-        synthwave: "relative overflow-hidden bg-gradient-to-r from-retro-cyan/20 to-retro-purple/20 border-2 border-retro-cyan/50 text-retro-cyan hover:bg-gradient-to-r hover:from-retro-cyan/30 hover:to-retro-purple/30 hover:border-retro-cyan hover:scale-105 hover:shadow-lg hover:shadow-retro-cyan/25 transition-all duration-300 retro-glow",
+        retro: "relative overflow-hidden bg-gradient-to-r from-primary/20 to-primary-glow/20 border-2 border-primary text-primary hover:bg-gradient-to-r hover:from-primary/30 hover:to-primary-glow/30 hover:border-primary-electric hover:scale-105 hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 retro-glow font-semibold",
+        synthwave: "relative overflow-hidden bg-gradient-to-r from-primary/20 to-primary-electric/20 border-2 border-primary text-primary hover:bg-gradient-to-r hover:from-primary/30 hover:to-primary-electric/30 hover:border-primary-electric hover:scale-105 hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 retro-glow font-semibold",
         light: "border-2 border-primary/40 bg-card text-primary hover:bg-primary/10 hover:border-primary transition-all duration-300 shadow-md",
       },
       size: {
