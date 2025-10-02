@@ -372,6 +372,17 @@ All colors MUST be HSL.
   }
 
   /* Logo stays the same in both light and dark mode */
+  .retro-logo-hover {
+    mix-blend-mode: normal !important;
+  }
+  .retro-logo-hover:not(:hover) {
+    opacity: 1 !important;
+    filter: none !important;
+  }
+  .dark .retro-logo-hover:not(:hover) {
+    opacity: 1 !important;
+    filter: none !important;
+  }
 
   /* Animated variant for loader */
   .retro-logo-loader {

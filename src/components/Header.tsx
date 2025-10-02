@@ -48,7 +48,7 @@ const Header = () => {
       <div className="container mx-auto px-4 py-2 flex items-center justify-between">
         <div className="flex items-center">
           <a href="/" className="block" onMouseEnter={handleLogoHover}>
-            <img src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" alt="UPM Logo" className="h-12 w-auto retro-logo-hover opacity-100 filter-none mix-blend-normal" />
+            <img src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" alt="UPM Logo" className="h-12 w-auto retro-logo-hover" />
           </a>
         </div>
         
