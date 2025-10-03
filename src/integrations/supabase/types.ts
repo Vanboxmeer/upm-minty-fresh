@@ -229,6 +229,45 @@ export type Database = {
         }
         Relationships: []
       }
+      case_study_templates: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+          preview_image: string | null
+          sort_order: number | null
+          template_content: string
+          template_variables: Json | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          preview_image?: string | null
+          sort_order?: number | null
+          template_content: string
+          template_variables?: Json | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          preview_image?: string | null
+          sort_order?: number | null
+          template_content?: string
+          template_variables?: Json | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       categories: {
         Row: {
           color: string | null
@@ -255,6 +294,47 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      content_freshness_tracking: {
+        Row: {
+          created_at: string | null
+          freshness_score: number | null
+          id: string
+          last_reviewed_date: string | null
+          needs_update: boolean | null
+          post_id: string | null
+          update_suggestions: string[] | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          freshness_score?: number | null
+          id?: string
+          last_reviewed_date?: string | null
+          needs_update?: boolean | null
+          post_id?: string | null
+          update_suggestions?: string[] | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          freshness_score?: number | null
+          id?: string
+          last_reviewed_date?: string | null
+          needs_update?: boolean | null
+          post_id?: string | null
+          update_suggestions?: string[] | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "content_freshness_tracking_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: true
+            referencedRelation: "blog_posts"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       newsletter_rate_limits: {
         Row: {
@@ -417,6 +497,53 @@ export type Database = {
         }
         Relationships: []
       }
+      webmentions: {
+        Row: {
+          created_at: string | null
+          error_message: string | null
+          id: string
+          post_id: string | null
+          response_code: number | null
+          sent_at: string | null
+          source_url: string
+          status: string | null
+          target_url: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          error_message?: string | null
+          id?: string
+          post_id?: string | null
+          response_code?: number | null
+          sent_at?: string | null
+          source_url: string
+          status?: string | null
+          target_url: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          error_message?: string | null
+          id?: string
+          post_id?: string | null
+          response_code?: number | null
+          sent_at?: string | null
+          source_url?: string
+          status?: string | null
+          target_url?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "webmentions_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "blog_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -437,6 +564,10 @@ export type Database = {
       generate_slug: {
         Args: { title: string }
         Returns: string
+      }
+      get_content_age_days: {
+        Args: { reviewed_date: string }
+        Returns: number
       }
     }
     Enums: {
