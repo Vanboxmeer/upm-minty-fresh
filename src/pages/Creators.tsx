@@ -26,28 +26,28 @@ const CreatorsPage = () => {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
         {/* Animated Background */}
         <div className="absolute inset-0">
-          {/* Theme-aware base gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-background via-muted/50 to-background dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"></div>
+          {/* Vibrant gradient background for light mode with purple/pink tones */}
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"></div>
           
-          {/* Animated color overlays */}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-accent/10 animate-pulse dark:from-primary/30 dark:to-accent/20"></div>
+          {/* Animated color overlays with stronger presence in light mode */}
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-200/30 via-pink-100/25 to-blue-200/30 animate-pulse dark:from-primary/30 dark:to-accent/20" style={{ animationDuration: '5s' }}></div>
           
-          {/* Floating geometric shapes */}
+          {/* Floating geometric shapes with vibrant colors */}
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-32 h-32 bg-primary/30 rounded-full blur-xl animate-bounce dark:bg-primary/40" style={{ animationDelay: '0s', animationDuration: '6s' }}></div>
-            <div className="absolute top-40 right-20 w-20 h-20 bg-accent/40 rounded-full blur-lg animate-bounce dark:bg-accent/50" style={{ animationDelay: '2s', animationDuration: '8s' }}></div>
-            <div className="absolute bottom-40 left-1/4 w-24 h-24 bg-primary/20 rounded-full blur-lg animate-bounce dark:bg-primary/30" style={{ animationDelay: '4s', animationDuration: '7s' }}></div>
-            <div className="absolute bottom-20 right-1/3 w-40 h-40 bg-accent/15 rounded-full blur-2xl animate-bounce dark:bg-accent/25" style={{ animationDelay: '1s', animationDuration: '9s' }}></div>
+            <div className="absolute top-20 left-10 w-32 h-32 bg-purple-400/35 rounded-full blur-xl animate-bounce dark:bg-primary/40" style={{ animationDelay: '0s', animationDuration: '6s' }}></div>
+            <div className="absolute top-40 right-20 w-20 h-20 bg-pink-400/45 rounded-full blur-lg animate-bounce dark:bg-accent/50" style={{ animationDelay: '2s', animationDuration: '8s' }}></div>
+            <div className="absolute bottom-40 left-1/4 w-24 h-24 bg-blue-400/30 rounded-full blur-lg animate-bounce dark:bg-primary/30" style={{ animationDelay: '4s', animationDuration: '7s' }}></div>
+            <div className="absolute bottom-20 right-1/3 w-40 h-40 bg-purple-300/25 rounded-full blur-2xl animate-bounce dark:bg-accent/25" style={{ animationDelay: '1s', animationDuration: '9s' }}></div>
             
-            {/* Subtle grid pattern */}
-            <div className="absolute inset-0 opacity-10 dark:opacity-20" style={{
-              backgroundImage: 'radial-gradient(circle at 1px 1px, hsl(var(--foreground) / 0.3) 1px, transparent 0)',
+            {/* Subtle dot pattern */}
+            <div className="absolute inset-0 opacity-15 dark:opacity-20" style={{
+              backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(147, 51, 234, 0.4) 1px, transparent 0)',
               backgroundSize: '60px 60px'
             }}></div>
           </div>
           
           {/* Content overlay for readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-background/50 dark:from-slate-900/50 dark:via-transparent dark:to-slate-900/30"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-transparent to-white/40 dark:from-slate-900/50 dark:via-transparent dark:to-slate-900/30"></div>
         </div>
         
         <div className="relative container mx-auto px-4 py-12 text-center">

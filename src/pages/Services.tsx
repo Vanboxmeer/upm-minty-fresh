@@ -49,38 +49,38 @@ const ServicesPage = () => {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
         {/* Animated Background */}
         <div className="absolute inset-0">
-          {/* Theme-aware base with blue tones */}
-          <div className="absolute inset-0 bg-gradient-to-br from-background via-muted/40 to-background dark:from-slate-800 dark:via-blue-900/60 dark:to-slate-900"></div>
+          {/* Vibrant gradient background for light mode */}
+          <div className="absolute inset-0 bg-gradient-to-br from-sky-100 via-blue-50 to-cyan-100 dark:from-slate-800 dark:via-blue-900/60 dark:to-slate-900"></div>
           
-          {/* Animated tech grid overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/15 via-transparent to-secondary/10 animate-pulse dark:from-primary/20 dark:to-secondary/15" style={{ animationDuration: '4s' }}></div>
+          {/* Animated color overlays with stronger presence in light mode */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-200/40 via-cyan-100/30 to-sky-200/40 animate-pulse dark:from-primary/20 dark:via-transparent dark:to-secondary/15" style={{ animationDuration: '4s' }}></div>
           
-          {/* Floating tech elements */}
+          {/* Floating colored elements - more visible in light mode */}
           <div className="absolute inset-0">
-            <div className="absolute top-32 left-16 w-28 h-28 bg-primary/25 rounded-lg blur-xl animate-bounce dark:bg-primary/35" style={{ animationDelay: '0s', animationDuration: '5s', transform: 'rotate(45deg)' }}></div>
-            <div className="absolute top-48 right-24 w-16 h-16 bg-secondary/35 rounded-lg blur-lg animate-bounce dark:bg-secondary/45" style={{ animationDelay: '1.5s', animationDuration: '7s', transform: 'rotate(30deg)' }}></div>
-            <div className="absolute bottom-48 left-1/3 w-20 h-20 bg-primary/30 rounded-lg blur-lg animate-bounce dark:bg-primary/40" style={{ animationDelay: '3s', animationDuration: '6s', transform: 'rotate(60deg)' }}></div>
-            <div className="absolute bottom-24 right-1/4 w-36 h-36 bg-secondary/20 rounded-lg blur-2xl animate-bounce dark:bg-secondary/30" style={{ animationDelay: '2s', animationDuration: '8s', transform: 'rotate(15deg)' }}></div>
+            <div className="absolute top-32 left-16 w-28 h-28 bg-blue-400/30 rounded-lg blur-xl animate-bounce dark:bg-primary/35" style={{ animationDelay: '0s', animationDuration: '5s', transform: 'rotate(45deg)' }}></div>
+            <div className="absolute top-48 right-24 w-16 h-16 bg-cyan-400/40 rounded-lg blur-lg animate-bounce dark:bg-secondary/45" style={{ animationDelay: '1.5s', animationDuration: '7s', transform: 'rotate(30deg)' }}></div>
+            <div className="absolute bottom-48 left-1/3 w-20 h-20 bg-sky-400/35 rounded-lg blur-lg animate-bounce dark:bg-primary/40" style={{ animationDelay: '3s', animationDuration: '6s', transform: 'rotate(60deg)' }}></div>
+            <div className="absolute bottom-24 right-1/4 w-36 h-36 bg-blue-300/25 rounded-lg blur-2xl animate-bounce dark:bg-secondary/30" style={{ animationDelay: '2s', animationDuration: '8s', transform: 'rotate(15deg)' }}></div>
             
             {/* Circuit pattern overlay */}
-            <div className="absolute inset-0 opacity-5 dark:opacity-10" style={{
+            <div className="absolute inset-0 opacity-10 dark:opacity-10" style={{
               backgroundImage: `
-                linear-gradient(90deg, hsl(var(--primary) / 0.3) 50%, transparent 50%),
-                linear-gradient(0deg, hsl(var(--primary) / 0.3) 50%, transparent 50%)
+                linear-gradient(90deg, rgb(59, 130, 246, 0.3) 50%, transparent 50%),
+                linear-gradient(0deg, rgb(59, 130, 246, 0.3) 50%, transparent 50%)
               `,
               backgroundSize: '80px 80px'
             }}></div>
             
             {/* Diagonal lines for tech aesthetic */}
-            <div className="absolute inset-0 opacity-10 dark:opacity-20">
-              <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent transform rotate-12 origin-left"></div>
-              <div className="absolute top-20 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-secondary to-transparent transform -rotate-12 origin-left"></div>
-              <div className="absolute bottom-20 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent transform rotate-6 origin-left"></div>
+            <div className="absolute inset-0 opacity-20 dark:opacity-20">
+              <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent transform rotate-12 origin-left"></div>
+              <div className="absolute top-20 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent transform -rotate-12 origin-left"></div>
+              <div className="absolute bottom-20 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-sky-400 to-transparent transform rotate-6 origin-left"></div>
             </div>
           </div>
           
           {/* Content overlay for readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-background/20 to-background/40 dark:from-slate-900/60 dark:via-transparent dark:to-slate-800/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-white/30 dark:from-slate-900/60 dark:via-transparent dark:to-slate-800/40"></div>
         </div>
         
         <div className="relative container mx-auto px-4 py-12 text-center">
