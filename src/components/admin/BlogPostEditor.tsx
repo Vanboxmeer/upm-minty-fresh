@@ -29,11 +29,12 @@ import { Combobox } from '@/components/ui/combobox';
 import { TagInput } from '@/components/ui/tag-input';
 import { BlogPost } from '@/hooks/useBlogPosts';
 import { useCategories } from '@/hooks/useCategories';
-import { Save, Eye, Upload, X, Smile, Plus } from 'lucide-react';
+import { Save, Eye, Upload, X, Smile, Plus, FileText, Link2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { EmojiPickerComponent } from './EmojiPicker';
 import { ImageGallery, type GalleryImage } from './ImageGallery';
+import { TemplateSelector } from './TemplateSelector';
 
 const blogPostSchema = z.object({
   title: z.string().min(1, 'Title is required'),
@@ -71,6 +72,8 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
   const [previewMode, setPreviewMode] = useState(false);
   const [contentMode, setContentMode] = useState<'rich' | 'html'>('rich');
   const [cursorPosition, setCursorPosition] = useState<number | null>(null);
+  const [showTemplateSelector, setShowTemplateSelector] = useState(false);
+  const [loadingLinkSuggestions, setLoadingLinkSuggestions] = useState(false);
   const { categories, createCategory } = useCategories();
   const { toast } = useToast();
   
@@ -206,6 +209,48 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
     }
   };
 
+  const handleTemplateSelect = (content: string) => {
+    form.setValue('content', content);
+    toast({
+      title: 'Template Applied',
+      description: 'You can now customize the content',
+    });
+  };
+
+  const getSuggestedLinks = async () => {
+    setLoadingLinkSuggestions(true);
+    try {
+      const content = form.getValues('content');
+      const { data, error } = await supabase.functions.invoke('suggest-internal-links', {
+        body: { content, currentPostId: post?.id },
+      });
+
+      if (error) throw error;
+
+      if (data.suggestions && data.suggestions.length > 0) {
+        toast({
+          title: 'Link Suggestions',
+          description: `Found ${data.suggestions.length} relevant internal links. Check console for details.`,
+        });
+        console.log('Suggested links:', data.suggestions);
+      } else {
+        toast({
+          title: 'No Suggestions',
+          description: 'No relevant internal links found',
+        });
+      }
+    } catch (error) {
+      console.error('Error getting link suggestions:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to get link suggestions',
+        variant: 'destructive',
+      });
+    } finally {
+      setLoadingLinkSuggestions(false);
+    }
+  };
+
   const onSubmit = async (data: BlogPostFormData) => {
     try {
       const keywords = Array.isArray(data.seo_keywords) ? data.seo_keywords : [];
@@ -270,6 +315,25 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
           <Button
             type="button"
             variant="outline"
+            size="sm"
+            onClick={() => setShowTemplateSelector(true)}
+          >
+            <FileText className="mr-2 h-4 w-4" />
+            Use Template
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={getSuggestedLinks}
+            disabled={loadingLinkSuggestions}
+          >
+            <Link2 className="mr-2 h-4 w-4" />
+            {loadingLinkSuggestions ? 'Finding...' : 'Suggest Links'}
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
             onClick={() => setPreviewMode(!previewMode)}
           >
             <Eye className="mr-2 h-4 w-4" />
@@ -277,6 +341,12 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
           </Button>
         </div>
       </div>
+
+      <TemplateSelector 
+        open={showTemplateSelector}
+        onClose={() => setShowTemplateSelector(false)}
+        onSelect={handleTemplateSelect}
+      />
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

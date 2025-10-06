@@ -5,6 +5,7 @@ import { BlogPostEditor } from '@/components/admin/BlogPostEditor';
 import { useBlogPosts } from '@/hooks/useBlogPosts';
 import { BlogPost } from '@/hooks/useBlogPosts';
 import { supabase } from '@/integrations/supabase/client';
+import { usePostPublishing } from '@/hooks/usePostPublishing';
 
 export const BlogPostEdit = () => {
   const { id } = useParams<{ id: string }>();
@@ -12,6 +13,7 @@ export const BlogPostEdit = () => {
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
   const { updatePost } = useBlogPosts();
+  const { triggerPostPublishing } = usePostPublishing();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,7 +45,11 @@ export const BlogPostEdit = () => {
     
     setLoading(true);
     try {
+      const wasPublished = post?.status === 'published';
       await updatePost(id, data);
+      if (!wasPublished && data.status === 'published') {
+        triggerPostPublishing(id);
+      }
       navigate('/admin/blog');
     } finally {
       setLoading(false);
