@@ -16,6 +16,13 @@ interface ContactEmailRequest {
   message: string;
   referrerName?: string;
   referrerCode?: string;
+  vibeCodingData?: {
+    approximateBudget?: string;
+    timeframe?: string;
+    appFeatures?: string[];
+    appDescription?: string;
+    includesWeb3?: string;
+  };
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -25,7 +32,7 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { firstName, lastName, email, phone, telegram, country, message, referrerName, referrerCode }: ContactEmailRequest = await req.json();
+    const { firstName, lastName, email, phone, telegram, country, message, referrerName, referrerCode, vibeCodingData }: ContactEmailRequest = await req.json();
 
     console.log("Sending contact email:", { firstName, lastName, email });
 
@@ -77,6 +84,14 @@ const handler = async (req: Request): Promise<Response> => {
           <p><strong>Telegram:</strong> ${telegram || 'Not provided'}</p>
           <p><strong>Country:</strong> ${country}</p>
           <p><strong>Referrer:</strong> ${referrerName || 'None'} ${referrerCode ? `(Code: ${referrerCode})` : ''}</p>
+          ${vibeCodingData ? `
+            <h3>Vibe Coding App Development Details:</h3>
+            <p><strong>Budget:</strong> ${vibeCodingData.approximateBudget || 'Not specified'}</p>
+            <p><strong>Timeframe:</strong> ${vibeCodingData.timeframe || 'Not specified'}</p>
+            <p><strong>App Type:</strong> ${vibeCodingData.includesWeb3 || 'Not specified'}</p>
+            ${vibeCodingData.appFeatures?.length ? `<p><strong>Features:</strong> ${vibeCodingData.appFeatures.join(', ')}</p>` : ''}
+            ${vibeCodingData.appDescription ? `<p><strong>Description:</strong> ${vibeCodingData.appDescription}</p>` : ''}
+          ` : ''}
           <p><strong>Message:</strong></p>
           <p>${message}</p>
         `,

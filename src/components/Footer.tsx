@@ -27,6 +27,7 @@ const Footer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showCampaignDetails, setShowCampaignDetails] = useState(false);
   const [showCreatorDetails, setShowCreatorDetails] = useState(false);
+  const [showVibeCodingDetails, setShowVibeCodingDetails] = useState(false);
   const [isExistingClient, setIsExistingClient] = useState(false);
   const [existingClientInquiry, setExistingClientInquiry] = useState("");
   const [campaignId, setCampaignId] = useState("");
@@ -40,9 +41,11 @@ const Footer = () => {
     customBudget,
     campaignData,
     creatorData,
+    vibeCodingData,
     userType,
     updateCampaignField,
     updateCreatorField,
+    updateVibeCodingField,
     getSelectionSummary,
     setSelectedPackage,
     setSelectedSubscription,
@@ -104,6 +107,19 @@ const Footer = () => {
         "Scalable media outreach matching your investment",
         "Custom KOL selection and content creation",
         "Web3 directory listing services"
+      ],
+      popular: false
+    },
+    {
+      name: "Vibe Coding App Development",
+      price: "Custom",
+      description: "Launch your MVP quickly with Base44 and Lovable platforms:",
+      features: [
+        "Rapid MVP development using no-code/low-code platforms",
+        "Full-stack app development with Base44 or Lovable",
+        "Web2 and Web3 integration capabilities",
+        "Custom feature development and integration",
+        "Project management and development support"
       ],
       popular: false
     }
@@ -322,6 +338,7 @@ const Footer = () => {
           message: selectionSummary ? `${selectionSummary}\n\n${message}` : message,
           referrerName: referrerName || null,
           referrerCode: referrerCode || null,
+          vibeCodingData: selectedPackage?.name === 'Vibe Coding App Development' ? vibeCodingData : undefined,
         },
       });
 
@@ -621,12 +638,18 @@ const Footer = () => {
                   <div>
                     <h4 className="text-lg font-medium flex items-center gap-2">
                       <Target className="h-5 w-5" />
-                      {userType === 'creator' ? 'Creator Details (Optional)' : 'Campaign Details (Optional)'}
+                      {selectedPackage?.name === 'Vibe Coding App Development' 
+                        ? 'App Development Details (Optional)'
+                        : userType === 'creator' 
+                          ? 'Creator Details (Optional)' 
+                          : 'Campaign Details (Optional)'}
                     </h4>
                     <p className="text-sm text-white/70 mt-1">
-                      {userType === 'creator' 
-                        ? 'Share your creator profile and collaboration interests'
-                        : 'Share more details about the campaign you\'re looking to run'
+                      {selectedPackage?.name === 'Vibe Coding App Development'
+                        ? 'Tell us about your app development needs'
+                        : userType === 'creator' 
+                          ? 'Share your creator profile and collaboration interests'
+                          : 'Share more details about the campaign you\'re looking to run'
                       }
                     </p>
                   </div>
@@ -635,7 +658,9 @@ const Footer = () => {
                     variant="ghost"
                     size="sm"
                     onClick={() => {
-                      if (userType === 'creator') {
+                      if (selectedPackage?.name === 'Vibe Coding App Development') {
+                        setShowVibeCodingDetails(!showVibeCodingDetails);
+                      } else if (userType === 'creator') {
                         setShowCreatorDetails(!showCreatorDetails);
                       } else {
                         setShowCampaignDetails(!showCampaignDetails);
@@ -643,12 +668,137 @@ const Footer = () => {
                     }}
                     className="text-white hover:text-white hover:bg-white/10 border border-white/20"
                   >
-                    {(userType === 'creator' ? showCreatorDetails : showCampaignDetails) ? "Hide Details" : "Add Details"}
+                    {(selectedPackage?.name === 'Vibe Coding App Development' 
+                      ? showVibeCodingDetails 
+                      : userType === 'creator' 
+                        ? showCreatorDetails 
+                        : showCampaignDetails) ? "Hide Details" : "Add Details"}
                   </Button>
                 </div>
                 
+                {/* Vibe Coding Details Form */}
+                {selectedPackage?.name === 'Vibe Coding App Development' && showVibeCodingDetails && (
+                  <div className="space-y-4">
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-2 text-white/90">Approximate Budget</label>
+                        <Select 
+                          value={vibeCodingData.approximateBudget || ""} 
+                          onValueChange={(value) => updateVibeCodingField('approximateBudget', value)}
+                        >
+                          <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                            <SelectValue placeholder="Select budget range" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 max-h-64 z-50">
+                            <SelectItem value="$5,000 - $10,000" className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                              $5,000 - $10,000
+                            </SelectItem>
+                            <SelectItem value="$10,000 - $25,000" className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                              $10,000 - $25,000
+                            </SelectItem>
+                            <SelectItem value="$25,000 - $50,000" className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                              $25,000 - $50,000
+                            </SelectItem>
+                            <SelectItem value="$50,000+" className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                              $50,000+
+                            </SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      
+                      <div>
+                        <label className="block text-sm font-medium mb-2 text-white/90">Timeframe</label>
+                        <Select 
+                          value={vibeCodingData.timeframe || ""} 
+                          onValueChange={(value) => updateVibeCodingField('timeframe', value)}
+                        >
+                          <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                            <SelectValue placeholder="Select timeframe" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 max-h-64 z-50">
+                            <SelectItem value="1-2 weeks" className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                              1-2 weeks
+                            </SelectItem>
+                            <SelectItem value="2-4 weeks" className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                              2-4 weeks
+                            </SelectItem>
+                            <SelectItem value="1-2 months" className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                              1-2 months
+                            </SelectItem>
+                            <SelectItem value="2-3 months" className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                              2-3 months
+                            </SelectItem>
+                            <SelectItem value="3+ months" className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                              3+ months
+                            </SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2 text-white/90">Desired App Features</label>
+                      <div className="grid grid-cols-2 gap-2">
+                        {['User Authentication', 'Database Integration', 'Payment Processing', 'API Integrations', 'Social Features', 'Admin Dashboard', 'Mobile Responsive', 'Real-time Updates'].map((feature) => (
+                          <div key={feature} className="flex items-center space-x-2">
+                            <Checkbox
+                              id={`feature-${feature}`}
+                              checked={vibeCodingData.appFeatures?.includes(feature) || false}
+                              onCheckedChange={(checked) => {
+                                const current = vibeCodingData.appFeatures || [];
+                                if (checked) {
+                                  updateVibeCodingField('appFeatures', [...current, feature]);
+                                } else {
+                                  updateVibeCodingField('appFeatures', current.filter(f => f !== feature));
+                                }
+                              }}
+                              className="border-white/30 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                            />
+                            <label htmlFor={`feature-${feature}`} className="text-xs text-white/90">
+                              {feature}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2 text-white/90">Web2/Web3 Components</label>
+                      <Select 
+                        value={vibeCodingData.includesWeb3 || ""} 
+                        onValueChange={(value) => updateVibeCodingField('includesWeb3', value)}
+                      >
+                        <SelectTrigger className="bg-white/20 border-white/30 text-white">
+                          <SelectValue placeholder="Select app type" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 max-h-64 z-50">
+                          <SelectItem value="Web2 Only" className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            Web2 Only (Traditional web app)
+                          </SelectItem>
+                          <SelectItem value="Web2 + Web3" className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            Web2 + Web3 (Hybrid approach)
+                          </SelectItem>
+                          <SelectItem value="Web3 Focus" className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            Web3 Focus (Blockchain-heavy)
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2 text-white/90">App Description</label>
+                      <textarea
+                        placeholder="Describe the app you're looking to build, its purpose, target audience, and any specific requirements..."
+                        value={vibeCodingData.appDescription || ""}
+                        onChange={(e) => updateVibeCodingField('appDescription', e.target.value)}
+                        className="w-full p-3 rounded-md bg-white/20 border border-white/30 text-white placeholder:text-white/70 min-h-[100px] resize-none"
+                      />
+                    </div>
+                  </div>
+                )}
+
                 {/* Creator Details Form */}
-                {userType === 'creator' && showCreatorDetails && (
+                {userType === 'creator' && showCreatorDetails && selectedPackage?.name !== 'Vibe Coding App Development' && (
                   <div className="space-y-4">
                     {/* Social Media Links */}
                     <div className="grid md:grid-cols-2 gap-4">
@@ -741,7 +891,7 @@ const Footer = () => {
                 )}
                 
                 {/* Campaign Details Form */}
-                {userType === 'brand' && showCampaignDetails && (
+                {userType === 'brand' && showCampaignDetails && selectedPackage?.name !== 'Vibe Coding App Development' && (
                   <div className="space-y-4">
                     <div className="grid md:grid-cols-2 gap-4">
                       <Input

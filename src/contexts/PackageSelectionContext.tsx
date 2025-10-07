@@ -53,6 +53,14 @@ export interface CreatorData {
   pastCollaborations?: string;
 }
 
+export interface VibeCodingData {
+  approximateBudget?: string;
+  timeframe?: string;
+  appFeatures?: string[];
+  appDescription?: string;
+  includesWeb3?: string;
+}
+
 interface PackageSelectionContextType {
   selectedPackage: PackageData | null;
   selectedSubscription: SubscriptionData | null;
@@ -60,6 +68,7 @@ interface PackageSelectionContextType {
   customBudget: string;
   campaignData: CampaignData;
   creatorData: CreatorData;
+  vibeCodingData: VibeCodingData;
   userType: 'brand' | 'creator' | null;
   setSelectedPackage: (pkg: PackageData | null) => void;
   setSelectedSubscription: (sub: SubscriptionData | null) => void;
@@ -67,9 +76,11 @@ interface PackageSelectionContextType {
   setCustomBudget: (budget: string) => void;
   setCampaignData: (data: CampaignData) => void;
   setCreatorData: (data: CreatorData) => void;
+  setVibeCodingData: (data: VibeCodingData) => void;
   setUserType: (type: 'brand' | 'creator' | null) => void;
   updateCampaignField: (field: keyof CampaignData, value: any) => void;
   updateCreatorField: (field: keyof CreatorData, value: any) => void;
+  updateVibeCodingField: (field: keyof VibeCodingData, value: any) => void;
   clearSelection: () => void;
   getSelectionSummary: () => string;
 }
@@ -95,6 +106,7 @@ export const PackageSelectionProvider = ({ children }: PackageSelectionProviderP
   const [customBudget, setCustomBudget] = useState<string>("");
   const [campaignData, setCampaignData] = useState<CampaignData>({});
   const [creatorData, setCreatorData] = useState<CreatorData>({});
+  const [vibeCodingData, setVibeCodingData] = useState<VibeCodingData>({});
   const [userType, setUserType] = useState<'brand' | 'creator' | null>(null);
 
   const updateCampaignField = (field: keyof CampaignData, value: any) => {
@@ -105,6 +117,10 @@ export const PackageSelectionProvider = ({ children }: PackageSelectionProviderP
     setCreatorData(prev => ({ ...prev, [field]: value }));
   };
 
+  const updateVibeCodingField = (field: keyof VibeCodingData, value: any) => {
+    setVibeCodingData(prev => ({ ...prev, [field]: value }));
+  };
+
   const clearSelection = () => {
     setSelectedPackage(null);
     setSelectedSubscription(null);
@@ -112,6 +128,7 @@ export const PackageSelectionProvider = ({ children }: PackageSelectionProviderP
     setCustomBudget("");
     setCampaignData({});
     setCreatorData({});
+    setVibeCodingData({});
     setUserType(null);
   };
 
@@ -141,8 +158,19 @@ export const PackageSelectionProvider = ({ children }: PackageSelectionProviderP
     summary += `Subscription Details: ${selectedSubscription.description || 'Creator subscription plan'}\n`;
     summary += `\n`;
 
+    // Add Vibe Coding details if it's a Vibe Coding package
+    if (selectedPackage.name === "Vibe Coding App Development" && Object.keys(vibeCodingData).length > 0) {
+      summary += `VIBE CODING APP DEVELOPMENT DETAILS:\n\n`;
+      
+      if (vibeCodingData.approximateBudget) summary += `Approximate Budget: ${vibeCodingData.approximateBudget}\n`;
+      if (vibeCodingData.timeframe) summary += `Timeframe: ${vibeCodingData.timeframe}\n`;
+      if (vibeCodingData.appFeatures?.length) summary += `Desired Features: ${vibeCodingData.appFeatures.join(', ')}\n`;
+      if (vibeCodingData.includesWeb3) summary += `Web2/Web3: ${vibeCodingData.includesWeb3}\n`;
+      if (vibeCodingData.appDescription) summary += `App Description: ${vibeCodingData.appDescription}\n`;
+      summary += `\n`;
+    }
     // Add creator details if it's a creator subscription
-    if (isCreatorSubscription(selectedSubscription.name) && Object.keys(creatorData).length > 0) {
+    else if (isCreatorSubscription(selectedSubscription.name) && Object.keys(creatorData).length > 0) {
       summary += `CREATOR DETAILS:\n\n`;
       
       if (creatorData.website) summary += `Website: ${creatorData.website}\n`;
@@ -187,6 +215,7 @@ export const PackageSelectionProvider = ({ children }: PackageSelectionProviderP
     customBudget,
     campaignData,
     creatorData,
+    vibeCodingData,
     userType,
     setSelectedPackage,
     setSelectedSubscription,
@@ -194,9 +223,11 @@ export const PackageSelectionProvider = ({ children }: PackageSelectionProviderP
     setCustomBudget,
     setCampaignData,
     setCreatorData,
+    setVibeCodingData,
     setUserType,
     updateCampaignField,
     updateCreatorField,
+    updateVibeCodingField,
     clearSelection,
     getSelectionSummary,
   };
