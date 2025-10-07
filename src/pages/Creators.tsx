@@ -26,28 +26,33 @@ const CreatorsPage = () => {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
         {/* Animated Background */}
         <div className="absolute inset-0">
-          {/* Vibrant gradient background for light mode with purple/pink tones */}
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"></div>
+          {/* Elegant gradient foundation */}
+          <div className="absolute inset-0 bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900"></div>
           
-          {/* Animated color overlays with stronger presence in light mode */}
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-200/30 via-pink-100/25 to-blue-200/30 animate-pulse dark:from-primary/30 dark:to-accent/20" style={{ animationDuration: '5s' }}></div>
+          {/* Multi-layered mesh gradient */}
+          <div className="absolute inset-0 bg-gradient-to-tl from-fuchsia-100/50 via-pink-100/40 to-purple-100/50 dark:from-primary/30 dark:to-accent/20"></div>
           
-          {/* Floating geometric shapes with vibrant colors */}
+          {/* Radial accent gradients */}
+          <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-gradient-radial from-pink-200/60 to-transparent blur-3xl"></div>
+          <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-gradient-radial from-purple-200/60 to-transparent blur-3xl"></div>
+          
+          {/* Sophisticated animated orbs */}
           <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-32 h-32 bg-purple-400/35 rounded-full blur-xl animate-bounce dark:bg-primary/40" style={{ animationDelay: '0s', animationDuration: '6s' }}></div>
-            <div className="absolute top-40 right-20 w-20 h-20 bg-pink-400/45 rounded-full blur-lg animate-bounce dark:bg-accent/50" style={{ animationDelay: '2s', animationDuration: '8s' }}></div>
-            <div className="absolute bottom-40 left-1/4 w-24 h-24 bg-blue-400/30 rounded-full blur-lg animate-bounce dark:bg-primary/30" style={{ animationDelay: '4s', animationDuration: '7s' }}></div>
-            <div className="absolute bottom-20 right-1/3 w-40 h-40 bg-purple-300/25 rounded-full blur-2xl animate-bounce dark:bg-accent/25" style={{ animationDelay: '1s', animationDuration: '9s' }}></div>
-            
-            {/* Subtle dot pattern */}
-            <div className="absolute inset-0 opacity-15 dark:opacity-20" style={{
-              backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(147, 51, 234, 0.4) 1px, transparent 0)',
-              backgroundSize: '60px 60px'
-            }}></div>
+            <div className="absolute top-32 right-16 w-80 h-80 bg-gradient-to-br from-fuchsia-300/35 to-pink-300/35 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '0s', animationDuration: '9s' }}></div>
+            <div className="absolute top-1/3 left-16 w-96 h-96 bg-gradient-to-br from-purple-300/30 to-indigo-300/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '3s', animationDuration: '11s' }}></div>
+            <div className="absolute bottom-32 right-1/3 w-72 h-72 bg-gradient-to-br from-pink-300/40 to-purple-300/40 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s', animationDuration: '10s' }}></div>
           </div>
           
-          {/* Content overlay for readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-transparent to-white/40 dark:from-slate-900/50 dark:via-transparent dark:to-slate-900/30"></div>
+          {/* Fine grain texture */}
+          <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.025]" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E")`,
+          }}></div>
+          
+          {/* Soft glass effect */}
+          <div className="absolute inset-0 backdrop-blur-[0.5px]"></div>
+          
+          {/* Enhanced readability overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/35 via-white/15 to-white/45 dark:from-slate-900/50 dark:via-transparent dark:to-slate-900/30"></div>
         </div>
         
         <div className="relative container mx-auto px-4 py-12 text-center">

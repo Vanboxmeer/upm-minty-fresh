@@ -49,38 +49,33 @@ const ServicesPage = () => {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
         {/* Animated Background */}
         <div className="absolute inset-0">
-          {/* Vibrant gradient background for light mode */}
-          <div className="absolute inset-0 bg-gradient-to-br from-sky-100 via-blue-50 to-cyan-100 dark:from-slate-800 dark:via-blue-900/60 dark:to-slate-900"></div>
+          {/* Sophisticated gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-slate-800 dark:via-blue-900/60 dark:to-slate-900"></div>
           
-          {/* Animated color overlays with stronger presence in light mode */}
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-200/40 via-cyan-100/30 to-sky-200/40 animate-pulse dark:from-primary/20 dark:via-transparent dark:to-secondary/15" style={{ animationDuration: '4s' }}></div>
+          {/* Mesh gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-cyan-100/60 via-blue-100/40 to-indigo-100/60 dark:from-primary/20 dark:via-transparent dark:to-secondary/15"></div>
           
-          {/* Floating colored elements - more visible in light mode */}
+          {/* Radial gradients for depth */}
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-radial from-blue-200/50 to-transparent blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-radial from-indigo-200/50 to-transparent blur-3xl"></div>
+          
+          {/* Animated orbs */}
           <div className="absolute inset-0">
-            <div className="absolute top-32 left-16 w-28 h-28 bg-blue-400/30 rounded-lg blur-xl animate-bounce dark:bg-primary/35" style={{ animationDelay: '0s', animationDuration: '5s', transform: 'rotate(45deg)' }}></div>
-            <div className="absolute top-48 right-24 w-16 h-16 bg-cyan-400/40 rounded-lg blur-lg animate-bounce dark:bg-secondary/45" style={{ animationDelay: '1.5s', animationDuration: '7s', transform: 'rotate(30deg)' }}></div>
-            <div className="absolute bottom-48 left-1/3 w-20 h-20 bg-sky-400/35 rounded-lg blur-lg animate-bounce dark:bg-primary/40" style={{ animationDelay: '3s', animationDuration: '6s', transform: 'rotate(60deg)' }}></div>
-            <div className="absolute bottom-24 right-1/4 w-36 h-36 bg-blue-300/25 rounded-lg blur-2xl animate-bounce dark:bg-secondary/30" style={{ animationDelay: '2s', animationDuration: '8s', transform: 'rotate(15deg)' }}></div>
-            
-            {/* Circuit pattern overlay */}
-            <div className="absolute inset-0 opacity-10 dark:opacity-10" style={{
-              backgroundImage: `
-                linear-gradient(90deg, rgb(59, 130, 246, 0.3) 50%, transparent 50%),
-                linear-gradient(0deg, rgb(59, 130, 246, 0.3) 50%, transparent 50%)
-              `,
-              backgroundSize: '80px 80px'
-            }}></div>
-            
-            {/* Diagonal lines for tech aesthetic */}
-            <div className="absolute inset-0 opacity-20 dark:opacity-20">
-              <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent transform rotate-12 origin-left"></div>
-              <div className="absolute top-20 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent transform -rotate-12 origin-left"></div>
-              <div className="absolute bottom-20 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-sky-400 to-transparent transform rotate-6 origin-left"></div>
-            </div>
+            <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-blue-300/40 to-cyan-300/40 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '0s', animationDuration: '8s' }}></div>
+            <div className="absolute top-1/2 right-20 w-96 h-96 bg-gradient-to-br from-indigo-300/30 to-purple-300/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s', animationDuration: '10s' }}></div>
+            <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-gradient-to-br from-cyan-300/35 to-blue-300/35 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s', animationDuration: '9s' }}></div>
           </div>
           
-          {/* Content overlay for readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-white/30 dark:from-slate-900/60 dark:via-transparent dark:to-slate-800/40"></div>
+          {/* Subtle noise texture */}
+          <div className="absolute inset-0 opacity-[0.015] dark:opacity-[0.02]" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E")`,
+          }}></div>
+          
+          {/* Glass morphism effect */}
+          <div className="absolute inset-0 backdrop-blur-[0.5px]"></div>
+          
+          {/* Content overlay for optimal readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/20 to-white/50 dark:from-slate-900/60 dark:via-transparent dark:to-slate-800/40"></div>
         </div>
         
         <div className="relative container mx-auto px-4 py-12 text-center">
