@@ -371,15 +371,14 @@ All colors MUST be HSL.
       brightness(1.15) contrast(1.05);
   }
 
-  /* Logo stays the same in both light and dark mode */
+  /* Logo always appears in light theme version */
   .retro-logo-hover {
     mix-blend-mode: normal !important;
+    background: white;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
   }
   .retro-logo-hover:not(:hover) {
-    opacity: 1 !important;
-    filter: none !important;
-  }
-  .dark .retro-logo-hover:not(:hover) {
     opacity: 1 !important;
     filter: none !important;
   }
