@@ -16,7 +16,7 @@ const About = () => {
               <img 
                 src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
                 alt="UPM Logo" 
-                className="h-24 w-auto mx-auto mb-6 transition-transform duration-300 hover:scale-105" 
+                className="retro-logo-hover h-24 w-auto mx-auto mb-6" 
               />
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
                 About United Press Media
@@ -89,19 +89,19 @@ const About = () => {
                   <ul className="space-y-4">
                     <li className="flex items-start">
                       <CheckCircle className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
-                      <span>Extensive network of media contacts and content creators</span>
+                      <span className="text-foreground">Extensive network of media contacts and content creators</span>
                     </li>
                     <li className="flex items-start">
                       <CheckCircle className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
-                      <span>Transparent pricing with no hidden fees</span>
+                      <span className="text-foreground">Transparent pricing with no hidden fees</span>
                     </li>
                     <li className="flex items-start">
                       <Headphones className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
-                      <span>Responsive customer support and regular campaign updates</span>
+                      <span className="text-foreground">Responsive customer support and regular campaign updates</span>
                     </li>
                     <li className="flex items-start">
                       <Clock className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
-                      <span>Fast turnaround times and reliable delivery</span>
+                      <span className="text-foreground">Fast turnaround times and reliable delivery</span>
                     </li>
                   </ul>
                 </div>
