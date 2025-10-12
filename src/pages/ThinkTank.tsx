@@ -217,7 +217,7 @@ const ThinkTank = () => {
                           <Button
                             key={index}
                             variant="outline"
-                            className="h-auto min-h-[80px] p-4 text-left justify-start items-start hover:border-primary hover:bg-primary/20 dark:hover:bg-primary/15 hover:scale-[1.02] transition-all duration-300 group"
+                            className="h-auto min-h-[80px] p-4 text-left justify-start items-start hover:border-primary hover:bg-primary/30 dark:hover:bg-primary/30 hover:shadow-lg hover:shadow-primary/20 hover:scale-[1.02] transition-all duration-300 group"
                             onClick={() => handleSend(starter.text)}
                           >
                             <Icon className="h-5 w-5 text-primary mt-0.5 mr-3 flex-shrink-0 group-hover:scale-110 transition-transform" />
