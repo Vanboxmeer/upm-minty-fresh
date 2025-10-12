@@ -497,6 +497,60 @@ export type Database = {
         }
         Relationships: []
       }
+      think_tank_conversations: {
+        Row: {
+          ai_response: string
+          created_at: string
+          id: string
+          ip_address: string | null
+          service_suggested: string[] | null
+          session_id: string
+          user_message: string
+        }
+        Insert: {
+          ai_response: string
+          created_at?: string
+          id?: string
+          ip_address?: string | null
+          service_suggested?: string[] | null
+          session_id: string
+          user_message: string
+        }
+        Update: {
+          ai_response?: string
+          created_at?: string
+          id?: string
+          ip_address?: string | null
+          service_suggested?: string[] | null
+          session_id?: string
+          user_message?: string
+        }
+        Relationships: []
+      }
+      think_tank_rate_limits: {
+        Row: {
+          first_message_at: string
+          id: string
+          ip_address: string
+          last_message_at: string
+          message_count: number
+        }
+        Insert: {
+          first_message_at?: string
+          id?: string
+          ip_address: string
+          last_message_at?: string
+          message_count?: number
+        }
+        Update: {
+          first_message_at?: string
+          id?: string
+          ip_address?: string
+          last_message_at?: string
+          message_count?: number
+        }
+        Relationships: []
+      }
       webmentions: {
         Row: {
           created_at: string | null

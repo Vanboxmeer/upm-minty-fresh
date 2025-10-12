@@ -21,6 +21,7 @@ import PaymentScale from "./pages/PaymentScale";
 import PaymentDominate from "./pages/PaymentDominate";
 import About from "./pages/About";
 import HelpCenter from "./pages/HelpCenter";
+import ThinkTank from "./pages/ThinkTank";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Contact from "./pages/Contact";
@@ -63,6 +64,7 @@ const App = () => (
           <Route path="/payment/dominate" element={<PaymentDominate />} />
           <Route path="/about" element={<About />} />
           <Route path="/help-center" element={<HelpCenter />} />
+          <Route path="/think-tank" element={<ThinkTank />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                <Route path="/terms-of-service" element={<TermsOfService />} />
                <Route path="/rss" element={<RSSFeed />} />

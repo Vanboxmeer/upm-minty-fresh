@@ -79,6 +79,7 @@ const Header = () => {
             
             <button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer">Contact</button>
             <a href="/blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
+            <a href="/think-tank" className="text-foreground hover:text-primary transition-colors">Think Tank</a>
           </nav>
           
             <div className="flex items-center space-x-4">
@@ -116,6 +117,7 @@ const Header = () => {
             
             <button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer text-left">Contact</button>
             <a href="/blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
+            <a href="/think-tank" className="text-foreground hover:text-primary transition-colors">Think Tank</a>
             <div className="flex flex-col space-y-2 pt-4 border-t border-border">
               <ThemeToggle />
               <Button variant="synthwave" size="sm" className="group relative overflow-hidden" onClick={scrollToCoveragePackages}>
