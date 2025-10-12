@@ -113,35 +113,82 @@ const ThinkTank = () => {
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
       let assistantMessage = '';
+      let textBuffer = '';
 
       // Add empty assistant message that we'll update
       setMessages(prev => [...prev, { role: 'assistant', content: '' }]);
 
       while (true) {
         const { done, value } = await reader!.read();
-        if (done) break;
-
-        const chunk = decoder.decode(value);
-        const lines = chunk.split('\n');
-
-        for (const line of lines) {
-          if (line.startsWith('data: ')) {
-            try {
-              const data = JSON.parse(line.slice(6));
-              if (data.content) {
-                assistantMessage += data.content;
-                setMessages(prev => {
-                  const newMessages = [...prev];
-                  newMessages[newMessages.length - 1] = {
-                    role: 'assistant',
-                    content: assistantMessage,
-                  };
-                  return newMessages;
-                });
+        if (done) {
+          // Process any remaining buffered data
+          if (textBuffer.trim()) {
+            const lines = textBuffer.split('\n');
+            for (let line of lines) {
+              if (line.endsWith('\r')) line = line.slice(0, -1);
+              if (line.startsWith(':') || line.trim() === '') continue;
+              if (!line.startsWith('data: ')) continue;
+              
+              const jsonStr = line.slice(6).trim();
+              if (jsonStr === '[DONE]') continue;
+              
+              try {
+                const data = JSON.parse(jsonStr);
+                if (data.content) {
+                  assistantMessage += data.content;
+                  setMessages(prev => {
+                    const newMessages = [...prev];
+                    newMessages[newMessages.length - 1] = {
+                      role: 'assistant',
+                      content: assistantMessage,
+                    };
+                    return newMessages;
+                  });
+                }
+              } catch (e) {
+                console.error('Final buffer parse error:', e);
               }
-            } catch (e) {
-              console.error('Error parsing chunk:', e);
             }
+          }
+          break;
+        }
+
+        // Accumulate chunks into buffer
+        textBuffer += decoder.decode(value, { stream: true });
+
+        // Process complete lines only
+        let newlineIndex: number;
+        while ((newlineIndex = textBuffer.indexOf('\n')) !== -1) {
+          let line = textBuffer.slice(0, newlineIndex);
+          textBuffer = textBuffer.slice(newlineIndex + 1);
+
+          // Handle CRLF
+          if (line.endsWith('\r')) line = line.slice(0, -1);
+          
+          // Skip SSE comments and empty lines
+          if (line.startsWith(':') || line.trim() === '') continue;
+          if (!line.startsWith('data: ')) continue;
+
+          const jsonStr = line.slice(6).trim();
+          if (jsonStr === '[DONE]') continue;
+
+          try {
+            const data = JSON.parse(jsonStr);
+            if (data.content) {
+              assistantMessage += data.content;
+              setMessages(prev => {
+                const newMessages = [...prev];
+                newMessages[newMessages.length - 1] = {
+                  role: 'assistant',
+                  content: assistantMessage,
+                };
+                return newMessages;
+              });
+            }
+          } catch (e) {
+            // Incomplete JSON - put it back in buffer for next iteration
+            textBuffer = line + '\n' + textBuffer;
+            break;
           }
         }
       }

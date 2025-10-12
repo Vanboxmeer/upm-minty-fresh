@@ -236,47 +236,89 @@ Remember: Users should feel like they're talking to a seasoned strategist who's 
     const stream = new ReadableStream({
       async start(controller) {
         try {
-          while (true) {
+          let textBuffer = '';
+          let streamDone = false;
+
+          while (!streamDone) {
             const { done, value } = await reader!.read();
             if (done) {
-              // Save conversation to database
-              const serviceSuggestions = detectServices(fullResponse);
-              
-              await supabase
-                .from('think_tank_conversations')
-                .insert({
-                  session_id: sessionId,
-                  user_message: message,
-                  ai_response: fullResponse,
-                  service_suggested: serviceSuggestions,
-                  ip_address: clientIP
-                });
-
-              controller.close();
+              // Process any remaining buffered data
+              if (textBuffer.trim()) {
+                const lines = textBuffer.split('\n');
+                for (let line of lines) {
+                  if (line.endsWith('\r')) line = line.slice(0, -1);
+                  if (line.startsWith(':') || line.trim() === '') continue;
+                  if (!line.startsWith('data: ')) continue;
+                  
+                  const jsonStr = line.slice(6).trim();
+                  if (jsonStr === '[DONE]') continue;
+                  
+                  try {
+                    const parsed = JSON.parse(jsonStr);
+                    const content = parsed.choices?.[0]?.delta?.content;
+                    if (content) {
+                      fullResponse += content;
+                      controller.enqueue(encoder.encode(`data: ${JSON.stringify({ content })}\n\n`));
+                    }
+                  } catch (e) {
+                    console.error('Final buffer parse error:', e);
+                  }
+                }
+              }
               break;
             }
 
-            const chunk = decoder.decode(value);
-            const lines = chunk.split('\n');
+            // Accumulate chunks into buffer
+            textBuffer += decoder.decode(value, { stream: true });
 
-            for (const line of lines) {
-              if (line.startsWith('data: ')) {
-                const data = line.slice(6);
-                if (data === '[DONE]') continue;
-                
-                try {
-                  const parsed = JSON.parse(data);
-                  const content = parsed.choices?.[0]?.delta?.content;
-                  if (content) {
-                    fullResponse += content;
-                    controller.enqueue(encoder.encode(`data: ${JSON.stringify({ content })}\n\n`));
-                  }
-                } catch (e) {
-                  console.error('Error parsing SSE data:', e);
+            // Process complete lines only
+            let newlineIndex: number;
+            while ((newlineIndex = textBuffer.indexOf('\n')) !== -1) {
+              let line = textBuffer.slice(0, newlineIndex);
+              textBuffer = textBuffer.slice(newlineIndex + 1);
+
+              // Handle CRLF
+              if (line.endsWith('\r')) line = line.slice(0, -1);
+              
+              // Skip SSE comments and empty lines
+              if (line.startsWith(':') || line.trim() === '') continue;
+              if (!line.startsWith('data: ')) continue;
+
+              const jsonStr = line.slice(6).trim();
+              if (jsonStr === '[DONE]') {
+                streamDone = true;
+                break;
+              }
+
+              try {
+                const parsed = JSON.parse(jsonStr);
+                const content = parsed.choices?.[0]?.delta?.content;
+                if (content) {
+                  fullResponse += content;
+                  controller.enqueue(encoder.encode(`data: ${JSON.stringify({ content })}\n\n`));
                 }
+              } catch (e) {
+                // Incomplete JSON - put it back in buffer for next iteration
+                textBuffer = line + '\n' + textBuffer;
+                break;
               }
             }
           }
+
+          // Save conversation to database
+          const serviceSuggestions = detectServices(fullResponse);
+          
+          await supabase
+            .from('think_tank_conversations')
+            .insert({
+              session_id: sessionId,
+              user_message: message,
+              ai_response: fullResponse,
+              service_suggested: serviceSuggestions,
+              ip_address: clientIP
+            });
+
+          controller.close();
         } catch (error) {
           console.error('Stream error:', error);
           controller.error(error);
