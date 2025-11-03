@@ -74,6 +74,16 @@ const Header = () => {
                     Creators
                   </a>
                 </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <a href="/media-for-brands" className="w-full cursor-pointer">
+                    Media for Brands
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <a href="/vibe-coding" className="w-full cursor-pointer">
+                    Vibe Coding Agency
+                  </a>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             
@@ -112,6 +122,8 @@ const Header = () => {
               <div className="pl-4 space-y-2">
                 <a href="/services" className="text-foreground hover:text-primary transition-colors block">Brands</a>
                 <a href="/creators" className="text-foreground hover:text-primary transition-colors block">Creators</a>
+                <a href="/media-for-brands" className="text-foreground hover:text-primary transition-colors block">Media for Brands</a>
+                <a href="/vibe-coding" className="text-foreground hover:text-primary transition-colors block">Vibe Coding Agency</a>
               </div>
             </div>
             

@@ -111,6 +111,20 @@ const Footer = () => {
       popular: false
     },
     {
+      name: "Media for Brands",
+      price: "Custom",
+      description: "AI-powered video and image generation using Grok Imagine with character continuity:",
+      features: [
+        "Instagram Reels, TikTok clips, and social media content",
+        "10-30s video ads with sound and character continuity",
+        "Banner/display creatives for Brave, Native, Telegram Ads",
+        "Photorealistic 1024×1024 images and short videos",
+        "Unlimited iterations with Grok Imagine infinite scroll",
+        "Web3, crypto, and tech-optimized content generation"
+      ],
+      popular: false
+    },
+    {
       name: "Vibe Coding App Development",
       price: "Custom",
       description: "Launch your MVP quickly with Base44 and Lovable platforms:",
@@ -1250,6 +1264,14 @@ const Footer = () => {
               <li><a href="/services#features--interviews--spaces" className="hover:text-primary transition-colors">Features, Interviews, Spaces</a></li>
               <li><a href="/services" className="hover:text-primary transition-colors">Managed Paid Advertising</a></li>
               <li><a href="/creators" className="hover:text-primary transition-colors">Creator Services</a></li>
+              <li>
+                <a href="/media-for-brands" className="hover:text-primary transition-colors">
+                  Media for Brands
+                </a>
+                <p className="text-xs text-muted-foreground mt-1">
+                  AI-generated videos, images & commercials with character continuity
+                </p>
+              </li>
               <li><a href="/vibe-coding" className="hover:text-primary transition-colors">Vibe Coding Agency</a></li>
               <li><a href="https://watchcrypto.info/about/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Web3 Directory Listings</a></li>
             </ul>

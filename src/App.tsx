@@ -12,6 +12,7 @@ import { ProtectedRoute } from "@/components/admin/ProtectedRoute";
 import Index from "./pages/Index";
 import Services from "./pages/Services";
 import Creators from "./pages/Creators";
+import MediaForBrands from "./pages/MediaForBrands";
 import VibeCoding from "./pages/VibeCoding";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
@@ -55,6 +56,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/services" element={<Services />} />
           <Route path="/creators" element={<Creators />} />
+          <Route path="/media-for-brands" element={<MediaForBrands />} />
           <Route path="/vibe-coding" element={<VibeCoding />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
