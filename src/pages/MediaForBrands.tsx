@@ -274,10 +274,166 @@ const MediaForBrands = () => {
       </section>
 
 
-      {/* Package Selector */}
-      <div id="package-selector">
-        <PackageSelector />
-      </div>
+      {/* Media Generation Packages */}
+      <section id="package-selector" className="py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Set Campaign Budget & Subscription Level</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Select both a campaign budget and subscription level to get started. Choose your budget below for AI-generated videos, images, and commercial content.
+            </p>
+          </div>
+
+          <div className="max-w-6xl mx-auto mb-16">
+            <h3 className="text-2xl font-semibold mb-8 text-center">Step 1: Set Campaign Budget</h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* Growth Package */}
+              <Card className="p-6 hover:shadow-lg transition-all cursor-pointer hover:border-primary/50">
+                <div className="text-center mb-4">
+                  <h4 className="text-2xl font-bold mb-2">Growth</h4>
+                  <p className="text-3xl font-bold text-primary mb-4">$5,000</p>
+                </div>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Perfect for emerging brands testing AI content. Use your budget for:
+                </p>
+                <ul className="space-y-2 text-sm mb-6">
+                  {[
+                    "50-100 AI-generated images (1024×1024)",
+                    "10-20 short video clips (10-15s)",
+                    "Character continuity setup",
+                    "Social media content pack",
+                    "Basic ad creative variations"
+                  ].map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Button 
+                  onClick={scrollToPackageSelector}
+                  className="w-full"
+                  variant="outline"
+                >
+                  Select Option
+                </Button>
+              </Card>
+
+              {/* Scale Package */}
+              <Card className="p-6 hover:shadow-lg transition-all cursor-pointer border-2 border-primary relative">
+                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground">
+                  Most Popular
+                </Badge>
+                <div className="text-center mb-4">
+                  <h4 className="text-2xl font-bold mb-2">Scale</h4>
+                  <p className="text-3xl font-bold text-primary mb-4">$25,000</p>
+                </div>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Comprehensive AI media for scaling brands. Use your budget for:
+                </p>
+                <ul className="space-y-2 text-sm mb-6">
+                  {[
+                    "200-500 AI-generated images",
+                    "50-100 video clips with sound",
+                    "Multiple character continuity setups",
+                    "Multi-platform content (IG, TikTok, X)",
+                    "Banner ads for Brave/Native/Telegram",
+                    "10-30s commercial video generation"
+                  ].map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Button 
+                  onClick={scrollToPackageSelector}
+                  className="w-full"
+                >
+                  Select Option
+                </Button>
+              </Card>
+
+              {/* Dominate Package */}
+              <Card className="p-6 hover:shadow-lg transition-all cursor-pointer hover:border-secondary/50">
+                <div className="text-center mb-4">
+                  <h4 className="text-2xl font-bold mb-2">Dominate</h4>
+                  <p className="text-3xl font-bold text-secondary mb-4">$100,000</p>
+                </div>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Maximum AI content output for industry leaders. Use your budget for:
+                </p>
+                <ul className="space-y-2 text-sm mb-6">
+                  {[
+                    "1000+ AI-generated images",
+                    "300+ video clips and commercials",
+                    "Unlimited character variations",
+                    "Full campaign series production",
+                    "Priority generation queue",
+                    "Longer campaign or larger media blitz",
+                    "Enterprise-level asset library"
+                  ].map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Button 
+                  onClick={scrollToPackageSelector}
+                  className="w-full"
+                  variant="outline"
+                >
+                  Select Option
+                </Button>
+              </Card>
+
+              {/* Custom Budget */}
+              <Card className="p-6 hover:shadow-lg transition-all cursor-pointer hover:border-accent/50">
+                <div className="text-center mb-4">
+                  <h4 className="text-2xl font-bold mb-2">Custom Budget</h4>
+                  <p className="text-3xl font-bold text-accent mb-4">Custom</p>
+                </div>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Your account manager optimizes AI generation to match your budget:
+                </p>
+                <ul className="space-y-2 text-sm mb-6">
+                  {[
+                    "Custom budget allocation ($5K - $500K)",
+                    "Mixed content packages (video + image)",
+                    "Scalable AI generation matching investment",
+                    "Custom character development",
+                    "Dedicated account manager",
+                    "Priority support and revisions"
+                  ].map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-accent shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Button 
+                  onClick={scrollToPackageSelector}
+                  className="w-full"
+                  variant="outline"
+                >
+                  Select Option
+                </Button>
+              </Card>
+            </div>
+          </div>
+
+          {/* Subscription Levels - Reuse from PackageSelector */}
+          <div className="max-w-6xl mx-auto">
+            <h3 className="text-2xl font-semibold mb-8 text-center">Step 2: Choose Subscription Level</h3>
+            <div className="text-center mb-8">
+              <p className="text-muted-foreground">
+                Select your ongoing subscription tier for continuous AI media generation
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Footer with Contact Form */}
       <Footer />
