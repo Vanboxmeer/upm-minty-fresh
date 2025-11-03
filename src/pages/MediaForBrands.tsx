@@ -273,43 +273,6 @@ const MediaForBrands = () => {
         </div>
       </section>
 
-      {/* Budget Guidance */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">Budget Guidelines</h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              <Card className="p-6 border-2 hover:border-primary/50 transition-all">
-                <div className="text-center">
-                  <Badge className="mb-4 bg-green-500/20 text-green-700 dark:text-green-300">Starter</Badge>
-                  <h3 className="text-2xl font-bold mb-2">$500 - $2,000</h3>
-                  <p className="text-muted-foreground mb-4">50-200 assets</p>
-                  <p className="text-sm text-muted-foreground">Perfect for testing campaigns and single-platform content</p>
-                </div>
-              </Card>
-              <Card className="p-6 border-2 border-primary hover:border-primary transition-all">
-                <div className="text-center">
-                  <Badge className="mb-4 bg-primary/20 text-primary">Professional</Badge>
-                  <h3 className="text-2xl font-bold mb-2">$2,000 - $10,000</h3>
-                  <p className="text-muted-foreground mb-4">200-1,000 assets</p>
-                  <p className="text-sm text-muted-foreground">Multi-platform campaigns with diverse content types</p>
-                </div>
-              </Card>
-              <Card className="p-6 border-2 hover:border-secondary/50 transition-all">
-                <div className="text-center">
-                  <Badge className="mb-4 bg-secondary/20 text-secondary">Enterprise</Badge>
-                  <h3 className="text-2xl font-bold mb-2">$10,000+</h3>
-                  <p className="text-muted-foreground mb-4">Unlimited assets</p>
-                  <p className="text-sm text-muted-foreground">Full-scale campaigns with priority support</p>
-                </div>
-              </Card>
-            </div>
-            <p className="text-center text-sm text-muted-foreground mt-8">
-              Media generation is priced per asset. Higher budgets = more outputs + faster turnaround.
-            </p>
-          </div>
-        </div>
-      </section>
 
       {/* Package Selector */}
       <div id="package-selector">
