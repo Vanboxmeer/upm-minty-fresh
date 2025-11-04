@@ -277,29 +277,26 @@ const MediaForBrands = () => {
       {/* Media Generation Packages */}
       <section id="package-selector" className="py-20 bg-background">
         <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Choose Your Campaign Budget</h2>
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Set Your Campaign Budget</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Professional AI-generated content for your brand
+              AI-generated content included in your campaign budget
             </p>
           </div>
 
-          <div className="max-w-6xl mx-auto mb-16">
+          <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {/* Growth Package */}
-              <Card className="p-6 hover:shadow-lg transition-all cursor-pointer hover:border-primary/50">
+              <Card className="p-6 hover:shadow-lg transition-all">
                 <div className="text-center mb-4">
                   <h4 className="text-2xl font-bold mb-2">Growth</h4>
                   <p className="text-3xl font-bold text-primary mb-4">$5,000</p>
                 </div>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Starter package for testing AI-generated content
-                </p>
                 <ul className="space-y-2 text-sm mb-6">
                   {[
                     "15-25 custom images",
                     "5-10 short video clips",
-                    "Basic character setup",
+                    "Character setup",
                     "Social media formats"
                   ].map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-2">
@@ -308,17 +305,10 @@ const MediaForBrands = () => {
                     </li>
                   ))}
                 </ul>
-                <Button 
-                  onClick={scrollToPackageSelector}
-                  className="w-full"
-                  variant="outline"
-                >
-                  Select Option
-                </Button>
               </Card>
 
               {/* Scale Package */}
-              <Card className="p-6 hover:shadow-lg transition-all cursor-pointer border-2 border-primary relative">
+              <Card className="p-6 border-2 border-primary relative hover:shadow-lg transition-all">
                 <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground">
                   Most Popular
                 </Badge>
@@ -326,9 +316,6 @@ const MediaForBrands = () => {
                   <h4 className="text-2xl font-bold mb-2">Scale</h4>
                   <p className="text-3xl font-bold text-primary mb-4">$25,000</p>
                 </div>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Full content package for serious campaigns
-                </p>
                 <ul className="space-y-2 text-sm mb-6">
                   {[
                     "75-150 custom images",
@@ -343,31 +330,21 @@ const MediaForBrands = () => {
                     </li>
                   ))}
                 </ul>
-                <Button 
-                  onClick={scrollToPackageSelector}
-                  className="w-full"
-                >
-                  Select Option
-                </Button>
               </Card>
 
               {/* Dominate Package */}
-              <Card className="p-6 hover:shadow-lg transition-all cursor-pointer hover:border-secondary/50">
+              <Card className="p-6 hover:shadow-lg transition-all">
                 <div className="text-center mb-4">
                   <h4 className="text-2xl font-bold mb-2">Dominate</h4>
                   <p className="text-3xl font-bold text-secondary mb-4">$100,000</p>
                 </div>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Enterprise-level content production
-                </p>
                 <ul className="space-y-2 text-sm mb-6">
                   {[
                     "300+ custom images",
                     "100+ video clips",
                     "Advanced character work",
                     "Campaign series",
-                    "Priority support",
-                    "Extended timeline options"
+                    "Priority support"
                   ].map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
@@ -375,30 +352,20 @@ const MediaForBrands = () => {
                     </li>
                   ))}
                 </ul>
-                <Button 
-                  onClick={scrollToPackageSelector}
-                  className="w-full"
-                  variant="outline"
-                >
-                  Select Option
-                </Button>
               </Card>
 
               {/* Custom Budget */}
-              <Card className="p-6 hover:shadow-lg transition-all cursor-pointer hover:border-accent/50">
+              <Card className="p-6 hover:shadow-lg transition-all">
                 <div className="text-center mb-4">
                   <h4 className="text-2xl font-bold mb-2">Custom</h4>
                   <p className="text-3xl font-bold text-accent mb-4">Custom</p>
                 </div>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Tailored solutions for unique needs
-                </p>
                 <ul className="space-y-2 text-sm mb-6">
                   {[
                     "Custom deliverables",
-                    "Flexible budget allocation",
+                    "Flexible budget",
                     "Mixed content packages",
-                    "Dedicated account manager",
+                    "Account manager",
                     "Priority support"
                   ].map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-2">
@@ -407,24 +374,18 @@ const MediaForBrands = () => {
                     </li>
                   ))}
                 </ul>
-                <Button 
-                  onClick={scrollToPackageSelector}
-                  className="w-full"
-                  variant="outline"
-                >
-                  Select Option
-                </Button>
               </Card>
             </div>
-          </div>
 
-          {/* Subscription Levels - Reuse from PackageSelector */}
-          <div className="max-w-6xl mx-auto">
-            <h3 className="text-2xl font-semibold mb-8 text-center">Step 2: Choose Subscription Level</h3>
-            <div className="text-center mb-8">
-              <p className="text-muted-foreground">
-                Select your ongoing subscription tier for continuous AI media generation
-              </p>
+            <div className="text-center mt-12">
+              <Button 
+                onClick={scrollToPackageSelector}
+                size="lg"
+                className="text-lg px-8 py-6"
+              >
+                Get Started
+                <Zap className="ml-2 h-5 w-5" />
+              </Button>
             </div>
           </div>
         </div>
