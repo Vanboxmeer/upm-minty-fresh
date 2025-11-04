@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PackageSelector from "@/components/PackageSelector";
@@ -11,6 +12,7 @@ import { Sparkles, Video, Image as ImageIcon, Zap, Target, Layers, CheckCircle2 
 
 const MediaForBrands = () => {
   const { setSelectedPackage, setUserType } = usePackageSelection();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Set user type to brand for this page
@@ -50,12 +52,6 @@ const MediaForBrands = () => {
     });
   }, [setSelectedPackage, setUserType]);
 
-  const scrollToPackageSelector = () => {
-    const element = document.getElementById('package-selector');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -90,7 +86,7 @@ const MediaForBrands = () => {
             </p>
 
             <Button 
-              onClick={scrollToPackageSelector}
+              onClick={() => navigate('/contact')}
               size="lg"
               className="text-lg px-8 py-6 bg-primary hover:bg-primary/90"
             >
@@ -146,7 +142,7 @@ const MediaForBrands = () => {
               </div>
               <ul className="space-y-3 text-muted-foreground">
                 {[
-                  "10-30s video ads with sound",
+                  "5-60s video ads with sound",
                   "Banner/display creatives for Brave Ads",
                   "Native advertising formats",
                   "Telegram Ads channel placements",
@@ -172,7 +168,6 @@ const MediaForBrands = () => {
             <div className="grid md:grid-cols-2 gap-6">
               <ul className="space-y-3 text-muted-foreground">
                 {[
-                  "Photorealistic 1024×1024 images",
                   "Short videos with audio generation",
                   "Upload reference → maintain exact character"
                 ].map((feature, idx) => (
