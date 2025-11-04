@@ -277,15 +277,14 @@ const MediaForBrands = () => {
       {/* Media Generation Packages */}
       <section id="package-selector" className="py-20 bg-background">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Set Campaign Budget & Subscription Level</h2>
+            <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Choose Your Campaign Budget</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Select both a campaign budget and subscription level to get started. Choose your budget below for AI-generated videos, images, and commercial content.
+              Professional AI-generated content for your brand
             </p>
           </div>
 
           <div className="max-w-6xl mx-auto mb-16">
-            <h3 className="text-2xl font-semibold mb-8 text-center">Step 1: Set Campaign Budget</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {/* Growth Package */}
               <Card className="p-6 hover:shadow-lg transition-all cursor-pointer hover:border-primary/50">
@@ -294,15 +293,14 @@ const MediaForBrands = () => {
                   <p className="text-3xl font-bold text-primary mb-4">$5,000</p>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Perfect for emerging brands testing AI content. Use your budget for:
+                  Starter package for testing AI-generated content
                 </p>
                 <ul className="space-y-2 text-sm mb-6">
                   {[
-                    "50-100 AI-generated images (1024×1024)",
-                    "10-20 short video clips (10-15s)",
-                    "Character continuity setup",
-                    "Social media content pack",
-                    "Basic ad creative variations"
+                    "15-25 custom images",
+                    "5-10 short video clips",
+                    "Basic character setup",
+                    "Social media formats"
                   ].map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
@@ -329,16 +327,15 @@ const MediaForBrands = () => {
                   <p className="text-3xl font-bold text-primary mb-4">$25,000</p>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Comprehensive AI media for scaling brands. Use your budget for:
+                  Full content package for serious campaigns
                 </p>
                 <ul className="space-y-2 text-sm mb-6">
                   {[
-                    "200-500 AI-generated images",
-                    "50-100 video clips with sound",
-                    "Multiple character continuity setups",
-                    "Multi-platform content (IG, TikTok, X)",
-                    "Banner ads for Brave/Native/Telegram",
-                    "10-30s commercial video generation"
+                    "75-150 custom images",
+                    "25-50 video clips",
+                    "Character continuity",
+                    "Multi-platform formats",
+                    "Ad creative variations"
                   ].map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
@@ -361,17 +358,16 @@ const MediaForBrands = () => {
                   <p className="text-3xl font-bold text-secondary mb-4">$100,000</p>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Maximum AI content output for industry leaders. Use your budget for:
+                  Enterprise-level content production
                 </p>
                 <ul className="space-y-2 text-sm mb-6">
                   {[
-                    "1000+ AI-generated images",
-                    "300+ video clips and commercials",
-                    "Unlimited character variations",
-                    "Full campaign series production",
-                    "Priority generation queue",
-                    "Longer campaign or larger media blitz",
-                    "Enterprise-level asset library"
+                    "300+ custom images",
+                    "100+ video clips",
+                    "Advanced character work",
+                    "Campaign series",
+                    "Priority support",
+                    "Extended timeline options"
                   ].map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
@@ -391,20 +387,19 @@ const MediaForBrands = () => {
               {/* Custom Budget */}
               <Card className="p-6 hover:shadow-lg transition-all cursor-pointer hover:border-accent/50">
                 <div className="text-center mb-4">
-                  <h4 className="text-2xl font-bold mb-2">Custom Budget</h4>
+                  <h4 className="text-2xl font-bold mb-2">Custom</h4>
                   <p className="text-3xl font-bold text-accent mb-4">Custom</p>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Your account manager optimizes AI generation to match your budget:
+                  Tailored solutions for unique needs
                 </p>
                 <ul className="space-y-2 text-sm mb-6">
                   {[
-                    "Custom budget allocation ($5K - $500K)",
-                    "Mixed content packages (video + image)",
-                    "Scalable AI generation matching investment",
-                    "Custom character development",
+                    "Custom deliverables",
+                    "Flexible budget allocation",
+                    "Mixed content packages",
                     "Dedicated account manager",
-                    "Priority support and revisions"
+                    "Priority support"
                   ].map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 text-accent shrink-0 mt-0.5" />
