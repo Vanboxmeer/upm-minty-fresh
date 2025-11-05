@@ -40,7 +40,16 @@ const ThinkTank = () => {
   }, []);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    // Only auto-scroll if user is near bottom (within 150px)
+    const container = chatContainerRef.current;
+    if (!container) return;
+    
+    const { scrollTop, scrollHeight, clientHeight } = container;
+    const isNearBottom = scrollHeight - scrollTop - clientHeight < 150;
+    
+    if (isNearBottom) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
   }, [messages]);
 
   useEffect(() => {
@@ -242,11 +251,11 @@ const ThinkTank = () => {
       </section>
 
       {/* Chat Section */}
-      <section className="flex-1 py-8 px-4">
-        <div className="container mx-auto max-w-4xl">
-          <Card className="bg-gradient-to-b from-card/60 to-card/40 backdrop-blur-md border-2 border-primary/20 shadow-2xl relative overflow-hidden">
+      <section className="flex-1 py-8 px-4 pb-16">
+        <div className="container mx-auto max-w-4xl h-full">
+          <Card className="bg-gradient-to-b from-card/60 to-card/40 backdrop-blur-md border-2 border-primary/20 shadow-2xl relative overflow-hidden h-[calc(100vh-280px)] min-h-[500px]">
             <div className="absolute inset-0 bg-grid-pattern opacity-[0.02] pointer-events-none"></div>
-            <div className="flex flex-col h-[500px] sm:h-[550px] md:h-[600px] lg:h-[650px] xl:h-[700px] min-h-[400px] relative z-10">
+            <div className="flex flex-col h-full relative z-10">
               {/* Messages Area */}
               <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-6 space-y-4 scroll-smooth">
                 {messages.length === 0 ? (
