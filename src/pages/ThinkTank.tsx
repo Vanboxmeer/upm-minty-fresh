@@ -362,7 +362,7 @@ const ThinkTank = () => {
                     {showScrollButton && (
                       <Button
                         onClick={scrollToBottom}
-                        className="fixed bottom-24 right-8 rounded-full h-10 w-10 shadow-lg bg-primary hover:bg-primary-electric z-20"
+                        className="absolute bottom-32 right-4 rounded-full h-10 w-10 shadow-lg bg-primary hover:bg-primary-electric z-20"
                         size="icon"
                       >
                         <ChevronDown className="h-5 w-5" />
