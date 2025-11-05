@@ -81,9 +81,6 @@ const MediaForBrands = () => {
               AI-Powered Videos, Images & Commercials with <span className="text-primary font-semibold">Character Continuity</span>
             </p>
             
-            <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto">
-              Generate photorealistic content instantly via Grok Imagine. Perfect for social media, paid ads, and brand campaigns.
-            </p>
 
             <Button 
               onClick={() => navigate('/contact')}
@@ -121,8 +118,7 @@ const MediaForBrands = () => {
                   "Instagram Reels & TikTok clips",
                   "X/Twitter carousels & video posts",
                   "Branded memes & lifestyle scenes",
-                  "Product showcases & demos",
-                  "Endless variations via infinite scroll"
+                  "Product showcases & demos"
                 ].map((feature, idx) => (
                   <li key={idx} className="flex items-start gap-3">
                     <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
@@ -157,117 +153,8 @@ const MediaForBrands = () => {
             </Card>
           </div>
 
-          {/* Powered by Grok Imagine */}
-          <Card className="p-8 max-w-5xl mx-auto bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 bg-primary/20 rounded-lg">
-                <Layers className="w-6 h-6 text-primary" />
-              </div>
-              <h3 className="text-2xl font-semibold">Powered by Grok Imagine</h3>
-            </div>
-            <div className="grid md:grid-cols-2 gap-6">
-              <ul className="space-y-3 text-muted-foreground">
-                {[
-                  "Short videos with audio generation",
-                  "Upload reference → maintain exact character"
-                ].map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <ul className="space-y-3 text-muted-foreground">
-                {[
-                  "Trained on billions of examples",
-                  "Optimized for DeFi, NFT, AI & Tech",
-                  "Infinite iteration, zero revision hell"
-                ].map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Card>
         </div>
       </section>
-
-      {/* Integration Section */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Seamless Campaign Integration</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Same contact form, same subscription flow – just select your package and budget
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <Card className="p-6 text-center hover:shadow-lg transition-all">
-              <div className="mx-auto mb-4 p-4 bg-primary/10 rounded-full w-16 h-16 flex items-center justify-center">
-                <Layers className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Subscription Levels</h3>
-              <p className="text-muted-foreground">
-                Starter → Pro → Enterprise bundles<br />(images + videos)
-              </p>
-            </Card>
-
-            <Card className="p-6 text-center hover:shadow-lg transition-all">
-              <div className="mx-auto mb-4 p-4 bg-secondary/10 rounded-full w-16 h-16 flex items-center justify-center">
-                <Target className="w-8 h-8 text-secondary" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Campaign Budget</h3>
-              <p className="text-muted-foreground">
-                Set your range in the form<br />We optimize output count & quality
-              </p>
-            </Card>
-
-            <Card className="p-6 text-center hover:shadow-lg transition-all">
-              <div className="mx-auto mb-4 p-4 bg-accent/10 rounded-full w-16 h-16 flex items-center justify-center">
-                <Zap className="w-8 h-8 text-accent" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">One Contact Form</h3>
-              <p className="text-muted-foreground">
-                Same form, same flow<br />Just select "Media for Brands"
-              </p>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Character Continuity Feature Highlight */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-6 px-4 py-2 text-sm bg-primary/20 text-primary border-primary/30">
-              <ImageIcon className="w-4 h-4 mr-2 inline" />
-              Unique Selling Point
-            </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Perfect Character Continuity</h2>
-            <p className="text-xl text-muted-foreground mb-8">
-              Upload your brand mascot once → Generate hundreds of variations in different scenarios
-            </p>
-            <div className="grid md:grid-cols-3 gap-6 text-left">
-              <Card className="p-6">
-                <h4 className="font-semibold text-lg mb-2">Same Character</h4>
-                <p className="text-muted-foreground">Maintain brand consistency across all content</p>
-              </Card>
-              <Card className="p-6">
-                <h4 className="font-semibold text-lg mb-2">Infinite Scenarios</h4>
-                <p className="text-muted-foreground">Place your character in any setting or situation</p>
-              </Card>
-              <Card className="p-6">
-                <h4 className="font-semibold text-lg mb-2">Series-Based Content</h4>
-                <p className="text-muted-foreground">Perfect for ongoing campaigns and storylines</p>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
-
 
       {/* Footer with Contact Form */}
       <Footer />
