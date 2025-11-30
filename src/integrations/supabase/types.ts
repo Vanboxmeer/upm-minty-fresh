@@ -607,22 +607,10 @@ export type Database = {
         Args: { client_ip: string }
         Returns: boolean
       }
-      cleanup_newsletter_rate_limits: {
-        Args: Record<PropertyKey, never>
-        Returns: undefined
-      }
-      generate_referral_code: {
-        Args: Record<PropertyKey, never>
-        Returns: string
-      }
-      generate_slug: {
-        Args: { title: string }
-        Returns: string
-      }
-      get_content_age_days: {
-        Args: { reviewed_date: string }
-        Returns: number
-      }
+      cleanup_newsletter_rate_limits: { Args: never; Returns: undefined }
+      generate_referral_code: { Args: never; Returns: string }
+      generate_slug: { Args: { title: string }; Returns: string }
+      get_content_age_days: { Args: { reviewed_date: string }; Returns: number }
     }
     Enums: {
       [_ in never]: never
