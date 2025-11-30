@@ -175,6 +175,7 @@ export type Database = {
           featured_image_alt: string | null
           gallery_images: Json | null
           id: string
+          linkedin_handles: string[] | null
           publish_date: string | null
           read_time: string | null
           seo_description: string | null
@@ -183,6 +184,7 @@ export type Database = {
           slug: string
           status: string
           title: string
+          twitter_handles: string[] | null
           updated_at: string
         }
         Insert: {
@@ -196,6 +198,7 @@ export type Database = {
           featured_image_alt?: string | null
           gallery_images?: Json | null
           id?: string
+          linkedin_handles?: string[] | null
           publish_date?: string | null
           read_time?: string | null
           seo_description?: string | null
@@ -204,6 +207,7 @@ export type Database = {
           slug: string
           status?: string
           title: string
+          twitter_handles?: string[] | null
           updated_at?: string
         }
         Update: {
@@ -217,6 +221,7 @@ export type Database = {
           featured_image_alt?: string | null
           gallery_images?: Json | null
           id?: string
+          linkedin_handles?: string[] | null
           publish_date?: string | null
           read_time?: string | null
           seo_description?: string | null
@@ -225,6 +230,7 @@ export type Database = {
           slug?: string
           status?: string
           title?: string
+          twitter_handles?: string[] | null
           updated_at?: string
         }
         Relationships: []
