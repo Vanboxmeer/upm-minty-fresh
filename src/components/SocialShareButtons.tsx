@@ -7,13 +7,17 @@ interface SocialShareButtonsProps {
   title: string;
   description?: string;
   className?: string;
+  twitterHandles?: string[];
+  linkedinHandles?: string[];
 }
 
 export const SocialShareButtons = ({ 
   url, 
   title, 
   description = '', 
-  className = '' 
+  className = '',
+  twitterHandles = [],
+  linkedinHandles = []
 }: SocialShareButtonsProps) => {
   const { toast } = useToast();
   
@@ -21,9 +25,21 @@ export const SocialShareButtons = ({
   const encodedTitle = encodeURIComponent(title);
   const encodedDescription = encodeURIComponent(description);
 
+  // Build Twitter text with handles
+  const twitterText = twitterHandles.length > 0 
+    ? `${title} ${twitterHandles.join(' ')}`
+    : title;
+  const encodedTwitterText = encodeURIComponent(twitterText);
+
+  // Build LinkedIn description with handles (LinkedIn uses company pages format)
+  const linkedinText = linkedinHandles.length > 0
+    ? `${description}\n\nMentioned: ${linkedinHandles.map(handle => `https://linkedin.com/company/${handle}`).join(' ')}`
+    : description;
+  const encodedLinkedinText = encodeURIComponent(linkedinText);
+
   const shareUrls = {
-    twitter: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`,
-    linkedin: `https://linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+    twitter: `https://twitter.com/intent/tweet?text=${encodedTwitterText}&url=${encodedUrl}`,
+    linkedin: `https://linkedin.com/sharing/share-offsite/?url=${encodedUrl}&summary=${encodedLinkedinText}`,
     facebook: `https://facebook.com/sharer/sharer.php?u=${encodedUrl}`,
     email: `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%0A${encodedUrl}`,
   };

@@ -157,6 +157,8 @@ const BlogPost = () => {
               url={`https://unitedpress.media/blog/${post.slug}`}
               title={post.title}
               description={post.excerpt || post.content?.substring(0, 160) || ''}
+              twitterHandles={(post as any).twitter_handles || []}
+              linkedinHandles={(post as any).linkedin_handles || []}
               className="border rounded-lg p-4 bg-muted/50"
             />
           </div>

@@ -57,6 +57,8 @@ const blogPostSchema = z.object({
   seo_keywords: z.array(z.string()).optional(),
   read_time: z.string().optional(),
   publish_date: z.string().optional(),
+  twitter_handles: z.array(z.string()).optional(),
+  linkedin_handles: z.array(z.string()).optional(),
 });
 
 type BlogPostFormData = z.infer<typeof blogPostSchema>;
@@ -102,6 +104,8 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
         const localDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000));
         return localDate.toISOString().slice(0, 16);
       })() : '',
+      twitter_handles: (post as any)?.twitter_handles || [],
+      linkedin_handles: (post as any)?.linkedin_handles || [],
     },
   });
 
@@ -804,6 +808,58 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                             {...field}
                           />
                         </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="twitter_handles"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>X (Twitter) Handles to Tag</FormLabel>
+                        <FormControl>
+                          <div key="twitter-tag-input">
+                            <TagInput
+                              id="twitter-handles-input"
+                              tags={field.value || []}
+                              onTagsChange={field.onChange}
+                              placeholder="Type @handle and press Enter..."
+                              maxTags={10}
+                              className="twitter-handles-tag-input"
+                            />
+                          </div>
+                        </FormControl>
+                        <p className="text-xs text-muted-foreground">
+                          Enter X/Twitter handles (e.g., @project1, @brand2) to tag when sharing
+                        </p>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="linkedin_handles"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>LinkedIn Company Handles</FormLabel>
+                        <FormControl>
+                          <div key="linkedin-tag-input">
+                            <TagInput
+                              id="linkedin-handles-input"
+                              tags={field.value || []}
+                              onTagsChange={field.onChange}
+                              placeholder="Type company name and press Enter..."
+                              maxTags={10}
+                              className="linkedin-handles-tag-input"
+                            />
+                          </div>
+                        </FormControl>
+                        <p className="text-xs text-muted-foreground">
+                          Enter LinkedIn company page names (e.g., company-name, not full URLs)
+                        </p>
                         <FormMessage />
                       </FormItem>
                     )}
