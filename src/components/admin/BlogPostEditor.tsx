@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -29,7 +29,7 @@ import { Combobox } from '@/components/ui/combobox';
 import { TagInput } from '@/components/ui/tag-input';
 import { BlogPost } from '@/hooks/useBlogPosts';
 import { useCategories } from '@/hooks/useCategories';
-import { Save, Eye, Upload, X, Smile, Plus, FileText, Link2 } from 'lucide-react';
+import { Save, Eye, Upload, X, Smile, Plus, FileText, Link2, Sparkles } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { EmojiPickerComponent } from './EmojiPicker';
@@ -76,6 +76,7 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
   const [cursorPosition, setCursorPosition] = useState<number | null>(null);
   const [showTemplateSelector, setShowTemplateSelector] = useState(false);
   const [loadingLinkSuggestions, setLoadingLinkSuggestions] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
   const { categories, createCategory } = useCategories();
   const { toast } = useToast();
   
@@ -220,6 +221,73 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
       description: 'You can now customize the content',
     });
   };
+
+  const generateSuggestions = async () => {
+    const title = form.getValues('title');
+    const content = form.getValues('content');
+
+    if (!content || !title) {
+      toast({
+        title: "Missing content",
+        description: "Please add a title and content first",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsGenerating(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('suggest-categories-keywords', {
+        body: { content, title }
+      });
+
+      if (error) throw error;
+
+      if (data.categories && data.categories.length > 0) {
+        form.setValue('categories', data.categories);
+      }
+      if (data.keywords && data.keywords.length > 0) {
+        form.setValue('seo_keywords', data.keywords);
+      }
+
+      toast({
+        title: "Suggestions generated",
+        description: "Categories and keywords have been auto-populated",
+      });
+    } catch (error) {
+      console.error('Error generating suggestions:', error);
+      toast({
+        title: "Generation failed",
+        description: error.message || "Failed to generate suggestions",
+        variant: "destructive",
+      });
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  // Debounced version for auto-suggestion
+  const debouncedAutoSuggest = useCallback(
+    (() => {
+      let timeout: NodeJS.Timeout;
+      return (content: string) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(async () => {
+          const title = form.getValues('title');
+          const currentCategories = form.getValues('categories');
+          const currentKeywords = form.getValues('seo_keywords');
+          
+          // Only auto-suggest if fields are empty
+          if (title && content.length > 500 && 
+              (!currentCategories || currentCategories.length === 0) && 
+              (!currentKeywords || currentKeywords.length === 0)) {
+            await generateSuggestions();
+          }
+        }, 3000);
+      };
+    })(),
+    [form]
+  );
 
   const getSuggestedLinks = async () => {
     setLoadingLinkSuggestions(true);
@@ -413,20 +481,20 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Keyword Tags</FormLabel>
-                        <FormControl>
+                         <FormControl>
                            <div key="keywords-tag-input">
                              <TagInput
                                id="seo-keywords-input"
                                tags={field.value || []}
                                onTagsChange={field.onChange}
-                               placeholder="Type keyword and press Enter..."
+                               placeholder="Auto-populated by AI. Add more if needed..."
                                maxTags={10}
                                className="keywords-tag-input"
                              />
                            </div>
                         </FormControl>
                         <p className="text-xs text-muted-foreground">
-                          Press Enter or comma to add keywords. Maximum 10 keywords.
+                          Auto-populated by AI. Maximum 10 keywords.
                         </p>
                         <FormMessage />
                       </FormItem>
@@ -461,7 +529,10 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                               <ReactQuill
                                 theme="snow"
                                 value={field.value}
-                                onChange={field.onChange}
+                                onChange={(value) => {
+                                  field.onChange(value);
+                                  debouncedAutoSuggest(value);
+                                }}
                                 placeholder="Write your blog post content..."
                                 modules={{
                                   toolbar: {
@@ -581,10 +652,18 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="flex items-center justify-between">
-                          Categories
-                          <span className="text-xs text-muted-foreground">
-                            Multiple categories supported
-                          </span>
+                          <span>Categories</span>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            onClick={generateSuggestions}
+                            disabled={isGenerating}
+                            className="h-7 px-2"
+                          >
+                            <Sparkles className="h-3 w-3 mr-1" />
+                            {isGenerating ? 'Generating...' : 'AI Suggest'}
+                          </Button>
                         </FormLabel>
                         <FormControl>
                           <div className="space-y-2">
@@ -637,7 +716,7 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                           </div>
                         </FormControl>
                         <p className="text-xs text-muted-foreground">
-                          Select existing categories or type new ones. New categories will be saved automatically.
+                          Auto-populated by AI. Select existing or type new categories.
                         </p>
                         <FormMessage />
                       </FormItem>

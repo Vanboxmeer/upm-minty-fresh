@@ -42,5 +42,8 @@ verify_jwt = false
 [functions.suggest-internal-links]
 verify_jwt = true
 
+[functions.suggest-categories-keywords]
+verify_jwt = true
+
 [functions.check-content-freshness]
 verify_jwt = false
