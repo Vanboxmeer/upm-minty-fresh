@@ -111,7 +111,7 @@ export const SuggestedSocialPosts = ({
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Sparkles className="h-5 w-5 text-primary" />
-          Suggested Social Posts
+          AI Social Post Drafts
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -120,7 +120,9 @@ export const SuggestedSocialPosts = ({
             <Alert>
               <AlertCircle className="h-4 w-4" />
               <AlertDescription>
-                Generate AI-powered social media posts with verified handles from websites mentioned in your article.
+                Generate X and LinkedIn post bodies that already include @handles for any official
+                project websites linked inside this article. You can then copy and paste them into
+                each platform.
               </AlertDescription>
             </Alert>
             <Button
@@ -129,7 +131,7 @@ export const SuggestedSocialPosts = ({
               className="w-full"
             >
               <Sparkles className="h-4 w-4 mr-2" />
-              {loading ? 'Analyzing content...' : 'Generate Social Posts'}
+              {loading ? 'Analyzing content & finding handles…' : 'Generate Tagged Social Posts'}
             </Button>
           </div>
         ) : (
