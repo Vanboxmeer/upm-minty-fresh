@@ -35,6 +35,29 @@ serve(async (req) => {
       throw new Error('Post not found');
     }
 
+    // Get social handles from content
+    let socialHandles = { twitter: [], linkedin: [] };
+    try {
+      const { data: handlesData, error: handlesError } = await supabaseClient.functions.invoke(
+        'suggest-social-handles',
+        {
+          body: {
+            content: post.content,
+            title: post.title,
+            excerpt: post.excerpt
+          }
+        }
+      );
+      
+      if (!handlesError && handlesData?.socialHandles) {
+        socialHandles = handlesData.socialHandles;
+        console.log('Found social handles:', socialHandles);
+      }
+    } catch (error) {
+      console.error('Error fetching social handles:', error);
+      // Continue without handles
+    }
+
     const results = {
       twitter: null as any,
     };
@@ -43,7 +66,26 @@ serve(async (req) => {
     if (TWITTER_API_KEY && TWITTER_API_SECRET) {
       try {
         const postUrl = `https://unitedpress.media/blog/${post.slug}`;
-        const tweetText = `${post.title}\n\n${post.excerpt || ''}\n\n${postUrl}`.slice(0, 280);
+        
+        // Build tweet with handles
+        let tweetText = `📰 ${post.title}\n\n`;
+        if (post.excerpt && post.excerpt.length < 100) {
+          tweetText += `${post.excerpt}\n\n`;
+        }
+        
+        // Add verified handles
+        if (socialHandles.twitter.length > 0) {
+          tweetText += `${socialHandles.twitter.join(' ')}\n\n`;
+        }
+        
+        tweetText += postUrl;
+        
+        // Ensure tweet is under 280 characters
+        if (tweetText.length > 280) {
+          const maxExcerptLength = 100 - (socialHandles.twitter.join(' ').length);
+          const shortExcerpt = post.excerpt ? post.excerpt.substring(0, maxExcerptLength) + '...' : '';
+          tweetText = `📰 ${post.title}\n\n${shortExcerpt}\n\n${socialHandles.twitter.join(' ')}\n\n${postUrl}`.slice(0, 280);
+        }
         
         results.twitter = await postToTwitter(tweetText);
         console.log('Posted to Twitter:', results.twitter);
