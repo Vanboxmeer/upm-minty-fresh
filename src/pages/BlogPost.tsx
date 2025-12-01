@@ -5,6 +5,7 @@ import { useParams, Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { SocialShareButtons } from "@/components/SocialShareButtons";
+import { SuggestedSocialPosts } from "@/components/SuggestedSocialPosts";
 import { CategoryBreadcrumbs } from "@/components/CategoryBreadcrumbs";
 import { RelatedPosts } from "@/components/RelatedPosts";
 import { BlogNavigation } from "@/components/BlogNavigation";
@@ -151,7 +152,17 @@ const BlogPost = () => {
             />
           </section>
 
-          {/* Social Share Buttons */}
+          {/* Suggested Social Posts with Auto-detected Handles */}
+          <div className="max-w-3xl mx-auto mb-12">
+            <SuggestedSocialPosts
+              postUrl={`https://unitedpress.media/blog/${post.slug}`}
+              title={post.title}
+              excerpt={post.excerpt || ''}
+              content={post.content}
+            />
+          </div>
+
+          {/* Traditional Social Share Buttons */}
           <div className="max-w-3xl mx-auto mb-12 flex justify-center">
             <SocialShareButtons 
               url={`https://unitedpress.media/blog/${post.slug}`}

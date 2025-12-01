@@ -45,5 +45,8 @@ verify_jwt = true
 [functions.suggest-categories-keywords]
 verify_jwt = true
 
+[functions.suggest-social-handles]
+verify_jwt = false
+
 [functions.check-content-freshness]
 verify_jwt = false
