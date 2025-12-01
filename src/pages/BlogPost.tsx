@@ -152,26 +152,25 @@ const BlogPost = () => {
             />
           </section>
 
-          {/* Suggested Social Posts with Auto-detected Handles */}
-          <div className="max-w-3xl mx-auto mb-12">
+          {/* Suggested Social Posts + Traditional Social Share Buttons */}
+          <div className="max-w-3xl mx-auto mb-12 space-y-6">
             <SuggestedSocialPosts
               postUrl={`https://unitedpress.media/blog/${post.slug}`}
               title={post.title}
               excerpt={post.excerpt || ''}
               content={post.content}
             />
-          </div>
 
-          {/* Traditional Social Share Buttons */}
-          <div className="max-w-3xl mx-auto mb-12 flex justify-center">
-            <SocialShareButtons 
-              url={`https://unitedpress.media/blog/${post.slug}`}
-              title={post.title}
-              description={post.excerpt || post.content?.substring(0, 160) || ''}
-              twitterHandles={(post as any).twitter_handles || []}
-              linkedinHandles={(post as any).linkedin_handles || []}
-              className="border rounded-lg p-4 bg-muted/50"
-            />
+            <div className="flex justify-center">
+              <SocialShareButtons 
+                url={`https://unitedpress.media/blog/${post.slug}`}
+                title={post.title}
+                description={post.excerpt || post.content?.substring(0, 160) || ''}
+                twitterHandles={(post as any).twitter_handles || []}
+                linkedinHandles={(post as any).linkedin_handles || []}
+                className="border rounded-lg p-4 bg-muted/50"
+              />
+            </div>
           </div>
 
           {/* Blog Navigation */}
