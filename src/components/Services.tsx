@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import servicesIcon from "@/assets/crypto-marketing-services.jpg";
+import AnimatedServicesHero from "@/components/AnimatedServicesHero";
 import { CheckCircle } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 const Services = () => {
@@ -53,7 +53,7 @@ AI, GameFi, DeFi, and Web3</span>
           </div>
           
           <div className={`relative transition-all duration-700 delay-300 ${heroVisible ? 'animate-fade-in' : 'opacity-0 translate-x-[50px]'}`}>
-            <img src={servicesIcon} alt="Digital Marketing Services" className="w-full h-auto rounded-lg shadow-lg" />
+            <AnimatedServicesHero />
           </div>
         </div>
 
