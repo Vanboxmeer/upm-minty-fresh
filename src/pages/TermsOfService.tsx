@@ -156,7 +156,7 @@ const TermsOfService = () => {
               <section>
                 <h2 className="text-2xl font-semibold mb-4 text-foreground">Data Privacy and Privacy Policy</h2>
                 <p className="mb-4 text-foreground leading-relaxed">UPM handles personal data from clients, influencers, and other parties in the course of providing services, such as contact information, campaign details, and communication records. We use tools like Google Spreadsheets for managing information, Telegram for client interactions, and Gmail for communications. We are committed to protecting your privacy and comply with applicable data protection laws, including the General Data Protection Regulation (GDPR) for clients in the European Union (EU) or where GDPR applies. This includes obtaining necessary consents, ensuring data security, and providing rights such as access, rectification, and deletion of personal data.</p>
-                <p className="mb-4 text-foreground leading-relaxed">For detailed information on how we collect, use, store, and share personal data, please refer to our separate Privacy Policy, available at <a href="/privacy-policy" className="text-primary hover:underline">unitedpress.media/privacy-policy</a>. By using our services, you consent to the practices described in the Privacy Policy. If you are an EU resident, you have additional rights under GDPR, and we will process your data accordingly. Questions about data privacy can be directed to contact@unitedpress.media.</p>
+                <p className="mb-4 text-foreground leading-relaxed">For detailed information on how we collect, use, store, and share personal data, please refer to our separate Privacy Policy, available at <a href="/privacy-policy" className="text-primary hover:underline">unitedpress.media/privacy-policy</a>. By using our services, you consent to the practices described in the Privacy Policy. If you are an EU resident, you have additional rights under GDPR, and we will process your data accordingly. Questions about data privacy can be directed to unitedpress.media@gmail.com.</p>
               </section>
 
               <section>
@@ -177,7 +177,7 @@ const TermsOfService = () => {
 
               <section>
                 <h2 className="text-2xl font-semibold mb-4 text-foreground">Contact and Tax Advice</h2>
-                <p className="text-foreground leading-relaxed">For questions or concerns, please contact us at contact@unitedpress.media. These Terms of Service are not intended to provide tax advice, and clients should consult their own tax professionals for guidance on VAT, withholding tax, and other tax-related matters.</p>
+                <p className="text-foreground leading-relaxed">For questions or concerns, please contact us at unitedpress.media@gmail.com. These Terms of Service are not intended to provide tax advice, and clients should consult their own tax professionals for guidance on VAT, withholding tax, and other tax-related matters.</p>
               </section>
 
               <section>
@@ -185,7 +185,7 @@ const TermsOfService = () => {
                 <p className="mb-4 text-foreground leading-relaxed">For questions about these Terms of Service, please contact us:</p>
                 <div className="bg-muted p-6 rounded-lg text-foreground">
                   <p><strong>United Press Media</strong></p>
-                  <p>Email: contact@unitedpress.media</p>
+                  <p>Email: unitedpress.media@gmail.com</p>
                   <p>Telegram: <a href="https://t.me/unitedpressmedia" className="text-primary hover:underline">@unitedpressmedia</a></p>
                 </div>
               </section>
