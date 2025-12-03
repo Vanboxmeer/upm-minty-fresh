@@ -38,90 +38,125 @@ serve(async (req) => {
       urlMap: {}
     };
 
-    // Process each URL to find social handles
-    for (const url of uniqueUrls.slice(0, 10)) { // Limit to 10 URLs to prevent timeout
+    // Expanded list of invalid/generic handles to filter out
+    const invalidTwitterHandles = new Set([
+      'home', 'share', 'intent', 'i', 'widgets', 'search', 'explore', 'settings',
+      'notifications', 'messages', 'login', 'signup', 'about', 'help', 'privacy',
+      'tos', 'cookie', 'ads', 'business', 'developer', 'connatix', 'addthis',
+      'sharethis', 'facebook', 'instagram', 'youtube', 'tiktok', 'pinterest'
+    ]);
+
+    // Process ALL URLs (increased limit to 25 for better coverage)
+    const urlsToProcess = uniqueUrls.slice(0, 25);
+    console.log(`Processing ${urlsToProcess.length} URLs out of ${uniqueUrls.length} total`);
+
+    // Process URLs in parallel for speed
+    const processUrl = async (url: string) => {
       try {
         console.log(`Processing URL: ${url}`);
         const response = await fetch(url, {
           headers: {
-            'User-Agent': 'Mozilla/5.0 (compatible; UPM-Bot/1.0; +https://unitedpress.media)'
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
           },
-          signal: AbortSignal.timeout(5000) // 5 second timeout per URL
+          signal: AbortSignal.timeout(8000) // 8 second timeout per URL
         });
 
-        if (!response.ok) continue;
+        if (!response.ok) return null;
 
         const html = await response.text();
-        const domain = new URL(url).hostname;
+        const domain = new URL(url).hostname.replace('www.', '');
 
-        // Extract brand/company name from title tag
+        // Extract brand/company name from title tag or og:site_name
+        const ogSiteNameMatch = html.match(/<meta[^>]*property=["']og:site_name["'][^>]*content=["']([^"']+)["']/i);
         const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
-        const brandName = titleMatch ? titleMatch[1].split('|')[0].split('-')[0].trim() : domain;
+        let brandName = ogSiteNameMatch?.[1] || (titleMatch ? titleMatch[1].split('|')[0].split('-')[0].split('–')[0].trim() : domain);
+        
+        // Clean up brand name
+        brandName = brandName.replace(/\s*[|\-–]\s*.*$/, '').trim();
+        if (brandName.length > 50) brandName = domain;
 
-        // Find Twitter/X handle
+        // Find Twitter/X handle - prioritize meta tags over links
         const twitterPatterns = [
-          /twitter\.com\/([a-zA-Z0-9_]+)/i,
-          /x\.com\/([a-zA-Z0-9_]+)/i,
+          // Meta tags first (most reliable)
           /<meta[^>]*name=["']twitter:site["'][^>]*content=["']@?([a-zA-Z0-9_]+)["']/i,
+          /<meta[^>]*content=["']@?([a-zA-Z0-9_]+)["'][^>]*name=["']twitter:site["']/i,
           /<meta[^>]*property=["']twitter:site["'][^>]*content=["']@?([a-zA-Z0-9_]+)["']/i,
-          /<a[^>]*href=["']https?:\/\/(?:twitter|x)\.com\/([a-zA-Z0-9_]+)["']/i
+          // Links in social sections
+          /<a[^>]*href=["']https?:\/\/(?:twitter|x)\.com\/([a-zA-Z0-9_]+)\/?["'][^>]*(?:rel=["'][^"']*noopener|class=["'][^"']*social)/i,
+          // General Twitter/X links
+          /href=["']https?:\/\/(?:twitter|x)\.com\/([a-zA-Z0-9_]+)\/?["']/gi,
         ];
 
-        let twitterHandle = null;
+        let twitterHandle: string | null = null;
         for (const pattern of twitterPatterns) {
-          const match = html.match(pattern);
-          if (match && match[1]) {
-            twitterHandle = match[1];
-            // Verify it's not a generic path
-            if (!['home', 'share', 'intent', 'i'].includes(twitterHandle.toLowerCase())) {
+          const matches = html.match(pattern);
+          if (matches && matches[1]) {
+            const handle = matches[1].toLowerCase();
+            // Strict validation
+            if (!invalidTwitterHandles.has(handle) && 
+                handle.length >= 2 && 
+                handle.length <= 15 &&
+                !/^[0-9]+$/.test(handle)) {
+              twitterHandle = matches[1];
               break;
             }
-            twitterHandle = null;
           }
         }
 
-        // Find LinkedIn handle
+        // Find LinkedIn company page
         const linkedinPatterns = [
-          /linkedin\.com\/company\/([a-zA-Z0-9\-]+)/i,
-          /<meta[^>]*property=["']og:url["'][^>]*content=["']https?:\/\/(?:www\.)?linkedin\.com\/company\/([a-zA-Z0-9\-]+)["']/i,
-          /<a[^>]*href=["']https?:\/\/(?:www\.)?linkedin\.com\/company\/([a-zA-Z0-9\-]+)["']/i
+          /<a[^>]*href=["']https?:\/\/(?:www\.)?linkedin\.com\/company\/([a-zA-Z0-9\-]+)\/?["']/gi,
+          /linkedin\.com\/company\/([a-zA-Z0-9\-]+)/gi,
         ];
 
-        let linkedinHandle = null;
+        let linkedinHandle: string | null = null;
         for (const pattern of linkedinPatterns) {
           const match = html.match(pattern);
           if (match && match[1]) {
-            linkedinHandle = match[1];
-            break;
+            // Filter out generic LinkedIn paths
+            const handle = match[1].toLowerCase();
+            if (!['company', 'companies', 'jobs', 'feed', 'in', 'pub'].includes(handle)) {
+              linkedinHandle = match[1];
+              break;
+            }
           }
         }
 
-        // Store results
         if (twitterHandle || linkedinHandle) {
-          socialHandles.urlMap[url] = {
-            twitter: twitterHandle || undefined,
-            linkedin: linkedinHandle || undefined,
-            name: brandName
-          };
-
-          if (twitterHandle) {
-            const formattedHandle = `@${twitterHandle}`;
-            if (!socialHandles.twitter.includes(formattedHandle)) {
-              socialHandles.twitter.push(formattedHandle);
-            }
-          }
-
-          if (linkedinHandle) {
-            if (!socialHandles.linkedin.includes(linkedinHandle)) {
-              socialHandles.linkedin.push(linkedinHandle);
-            }
-          }
-
-          console.log(`Found handles for ${url}:`, { twitter: twitterHandle, linkedin: linkedinHandle });
+          console.log(`Found handles for ${url}:`, { twitter: twitterHandle, linkedin: linkedinHandle, brand: brandName });
+          return { url, twitter: twitterHandle, linkedin: linkedinHandle, name: brandName };
         }
+        return null;
       } catch (error) {
-        console.error(`Error processing ${url}:`, error);
-        continue;
+        console.error(`Error processing ${url}:`, error.message);
+        return null;
+      }
+    };
+
+    // Process all URLs in parallel
+    const results = await Promise.all(urlsToProcess.map(processUrl));
+
+    // Aggregate results
+    for (const result of results) {
+      if (!result) continue;
+      
+      socialHandles.urlMap[result.url] = {
+        twitter: result.twitter || undefined,
+        linkedin: result.linkedin || undefined,
+        name: result.name
+      };
+
+      if (result.twitter) {
+        const formattedHandle = `@${result.twitter}`;
+        if (!socialHandles.twitter.includes(formattedHandle)) {
+          socialHandles.twitter.push(formattedHandle);
+        }
+      }
+
+      if (result.linkedin) {
+        if (!socialHandles.linkedin.includes(result.linkedin)) {
+          socialHandles.linkedin.push(result.linkedin);
+        }
       }
     }
 
@@ -182,24 +217,36 @@ function generateLinkedInPost(
   handles: string[],
   urlMap: { [key: string]: { twitter?: string; linkedin?: string; name?: string } }
 ): string {
-  let post = `${title}\n\n`;
+  let post = `🚀 ${title}\n\n`;
   
   if (excerpt) {
     post += `${excerpt}\n\n`;
   }
   
   if (handles.length > 0) {
-    post += '✨ Featuring insights from:\n';
+    // Build mentions - LinkedIn uses company page format
+    const mentions: string[] = [];
     handles.forEach(handle => {
-      // Find the brand name from urlMap
       const entry = Object.values(urlMap).find(v => v.linkedin === handle);
-      const brandName = entry?.name || handle;
-      post += `• ${brandName} (https://linkedin.com/company/${handle})\n`;
+      const brandName = entry?.name || handle.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+      // LinkedIn company mentions use this format for clickable links
+      mentions.push(brandName);
+    });
+    
+    post += `📌 Featuring: ${mentions.join(', ')}\n\n`;
+    
+    // Add company page links at the end for proper tagging
+    post += 'Companies mentioned:\n';
+    handles.forEach(handle => {
+      const entry = Object.values(urlMap).find(v => v.linkedin === handle);
+      const brandName = entry?.name || handle.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+      post += `• ${brandName}: https://www.linkedin.com/company/${handle}/\n`;
     });
     post += '\n';
   }
   
-  post += 'Read the full article: [YOUR_BLOG_URL]';
+  post += '📖 Read the full article: [YOUR_BLOG_URL]\n\n';
+  post += '#Web3 #Crypto #Marketing #Blockchain';
   
   return post;
 }
