@@ -99,26 +99,34 @@ const AnimatedServicesHero = () => {
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="relative z-10">
           <div className="relative">
-            {/* Outer glow rings - always active */}
-            <div className="absolute -inset-6 bg-primary/30 rounded-full blur-2xl animate-pulse" />
-            <div className="absolute -inset-4 bg-primary/40 rounded-full blur-xl animate-pulse" style={{ animationDelay: '0.3s' }} />
-            <div className="absolute -inset-2 bg-primary-glow/50 rounded-full blur-lg animate-pulse" style={{ animationDelay: '0.6s' }} />
+            {/* Retro cyan glow layers - mimicking retro-logo-hover effect */}
+            <div className="absolute -inset-8 bg-retro-cyan/20 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute -inset-6 bg-retro-cyan/30 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '0.2s' }} />
+            <div className="absolute -inset-4 bg-primary/40 rounded-full blur-xl animate-pulse" style={{ animationDelay: '0.4s' }} />
             
-            {/* Main logo container - always scaled up */}
-            <div className="relative w-28 h-28 rounded-full flex items-center justify-center shadow-2xl overflow-hidden scale-110">
+            {/* Main logo container */}
+            <div className="relative w-36 h-36 rounded-full flex items-center justify-center shadow-2xl overflow-hidden">
               {/* Animated gradient ring */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary via-retro-purple to-retro-cyan animate-[spin_6s_linear_infinite]" />
+              <div className="absolute inset-0 bg-gradient-to-br from-retro-cyan via-primary to-retro-purple animate-[spin_8s_linear_infinite]" />
               
               {/* Inner circle with logo */}
-              <div className="absolute inset-[3px] rounded-full bg-slate-900 flex items-center justify-center overflow-hidden">
+              <div className="absolute inset-[4px] rounded-full bg-slate-900/95 flex items-center justify-center overflow-hidden">
                 {/* Glass highlight */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent" />
                 
-                {/* UPM Logo */}
+                {/* UPM Logo - larger with retro glow effect always active */}
                 <img 
-                  src="/lovable-uploads/e7c5744d-4804-4575-b2f2-0e55bee6382b.png" 
+                  src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
                   alt="UPM Logo"
-                  className="w-16 h-16 object-contain drop-shadow-[0_0_10px_rgba(139,92,246,0.5)]"
+                  className="w-24 h-24 object-contain"
+                  style={{
+                    filter: `
+                      drop-shadow(0 0 8px rgba(0, 255, 255, 0.8))
+                      drop-shadow(0 0 15px rgba(0, 255, 255, 0.6))
+                      drop-shadow(0 0 25px rgba(0, 255, 255, 0.4))
+                      drop-shadow(0 0 35px rgba(139, 92, 246, 0.3))
+                    `
+                  }}
                 />
               </div>
               
@@ -127,8 +135,8 @@ const AnimatedServicesHero = () => {
             </div>
             
             {/* Orbiting ring effects */}
-            <div className="absolute -inset-8 border border-primary/40 rounded-full animate-[spin_15s_linear_infinite]" />
-            <div className="absolute -inset-12 border border-primary/20 rounded-full animate-[spin_20s_linear_infinite_reverse]" />
+            <div className="absolute -inset-10 border border-retro-cyan/30 rounded-full animate-[spin_15s_linear_infinite]" />
+            <div className="absolute -inset-16 border border-primary/20 rounded-full animate-[spin_20s_linear_infinite_reverse]" />
           </div>
         </div>
 
