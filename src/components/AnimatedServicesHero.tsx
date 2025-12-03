@@ -62,10 +62,24 @@ const AnimatedServicesHero = () => {
         {/* Center node - representing your brand */}
         <div className="relative z-10">
           <div className="relative">
-            <div className="absolute inset-0 bg-primary/30 rounded-full blur-xl animate-pulse" />
-            <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-primary to-primary-glow flex items-center justify-center shadow-2xl border-2 border-primary-neon/50">
-              <Sparkles className="w-10 h-10 text-white animate-pulse" />
+            {/* Outer glow rings */}
+            <div className="absolute -inset-4 bg-primary/20 rounded-full blur-2xl animate-pulse" />
+            <div className="absolute -inset-2 bg-primary/30 rounded-full blur-xl animate-pulse" style={{ animationDelay: '0.5s' }} />
+            {/* Main orb with glassmorphism */}
+            <div className="relative w-24 h-24 rounded-full flex items-center justify-center shadow-2xl overflow-hidden group">
+              {/* Animated gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary-glow to-retro-purple animate-[spin_8s_linear_infinite]" />
+              {/* Inner highlight */}
+              <div className="absolute inset-[2px] rounded-full bg-gradient-to-br from-white/30 via-transparent to-transparent" />
+              {/* Glass overlay */}
+              <div className="absolute inset-[3px] rounded-full backdrop-blur-sm bg-gradient-to-br from-white/10 to-transparent" />
+              {/* Inner shadow for depth */}
+              <div className="absolute inset-0 rounded-full shadow-[inset_0_-8px_20px_rgba(0,0,0,0.4),inset_0_4px_10px_rgba(255,255,255,0.2)]" />
+              {/* Icon */}
+              <Sparkles className="relative w-12 h-12 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] animate-pulse" />
             </div>
+            {/* Orbiting ring effect */}
+            <div className="absolute -inset-6 border-2 border-primary/30 rounded-full animate-[spin_10s_linear_infinite]" />
           </div>
         </div>
 
@@ -79,12 +93,23 @@ const AnimatedServicesHero = () => {
             className="absolute top-[15%] left-[20%] transform -translate-x-1/2 -translate-y-1/2"
             style={{ animation: 'spin 20s linear infinite reverse' }}
           >
-            <div className="relative group">
-              <div className="absolute inset-0 bg-retro-cyan/30 rounded-full blur-lg group-hover:blur-xl transition-all" />
-              <div className="relative w-16 h-16 rounded-full bg-gradient-to-br from-retro-cyan to-primary flex items-center justify-center shadow-xl border-2 border-retro-cyan/50 group-hover:scale-110 transition-transform">
-                <Users className="w-8 h-8 text-white" />
+            <div className="relative group cursor-pointer">
+              {/* Outer glow */}
+              <div className="absolute -inset-2 bg-retro-cyan/40 rounded-full blur-xl group-hover:blur-2xl transition-all opacity-60 group-hover:opacity-100" />
+              {/* Main orb */}
+              <div className="relative w-16 h-16 rounded-full overflow-hidden group-hover:scale-110 transition-transform duration-300">
+                {/* Gradient background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-retro-cyan via-primary to-retro-cyan/80" />
+                {/* Glass highlight */}
+                <div className="absolute inset-[2px] rounded-full bg-gradient-to-br from-white/40 via-white/10 to-transparent" />
+                {/* Inner depth shadow */}
+                <div className="absolute inset-0 rounded-full shadow-[inset_0_-6px_15px_rgba(0,0,0,0.4),inset_0_3px_8px_rgba(255,255,255,0.3)]" />
+                {/* Icon */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <Users className="w-7 h-7 text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.3)]" />
+                </div>
               </div>
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs font-semibold text-retro-cyan opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs font-semibold text-retro-cyan opacity-0 group-hover:opacity-100 transition-opacity bg-background/80 px-2 py-1 rounded backdrop-blur-sm">
                 KOL Network
               </div>
             </div>
@@ -100,12 +125,17 @@ const AnimatedServicesHero = () => {
             className="absolute top-[15%] right-[20%] transform translate-x-1/2 -translate-y-1/2"
             style={{ animation: 'spin 25s linear infinite reverse' }}
           >
-            <div className="relative group">
-              <div className="absolute inset-0 bg-retro-purple/30 rounded-full blur-lg group-hover:blur-xl transition-all" />
-              <div className="relative w-16 h-16 rounded-full bg-gradient-to-br from-retro-purple to-retro-pink flex items-center justify-center shadow-xl border-2 border-retro-purple/50 group-hover:scale-110 transition-transform">
-                <FileText className="w-8 h-8 text-white" />
+            <div className="relative group cursor-pointer">
+              <div className="absolute -inset-2 bg-retro-purple/40 rounded-full blur-xl group-hover:blur-2xl transition-all opacity-60 group-hover:opacity-100" />
+              <div className="relative w-16 h-16 rounded-full overflow-hidden group-hover:scale-110 transition-transform duration-300">
+                <div className="absolute inset-0 bg-gradient-to-br from-retro-purple via-retro-pink to-retro-purple/80" />
+                <div className="absolute inset-[2px] rounded-full bg-gradient-to-br from-white/40 via-white/10 to-transparent" />
+                <div className="absolute inset-0 rounded-full shadow-[inset_0_-6px_15px_rgba(0,0,0,0.4),inset_0_3px_8px_rgba(255,255,255,0.3)]" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <FileText className="w-7 h-7 text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.3)]" />
+                </div>
               </div>
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs font-semibold text-retro-purple opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs font-semibold text-retro-purple opacity-0 group-hover:opacity-100 transition-opacity bg-background/80 px-2 py-1 rounded backdrop-blur-sm">
                 Press Releases
               </div>
             </div>
@@ -121,12 +151,17 @@ const AnimatedServicesHero = () => {
             className="absolute bottom-[15%] left-1/2 transform -translate-x-1/2 translate-y-1/2"
             style={{ animation: 'spin 18s linear infinite reverse' }}
           >
-            <div className="relative group">
-              <div className="absolute inset-0 bg-retro-pink/30 rounded-full blur-lg group-hover:blur-xl transition-all" />
-              <div className="relative w-16 h-16 rounded-full bg-gradient-to-br from-retro-pink to-primary flex items-center justify-center shadow-xl border-2 border-retro-pink/50 group-hover:scale-110 transition-transform">
-                <Megaphone className="w-8 h-8 text-white" />
+            <div className="relative group cursor-pointer">
+              <div className="absolute -inset-2 bg-retro-pink/40 rounded-full blur-xl group-hover:blur-2xl transition-all opacity-60 group-hover:opacity-100" />
+              <div className="relative w-16 h-16 rounded-full overflow-hidden group-hover:scale-110 transition-transform duration-300">
+                <div className="absolute inset-0 bg-gradient-to-br from-retro-pink via-primary to-retro-pink/80" />
+                <div className="absolute inset-[2px] rounded-full bg-gradient-to-br from-white/40 via-white/10 to-transparent" />
+                <div className="absolute inset-0 rounded-full shadow-[inset_0_-6px_15px_rgba(0,0,0,0.4),inset_0_3px_8px_rgba(255,255,255,0.3)]" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <Megaphone className="w-7 h-7 text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.3)]" />
+                </div>
               </div>
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs font-semibold text-retro-pink opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs font-semibold text-retro-pink opacity-0 group-hover:opacity-100 transition-opacity bg-background/80 px-2 py-1 rounded backdrop-blur-sm">
                 Media Features
               </div>
             </div>
@@ -142,12 +177,17 @@ const AnimatedServicesHero = () => {
             className="absolute top-1/2 right-[10%] transform translate-x-1/2 -translate-y-1/2"
             style={{ animation: 'spin 22s linear infinite reverse' }}
           >
-            <div className="relative group">
-              <div className="absolute inset-0 bg-primary-electric/30 rounded-full blur-lg group-hover:blur-xl transition-all" />
-              <div className="relative w-14 h-14 rounded-full bg-gradient-to-br from-primary-electric to-retro-cyan flex items-center justify-center shadow-xl border-2 border-primary-electric/50 group-hover:scale-110 transition-transform">
-                <TrendingUp className="w-7 h-7 text-white" />
+            <div className="relative group cursor-pointer">
+              <div className="absolute -inset-2 bg-primary-electric/40 rounded-full blur-xl group-hover:blur-2xl transition-all opacity-60 group-hover:opacity-100" />
+              <div className="relative w-14 h-14 rounded-full overflow-hidden group-hover:scale-110 transition-transform duration-300">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-electric via-retro-cyan to-primary-electric/80" />
+                <div className="absolute inset-[2px] rounded-full bg-gradient-to-br from-white/40 via-white/10 to-transparent" />
+                <div className="absolute inset-0 rounded-full shadow-[inset_0_-6px_15px_rgba(0,0,0,0.4),inset_0_3px_8px_rgba(255,255,255,0.3)]" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <TrendingUp className="w-6 h-6 text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.3)]" />
+                </div>
               </div>
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs font-semibold text-primary-electric opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs font-semibold text-primary-electric opacity-0 group-hover:opacity-100 transition-opacity bg-background/80 px-2 py-1 rounded backdrop-blur-sm">
                 Growth
               </div>
             </div>
@@ -163,12 +203,17 @@ const AnimatedServicesHero = () => {
             className="absolute top-1/2 left-[10%] transform -translate-x-1/2 -translate-y-1/2"
             style={{ animation: 'spin 24s linear infinite reverse' }}
           >
-            <div className="relative group">
-              <div className="absolute inset-0 bg-primary/30 rounded-full blur-lg group-hover:blur-xl transition-all" />
-              <div className="relative w-14 h-14 rounded-full bg-gradient-to-br from-primary to-primary-glow flex items-center justify-center shadow-xl border-2 border-primary/50 group-hover:scale-110 transition-transform">
-                <Network className="w-7 h-7 text-white" />
+            <div className="relative group cursor-pointer">
+              <div className="absolute -inset-2 bg-primary/40 rounded-full blur-xl group-hover:blur-2xl transition-all opacity-60 group-hover:opacity-100" />
+              <div className="relative w-14 h-14 rounded-full overflow-hidden group-hover:scale-110 transition-transform duration-300">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary-glow to-primary/80" />
+                <div className="absolute inset-[2px] rounded-full bg-gradient-to-br from-white/40 via-white/10 to-transparent" />
+                <div className="absolute inset-0 rounded-full shadow-[inset_0_-6px_15px_rgba(0,0,0,0.4),inset_0_3px_8px_rgba(255,255,255,0.3)]" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <Network className="w-6 h-6 text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.3)]" />
+                </div>
               </div>
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity bg-background/80 px-2 py-1 rounded backdrop-blur-sm">
                 Distribution
               </div>
             </div>
