@@ -4,8 +4,13 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
+  DropdownMenuLabel,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Building2, Users, Palette, Code } from "lucide-react";
 import { useState } from "react";
 import confetti from "canvas-confetti";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -63,25 +68,42 @@ const Header = () => {
                 Services
                 <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="min-w-[160px]">
+              <DropdownMenuContent align="start" className="min-w-[200px] bg-popover border border-border">
+                {/* Brands with sub-items */}
+                <DropdownMenuSub>
+                  <DropdownMenuSubTrigger className="cursor-pointer">
+                    <Building2 className="h-4 w-4 mr-2" />
+                    For Brands
+                  </DropdownMenuSubTrigger>
+                  <DropdownMenuSubContent className="bg-popover border border-border">
+                    <DropdownMenuItem asChild>
+                      <a href="/services" className="w-full cursor-pointer flex items-center">
+                        <Building2 className="h-4 w-4 mr-2 opacity-60" />
+                        Marketing Services
+                      </a>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <a href="/media-for-brands" className="w-full cursor-pointer flex items-center">
+                        <Palette className="h-4 w-4 mr-2 opacity-60" />
+                        Content Creation
+                      </a>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <a href="/vibe-coding" className="w-full cursor-pointer flex items-center">
+                        <Code className="h-4 w-4 mr-2 opacity-60" />
+                        Vibe Coding
+                      </a>
+                    </DropdownMenuItem>
+                  </DropdownMenuSubContent>
+                </DropdownMenuSub>
+                
+                <DropdownMenuSeparator />
+                
+                {/* Creators */}
                 <DropdownMenuItem asChild>
-                  <a href="/services" className="w-full cursor-pointer">
-                    Brands
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="/creators" className="w-full cursor-pointer">
-                    Creators
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="/media-for-brands" className="w-full cursor-pointer">
-                    Content Creation
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="/vibe-coding" className="w-full cursor-pointer">
-                    Vibe Coding App Development
+                  <a href="/creators" className="w-full cursor-pointer flex items-center">
+                    <Users className="h-4 w-4 mr-2" />
+                    For Creators
                   </a>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -119,11 +141,25 @@ const Header = () => {
             {/* Mobile Services Menu */}
             <div className="flex flex-col space-y-2">
               <span className="text-foreground font-medium">Services</span>
-              <div className="pl-4 space-y-2">
-                <a href="/services" className="text-foreground hover:text-primary transition-colors block">Brands</a>
-                <a href="/creators" className="text-foreground hover:text-primary transition-colors block">Creators</a>
-                <a href="/media-for-brands" className="text-foreground hover:text-primary transition-colors block">Content Creation</a>
-                <a href="/vibe-coding" className="text-foreground hover:text-primary transition-colors block">Vibe Coding App Development</a>
+              <div className="pl-4 space-y-3">
+                {/* For Brands Section */}
+                <div className="space-y-2">
+                  <span className="text-muted-foreground text-sm font-medium flex items-center">
+                    <Building2 className="h-4 w-4 mr-2" />
+                    For Brands
+                  </span>
+                  <div className="pl-6 space-y-2">
+                    <a href="/services" className="text-foreground hover:text-primary transition-colors block text-sm">Marketing Services</a>
+                    <a href="/media-for-brands" className="text-foreground hover:text-primary transition-colors block text-sm">Content Creation</a>
+                    <a href="/vibe-coding" className="text-foreground hover:text-primary transition-colors block text-sm">Vibe Coding</a>
+                  </div>
+                </div>
+                
+                {/* For Creators */}
+                <a href="/creators" className="text-foreground hover:text-primary transition-colors flex items-center">
+                  <Users className="h-4 w-4 mr-2" />
+                  For Creators
+                </a>
               </div>
             </div>
             
