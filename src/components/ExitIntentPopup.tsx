@@ -97,6 +97,32 @@ const ExitIntentPopup = ({ isOpen, onClose }: ExitIntentPopupProps) => {
         "Web3 directory listing services"
       ],
       popular: false
+    },
+    {
+      name: "Media for Brands",
+      price: "Custom",
+      description: "AI-powered video and image generation using Grok Imagine with character continuity:",
+      features: [
+        "Instagram Reels, TikTok clips, and social media content",
+        "10-30s video ads with sound and character continuity",
+        "Banner/display creatives for Brave, Native, Telegram Ads",
+        "Photorealistic 1024×1024 images and short videos",
+        "Unlimited iterations with Grok Imagine infinite scroll"
+      ],
+      popular: false
+    },
+    {
+      name: "Vibe Coding App Development",
+      price: "Custom",
+      description: "Launch your MVP quickly with Base44 and Lovable platforms:",
+      features: [
+        "Rapid MVP development using no-code/low-code platforms",
+        "Full-stack app development with Base44 or Lovable",
+        "Web2 and Web3 integration capabilities",
+        "Custom feature development and integration",
+        "Project management and development support"
+      ],
+      popular: false
     }
   ];
 
