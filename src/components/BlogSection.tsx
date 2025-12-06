@@ -19,31 +19,36 @@ const BlogSection = () => {
     <section className="py-16 bg-background">
       {/* Cosmic Space Header */}
       <div className="relative overflow-hidden mb-12">
-        {/* Cosmic background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-purple-900/40 to-background">
-          {/* Stars */}
+        {/* Cosmic background - forced dark for space effect */}
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, #0f0a1e 0%, #1a0a2e 30%, #0c1929 70%, transparent 100%)' }}>
+          {/* Deep space stars layer */}
           <div className="absolute inset-0">
-            {[...Array(50)].map((_, i) => (
+            {[...Array(80)].map((_, i) => (
               <div
                 key={i}
-                className="absolute rounded-full bg-white"
+                className="absolute rounded-full"
                 style={{
-                  width: Math.random() > 0.8 ? '2px' : '1px',
-                  height: Math.random() > 0.8 ? '2px' : '1px',
+                  width: Math.random() > 0.85 ? '3px' : Math.random() > 0.5 ? '2px' : '1px',
+                  height: Math.random() > 0.85 ? '3px' : Math.random() > 0.5 ? '2px' : '1px',
                   left: `${Math.random() * 100}%`,
                   top: `${Math.random() * 100}%`,
-                  opacity: 0.3 + Math.random() * 0.7,
-                  animation: `pulse ${2 + Math.random() * 3}s ease-in-out infinite`,
-                  animationDelay: `${Math.random() * 2}s`,
+                  background: Math.random() > 0.7 ? '#00ffff' : Math.random() > 0.5 ? '#a855f7' : '#ffffff',
+                  opacity: 0.4 + Math.random() * 0.6,
+                  boxShadow: Math.random() > 0.8 ? '0 0 6px 2px rgba(0, 255, 255, 0.5)' : 'none',
+                  animation: `pulse ${2 + Math.random() * 4}s ease-in-out infinite`,
+                  animationDelay: `${Math.random() * 3}s`,
                 }}
               />
             ))}
           </div>
           
-          {/* Nebula glow effects */}
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/20 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute top-1/3 right-1/4 w-48 h-48 bg-retro-purple/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-32 bg-retro-cyan/10 rounded-full blur-3xl" />
+          {/* Nebula glow effects - more vibrant */}
+          <div className="absolute top-1/4 left-1/4 w-80 h-80 rounded-full blur-3xl animate-pulse" style={{ background: 'radial-gradient(circle, rgba(0, 255, 255, 0.3) 0%, transparent 70%)' }} />
+          <div className="absolute top-1/3 right-1/4 w-64 h-64 rounded-full blur-3xl animate-pulse" style={{ background: 'radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, transparent 70%)', animationDelay: '1s' }} />
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-40 rounded-full blur-3xl" style={{ background: 'radial-gradient(ellipse 60% 100% at 50% 100%, rgba(236, 72, 153, 0.25) 0%, transparent 70%)' }} />
+          
+          {/* Shooting star effect */}
+          <div className="absolute w-24 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-60 animate-pulse" style={{ top: '20%', left: '60%', transform: 'rotate(-45deg)' }} />
         </div>
         
         {/* Content */}
