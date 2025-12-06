@@ -357,13 +357,29 @@ All colors MUST be HSL.
     animation: logo-fill 1.2s ease-out forwards;
   }
 
-  /* Retro logo layered effects */
+  /* Retro logo layered effects with slow pulse */
   .retro-logo-hover {
     @apply transition-transform duration-300;
     will-change: filter, transform;
+    animation: logo-slow-pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes logo-slow-pulse {
+    0%, 100% {
+      filter: none;
+      transform: scale(1);
+    }
+    50% {
+      filter:
+        drop-shadow(-3px -1px 0 hsl(var(--primary)))
+        drop-shadow(3px 1px 0 hsl(var(--retro-purple)))
+        brightness(1.1) contrast(1.03);
+      transform: scale(1.03);
+    }
   }
 
   .retro-logo-hover:hover {
+    animation: none;
     transform: scale(1.05);
     filter:
       drop-shadow(-4px -2px 0 hsl(var(--primary)))
@@ -374,14 +390,6 @@ All colors MUST be HSL.
   /* Logo stays the same in both light and dark mode */
   .retro-logo-hover {
     mix-blend-mode: normal !important;
-  }
-  .retro-logo-hover:not(:hover) {
-    opacity: 1 !important;
-    filter: none !important;
-  }
-  .dark .retro-logo-hover:not(:hover) {
-    opacity: 1 !important;
-    filter: none !important;
   }
 
   /* Animated variant for loader */
