@@ -53,31 +53,6 @@ const BlogSection = () => {
         
         {/* Content */}
         <div className="relative container mx-auto px-4 py-16 text-center">
-          {/* UPM Logo with pulsing glow */}
-          <div className="flex justify-center mb-6">
-            <div className="relative">
-              {/* Pulsing glow layers */}
-              <div className="absolute -inset-4 bg-retro-cyan/30 rounded-full blur-2xl animate-pulse" />
-              <div className="absolute -inset-6 bg-primary/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '0.5s' }} />
-              <div className="absolute -inset-8 bg-retro-purple/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-              
-              {/* Logo */}
-              <img 
-                src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
-                alt="UPM Logo"
-                className="relative w-20 h-20 object-contain"
-                style={{
-                  filter: `
-                    drop-shadow(0 0 8px rgba(0, 255, 255, 0.6))
-                    drop-shadow(0 0 15px rgba(0, 255, 255, 0.4))
-                    drop-shadow(0 0 25px rgba(139, 92, 246, 0.3))
-                  `,
-                  animation: 'pulse 2s ease-in-out infinite'
-                }}
-              />
-            </div>
-          </div>
-          
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Latest from Our Blog</h2>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto">
             News, trends, and innovation in Web3, AI, VR, and GameFi.
