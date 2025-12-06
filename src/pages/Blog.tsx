@@ -54,19 +54,75 @@ const Blog = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="container mx-auto px-4 py-16">
-        <div className="text-center mb-12">
-          <div className="flex justify-center mb-8">
-            <img 
-              src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
-              alt="UPM Logo" 
-              className="h-20 w-auto retro-logo-hover opacity-100 filter-none mix-blend-normal" 
-            />
+      {/* Cosmic Space Hero Section */}
+      <div className="relative overflow-hidden">
+        {/* Cosmic background - forced dark for space effect */}
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, #0f0a1e 0%, #1a0a2e 30%, #0c1929 70%, hsl(var(--background)) 100%)' }}>
+          {/* Deep space stars layer */}
+          <div className="absolute inset-0">
+            {[...Array(100)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute rounded-full"
+                style={{
+                  width: Math.random() > 0.85 ? '3px' : Math.random() > 0.5 ? '2px' : '1px',
+                  height: Math.random() > 0.85 ? '3px' : Math.random() > 0.5 ? '2px' : '1px',
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  background: Math.random() > 0.7 ? '#00ffff' : Math.random() > 0.5 ? '#a855f7' : '#ffffff',
+                  opacity: 0.4 + Math.random() * 0.6,
+                  boxShadow: Math.random() > 0.8 ? '0 0 6px 2px rgba(0, 255, 255, 0.5)' : 'none',
+                  animation: `pulse ${2 + Math.random() * 4}s ease-in-out infinite`,
+                  animationDelay: `${Math.random() * 3}s`,
+                }}
+              />
+            ))}
           </div>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          
+          {/* Nebula glow effects */}
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl animate-pulse" style={{ background: 'radial-gradient(circle, rgba(0, 255, 255, 0.25) 0%, transparent 70%)' }} />
+          <div className="absolute top-1/3 right-1/4 w-72 h-72 rounded-full blur-3xl animate-pulse" style={{ background: 'radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%)', animationDelay: '1s' }} />
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-48 rounded-full blur-3xl" style={{ background: 'radial-gradient(ellipse 60% 100% at 50% 100%, rgba(236, 72, 153, 0.2) 0%, transparent 70%)' }} />
+          
+          {/* Shooting star accents */}
+          <div className="absolute w-32 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-50" style={{ top: '15%', left: '70%', transform: 'rotate(-45deg)', animation: 'pulse 3s ease-in-out infinite' }} />
+          <div className="absolute w-20 h-0.5 bg-gradient-to-r from-transparent via-purple-400 to-transparent opacity-40" style={{ top: '40%', left: '20%', transform: 'rotate(-35deg)', animation: 'pulse 4s ease-in-out infinite', animationDelay: '1.5s' }} />
+        </div>
+        
+        {/* Content */}
+        <div className="relative container mx-auto px-4 py-20 text-center">
+          {/* UPM Logo with pulsing glow */}
+          <div className="flex justify-center mb-8">
+            <div className="relative">
+              {/* Pulsing glow layers */}
+              <div className="absolute -inset-6 rounded-full blur-2xl animate-pulse" style={{ background: 'rgba(0, 255, 255, 0.3)' }} />
+              <div className="absolute -inset-10 rounded-full blur-3xl animate-pulse" style={{ background: 'rgba(139, 92, 246, 0.2)', animationDelay: '0.5s' }} />
+              <div className="absolute -inset-14 rounded-full blur-3xl animate-pulse" style={{ background: 'rgba(236, 72, 153, 0.15)', animationDelay: '1s' }} />
+              
+              {/* Logo */}
+              <img 
+                src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
+                alt="UPM Logo"
+                className="relative h-24 w-auto"
+                style={{
+                  filter: `
+                    drop-shadow(0 0 10px rgba(0, 255, 255, 0.7))
+                    drop-shadow(0 0 20px rgba(0, 255, 255, 0.5))
+                    drop-shadow(0 0 35px rgba(139, 92, 246, 0.4))
+                  `,
+                  animation: 'pulse 3s ease-in-out infinite'
+                }}
+              />
+            </div>
+          </div>
+          
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Explore the Convergence of Web3, AI, VR, and GameFi
           </p>
         </div>
+      </div>
+
+      <main className="container mx-auto px-4 py-8">
 
         <div className="mb-8">
           <h2 className="text-2xl font-semibold mb-6">
