@@ -21,6 +21,7 @@ const ServicesPage = () => {
     delayBetweenWords: 2000,
   });
   const serviceDetails = [{
+    id: "kol-collaborations",
     icon: Users,
     title: "KOL Collaborations",
     description: "Collaborate with influencers and key opinion leaders who have a direct connection with your target audience.",
@@ -28,6 +29,7 @@ const ServicesPage = () => {
     pricing: "Starting from $5K packages",
     image: kolCollaborationsImg
   }, {
+    id: "press-release",
     icon: Newspaper,
     title: "Press Release Services",
     description: "Distribute press releases to keep your investors and community up to date with important news and milestone events.",
@@ -35,8 +37,17 @@ const ServicesPage = () => {
     pricing: "Included in all packages",
     image: pressReleaseImg
   }, {
+    id: "publications",
+    icon: Newspaper,
+    title: "Publications",
+    description: "Get your brand featured in top-tier publications through sponsored content, feature articles, and earned media placements.",
+    features: ["Sponsored articles in major crypto outlets", "Feature story placements", "Earned media through newsworthy announcements", "Long-form thought leadership content"],
+    pricing: "Premium packages from $10K",
+    image: pressReleaseImg
+  }, {
+    id: "interviews",
     icon: Mic,
-    title: "Features, Interviews, Spaces",
+    title: "Interviews & Spaces",
     description: "Get featured in top media, have your CEO as a guest on a popular show, or co-host a community event.",
     features: ["Placement in top-tier crypto media outlets", "Executive interview opportunities", "Twitter Spaces and podcast hosting", "Community event organization", "Thought leadership positioning"],
     pricing: "Premium packages from $25K",
@@ -120,7 +131,7 @@ const ServicesPage = () => {
           </div>
 
           <div className="space-y-16">
-            {serviceDetails.map((service, index) => <div key={index} id={service.title.toLowerCase().replace(/[^a-z0-9]/g, '-')} className={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
+            {serviceDetails.map((service, index) => <div key={index} id={service.id} className={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
                 <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
                   <div className="flex items-center gap-4 mb-6">
                     <div className="p-3 bg-primary/10 rounded-lg">

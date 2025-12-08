@@ -76,12 +76,39 @@ const Header = () => {
                     For Brands
                   </DropdownMenuSubTrigger>
                   <DropdownMenuSubContent className="bg-popover border border-border">
-                    <DropdownMenuItem asChild>
-                      <a href="/services" className="w-full cursor-pointer flex items-center">
+                    <DropdownMenuSub>
+                      <DropdownMenuSubTrigger className="cursor-pointer">
                         <Building2 className="h-4 w-4 mr-2 opacity-60" />
                         Marketing Services
-                      </a>
-                    </DropdownMenuItem>
+                      </DropdownMenuSubTrigger>
+                      <DropdownMenuSubContent className="bg-popover border border-border">
+                        <DropdownMenuItem asChild>
+                          <a href="/services#kol-collaborations" className="w-full cursor-pointer text-sm">
+                            KOL Collaborations
+                          </a>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <a href="/services#press-release" className="w-full cursor-pointer text-sm">
+                            Press Release Services
+                          </a>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <a href="/services#publications" className="w-full cursor-pointer text-sm">
+                            Publications
+                          </a>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <a href="/services#interviews" className="w-full cursor-pointer text-sm">
+                            Interviews & Spaces
+                          </a>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <a href="/services#paid-advertising" className="w-full cursor-pointer text-sm">
+                            Managed Paid Advertising
+                          </a>
+                        </DropdownMenuItem>
+                      </DropdownMenuSubContent>
+                    </DropdownMenuSub>
                     <DropdownMenuItem asChild>
                       <a href="/media-for-brands" className="w-full cursor-pointer flex items-center">
                         <Palette className="h-4 w-4 mr-2 opacity-60" />
@@ -149,7 +176,14 @@ const Header = () => {
                     For Brands
                   </span>
                   <div className="pl-6 space-y-2">
-                    <a href="/services" className="text-foreground hover:text-primary transition-colors block text-sm">Marketing Services</a>
+                    <span className="text-muted-foreground text-xs font-medium">Marketing Services</span>
+                    <div className="pl-4 space-y-1">
+                      <a href="/services#kol-collaborations" className="text-foreground hover:text-primary transition-colors block text-xs">KOL Collaborations</a>
+                      <a href="/services#press-release" className="text-foreground hover:text-primary transition-colors block text-xs">Press Release Services</a>
+                      <a href="/services#publications" className="text-foreground hover:text-primary transition-colors block text-xs">Publications</a>
+                      <a href="/services#interviews" className="text-foreground hover:text-primary transition-colors block text-xs">Interviews & Spaces</a>
+                      <a href="/services#paid-advertising" className="text-foreground hover:text-primary transition-colors block text-xs">Managed Paid Advertising</a>
+                    </div>
                     <a href="/media-for-brands" className="text-foreground hover:text-primary transition-colors block text-sm">Content Creation</a>
                     <a href="/vibe-coding" className="text-foreground hover:text-primary transition-colors block text-sm">Vibe Coding</a>
                   </div>
