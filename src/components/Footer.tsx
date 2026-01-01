@@ -1213,7 +1213,7 @@ const Footer = () => {
         </div>
 
         {/* Footer Links */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 border-t border-background/20 pt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8 border-t border-background/20 pt-12">
           <div>
             <div className="flex items-center space-x-2 mb-4">
               <img 
@@ -1277,8 +1277,19 @@ const Footer = () => {
               <li><a href="/case-studies" className="hover:text-primary transition-colors">Case Studies</a></li>
               <li><a href="/blog" className="hover:text-primary transition-colors">Blog</a></li>
               <li><a href="/contact" className="hover:text-primary transition-colors">Contact</a></li>
+              <li><a href="/our-products" className="hover:text-primary transition-colors">Our Products</a></li>
               <li><a href="/affiliate-signup" className="hover:text-secondary transition-colors font-medium">Referral Program</a></li>
               <li><a href="/partner-dashboard" className="hover:text-primary transition-colors">Partner Login</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-semibold mb-4">Our Products</h4>
+            <ul className="space-y-2 text-sm opacity-80">
+              <li><a href="https://watchcrypto.info/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Watch Crypto</a></li>
+              <li><a href="https://spinquest.app/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">SpinQuest</a></li>
+              <li><a href="https://amplifyhub.base44.app" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">AmplifyHub</a></li>
+              <li><a href="https://re-writeable-ai.lovable.app/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Re-Writeable AI</a></li>
             </ul>
           </div>
           
