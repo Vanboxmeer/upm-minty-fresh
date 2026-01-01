@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { CheckCircle, Users, Newspaper, Mic } from "lucide-react";
 import kolCollaborationsImg from "/lovable-uploads/ecd96ef3-208b-4ecb-a825-eebccedf3db8.png";
 import pressReleaseImg from "/lovable-uploads/1b902ab0-3eb5-424d-8b98-de9e2da377c8.png";
-import publicationsImg from "@/assets/services/publications.jpg";
+import publicationsImg from "@/assets/services/publications.png";
 import featuresInterviewsImg from "/lovable-uploads/8d2ae042-e00e-4b60-acfe-8d2f6c8edbb2.png";
 import { updateMetaTags } from "@/utils/seoUtils";
 import { useTypewriter } from "@/hooks/useTypewriter";
