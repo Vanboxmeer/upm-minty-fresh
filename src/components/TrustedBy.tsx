@@ -34,7 +34,7 @@ const TrustedBy = () => {
       <div className="container mx-auto px-4">
         <div className={`text-center mb-12 transition-all duration-700 ${isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-2xl md:text-3xl font-bold mb-4 !text-gray-900">
-            Trusted by <span className="!text-primary">Leading Web3 Projects</span>
+            Trusted by <span className="text-blue-700">Leading Web3 Projects</span>
           </h2>
         </div>
         
