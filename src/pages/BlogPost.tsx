@@ -69,8 +69,9 @@ const BlogPost = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background">
+      <>
         <Header />
+        <div className="min-h-screen bg-background pt-16">
         <main className="container mx-auto px-4 py-16">
           <div className="animate-pulse space-y-4">
             <div className="h-8 bg-muted rounded w-1/3"></div>
@@ -78,14 +79,16 @@ const BlogPost = () => {
           </div>
         </main>
         <Footer />
-      </div>
+        </div>
+      </>
     );
   }
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-background">
+      <>
         <Header />
+        <div className="min-h-screen bg-background pt-16">
         <main className="container mx-auto px-4 py-16">
           <Card className="p-8">
             <h1 className="text-3xl font-bold mb-2">Article not found</h1>
@@ -94,13 +97,15 @@ const BlogPost = () => {
           </Card>
         </main>
         <Footer />
-      </div>
+        </div>
+      </>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
       <Header />
+      <div className="min-h-screen bg-background pt-16">
       <main className="container mx-auto px-4 py-16">
         <article>
           <header className="max-w-3xl mx-auto text-center mb-10">
@@ -186,7 +191,8 @@ const BlogPost = () => {
         <RelatedPosts currentPost={post} />
       </main>
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 

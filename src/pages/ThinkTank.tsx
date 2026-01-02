@@ -230,8 +230,9 @@ const ThinkTank = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <>
       <Header />
+      <div className="min-h-screen bg-background flex flex-col pt-16">
       
       {/* Hero Section */}
       <section className="relative py-12 md:py-20 px-4 overflow-hidden bg-gradient-to-b from-background via-primary/5 to-background">
@@ -442,7 +443,8 @@ const ThinkTank = () => {
       </section>
 
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 

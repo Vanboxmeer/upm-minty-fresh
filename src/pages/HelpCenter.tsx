@@ -35,8 +35,9 @@ const HelpCenter = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
       <Header />
+      <div className="min-h-screen bg-background pt-16">
       
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-4">
@@ -113,8 +114,9 @@ const HelpCenter = () => {
         </div>
       </main>
       
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 };
 

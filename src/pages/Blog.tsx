@@ -51,8 +51,9 @@ const Blog = () => {
   }, [posts]);
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
       <Header />
+      <div className="min-h-screen bg-background pt-16">
       
       {/* Cosmic Space Hero Section */}
       <div className="relative overflow-hidden">
@@ -222,8 +223,9 @@ const Blog = () => {
         </div>
       </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 };
 

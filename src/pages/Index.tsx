@@ -42,8 +42,8 @@ const Index = () => {
   return (
     <>
       <PageLoader />
-      <div className="min-h-screen bg-background">
-        <Header />
+      <Header />
+      <div className="min-h-screen bg-background pt-16">
         <Hero />
         <Services />
         <InfluencerPlatforms />

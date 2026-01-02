@@ -335,8 +335,9 @@ const PartnerDashboard = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-background">
+      <>
         <Header />
+        <div className="min-h-screen bg-background pt-16">
         
         <main className="container mx-auto px-4 py-24">
           <div className="max-w-md mx-auto">
@@ -406,8 +407,9 @@ const PartnerDashboard = () => {
           </div>
         </main>
         
-        <Footer />
-      </div>
+          <Footer />
+        </div>
+      </>
     );
   }
 
@@ -422,8 +424,9 @@ const PartnerDashboard = () => {
   const referralLink = `https://unitedpress.media/?ref=${affiliate?.referral_code}`;
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
       <Header />
+      <div className="min-h-screen bg-background pt-16">
       
       <main className="container mx-auto px-4 py-24">
         <div className="max-w-6xl mx-auto">
@@ -690,8 +693,9 @@ const PartnerDashboard = () => {
         </div>
       </main>
       
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 };
 
