@@ -151,8 +151,9 @@ const CaseStudies = () => {
         return "bg-gray-500/10 text-gray-400 border-gray-500/20";
     }
   };
-  return <div className="min-h-screen bg-background">
-      <Header />
+  return <>
+    <Header />
+    <div className="min-h-screen bg-background pt-16">
       
       <main className="pt-20">
         {/* Hero Section */}
@@ -238,6 +239,7 @@ const CaseStudies = () => {
       </main>
 
       <Footer />
-    </div>;
+    </div>
+  </>;
 };
 export default CaseStudies;

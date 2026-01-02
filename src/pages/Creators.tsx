@@ -19,8 +19,9 @@ const CreatorsPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
       <Header />
+      <div className="min-h-screen bg-background pt-16">
       
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
@@ -278,8 +279,9 @@ const CreatorsPage = () => {
         </div>
       </section>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 };
 

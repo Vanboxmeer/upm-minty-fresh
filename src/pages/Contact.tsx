@@ -1,8 +1,9 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 const Contact = () => {
-  return <div className="min-h-screen bg-background">
-      <Header />
+  return <>
+    <Header />
+    <div className="min-h-screen bg-background pt-16">
       
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-4">
@@ -137,6 +138,7 @@ const Contact = () => {
       </main>
       
       <Footer />
-    </div>;
+    </div>
+  </>;
 };
 export default Contact;

@@ -54,8 +54,9 @@ const MediaForBrands = () => {
 
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
       <Header />
+      <div className="min-h-screen bg-background pt-16">
       
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-50 via-indigo-50 to-purple-50 dark:from-slate-900 dark:via-blue-900/60 dark:to-slate-900">
@@ -156,9 +157,10 @@ const MediaForBrands = () => {
         </div>
       </section>
 
-      {/* Footer with Contact Form */}
-      <Footer />
-    </div>
+        {/* Footer with Contact Form */}
+        <Footer />
+      </div>
+    </>
   );
 };
 

@@ -5,8 +5,9 @@ import { FileText, Megaphone, Users, CheckCircle, Clock, Headphones } from "luci
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <>
       <Header />
+      <div className="min-h-screen bg-background pt-16">
       
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-4">
@@ -128,8 +129,9 @@ const About = () => {
         </div>
       </main>
       
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 };
 

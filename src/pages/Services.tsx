@@ -54,8 +54,9 @@ const ServicesPage = () => {
     pricing: "Premium packages from $25K",
     image: featuresInterviewsImg
   }];
-  return <div className="min-h-screen bg-background">
-      <Header />
+  return <>
+    <Header />
+    <div className="min-h-screen bg-background pt-16">
       
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
@@ -171,6 +172,7 @@ const ServicesPage = () => {
       <PaidAdvertising />
       <PackageSelector />
       <Footer />
-    </div>;
+    </div>
+  </>;
 };
 export default ServicesPage;

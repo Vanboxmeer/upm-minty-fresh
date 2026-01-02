@@ -55,8 +55,9 @@ const OurProducts = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
       <Header />
+      <div className="min-h-screen bg-background pt-16">
       
       {/* Hero Section */}
       <section className="relative pt-24 pb-16 overflow-hidden">
@@ -150,8 +151,9 @@ const OurProducts = () => {
         </div>
       </section>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 };
 
