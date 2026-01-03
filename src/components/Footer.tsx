@@ -1284,7 +1284,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Our Products</h4>
+            <h4 className="font-semibold mb-4">Our Apps</h4>
             <ul className="space-y-2 text-sm opacity-80">
               <li><a href="https://watchcrypto.info/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Watch Crypto</a></li>
               <li><a href="https://spinquest.app/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">SpinQuest</a></li>
