@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 const TelegramChat = () => {
   return (
     <div 
-      className="fixed bottom-4 z-50 animate-[fade-in_0.6s_ease-out_0.5s_both,scale-in_0.4s_ease-out_0.5s_both]" 
+      className="fixed bottom-4 z-50 animate-[fade-in_0.6s_ease-out_0.5s_both,scale-in_0.4s_ease-out_0.5s_both] hidden md:block" 
       style={{ right: '1rem' }}
     >
       <Button

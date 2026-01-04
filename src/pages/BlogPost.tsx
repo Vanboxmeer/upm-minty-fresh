@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useParams, Link } from "react-router-dom";
@@ -9,6 +9,9 @@ import { SuggestedSocialPosts } from "@/components/SuggestedSocialPosts";
 import { CategoryBreadcrumbs } from "@/components/CategoryBreadcrumbs";
 import { RelatedPosts } from "@/components/RelatedPosts";
 import { BlogNavigation } from "@/components/BlogNavigation";
+import { BlogPostCTA } from "@/components/BlogPostCTA";
+import { LeadMagnet } from "@/components/LeadMagnet";
+import MobileBottomNav from "@/components/MobileBottomNav";
 import DOMPurify from 'dompurify';
 import { useBlogPosts, type BlogPost } from "@/hooks/useBlogPosts";
 import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
@@ -71,7 +74,7 @@ const BlogPost = () => {
     return (
       <>
         <Header />
-        <div className="min-h-screen bg-background pt-16">
+        <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
         <main className="container mx-auto px-4 py-16">
           <div className="animate-pulse space-y-4">
             <div className="h-8 bg-muted rounded w-1/3"></div>
@@ -80,6 +83,7 @@ const BlogPost = () => {
         </main>
         <Footer />
         </div>
+        <MobileBottomNav />
       </>
     );
   }
@@ -88,7 +92,7 @@ const BlogPost = () => {
     return (
       <>
         <Header />
-        <div className="min-h-screen bg-background pt-16">
+        <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
         <main className="container mx-auto px-4 py-16">
           <Card className="p-8">
             <h1 className="text-3xl font-bold mb-2">Article not found</h1>
@@ -98,14 +102,38 @@ const BlogPost = () => {
         </main>
         <Footer />
         </div>
+        <MobileBottomNav />
       </>
     );
   }
 
+  // Determine where to insert mid-article CTA (after ~40% of content)
+  const contentWithCTA = useMemo(() => {
+    if (!post?.content) return { firstPart: '', secondPart: '' };
+    
+    const sanitized = DOMPurify.sanitize(post.content, {
+      ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'blockquote', 'a', 'img', 'code', 'pre'],
+      ALLOWED_ATTR: ['href', 'src', 'alt', 'title', 'target', 'rel']
+    });
+    
+    // Find a good split point (after ~40% of paragraphs)
+    const paragraphs = sanitized.split(/<\/p>/i);
+    const splitIndex = Math.floor(paragraphs.length * 0.4);
+    
+    if (paragraphs.length <= 3) {
+      return { firstPart: sanitized, secondPart: '' };
+    }
+    
+    const firstPart = paragraphs.slice(0, splitIndex).join('</p>') + '</p>';
+    const secondPart = paragraphs.slice(splitIndex).join('</p>');
+    
+    return { firstPart, secondPart };
+  }, [post?.content]);
+
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-background pt-16">
+      <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
       <main className="container mx-auto px-4 py-16">
         <article>
           <header className="max-w-3xl mx-auto text-center mb-10">
@@ -142,20 +170,24 @@ const BlogPost = () => {
           )}
 
           <section className="prose prose-neutral dark:prose-invert max-w-3xl mx-auto mb-12">
-            <div 
-              dangerouslySetInnerHTML={{ 
-                __html: (() => {
-                  console.log('Raw content:', post.content);
-                  const sanitized = DOMPurify.sanitize(post.content, {
-                    ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'blockquote', 'a', 'img', 'code', 'pre'],
-                    ALLOWED_ATTR: ['href', 'src', 'alt', 'title', 'target', 'rel']
-                  });
-                  console.log('Sanitized content:', sanitized);
-                  return sanitized;
-                })()
-              }} 
-            />
+            {/* First part of content */}
+            <div dangerouslySetInnerHTML={{ __html: contentWithCTA.firstPart }} />
+            
+            {/* Mid-article CTA (only if there's a second part) */}
+            {contentWithCTA.secondPart && (
+              <BlogPostCTA variant="inline" />
+            )}
+            
+            {/* Second part of content */}
+            {contentWithCTA.secondPart && (
+              <div dangerouslySetInnerHTML={{ __html: contentWithCTA.secondPart }} />
+            )}
           </section>
+
+          {/* End-article CTA */}
+          <div className="max-w-3xl mx-auto">
+            <BlogPostCTA variant="end" />
+          </div>
 
           {/* Suggested Social Posts + Traditional Social Share Buttons */}
           <div className="max-w-3xl mx-auto mb-12 space-y-6">
@@ -181,6 +213,11 @@ const BlogPost = () => {
           {/* Blog Navigation */}
           <BlogNavigation currentPost={post} />
 
+          {/* Lead Magnet */}
+          <div className="max-w-3xl mx-auto my-12">
+            <LeadMagnet />
+          </div>
+
           {/* Newsletter Signup */}
           <div className="max-w-2xl mx-auto">
             <NewsletterSignup variant="blog" />
@@ -192,6 +229,7 @@ const BlogPost = () => {
       </main>
       <Footer />
       </div>
+      <MobileBottomNav />
     </>
   );
 };

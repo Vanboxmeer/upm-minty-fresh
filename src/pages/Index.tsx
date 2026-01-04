@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import TrustedBy from "@/components/TrustedBy";
 import Services from "@/components/Services";
+import StatsCounter from "@/components/StatsCounter";
 import InfluencerPlatforms from "@/components/InfluencerPlatforms";
 import PaidAdvertising from "@/components/PaidAdvertising";
 import FeaturedInMedia from "@/components/FeaturedInMedia";
@@ -12,6 +13,7 @@ import Footer from "@/components/Footer";
 import PageLoader from "@/components/PageLoader";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 import TelegramChat from "@/components/TelegramChat";
+import MobileBottomNav from "@/components/MobileBottomNav";
 import { useExitIntent } from "@/hooks/useExitIntent";
 import { useReferralTracking } from "@/hooks/useReferralTracking";
 import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
@@ -43,9 +45,10 @@ const Index = () => {
     <>
       <PageLoader />
       <Header />
-      <div className="min-h-screen bg-background pt-16">
+      <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
         <Hero />
         <Services />
+        <StatsCounter />
         <InfluencerPlatforms />
         <PaidAdvertising />
         <TrustedBy />
@@ -55,6 +58,7 @@ const Index = () => {
         <Footer />
       </div>
       <TelegramChat />
+      <MobileBottomNav />
       <ExitIntentPopup isOpen={showExitIntent} onClose={hideExitIntent} />
     </>
   );

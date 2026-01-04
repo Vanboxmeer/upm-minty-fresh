@@ -4,6 +4,7 @@ import Services from "@/components/Services";
 import PaidAdvertising from "@/components/PaidAdvertising";
 import PackageSelector from "@/components/PackageSelector";
 import Footer from "@/components/Footer";
+import MobileBottomNav from "@/components/MobileBottomNav";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Users, Newspaper, Mic } from "lucide-react";
@@ -56,7 +57,7 @@ const ServicesPage = () => {
   }];
   return <>
     <Header />
-    <div className="min-h-screen bg-background pt-16">
+    <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
       
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
@@ -173,6 +174,7 @@ const ServicesPage = () => {
       <PackageSelector />
       <Footer />
     </div>
+    <MobileBottomNav />
   </>;
 };
 export default ServicesPage;
