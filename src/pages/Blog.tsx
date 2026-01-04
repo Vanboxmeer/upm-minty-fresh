@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import MobileBottomNav from "@/components/MobileBottomNav";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
@@ -53,7 +54,7 @@ const Blog = () => {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-background pt-16">
+      <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
       
       {/* Cosmic Space Hero Section */}
       <div className="relative overflow-hidden">
@@ -225,6 +226,7 @@ const Blog = () => {
 
         <Footer />
       </div>
+      <MobileBottomNav />
     </>
   );
 };

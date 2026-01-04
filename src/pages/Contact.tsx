@@ -1,9 +1,11 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import MobileBottomNav from "@/components/MobileBottomNav";
+
 const Contact = () => {
   return <>
     <Header />
-    <div className="min-h-screen bg-background pt-16">
+    <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
       
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-4">
@@ -139,6 +141,7 @@ const Contact = () => {
       
       <Footer />
     </div>
+    <MobileBottomNav />
   </>;
 };
 export default Contact;
