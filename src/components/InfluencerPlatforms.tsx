@@ -1,6 +1,31 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Card } from "@/components/ui/card";
 import { Youtube, Twitter, Send, Instagram, Music, Linkedin } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+
+const useCountUp = (end: number, duration: number = 2000, startCounting: boolean = false) => {
+  const [count, setCount] = useState(0);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    if (!startCounting || hasAnimated.current) return;
+    hasAnimated.current = true;
+
+    let startTime: number;
+    const animate = (currentTime: number) => {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(easeOut * end));
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+    requestAnimationFrame(animate);
+  }, [end, duration, startCounting]);
+
+  return count;
+};
 
 const InfluencerPlatforms = () => {
   const { elementRef, isVisible } = useScrollAnimation();
@@ -100,21 +125,34 @@ const InfluencerPlatforms = () => {
           })}
         </div>
 
-        <div className="text-center mt-16">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 px-6 py-4 bg-muted rounded-2xl max-w-md mx-auto">
-            <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold text-primary">1,500+</span>
-              <span className="text-muted-foreground text-sm">Content Creators</span>
-            </div>
-            <div className="hidden sm:block w-px h-6 bg-border"></div>
-            <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold text-primary">100M+</span>
-              <span className="text-muted-foreground text-sm">Combined Reach</span>
-            </div>
-          </div>
-        </div>
+        <StatsBar isVisible={isVisible} />
       </div>
     </section>
+  );
+};
+
+const StatsBar = ({ isVisible }: { isVisible: boolean }) => {
+  const creatorsCount = useCountUp(1500, 2000, isVisible);
+  const reachCount = useCountUp(100, 2000, isVisible);
+
+  return (
+    <div className="text-center mt-16">
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 px-8 py-6 bg-muted/50 border border-border/50 rounded-2xl max-w-lg mx-auto backdrop-blur-sm">
+        <div className="flex flex-col items-center gap-1">
+          <span className="text-3xl md:text-4xl font-bold text-primary tabular-nums">
+            {creatorsCount.toLocaleString()}+
+          </span>
+          <span className="text-muted-foreground text-sm">Content Creators</span>
+        </div>
+        <div className="hidden sm:block w-px h-12 bg-border/50"></div>
+        <div className="flex flex-col items-center gap-1">
+          <span className="text-3xl md:text-4xl font-bold text-primary tabular-nums">
+            {reachCount}M+
+          </span>
+          <span className="text-muted-foreground text-sm">Combined Reach</span>
+        </div>
+      </div>
+    </div>
   );
 };
 
