@@ -3,7 +3,6 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import TrustedBy from "@/components/TrustedBy";
 import Services from "@/components/Services";
-import StatsCounter from "@/components/StatsCounter";
 import InfluencerPlatforms from "@/components/InfluencerPlatforms";
 import PaidAdvertising from "@/components/PaidAdvertising";
 import FeaturedInMedia from "@/components/FeaturedInMedia";
@@ -48,7 +47,6 @@ const Index = () => {
       <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
         <Hero />
         <Services />
-        <StatsCounter />
         <InfluencerPlatforms />
         <PaidAdvertising />
         <TrustedBy />
