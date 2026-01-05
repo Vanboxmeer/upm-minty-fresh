@@ -232,7 +232,7 @@ export const useBlogPosts = () => {
     }
   };
 
-  const getPostBySlug = async (slug: string) => {
+  const getPostBySlug = useCallback(async (slug: string) => {
     try {
       const { data: allPosts, error } = await supabase
         .from('blog_posts')
@@ -257,7 +257,7 @@ export const useBlogPosts = () => {
     } catch (err) {
       throw new Error(err instanceof Error ? err.message : 'Post not found');
     }
-  };
+  }, []);
 
   const getRelatedPosts = async (currentPostId: string, categories: string[], limit = 3) => {
     try {
