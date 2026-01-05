@@ -51,6 +51,9 @@ const BlogPost = () => {
 
   useEffect(() => {
     if (!slug) return;
+    
+    setLoading(true);
+    setPost(null);
 
     const fetchPost = async () => {
       try {
@@ -62,6 +65,7 @@ const BlogPost = () => {
         }
       } catch (error) {
         console.error('Failed to fetch post:', error);
+        setPost(null);
       } finally {
         setLoading(false);
       }
@@ -69,6 +73,30 @@ const BlogPost = () => {
 
     fetchPost();
   }, [slug, getPostBySlug]);
+
+  // Determine where to insert mid-article CTA (after ~40% of content)
+  // Must be called before any conditional returns to satisfy Rules of Hooks
+  const contentWithCTA = useMemo(() => {
+    if (!post?.content) return { firstPart: '', secondPart: '' };
+    
+    const sanitized = DOMPurify.sanitize(post.content, {
+      ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'blockquote', 'a', 'img', 'code', 'pre'],
+      ALLOWED_ATTR: ['href', 'src', 'alt', 'title', 'target', 'rel']
+    });
+    
+    // Find a good split point (after ~40% of paragraphs)
+    const paragraphs = sanitized.split(/<\/p>/i);
+    const splitIndex = Math.floor(paragraphs.length * 0.4);
+    
+    if (paragraphs.length <= 3) {
+      return { firstPart: sanitized, secondPart: '' };
+    }
+    
+    const firstPart = paragraphs.slice(0, splitIndex).join('</p>') + '</p>';
+    const secondPart = paragraphs.slice(splitIndex).join('</p>');
+    
+    return { firstPart, secondPart };
+  }, [post?.content]);
 
   if (loading) {
     return (
@@ -106,29 +134,6 @@ const BlogPost = () => {
       </>
     );
   }
-
-  // Determine where to insert mid-article CTA (after ~40% of content)
-  const contentWithCTA = useMemo(() => {
-    if (!post?.content) return { firstPart: '', secondPart: '' };
-    
-    const sanitized = DOMPurify.sanitize(post.content, {
-      ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'blockquote', 'a', 'img', 'code', 'pre'],
-      ALLOWED_ATTR: ['href', 'src', 'alt', 'title', 'target', 'rel']
-    });
-    
-    // Find a good split point (after ~40% of paragraphs)
-    const paragraphs = sanitized.split(/<\/p>/i);
-    const splitIndex = Math.floor(paragraphs.length * 0.4);
-    
-    if (paragraphs.length <= 3) {
-      return { firstPart: sanitized, secondPart: '' };
-    }
-    
-    const firstPart = paragraphs.slice(0, splitIndex).join('</p>') + '</p>';
-    const secondPart = paragraphs.slice(splitIndex).join('</p>');
-    
-    return { firstPart, secondPart };
-  }, [post?.content]);
 
   return (
     <>
