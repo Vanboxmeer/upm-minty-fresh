@@ -14,7 +14,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   { icon: <Home className="w-5 h-5" />, label: "Home", href: "/" },
   { icon: <LayoutGrid className="w-5 h-5" />, label: "Services", href: "/services" },
-  { icon: <Rocket className="w-5 h-5" />, label: "Start", href: "/#packages", isPrimary: true },
+  { icon: <Rocket className="w-5 h-5" />, label: "Start", href: "/#package-selector", isPrimary: true },
   { icon: <Newspaper className="w-5 h-5" />, label: "Blog", href: "/blog" },
   { icon: <MessageCircle className="w-5 h-5" />, label: "Chat", href: "http://t.me/unitedpressmedia", isExternal: true },
 ];
@@ -59,9 +59,9 @@ const MobileBottomNav = () => {
   }, [lastScrollY]);
 
   const handleNavClick = (href: string) => {
-    if (href === "/#packages") {
+    if (href === "/#package-selector") {
       if (location.pathname === "/") {
-        const packagesSection = document.getElementById("packages");
+        const packagesSection = document.querySelector('[data-section="package-selector"]');
         packagesSection?.scrollIntoView({ behavior: "smooth" });
       }
     }
