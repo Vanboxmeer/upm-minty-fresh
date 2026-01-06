@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 // Sleek outlined social media icons with neon glow effect
 const XIcon = () => (
@@ -62,6 +62,17 @@ const AnimatedServicesHero = () => {
   // Calculate current rotation angle based on time
   const [rotation, setRotation] = useState(0);
   
+  // Generate stable particle positions once
+  const particles = useMemo(() => 
+    [...Array(15)].map(() => ({
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      duration: 6 + Math.random() * 4,
+      delay: Math.random() * 3,
+      opacity: 0.3 + Math.random() * 0.5,
+    })), []
+  );
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setRotation(prev => (prev + 0.3) % 360);
@@ -91,20 +102,35 @@ const AnimatedServicesHero = () => {
         }}
       />
 
-      {/* Floating particles */}
-      <div className="absolute inset-0">
-        {[...Array(6)].map((_, i) => (
+      {/* Floating particles - stable positions with smooth drift animation */}
+      <div className="absolute inset-0 overflow-hidden">
+        {particles.map((particle, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-primary rounded-full animate-pulse"
+            className="absolute w-1.5 h-1.5 bg-primary/60 rounded-full"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 3}s`,
+              left: `${particle.x}%`,
+              top: `${particle.y}%`,
+              animation: `float-${i % 3} ${particle.duration}s ease-in-out infinite`,
+              animationDelay: `${particle.delay}s`,
+              opacity: particle.opacity,
             }}
           />
         ))}
+        <style>{`
+          @keyframes float-0 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(10px, -15px); }
+          }
+          @keyframes float-1 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-8px, 12px); }
+          }
+          @keyframes float-2 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(12px, 8px); }
+          }
+        `}</style>
       </div>
 
       {/* Central hub with UPM Logo - always has active hover effect */}
