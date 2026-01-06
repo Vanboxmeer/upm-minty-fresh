@@ -1304,8 +1304,8 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-background/20 mt-12 pt-8">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-sm opacity-60">
+          <div className="flex justify-center items-center">
+            <p className="text-sm opacity-60 text-center">
               © 2025 UnitedPress.Media - by using our website or services you agree to our{" "}
               <a href="/terms-of-service" className="text-primary hover:underline">
                 terms of service
