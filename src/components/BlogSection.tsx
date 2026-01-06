@@ -19,8 +19,8 @@ const BlogSection = () => {
     <section className="py-16 bg-background">
       {/* Cosmic Space Header */}
       <div className="relative overflow-hidden mb-12">
-        {/* Cosmic background - forced dark for space effect */}
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, #0f0a1e 0%, #1a0a2e 30%, #0c1929 70%, transparent 100%)' }}>
+        {/* Cosmic background - forced dark for space effect with theme-aware bottom fade */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0f0a1e] via-[#1a0a2e] to-[#0c1929]">
           {/* Deep space stars layer */}
           <div className="absolute inset-0">
             {[...Array(80)].map((_, i) => (
@@ -50,6 +50,9 @@ const BlogSection = () => {
           {/* Shooting star effect */}
           <div className="absolute w-24 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-60 animate-pulse" style={{ top: '20%', left: '60%', transform: 'rotate(-45deg)' }} />
         </div>
+        
+        {/* Theme-aware bottom fade overlay */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
         
         {/* Content */}
         <div className="relative container mx-auto px-4 py-16 text-center">

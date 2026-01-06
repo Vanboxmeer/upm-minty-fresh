@@ -59,7 +59,7 @@ const Blog = () => {
       {/* Cosmic Space Hero Section */}
       <div className="relative overflow-hidden">
         {/* Cosmic background - forced dark for space effect */}
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, #0f0a1e 0%, #1a0a2e 30%, #0c1929 70%, hsl(var(--background)) 100%)' }}>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0f0a1e] via-[#1a0a2e] to-[#0c1929]">
           {/* Deep space stars layer */}
           <div className="absolute inset-0">
             {[...Array(100)].map((_, i) => (
@@ -90,6 +90,9 @@ const Blog = () => {
           <div className="absolute w-32 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-50" style={{ top: '15%', left: '70%', transform: 'rotate(-45deg)', animation: 'pulse 3s ease-in-out infinite' }} />
           <div className="absolute w-20 h-0.5 bg-gradient-to-r from-transparent via-purple-400 to-transparent opacity-40" style={{ top: '40%', left: '20%', transform: 'rotate(-35deg)', animation: 'pulse 4s ease-in-out infinite', animationDelay: '1.5s' }} />
         </div>
+        
+        {/* Theme-aware bottom fade overlay */}
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent" />
         
         {/* Content */}
         <div className="relative container mx-auto px-4 py-20 text-center">
