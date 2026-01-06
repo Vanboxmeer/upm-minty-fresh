@@ -9,7 +9,23 @@ import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useReferralTracking } from "@/hooks/useReferralTracking";
 import { supabase } from "@/integrations/supabase/client";
-import { Linkedin, Twitter, Send, Calendar, Globe, Target, Users, Zap, BarChart3 } from "lucide-react";
+import { Linkedin, Send, Calendar, Globe, Target, Users, Zap, BarChart3 } from "lucide-react";
+
+// X (Twitter) icon component matching lucide style
+const XIcon = ({ size = 20 }: { size?: number }) => (
+  <svg 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+  >
+    <path d="M4 4l6.5 8L4 20h2l5.5-6.5L16 20h4l-6.5-8L20 4h-2l-5.5 6.5L8 4H4z" />
+  </svg>
+);
 import { usePackageSelection } from "@/contexts/PackageSelectionContext";
 
 const Footer = () => {
@@ -1242,7 +1258,7 @@ const Footer = () => {
                 className="opacity-70 hover:text-primary transition-colors"
                 aria-label="Follow us on X (Twitter)"
               >
-                <Twitter size={20} />
+                <XIcon size={20} />
               </a>
               <a 
                 href="http://t.me/unitedpressmedia" 
