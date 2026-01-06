@@ -93,7 +93,7 @@ const AnimatedServicesHero = () => {
 
       {/* Floating particles */}
       <div className="absolute inset-0">
-        {[...Array(15)].map((_, i) => (
+        {[...Array(6)].map((_, i) => (
           <div
             key={i}
             className="absolute w-1 h-1 bg-primary rounded-full animate-pulse"
@@ -224,7 +224,7 @@ const AnimatedServicesHero = () => {
         </svg>
 
         {/* Data flow particles */}
-        {[...Array(6)].map((_, i) => (
+        {[...Array(3)].map((_, i) => (
           <div
             key={`orbit-${i}`}
             className="absolute w-full h-full"
