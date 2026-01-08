@@ -23,7 +23,7 @@ export const BlogPostCTA = ({ variant = "end" }: BlogPostCTAProps) => {
               Get a free consultation with our experts. No commitment required.
             </p>
           </div>
-          <Button asChild variant="outline" className="whitespace-nowrap">
+          <Button asChild variant="synthwave" className="whitespace-nowrap">
             <a 
               href="http://t.me/unitedpressmedia" 
               target="_blank" 
@@ -57,7 +57,7 @@ export const BlogPostCTA = ({ variant = "end" }: BlogPostCTAProps) => {
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </Button>
-          <Button asChild variant="outline" size="lg">
+          <Button asChild variant="synthwave" size="lg">
             <a 
               href="http://t.me/unitedpressmedia" 
               target="_blank" 
