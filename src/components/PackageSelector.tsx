@@ -159,7 +159,7 @@ const PackageSelector = () => {
             {coveragePackages.map((pkg, index) => (
               <Card 
                 key={index} 
-                className={`group relative flex flex-col h-full transition-all duration-500 card-hover hover:border-primary/50 ${
+                className={`group relative flex flex-col h-full transition-all duration-500 card-hover hover:border-primary/50 pricing-card-glow ${
                   selectedPackage?.name === pkg.name ? 'border-primary bg-primary/5 shadow-lg' : 'hover:shadow-lg'
                 } ${pkg.popular ? 'border-primary/50 ring-2 ring-primary/20' : ''}`}
               >
@@ -223,7 +223,7 @@ const PackageSelector = () => {
             {subscriptionPlans.map((plan, index) => (
               <Card 
                 key={index} 
-                className={`group relative flex flex-col h-full transition-all duration-500 card-hover hover:border-primary/50 ${
+                className={`group relative flex flex-col h-full transition-all duration-500 card-hover hover:border-primary/50 pricing-card-glow ${
                   selectedSubscription?.name === plan.name ? 'border-primary bg-primary/5 shadow-lg' : 'hover:shadow-lg'
                 } ${plan.popular ? 'border-primary/50 ring-2 ring-primary/20' : ''}`}
               >

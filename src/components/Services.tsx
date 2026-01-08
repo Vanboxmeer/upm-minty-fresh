@@ -37,7 +37,7 @@ AI, GameFi, DeFi, and Web3</span>
               results for your project.
             </p>
             
-            <Button variant="retro" size="lg" className="group relative overflow-hidden" onClick={() => {
+            <Button variant="retro" size="lg" className="group relative overflow-hidden cta-pulse cta-shimmer cta-glow-hover" onClick={() => {
               const packageSection = document.querySelector('[data-section="package-selector"]');
               if (packageSection) {
                 const offsetTop = packageSection.getBoundingClientRect().top + window.pageYOffset - 80;
@@ -63,7 +63,7 @@ AI, GameFi, DeFi, and Web3</span>
         <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => <Card 
               key={index} 
-              className={`group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5 ${
+              className={`group border-border card-hover card-glow-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5 ${
                 cardsVisible ? 'animate-fade-in' : 'opacity-0 translate-y-8'
               }`}
               style={{ animationDelay: `${index * 150}ms` }}
