@@ -52,7 +52,10 @@ AI, GameFi, DeFi, and Web3</span>
             </Button>
           </div>
           
-          <div className={`relative transition-all duration-700 delay-300 ${heroVisible ? 'animate-fade-in' : 'opacity-0 translate-x-[50px]'}`}>
+          <div 
+            className={`relative transition-all duration-700 delay-300 rounded-lg overflow-hidden ${heroVisible ? 'animate-fade-in' : 'opacity-0 translate-x-[50px]'}`}
+            style={{ background: '#0f172a' }}
+          >
             <AnimatedServicesHero />
           </div>
         </div>
