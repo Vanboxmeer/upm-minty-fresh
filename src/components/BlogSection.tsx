@@ -51,8 +51,8 @@ const BlogSection = () => {
           <div className="absolute w-24 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-60 animate-pulse" style={{ top: '20%', left: '60%', transform: 'rotate(-45deg)' }} />
         </div>
         
-        {/* Theme-aware bottom fade overlay */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
+        {/* Bottom fade overlay - forced dark to match cosmic background */}
+        <div className="absolute bottom-0 left-0 right-0 h-32" style={{ background: 'linear-gradient(to top, #0c1929, transparent)' }} />
         
         {/* Content */}
         <div className="relative container mx-auto px-4 py-16 text-center">

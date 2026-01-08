@@ -83,7 +83,8 @@ const AnimatedServicesHero = () => {
   return (
     <div 
       id="services-hero"
-      className="relative w-full h-full min-h-[400px] rounded-lg overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900/30 to-slate-900"
+      className="relative w-full h-full min-h-[400px] rounded-lg overflow-hidden"
+      style={{ background: 'linear-gradient(to bottom right, #0f172a, rgba(88, 28, 135, 0.3), #0f172a)' }}
     >
       {/* Animated background gradient that follows mouse */}
       <div 
@@ -267,8 +268,8 @@ const AnimatedServicesHero = () => {
         ))}
       </div>
 
-      {/* Bottom gradient overlay */}
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-slate-900 to-transparent" />
+      {/* Bottom gradient overlay - forced dark */}
+      <div className="absolute bottom-0 left-0 right-0 h-20" style={{ background: 'linear-gradient(to top, #0f172a, transparent)' }} />
     </div>
   );
 };

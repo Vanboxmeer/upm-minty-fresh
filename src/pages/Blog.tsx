@@ -91,8 +91,8 @@ const Blog = () => {
           <div className="absolute w-20 h-0.5 bg-gradient-to-r from-transparent via-purple-400 to-transparent opacity-40" style={{ top: '40%', left: '20%', transform: 'rotate(-35deg)', animation: 'pulse 4s ease-in-out infinite', animationDelay: '1.5s' }} />
         </div>
         
-        {/* Theme-aware bottom fade overlay */}
-        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent" />
+        {/* Bottom fade overlay - forced dark to match cosmic background */}
+        <div className="absolute bottom-0 left-0 right-0 h-40" style={{ background: 'linear-gradient(to top, #0c1929, transparent)' }} />
         
         {/* Content */}
         <div className="relative container mx-auto px-4 py-20 text-center">
