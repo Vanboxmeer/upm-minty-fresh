@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useTypewriter } from "@/hooks/useTypewriter";
+import { useParallax } from "@/hooks/useParallax";
+
 const Hero = () => {
   const brandTypes = ["AI Brands", "Web3 Brands", "GameFi Brands", "VR Brands", "Crypto Brands", "Tech Brands"];
   const currentBrand = useTypewriter({
@@ -8,6 +10,11 @@ const Hero = () => {
     deleteSpeed: 25,
     delayBetweenWords: 2000,
   });
+
+  // Parallax effects for background layers
+  const parallaxSlow = useParallax({ speed: 0.1 });
+  const parallaxMedium = useParallax({ speed: 0.2 });
+  const parallaxFast = useParallax({ speed: 0.3 });
 
   const scrollToCoveragePackages = () => {
     // Navigate to home if not there, then scroll
@@ -24,8 +31,9 @@ const Hero = () => {
       }
     }
   };
+
   return <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      {/* Animated Background */}
+      {/* Animated Background with Parallax */}
       <div className="absolute inset-0">
         {/* Base gradient with vibrant colors */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/50 to-slate-900"></div>
@@ -33,18 +41,34 @@ const Hero = () => {
         {/* Animated color overlays with retro colors */}
         <div className="absolute inset-0 retro-gradient opacity-30 animate-pulse"></div>
         
-        {/* Floating geometric shapes with vibrant colors */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-r from-primary to-retro-cyan rounded-full blur-3xl opacity-40 animate-bounce" style={{ animationDelay: '0s', animationDuration: '6s' }}></div>
-          <div className="absolute top-40 right-20 w-48 h-48 bg-gradient-to-r from-retro-purple to-retro-pink rounded-full blur-2xl opacity-50 animate-bounce" style={{ animationDelay: '2s', animationDuration: '8s' }}></div>
-          <div className="absolute bottom-40 left-1/4 w-56 h-56 bg-gradient-to-r from-retro-cyan to-primary-electric rounded-full blur-3xl opacity-40 animate-bounce" style={{ animationDelay: '4s', animationDuration: '7s' }}></div>
-          <div className="absolute bottom-20 right-1/3 w-72 h-72 bg-gradient-to-r from-primary-electric to-retro-purple rounded-full blur-3xl opacity-30 animate-bounce" style={{ animationDelay: '1s', animationDuration: '9s' }}></div>
+        {/* Floating geometric shapes with parallax */}
+        <div className="absolute inset-0 parallax-layer">
+          <div 
+            className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-r from-primary to-retro-cyan rounded-full blur-3xl opacity-40"
+            style={{ transform: `translateY(${parallaxSlow}px)` }}
+          />
+          <div 
+            className="absolute top-40 right-20 w-48 h-48 bg-gradient-to-r from-retro-purple to-retro-pink rounded-full blur-2xl opacity-50"
+            style={{ transform: `translateY(${parallaxMedium}px)` }}
+          />
+          <div 
+            className="absolute bottom-40 left-1/4 w-56 h-56 bg-gradient-to-r from-retro-cyan to-primary-electric rounded-full blur-3xl opacity-40"
+            style={{ transform: `translateY(${parallaxFast}px)` }}
+          />
+          <div 
+            className="absolute bottom-20 right-1/3 w-72 h-72 bg-gradient-to-r from-primary-electric to-retro-purple rounded-full blur-3xl opacity-30"
+            style={{ transform: `translateY(${parallaxMedium}px)` }}
+          />
           
-          {/* Retro grid pattern */}
-          <div className="absolute inset-0 opacity-10" style={{
-            backgroundImage: 'linear-gradient(hsl(var(--primary-neon)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary-neon)) 1px, transparent 1px)',
-            backgroundSize: '60px 60px'
-          }}></div>
+          {/* Retro grid pattern with subtle parallax */}
+          <div 
+            className="absolute inset-0 opacity-10" 
+            style={{
+              backgroundImage: 'linear-gradient(hsl(var(--primary-neon)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary-neon)) 1px, transparent 1px)',
+              backgroundSize: '60px 60px',
+              transform: `translateY(${parallaxSlow * 0.5}px)`
+            }}
+          />
         </div>
         
         {/* Content overlay for readability */}
@@ -64,11 +88,11 @@ const Hero = () => {
           <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto animate-fade-in">UPM helps you get in front of the right audience through powerful kol collaborations, PR distribution, native ad placements, and earned tier 1 media features.</p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
-            <Button variant="retro" size="lg" className="px-8 py-6 text-lg group relative overflow-hidden" onClick={scrollToCoveragePackages}>
+            <Button variant="retro" size="lg" className="px-8 py-6 text-lg group relative overflow-hidden cta-pulse cta-shimmer cta-glow-hover" onClick={scrollToCoveragePackages}>
               <span className="group-hover:scale-110 transition-transform duration-200">Start a Campaign</span>
               <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-primary/20 to-transparent group-hover:animate-[synthwave-scan_1s_ease-in-out] pointer-events-none" />
             </Button>
-            <Button variant="synthwave" size="lg" className="px-8 py-6 text-lg group relative overflow-hidden" asChild>
+            <Button variant="synthwave" size="lg" className="px-8 py-6 text-lg group relative overflow-hidden cta-shimmer cta-glow-hover" asChild>
               <a href="/services">
                 <span className="group-hover:scale-110 transition-transform duration-200">View Our Services</span>
                 <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-retro-cyan/20 to-transparent group-hover:animate-[synthwave-scan_1s_ease-in-out] pointer-events-none" />
