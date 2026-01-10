@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import ScrollToTop from "@/components/ScrollToTop";
 import PageLoader from "@/components/PageLoader";
+import TelegramChat from "@/components/TelegramChat";
+import TankChatWidget from "@/components/TankChatWidget";
 import { AdminAuthProvider } from "@/contexts/AdminAuthContext";
 import { PackageSelectionProvider } from "@/contexts/PackageSelectionContext";
 import { ProtectedRoute } from "@/components/admin/ProtectedRoute";
@@ -53,6 +55,8 @@ const App = () => (
             <PackageSelectionProvider>
               <PageLoader />
               <ScrollToTop />
+              <TankChatWidget />
+              <TelegramChat />
               <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/services" element={<Services />} />
