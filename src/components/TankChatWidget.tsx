@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import tankMascot from "@/assets/tank-mascot.png";
+import tankIcon from "@/assets/tank-icon.png";
 
 interface Message {
   role: "user" | "assistant";
@@ -174,9 +174,9 @@ const TankChatWidget = () => {
           aria-label="Chat with Tank AI"
         >
           <img
-            src={tankMascot}
+            src={tankIcon}
             alt="Tank AI Assistant"
-            className="h-12 w-12 object-cover"
+            className="h-12 w-12 object-contain rounded-full"
           />
         </Button>
         <div className="absolute -top-12 right-0 bg-card/95 backdrop-blur-sm border border-primary/30 rounded-lg px-3 py-2 shadow-lg animate-bounce-subtle">
@@ -197,9 +197,9 @@ const TankChatWidget = () => {
           aria-label="Expand Tank chat"
         >
           <img
-            src={tankMascot}
+            src={tankIcon}
             alt="Tank AI Assistant"
-            className="h-12 w-12 object-cover"
+            className="h-12 w-12 object-contain rounded-full"
           />
           {messages.length > 0 && (
             <span className="absolute -top-1 -right-1 h-5 w-5 bg-red-500 rounded-full text-xs flex items-center justify-center text-white font-bold">
@@ -218,9 +218,9 @@ const TankChatWidget = () => {
         <div className="bg-gradient-to-r from-primary to-primary-electric p-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <img
-              src={tankMascot}
+              src={tankIcon}
               alt="Tank"
-              className="h-8 w-8 rounded-full border-2 border-white/30"
+              className="h-8 w-8 rounded-full border-2 border-white/30 object-contain bg-white/20"
             />
             <div>
               <h3 className="font-bold text-white text-sm">Tank AI</h3>
