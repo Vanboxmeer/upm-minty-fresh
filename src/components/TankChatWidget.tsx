@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { X, Send, Loader2, Sparkles, Minimize2 } from "lucide-react";
+import { X, Send, Loader2, Minimize2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -333,10 +333,10 @@ const TankChatWidget = () => {
             {messages.length === 0 ? (
               <div className="h-full flex flex-col items-center justify-center text-center px-4">
                 <div className="bg-primary/10 rounded-full p-4 mb-4">
-                  <Sparkles className="h-8 w-8 text-primary" />
+                  <img src={tankIcon} alt="Tank" className="h-10 w-10 object-contain" />
                 </div>
                 <h4 className="font-semibold text-foreground mb-2">
-                  Hi! I'm Tank 🎮
+                  Hi! I'm Tank 👋
                 </h4>
                 <p className="text-sm text-muted-foreground mb-4">
                   Your AI marketing advisor. Ask me about Web3 marketing, press releases, or growth strategies!
@@ -474,10 +474,10 @@ const TankChatWidget = () => {
           {messages.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-center px-4">
               <div className="bg-primary/10 rounded-full p-4 mb-4">
-                <Sparkles className="h-8 w-8 text-primary" />
+                <img src={tankIcon} alt="Tank" className="h-10 w-10 object-contain" />
               </div>
               <h4 className="font-semibold text-foreground mb-2">
-                Hi! I'm Tank 🎮
+                Hi! I'm Tank 👋
               </h4>
               <p className="text-sm text-muted-foreground mb-4">
                 Your AI marketing advisor. Ask me about Web3 marketing!
