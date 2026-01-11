@@ -333,7 +333,7 @@ const TankChatWidget = () => {
             {messages.length === 0 ? (
               <div className="h-full flex flex-col items-center justify-center text-center px-4">
                 <div className="bg-primary/10 rounded-full p-4 mb-4">
-                  <img src={tankIcon} alt="Tank" className="h-10 w-10 object-contain" />
+                  <img src={tankIcon} alt="Tank" className="h-10 w-10 object-contain rounded-full" />
                 </div>
                 <h4 className="font-semibold text-foreground mb-2">
                   Hi! I'm Tank 👋
@@ -441,10 +441,10 @@ const TankChatWidget = () => {
         </div>
       </div>
 
-      {/* Mobile chat window - full screen overlay */}
+      {/* Mobile chat window - full screen overlay with proper safe area */}
       <div className="fixed inset-0 z-50 md:hidden bg-background flex flex-col animate-[fade-in_0.2s_ease-out]">
-        {/* Header */}
-        <div className="bg-gradient-to-r from-primary to-primary-electric p-3 flex items-center justify-between pt-[calc(env(safe-area-inset-top)+12px)]">
+        {/* Header - positioned below the fixed site header */}
+        <div className="bg-gradient-to-r from-primary to-primary-electric p-3 flex items-center justify-between mt-16">
           <div className="flex items-center gap-2">
             <img
               src={tankIcon}
@@ -474,7 +474,7 @@ const TankChatWidget = () => {
           {messages.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-center px-4">
               <div className="bg-primary/10 rounded-full p-4 mb-4">
-                <img src={tankIcon} alt="Tank" className="h-10 w-10 object-contain" />
+                <img src={tankIcon} alt="Tank" className="h-10 w-10 object-contain rounded-full" />
               </div>
               <h4 className="font-semibold text-foreground mb-2">
                 Hi! I'm Tank 👋
@@ -548,7 +548,7 @@ const TankChatWidget = () => {
         </div>
 
         {/* Input */}
-        <div className="border-t border-primary/20 p-3 bg-card/50 pb-[calc(env(safe-area-inset-bottom)+12px)]">
+        <div className="border-t border-primary/20 p-3 bg-card/50 pb-24">
           <div className="flex gap-2">
             <Textarea
               value={input}
