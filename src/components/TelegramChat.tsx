@@ -64,9 +64,9 @@ const TelegramChat = () => {
         </Button>
       </div>
       
-      {/* Mobile - scroll-aware positioning */}
+      {/* Mobile - scroll-aware positioning, stacked below Tank icon */}
       <div 
-        className={`fixed ${mobileBottomClass} left-4 z-50 md:hidden transition-all duration-300 animate-[fade-in_0.6s_ease-out_0.5s_both]`}
+        className={`fixed ${mobileBottomClass} right-4 z-40 md:hidden transition-all duration-300 animate-[fade-in_0.6s_ease-out_0.5s_both]`}
       >
         <Button
           variant="default"
