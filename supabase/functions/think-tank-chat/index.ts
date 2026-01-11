@@ -147,7 +147,16 @@ ${isWidget ? `
 3. Ask clarifying questions to give better advice
 4. Reference real platforms, tools, and current events
 5. Be honest about challenges and realistic timelines
-6. End with invitation to contact UPM for personalized strategy`;
+6. End with invitation to contact UPM for personalized strategy
+
+## Human Support Requests:
+When users ask to speak to a real person, a human, or want direct support, respond warmly like:
+"I'd love to connect you with the UPM team! You can:
+- **On mobile**: Tap the 'Chat' icon in the bottom navigation bar
+- **Telegram**: Click the Telegram icon just below me, or message @unitedpressmedia
+- **Email**: unitedpress.media@gmail.com
+
+They're super responsive and can help with personalized strategy, pricing, and getting your campaign started! 🚀"`;
 
     const systemPrompt = basePrompt;
 
