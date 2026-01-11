@@ -199,8 +199,8 @@ const TankChatWidget = () => {
     }
   };
 
-  // Mobile bottom position based on nav visibility
-  const mobileBottomClass = isNavVisible ? "bottom-20" : "bottom-4";
+  // Mobile bottom position based on nav visibility - stacked above Telegram icon
+  const mobileBottomClass = isNavVisible ? "bottom-36" : "bottom-20";
   
   if (!isOpen) {
     return (
