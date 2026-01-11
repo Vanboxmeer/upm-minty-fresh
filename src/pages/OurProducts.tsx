@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Globe, Gamepad2, Users, Sparkles, ExternalLink, ArrowRight } from "lucide-react";
+import { Globe, Gamepad2, Users, Sparkles, ExternalLink, ArrowRight, BookOpen } from "lucide-react";
 import { updateMetaTags } from "@/utils/seoUtils";
 
 const products = [
@@ -42,6 +42,15 @@ const products = [
     icon: Sparkles,
     gradient: "from-amber-500/20 to-orange-500/20",
     iconColor: "text-amber-500"
+  },
+  {
+    name: "Reading Race",
+    tagline: "Interactive Reading Games",
+    description: "Engage readers with interactive reading games and challenges. Perfect for educators and communities looking to gamify reading and boost literacy engagement.",
+    url: "https://readingrace.com/",
+    icon: BookOpen,
+    gradient: "from-rose-500/20 to-red-500/20",
+    iconColor: "text-rose-500"
   }
 ];
 
