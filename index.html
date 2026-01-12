@@ -43,7 +43,42 @@
   </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Initial loader shown before React hydrates - prevents white flash -->
+      <div id="initial-loader" style="
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+        transition: opacity 0.5s ease-out;
+      ">
+        <img 
+          src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
+          alt="Loading..." 
+          style="
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            animation: pulse-glow 2s ease-in-out infinite;
+          "
+        />
+      </div>
+      <style>
+        @keyframes pulse-glow {
+          0%, 100% { 
+            opacity: 0.7;
+            filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.5));
+          }
+          50% { 
+            opacity: 1;
+            filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.8)) drop-shadow(0 0 60px rgba(139, 92, 246, 0.4));
+          }
+        }
+      </style>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
