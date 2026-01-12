@@ -234,18 +234,18 @@ const ThinkTank = () => {
       <Header />
       <div className="min-h-screen bg-background flex flex-col pt-16">
       
-      {/* Hero Section */}
-      <section className="relative py-12 md:py-20 px-4 overflow-hidden bg-gradient-to-b from-background via-primary/5 to-background">
+      {/* Hero Section - Force dark background for consistency */}
+      <section className="relative py-12 md:py-20 px-4 overflow-hidden bg-[linear-gradient(135deg,#0f172a_0%,#1e1b4b_50%,#0f172a_100%)]">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="container mx-auto max-w-4xl relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6 animate-fade-in border border-primary/20">
+          <div className="inline-flex items-center gap-2 bg-primary/20 text-primary-glow px-4 py-2 rounded-full mb-6 animate-fade-in border border-primary/30">
             <Sparkles className="h-4 w-4" />
             <span className="text-sm font-semibold">AI-Powered Marketing Strategy</span>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-primary-glow to-primary bg-clip-text text-transparent animate-fade-in">
             Welcome to the Think Tank
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground mb-8 animate-fade-in">
+          <p className="text-lg md:text-xl text-slate-300 mb-8 animate-fade-in">
             Your AI marketing advisor specialized in Web3, crypto, and digital growth strategies. 
             Get personalized advice and discover how UPM can amplify your success.
           </p>
@@ -262,9 +262,9 @@ const ThinkTank = () => {
       </section>
 
       {/* Chat Section */}
-      <section className="flex-1 py-8 px-4 pb-16">
+      <section className="flex-1 py-8 px-4 pb-16 bg-background">
         <div className="container mx-auto max-w-4xl h-full">
-          <Card className="bg-gradient-to-b from-card/60 to-card/40 backdrop-blur-md border-2 border-primary/20 shadow-2xl relative overflow-hidden h-[calc(100vh-280px)] min-h-[500px]">
+          <Card className="bg-card border-2 border-primary/20 shadow-2xl relative overflow-hidden h-[calc(100vh-280px)] min-h-[500px]">
             <div className="absolute inset-0 bg-grid-pattern opacity-[0.02] pointer-events-none"></div>
             <div className="flex flex-col h-full relative z-10">
               {/* Messages Area */}
@@ -284,11 +284,11 @@ const ThinkTank = () => {
                           <Button
                             key={index}
                             variant="outline"
-                            className="h-auto min-h-[80px] p-4 text-left justify-start items-start hover:border-primary hover:bg-primary/30 dark:hover:bg-primary/30 hover:shadow-lg hover:shadow-primary/20 hover:scale-[1.02] transition-all duration-300 group"
+                            className="h-auto min-h-[80px] p-4 text-left justify-start items-start bg-card hover:bg-primary/10 border-2 border-primary/30 hover:border-primary hover:shadow-lg hover:shadow-primary/20 hover:scale-[1.02] transition-all duration-300 group"
                             onClick={() => handleSend(starter.text)}
                           >
                             <Icon className="h-5 w-5 text-primary mt-0.5 mr-3 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                            <span className="text-sm md:text-base leading-relaxed whitespace-normal break-words">
+                            <span className="text-sm md:text-base leading-relaxed whitespace-normal break-words text-foreground">
                               {starter.text}
                             </span>
                           </Button>
