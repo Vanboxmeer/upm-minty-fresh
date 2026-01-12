@@ -45,8 +45,8 @@ const products = [
   },
   {
     name: "Reading Race",
-    tagline: "Interactive Reading Games",
-    description: "Engage readers with interactive reading games and challenges. Perfect for educators and communities looking to gamify reading and boost literacy engagement.",
+    tagline: "Competitive AI EPUB Reader",
+    description: "The world's first competitive AI EPUB reader. Race through books with friends, experience immersive scene changes, and become the fastest reader you can be.",
     url: "https://readingrace.com/",
     icon: BookOpen,
     gradient: "from-rose-500/20 to-red-500/20",
@@ -57,9 +57,9 @@ const products = [
 const OurProducts = () => {
   useEffect(() => {
     updateMetaTags({
-      title: "Our Products | UPM Ecosystem",
-      description: "Explore the UPM ecosystem of digital products including Watch Crypto, SpinQuest, AmplifyHub, and Re-Writeable AI. Tools for crypto, community engagement, collaboration, and content creation.",
-      keywords: "UPM products, Watch Crypto, SpinQuest, AmplifyHub, Re-Writeable AI, crypto tools, community apps, content AI"
+      title: "Our Apps | UPM Ecosystem",
+      description: "Explore the UPM ecosystem of digital apps including Watch Crypto, SpinQuest, AmplifyHub, Re-Writeable AI, and Reading Race. Tools for crypto, community engagement, collaboration, and content creation.",
+      keywords: "UPM apps, Watch Crypto, SpinQuest, AmplifyHub, Re-Writeable AI, Reading Race, crypto tools, community apps, content AI"
     });
   }, []);
 
@@ -76,11 +76,11 @@ const OurProducts = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Explore Our{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-                Ecosystem
+                Apps
               </span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-8">
-              Discover the suite of digital products and platforms built by UPM to empower creators, brands, and communities.
+              Discover the suite of digital apps and platforms built by UPM to empower creators, brands, and communities.
             </p>
           </div>
         </div>
