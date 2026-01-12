@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { updateMetaTags } from "@/utils/seoUtils";
-import tankMascot from "@/assets/tank-mascot.png";
+import tankIcon from "@/assets/tank-icon.png";
 
 interface Message {
   role: 'user' | 'assistant';
@@ -252,11 +252,14 @@ const ThinkTank = () => {
           
           {/* Tank Mascot */}
           <div className="mt-8 mb-4 animate-fade-in flex justify-center">
-            <img 
-              src={tankMascot} 
-              alt="Tank - UPM's AI Marketing Advisor Mascot" 
-              className="w-full max-w-2xl h-auto object-contain drop-shadow-2xl"
-            />
+            <div className="relative">
+              <div className="absolute inset-0 bg-primary/30 blur-3xl rounded-full scale-150"></div>
+              <img 
+                src={tankIcon} 
+                alt="Tank - UPM's AI Marketing Advisor" 
+                className="relative w-32 h-32 md:w-48 md:h-48 object-contain drop-shadow-2xl animate-bounce-subtle"
+              />
+            </div>
           </div>
         </div>
       </section>
