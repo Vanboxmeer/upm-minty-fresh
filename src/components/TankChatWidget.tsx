@@ -206,7 +206,7 @@ const TankChatWidget = () => {
     return (
       <>
         {/* Desktop */}
-        <div className="fixed bottom-20 right-4 z-50 hidden md:block animate-[fade-in_0.6s_ease-out_0.3s_both]">
+        <div className="fixed bottom-32 right-4 z-50 hidden md:block animate-[fade-in_0.6s_ease-out_0.3s_both]">
           <Button
             onClick={() => setIsOpen(true)}
             className="h-14 w-14 rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-110 bg-gradient-to-br from-primary to-primary-electric text-primary-foreground animate-pulse-glow [box-shadow:0_0_20px_var(--primary-glow),0_0_40px_var(--primary-glow)] hover:[box-shadow:0_0_30px_var(--primary-glow),0_0_60px_var(--primary-glow)] p-0 overflow-hidden"
