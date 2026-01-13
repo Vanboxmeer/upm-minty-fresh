@@ -21,7 +21,8 @@ const products = [
     url: "https://watchcrypto.info/",
     icon: watchCryptoIcon,
     gradient: "from-emerald-500/20 to-teal-500/20",
-    isWide: false
+    isWide: false,
+    rounded: false
   },
   {
     name: "SpinQuest",
@@ -30,7 +31,8 @@ const products = [
     url: "https://spinquest.app/",
     icon: spinquestIcon,
     gradient: "from-purple-500/20 to-pink-500/20",
-    isWide: true
+    isWide: true,
+    rounded: false
   },
   {
     name: "AmplifyHub",
@@ -39,7 +41,8 @@ const products = [
     url: "https://amplifyhub.base44.app",
     icon: amplifyhubIcon,
     gradient: "from-blue-500/20 to-cyan-500/20",
-    isWide: false
+    isWide: false,
+    rounded: true
   },
   {
     name: "Re-Writeable AI",
@@ -48,7 +51,8 @@ const products = [
     url: "https://re-writeable-ai.lovable.app/",
     icon: rewriteableIcon,
     gradient: "from-amber-500/20 to-orange-500/20",
-    isWide: false
+    isWide: false,
+    rounded: true
   },
   {
     name: "Reading Race",
@@ -57,7 +61,8 @@ const products = [
     url: "https://readingrace.com/",
     icon: readingRaceIcon,
     gradient: "from-rose-500/20 to-red-500/20",
-    isWide: false
+    isWide: false,
+    rounded: true
   }
 ];
 
@@ -111,7 +116,7 @@ const OurProducts = () => {
                         <img 
                           src={product.icon} 
                           alt={`${product.name} icon`}
-                          className={`object-contain ${product.isWide ? 'h-12 w-auto max-w-[120px]' : 'h-14 w-14'}`}
+                          className={`object-contain ${product.isWide ? 'h-12 w-auto max-w-[120px]' : 'h-14 w-14'} ${product.rounded ? 'rounded-xl' : ''}`}
                         />
                       </div>
                       <a
