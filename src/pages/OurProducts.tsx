@@ -3,8 +3,15 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Globe, Gamepad2, Users, Sparkles, ExternalLink, ArrowRight, BookOpen } from "lucide-react";
+import { ExternalLink, ArrowRight } from "lucide-react";
 import { updateMetaTags } from "@/utils/seoUtils";
+
+// Import app icons
+import watchCryptoIcon from "@/assets/apps/watch-crypto.png";
+import spinquestIcon from "@/assets/apps/spinquest.png";
+import amplifyhubIcon from "@/assets/apps/amplifyhub.png";
+import rewriteableIcon from "@/assets/apps/rewriteable-ai.png";
+import readingRaceIcon from "@/assets/apps/reading-race.png";
 
 const products = [
   {
@@ -12,45 +19,45 @@ const products = [
     tagline: "Cryptoverse Explorer",
     description: "Track crypto news, projects, and market trends with our comprehensive cryptoverse explorer. Stay informed with real-time updates and in-depth analysis of the blockchain ecosystem.",
     url: "https://watchcrypto.info/",
-    icon: Globe,
+    icon: watchCryptoIcon,
     gradient: "from-emerald-500/20 to-teal-500/20",
-    iconColor: "text-emerald-500"
+    isWide: false
   },
   {
     name: "SpinQuest",
     tagline: "Activity & Adventure Randomizer",
     description: "A web app featuring activity and adventure randomizers with quests designed for brand communities. Includes multiplayer mini games to boost engagement and community interaction.",
     url: "https://spinquest.app/",
-    icon: Gamepad2,
+    icon: spinquestIcon,
     gradient: "from-purple-500/20 to-pink-500/20",
-    iconColor: "text-purple-500"
+    isWide: true
   },
   {
     name: "AmplifyHub",
     tagline: "Brand & Creator Collaboration Platform",
     description: "Connect brands with developers and creators for seamless project collaboration. Brands can share project details, track progress, and communicate directly with their team of creators and developers.",
     url: "https://amplifyhub.base44.app",
-    icon: Users,
+    icon: amplifyhubIcon,
     gradient: "from-blue-500/20 to-cyan-500/20",
-    iconColor: "text-blue-500"
+    isWide: false
   },
   {
     name: "Re-Writeable AI",
     tagline: "SEO Content Humanizer",
     description: "Transform your content strategy with advanced RAG-powered AI that generates, optimizes, and humanizes content. Create SEO-optimized content that passes as human-written while ensuring authenticity and performance.",
     url: "https://re-writeable-ai.lovable.app/",
-    icon: Sparkles,
+    icon: rewriteableIcon,
     gradient: "from-amber-500/20 to-orange-500/20",
-    iconColor: "text-amber-500"
+    isWide: false
   },
   {
     name: "Reading Race",
     tagline: "Competitive AI EPUB Reader",
     description: "The world's first competitive AI EPUB reader. Race through books with friends, experience immersive scene changes, and become the fastest reader you can be.",
     url: "https://readingrace.com/",
-    icon: BookOpen,
+    icon: readingRaceIcon,
     gradient: "from-rose-500/20 to-red-500/20",
-    iconColor: "text-rose-500"
+    isWide: false
   }
 ];
 
@@ -91,7 +98,6 @@ const OurProducts = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {products.map((product, index) => {
-              const IconComponent = product.icon;
               return (
                 <Card 
                   key={product.name}
@@ -101,8 +107,12 @@ const OurProducts = () => {
                   <div className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                   <CardHeader className="relative z-10">
                     <div className="flex items-start justify-between mb-4">
-                      <div className={`p-3 rounded-xl bg-gradient-to-br ${product.gradient}`}>
-                        <IconComponent className={`w-8 h-8 ${product.iconColor}`} />
+                      <div className="flex items-center justify-center w-16 h-16">
+                        <img 
+                          src={product.icon} 
+                          alt={`${product.name} icon`}
+                          className={`object-contain ${product.isWide ? 'h-12 w-auto max-w-[120px]' : 'h-14 w-14'}`}
+                        />
                       </div>
                       <a
                         href={product.url}
