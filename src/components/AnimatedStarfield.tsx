@@ -47,12 +47,14 @@ const AnimatedStarfield = ({
     }));
   }, [starCount, intensity]);
 
-  // Generate shooting star data
+  // Generate shooting star data with varied directions
   const shootingStars = useMemo(() => 
     showShootingStars ? [
-      { x: 70, y: 15, width: 32, angle: -45, duration: 3, delay: 0 },
-      { x: 20, y: 35, width: 20, angle: -35, duration: 4, delay: 1.5 },
-      { x: 85, y: 60, width: 24, angle: -50, duration: 5, delay: 3 },
+      { x: 15, y: 10, width: 40, angle: 35, duration: 2.5, delay: 0, distance: 150 },    // top-left to bottom-right
+      { x: 75, y: 15, width: 32, angle: -40, duration: 3, delay: 2, distance: 120 },     // top-right to bottom-left
+      { x: 50, y: 5, width: 28, angle: 75, duration: 2.8, delay: 4.5, distance: 140 },   // near-vertical down-right
+      { x: 85, y: 45, width: 24, angle: -55, duration: 2.2, delay: 7, distance: 100 },   // steep diagonal left
+      { x: 10, y: 35, width: 36, angle: 45, duration: 3.2, delay: 9, distance: 160 },    // classic diagonal right
     ] : []
   , [showShootingStars]);
 
@@ -121,22 +123,32 @@ const AnimatedStarfield = ({
         </>
       )}
 
-      {/* Shooting stars */}
-      {shootingStars.map((star, i) => (
-        <div
-          key={`shooting-${i}`}
-          className="absolute bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
-          style={{
-            width: `${star.width}px`,
-            height: '2px',
-            left: `${star.x}%`,
-            top: `${star.y}%`,
-            transform: `rotate(${star.angle}deg)`,
-            animation: `shootingStar ${star.duration}s ease-in-out infinite`,
-            animationDelay: `${star.delay}s`,
-          }}
-        />
-      ))}
+      {/* Shooting stars - travel along their angled path */}
+      {shootingStars.map((star, i) => {
+        // Calculate the travel vector based on angle
+        const angleRad = (star.angle * Math.PI) / 180;
+        const travelX = Math.cos(angleRad) * star.distance;
+        const travelY = Math.sin(angleRad) * star.distance;
+        
+        return (
+          <div
+            key={`shooting-${i}`}
+            className="absolute"
+            style={{
+              width: `${star.width}px`,
+              height: '2px',
+              left: `${star.x}%`,
+              top: `${star.y}%`,
+              background: `linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.9), rgba(255, 255, 255, 0.95), transparent)`,
+              borderRadius: '2px',
+              transform: `rotate(${star.angle}deg)`,
+              boxShadow: '0 0 6px 2px rgba(0, 255, 255, 0.4)',
+              animation: `shootingStar-${i} ${star.duration}s ease-out infinite`,
+              animationDelay: `${star.delay}s`,
+            }}
+          />
+        );
+      })}
 
       {/* CSS Animations */}
       <style>{`
@@ -175,11 +187,35 @@ const AnimatedStarfield = ({
           50% { opacity: 1; transform: scale(1.1); }
         }
         
-        @keyframes shootingStar {
-          0%, 90%, 100% { opacity: 0; transform: translateX(0) rotate(var(--angle, -45deg)); }
-          5% { opacity: 0.8; }
-          15% { opacity: 0; transform: translateX(100px) rotate(var(--angle, -45deg)); }
-        }
+        ${shootingStars.map((star, i) => {
+          const angleRad = (star.angle * Math.PI) / 180;
+          const travelX = Math.cos(angleRad) * star.distance;
+          const travelY = Math.sin(angleRad) * star.distance;
+          return `
+            @keyframes shootingStar-${i} {
+              0% { 
+                opacity: 0; 
+                transform: rotate(${star.angle}deg) translate(0, 0) scaleX(0.3);
+              }
+              5% { 
+                opacity: 1;
+                transform: rotate(${star.angle}deg) translate(${travelX * 0.1}px, ${travelY * 0.1}px) scaleX(1);
+              }
+              30% { 
+                opacity: 0.8;
+                transform: rotate(${star.angle}deg) translate(${travelX * 0.6}px, ${travelY * 0.6}px) scaleX(1.2);
+              }
+              50% { 
+                opacity: 0;
+                transform: rotate(${star.angle}deg) translate(${travelX}px, ${travelY}px) scaleX(0.5);
+              }
+              100% { 
+                opacity: 0;
+                transform: rotate(${star.angle}deg) translate(${travelX}px, ${travelY}px) scaleX(0);
+              }
+            }
+          `;
+        }).join('\n')}
       `}</style>
     </div>
   );
