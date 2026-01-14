@@ -11,6 +11,7 @@ import { useBlogPosts } from "@/hooks/useBlogPosts";
 import { CategoryBreadcrumbs } from "@/components/CategoryBreadcrumbs";
 import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
 import { Loader2 } from "lucide-react";
+import AnimatedStarfield from "@/components/AnimatedStarfield";
 
 const Blog = () => {
   const [searchParams] = useSearchParams();
@@ -56,46 +57,15 @@ const Blog = () => {
       <Header />
       <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
       
-      {/* Cosmic Space Hero Section */}
+      {/* Cosmic Space Hero Section with Animated Starfield */}
       <div className="relative overflow-hidden">
-        {/* Cosmic background - forced dark for space effect */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0f0a1e] via-[#1a0a2e] to-[#0c1929]">
-          {/* Deep space stars layer */}
-          <div className="absolute inset-0">
-            {[...Array(100)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute rounded-full"
-                style={{
-                  width: Math.random() > 0.85 ? '3px' : Math.random() > 0.5 ? '2px' : '1px',
-                  height: Math.random() > 0.85 ? '3px' : Math.random() > 0.5 ? '2px' : '1px',
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                  background: Math.random() > 0.7 ? '#00ffff' : Math.random() > 0.5 ? '#a855f7' : '#ffffff',
-                  opacity: 0.4 + Math.random() * 0.6,
-                  boxShadow: Math.random() > 0.8 ? '0 0 6px 2px rgba(0, 255, 255, 0.5)' : 'none',
-                  animation: `pulse ${2 + Math.random() * 4}s ease-in-out infinite`,
-                  animationDelay: `${Math.random() * 3}s`,
-                }}
-              />
-            ))}
-          </div>
-          
-          {/* Nebula glow effects */}
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl animate-pulse" style={{ background: 'radial-gradient(circle, rgba(0, 255, 255, 0.25) 0%, transparent 70%)' }} />
-          <div className="absolute top-1/3 right-1/4 w-72 h-72 rounded-full blur-3xl animate-pulse" style={{ background: 'radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%)', animationDelay: '1s' }} />
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-48 rounded-full blur-3xl" style={{ background: 'radial-gradient(ellipse 60% 100% at 50% 100%, rgba(236, 72, 153, 0.2) 0%, transparent 70%)' }} />
-          
-          {/* Shooting star accents */}
-          <div className="absolute w-32 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-50" style={{ top: '15%', left: '70%', transform: 'rotate(-45deg)', animation: 'pulse 3s ease-in-out infinite' }} />
-          <div className="absolute w-20 h-0.5 bg-gradient-to-r from-transparent via-purple-400 to-transparent opacity-40" style={{ top: '40%', left: '20%', transform: 'rotate(-35deg)', animation: 'pulse 4s ease-in-out infinite', animationDelay: '1.5s' }} />
-        </div>
+        <AnimatedStarfield starCount={100} showNebula={true} showShootingStars={true} intensity="normal" />
         
         {/* Bottom fade overlay - forced dark to match cosmic background */}
-        <div className="absolute bottom-0 left-0 right-0 h-40" style={{ background: 'linear-gradient(to top, #0c1929, transparent)' }} />
+        <div className="absolute bottom-0 left-0 right-0 h-40 z-10" style={{ background: 'linear-gradient(to top, #0c1929, transparent)' }} />
         
         {/* Content */}
-        <div className="relative container mx-auto px-4 py-20 text-center">
+        <div className="relative container mx-auto px-4 py-20 text-center z-20">
           {/* UPM Logo with pulsing glow */}
           <div className="flex justify-center mb-8">
             <div className="relative">

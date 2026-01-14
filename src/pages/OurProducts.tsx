@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ExternalLink, ArrowRight } from "lucide-react";
 import { updateMetaTags } from "@/utils/seoUtils";
+import AnimatedStarfield from "@/components/AnimatedStarfield";
 
 // Import app icons
 import watchCryptoIcon from "@/assets/apps/watch-crypto.png";
@@ -80,18 +81,43 @@ const OurProducts = () => {
       <Header />
       <div className="min-h-screen bg-background pt-16">
       
-      {/* Hero Section */}
+      {/* Hero Section with Animated Starfield */}
       <section className="relative pt-24 pb-16 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5" />
-        <div className="container mx-auto px-4 relative z-10">
+        <AnimatedStarfield starCount={100} showNebula={true} showShootingStars={true} intensity="normal" />
+        
+        {/* Bottom fade to content */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 z-10" style={{ background: 'linear-gradient(to top, #0c1929, transparent)' }} />
+        
+        <div className="container mx-auto px-4 relative z-20">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            {/* UPM Logo with glow */}
+            <div className="flex justify-center mb-8">
+              <div className="relative">
+                <div className="absolute -inset-6 rounded-full blur-2xl animate-pulse" style={{ background: 'rgba(0, 255, 255, 0.3)' }} />
+                <div className="absolute -inset-10 rounded-full blur-3xl animate-pulse" style={{ background: 'rgba(139, 92, 246, 0.2)', animationDelay: '0.5s' }} />
+                <img 
+                  src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
+                  alt="UPM Logo"
+                  className="relative h-20 w-auto"
+                  style={{
+                    filter: `
+                      drop-shadow(0 0 10px rgba(0, 255, 255, 0.7))
+                      drop-shadow(0 0 20px rgba(0, 255, 255, 0.5))
+                      drop-shadow(0 0 35px rgba(139, 92, 246, 0.4))
+                    `,
+                    animation: 'pulse 3s ease-in-out infinite'
+                  }}
+                />
+              </div>
+            </div>
+            
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
               Explore Our{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
                 Apps
               </span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8">
+            <p className="text-lg md:text-xl text-gray-300 mb-8">
               Discover the suite of digital apps and platforms built by UPM to empower creators, brands, and communities.
             </p>
           </div>
