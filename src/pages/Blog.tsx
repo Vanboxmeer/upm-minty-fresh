@@ -59,7 +59,7 @@ const Blog = () => {
       
       {/* Cosmic Space Hero Section with Animated Starfield */}
       <div className="relative overflow-hidden">
-        <AnimatedStarfield starCount={100} showNebula={true} showShootingStars={true} intensity="normal" />
+        <AnimatedStarfield />
         
         {/* Bottom fade overlay - forced dark to match cosmic background */}
         <div className="absolute bottom-0 left-0 right-0 h-40 z-10" style={{ background: 'linear-gradient(to top, #0c1929, transparent)' }} />

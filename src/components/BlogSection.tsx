@@ -21,7 +21,7 @@ const BlogSection = () => {
     <section className="py-16 bg-background">
       {/* Cosmic Space Header with Animated Starfield */}
       <div className="relative overflow-hidden mb-12">
-        <AnimatedStarfield starCount={80} showNebula={true} showShootingStars={true} intensity="subtle" />
+        <AnimatedStarfield />
         
         {/* Bottom fade overlay - forced dark to match cosmic background */}
         <div className="absolute bottom-0 left-0 right-0 h-32 z-10" style={{ background: 'linear-gradient(to top, #0c1929, transparent)' }} />
