@@ -82,7 +82,7 @@ const OurProducts = () => {
       <div className="min-h-screen bg-background pt-16">
       
       {/* Hero Section with Animated Starfield */}
-      <section className="relative pt-24 pb-16 overflow-hidden">
+      <section className="relative pt-14 pb-6 overflow-hidden">
         <AnimatedStarfield />
         
         {/* Bottom fade to content */}
@@ -117,9 +117,12 @@ const OurProducts = () => {
                 Apps
               </span>
             </h1>
-            <p className="text-lg md:text-xl text-gray-300 mb-8">
+            <p className="text-lg md:text-xl text-gray-300 mb-6">
               Discover the suite of digital apps and platforms built by UPM to empower creators, brands, and communities.
             </p>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary">
+              <span className="text-sm font-medium">Built with UPM Vibe Coding Services</span>
+            </div>
           </div>
         </div>
       </section>
@@ -186,18 +189,23 @@ const OurProducts = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Vibe Coding CTA Section */}
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to Work Together?
+            Turn Your Idea Into an MVP in Weeks
           </h2>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Whether you need marketing services, community tools, or content solutions — we have the expertise and products to help you succeed.
+            All of these apps were built using our Vibe Coding services. Let UPM help you bring your vision to life with rapid MVP development and AI-powered tools.
           </p>
-          <Button asChild size="lg" variant="hero">
-            <a href="/contact">Get in Touch</a>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button asChild size="lg" variant="hero">
+              <a href="/vibe-coding">Learn About Vibe Coding</a>
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <a href="/contact">Start Your Project</a>
+            </Button>
+          </div>
         </div>
       </section>
 
