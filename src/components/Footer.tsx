@@ -1233,7 +1233,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center space-x-2 mb-4">
               <img 
-                src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
+                src="/lovable-uploads/upm-logo.png" 
                 alt="UPM Logo" 
                 className="h-8 w-auto retro-logo-hover opacity-100 filter-none mix-blend-normal" 
               />

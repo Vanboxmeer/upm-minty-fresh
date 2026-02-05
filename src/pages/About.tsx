@@ -15,7 +15,7 @@ const About = () => {
             {/* Logo Section */}
             <div className="text-center mb-12">
               <img 
-                src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
+                src="/lovable-uploads/upm-logo.png" 
                 alt="UPM Logo" 
                 className="retro-logo-hover h-24 w-auto mx-auto mb-6" 
               />

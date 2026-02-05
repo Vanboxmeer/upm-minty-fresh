@@ -96,7 +96,7 @@ const OurProducts = () => {
                 <div className="absolute -inset-6 rounded-full blur-2xl animate-pulse" style={{ background: 'rgba(0, 255, 255, 0.3)' }} />
                 <div className="absolute -inset-10 rounded-full blur-3xl animate-pulse" style={{ background: 'rgba(139, 92, 246, 0.2)', animationDelay: '0.5s' }} />
                 <img 
-                  src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
+                  src="/lovable-uploads/upm-logo.png" 
                   alt="UPM Logo"
                   className="relative h-20 w-auto"
                   style={{

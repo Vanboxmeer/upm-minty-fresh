@@ -155,7 +155,7 @@ const AnimatedServicesHero = () => {
                 
                 {/* UPM Logo - larger with retro glow effect always active */}
                 <img 
-                  src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
+                  src="/lovable-uploads/upm-logo.png" 
                   alt="UPM Logo"
                   className="w-24 h-24 object-contain"
                   style={{

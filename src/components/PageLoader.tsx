@@ -16,7 +16,7 @@ const PageLoader = () => {
     // Preload the logo
     const img = new Image();
     img.onload = () => setLogoLoaded(true);
-    img.src = "/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png";
+    img.src = "/lovable-uploads/upm-logo.png";
 
     // Start fade out after minimum loading time
     const fadeTimer = setTimeout(() => {
@@ -49,7 +49,7 @@ const PageLoader = () => {
       {/* Logo with fill animation - properly centered */}
       <div className="flex items-center justify-center">
         <img 
-          src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
+          src="/lovable-uploads/upm-logo.png" 
           alt="UPM Logo" 
           className={`w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-contain transition-all duration-300 ${
             logoLoaded ? 'opacity-100 scale-100 animate-logo-fill retro-logo-loader' : 'opacity-0 scale-95'
