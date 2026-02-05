@@ -617,6 +617,7 @@ export type Database = {
       generate_referral_code: { Args: never; Returns: string }
       generate_slug: { Args: { title: string }; Returns: string }
       get_content_age_days: { Args: { reviewed_date: string }; Returns: number }
+      is_admin_user: { Args: { check_email: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
