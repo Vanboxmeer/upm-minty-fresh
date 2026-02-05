@@ -1,10 +1,24 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
+import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
+
+// Input validation schema
+const conversationMessageSchema = z.object({
+  role: z.enum(['user', 'assistant']),
+  content: z.string().max(10000, 'Message content too long')
+});
+
+const thinkTankSchema = z.object({
+  message: z.string().min(1, 'Message is required').max(5000, 'Message must be under 5000 characters'),
+  conversationHistory: z.array(conversationMessageSchema).max(20, 'Too many messages in history'),
+  sessionId: z.string().min(1, 'Session ID is required').max(100, 'Session ID too long'),
+  isWidget: z.boolean().optional()
+});
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -12,7 +26,22 @@ serve(async (req) => {
   }
 
   try {
-    const { message, conversationHistory, sessionId, isWidget } = await req.json();
+    // Parse and validate input
+    const rawBody = await req.json();
+    const validationResult = thinkTankSchema.safeParse(rawBody);
+    
+    if (!validationResult.success) {
+      console.error('Validation error:', validationResult.error.issues);
+      return new Response(
+        JSON.stringify({ 
+          error: 'Invalid input', 
+          details: validationResult.error.issues.map(i => i.message).join(', ')
+        }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const { message, conversationHistory, sessionId, isWidget } = validationResult.data;
     
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
     if (!LOVABLE_API_KEY) {
@@ -163,7 +192,7 @@ They're super responsive and can help with personalized strategy, pricing, and g
     // Build messages array with history
     const messages = [
       { role: 'system', content: systemPrompt },
-      ...conversationHistory.map((msg: any) => ({
+      ...conversationHistory.map((msg) => ({
         role: msg.role,
         content: msg.content
       })),
@@ -292,8 +321,8 @@ They're super responsive and can help with personalized strategy, pricing, and g
             .from('think_tank_conversations')
             .insert({
               session_id: sessionId,
-              user_message: message,
-              ai_response: fullResponse,
+              user_message: message.slice(0, 5000), // Truncate for safety
+              ai_response: fullResponse.slice(0, 50000), // Truncate for safety
               service_suggested: serviceSuggestions,
               ip_address: clientIP
             });
