@@ -76,7 +76,7 @@ const Blog = () => {
               
               {/* Logo */}
               <img 
-                src="/lovable-uploads/dc543201-6235-4993-abf2-0a832b4c4248.png" 
+                src="/lovable-uploads/upm-logo.png" 
                 alt="UPM Logo"
                 className="relative h-24 w-auto"
                 style={{
