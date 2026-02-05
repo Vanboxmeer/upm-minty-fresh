@@ -1,16 +1,28 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.54.0";
+import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-interface AffiliateApplication {
-  affiliate_name: string;
-  affiliate_email: string;
-  company?: string;
-  referral_code: string;
+// Input validation schema
+const affiliateSchema = z.object({
+  affiliate_name: z.string().min(1, 'Name is required').max(100, 'Name must be under 100 characters').trim(),
+  affiliate_email: z.string().email('Invalid email address').max(254, 'Email too long').trim(),
+  company: z.string().max(200, 'Company name must be under 200 characters').optional()
+});
+
+// Sanitize string for HTML email content
+function sanitizeForHtml(str: string | undefined | null): string {
+  if (!str) return '';
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
 }
 
 const supabaseClient = createClient(
@@ -27,9 +39,24 @@ serve(async (req) => {
   }
 
   try {
-    const { affiliate_name, affiliate_email, company }: Omit<AffiliateApplication, 'referral_code'> = await req.json();
+    // Parse and validate input
+    const rawBody = await req.json();
+    const validationResult = affiliateSchema.safeParse(rawBody);
+    
+    if (!validationResult.success) {
+      console.error('Validation error:', validationResult.error.issues);
+      return new Response(
+        JSON.stringify({ 
+          error: 'Invalid input', 
+          details: validationResult.error.issues.map(i => i.message).join(', ')
+        }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
 
-    console.log('Processing affiliate application for:', affiliate_email);
+    const { affiliate_name, affiliate_email, company } = validationResult.data;
+
+    console.log('Processing affiliate application for:', affiliate_email.slice(0, 3) + '***');
 
     // Check if affiliate already exists
     const { data: existingAffiliate } = await supabaseClient
@@ -67,9 +94,9 @@ serve(async (req) => {
     const { data: affiliateData, error: affiliateError } = await supabaseClient
       .from('affiliates')
       .insert({
-        affiliate_name,
+        affiliate_name: affiliate_name.slice(0, 100),
         affiliate_email,
-        company,
+        company: company?.slice(0, 200),
         referral_code,
         status: 'approved' // Auto-approve for immediate access
       })
@@ -102,6 +129,12 @@ serve(async (req) => {
     try {
       const resendApiKey = Deno.env.get('RESEND_API_KEY');
       if (resendApiKey) {
+        // Sanitize for HTML
+        const safeName = sanitizeForHtml(affiliate_name);
+        const safeEmail = sanitizeForHtml(affiliate_email);
+        const safeCompany = sanitizeForHtml(company);
+        const safeCode = sanitizeForHtml(referral_code);
+
         const emailResponse = await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: {
@@ -114,10 +147,10 @@ serve(async (req) => {
             subject: 'New Affiliate Application',
             html: `
               <h2>New Affiliate Application</h2>
-              <p><strong>Name:</strong> ${affiliate_name}</p>
-              <p><strong>Email:</strong> ${affiliate_email}</p>
-              <p><strong>Company:</strong> ${company || 'Not specified'}</p>
-              <p><strong>Referral Code:</strong> ${referral_code}</p>
+              <p><strong>Name:</strong> ${safeName}</p>
+              <p><strong>Email:</strong> ${safeEmail}</p>
+              <p><strong>Company:</strong> ${safeCompany || 'Not specified'}</p>
+              <p><strong>Referral Code:</strong> ${safeCode}</p>
               <p><strong>Status:</strong> Pending Review</p>
               <p>Please review and approve/reject this application in your admin panel.</p>
             `,
@@ -150,8 +183,7 @@ serve(async (req) => {
     
     return new Response(
       JSON.stringify({ 
-        error: 'Failed to process affiliate application',
-        details: error instanceof Error ? error.message : 'Unknown error'
+        error: 'Failed to process affiliate application'
       }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
