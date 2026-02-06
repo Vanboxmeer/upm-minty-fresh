@@ -5,29 +5,35 @@ export const useExitIntent = () => {
 
   useEffect(() => {
     let hasShown = false;
+    let isReady = false;
+
+    // Only allow exit intent after 20 seconds on site
+    const readyTimer = setTimeout(() => {
+      isReady = true;
+    }, 20000);
+
+    // Also check sessionStorage so it only fires once per session
+    const alreadyShownThisSession = sessionStorage.getItem('exitIntentShown');
+    if (alreadyShownThisSession) {
+      hasShown = true;
+    }
 
     const handleMouseLeave = (e: MouseEvent) => {
-      // Only trigger on desktop (window width >= 768px)
       if (window.innerWidth < 768) return;
+      if (!isReady || hasShown) return;
       
-      // Only trigger if mouse is leaving from the top of the viewport
-      if (e.clientY <= 0 && !hasShown) {
+      if (e.clientY <= 0) {
         setShowExitIntent(true);
         hasShown = true;
+        sessionStorage.setItem('exitIntentShown', 'true');
       }
     };
 
-    // Prevent showing multiple times
-    const handleMouseEnter = () => {
-      if (hasShown) return;
-    };
-
     document.addEventListener('mouseleave', handleMouseLeave);
-    document.addEventListener('mouseenter', handleMouseEnter);
 
     return () => {
+      clearTimeout(readyTimer);
       document.removeEventListener('mouseleave', handleMouseLeave);
-      document.removeEventListener('mouseenter', handleMouseEnter);
     };
   }, []);
 
