@@ -182,6 +182,7 @@ export type Database = {
           seo_keywords: string[] | null
           seo_title: string | null
           slug: string
+          social_embeds: Json | null
           status: string
           title: string
           twitter_handles: string[] | null
@@ -205,6 +206,7 @@ export type Database = {
           seo_keywords?: string[] | null
           seo_title?: string | null
           slug: string
+          social_embeds?: Json | null
           status?: string
           title: string
           twitter_handles?: string[] | null
@@ -228,6 +230,7 @@ export type Database = {
           seo_keywords?: string[] | null
           seo_title?: string | null
           slug?: string
+          social_embeds?: Json | null
           status?: string
           title?: string
           twitter_handles?: string[] | null

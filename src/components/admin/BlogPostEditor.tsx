@@ -27,9 +27,9 @@ import {
 } from '@/components/ui/select';
 import { Combobox } from '@/components/ui/combobox';
 import { TagInput } from '@/components/ui/tag-input';
-import { BlogPost } from '@/hooks/useBlogPosts';
+import { BlogPost, SocialEmbed } from '@/hooks/useBlogPosts';
 import { useCategories } from '@/hooks/useCategories';
-import { Save, Eye, Upload, X, Smile, Plus, FileText, Link2, Sparkles } from 'lucide-react';
+import { Save, Eye, Upload, X, Smile, Plus, FileText, Link2, Sparkles, Trash2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { EmojiPickerComponent } from './EmojiPicker';
@@ -77,6 +77,11 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
   const [showTemplateSelector, setShowTemplateSelector] = useState(false);
   const [loadingLinkSuggestions, setLoadingLinkSuggestions] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [socialEmbeds, setSocialEmbeds] = useState<SocialEmbed[]>(
+    (post?.social_embeds as SocialEmbed[]) || []
+  );
+  const [newEmbedPlatform, setNewEmbedPlatform] = useState('instagram');
+  const [newEmbedCode, setNewEmbedCode] = useState('');
   const { categories, createCategory } = useCategories();
   const { toast } = useToast();
   
@@ -353,8 +358,8 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
         status: finalStatus,
         seo_keywords: keywords,
         publish_date: publishDate,
-        // Ensure backward compatibility by setting the first category as the main category
         category: data.categories?.[0] || 'General',
+        social_embeds: socialEmbeds,
       };
 
       await onSave(postData);
@@ -852,6 +857,80 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                        </FormItem>
                      )}
                    />
+                 </CardContent>
+               </Card>
+
+               {/* Social Embeds Panel */}
+               <Card>
+                 <CardHeader>
+                   <CardTitle>Social Embeds</CardTitle>
+                 </CardHeader>
+                 <CardContent className="space-y-4">
+                   {socialEmbeds.map((embed, index) => (
+                     <div key={index} className="border rounded-md p-3 space-y-2 relative">
+                       <div className="flex items-center justify-between">
+                         <Badge variant="secondary" className="capitalize">{embed.platform}</Badge>
+                         <Button
+                           type="button"
+                           variant="ghost"
+                           size="sm"
+                           onClick={() => {
+                             setSocialEmbeds(prev => prev.filter((_, i) => i !== index));
+                           }}
+                         >
+                           <Trash2 className="h-4 w-4 text-destructive" />
+                         </Button>
+                       </div>
+                       <p className="text-xs text-muted-foreground truncate">
+                         {embed.embed_code.substring(0, 80)}...
+                       </p>
+                     </div>
+                   ))}
+
+                   <div className="space-y-2 border-t pt-3">
+                     <Select value={newEmbedPlatform} onValueChange={setNewEmbedPlatform}>
+                       <SelectTrigger>
+                         <SelectValue />
+                       </SelectTrigger>
+                       <SelectContent>
+                         <SelectItem value="instagram">Instagram</SelectItem>
+                         <SelectItem value="tiktok">TikTok</SelectItem>
+                         <SelectItem value="x">X (Twitter)</SelectItem>
+                         <SelectItem value="youtube">YouTube</SelectItem>
+                         <SelectItem value="other">Other</SelectItem>
+                       </SelectContent>
+                     </Select>
+                     <Textarea
+                       placeholder="Paste embed code here..."
+                       rows={3}
+                       value={newEmbedCode}
+                       onChange={(e) => setNewEmbedCode(e.target.value)}
+                       className="font-mono text-xs"
+                     />
+                     <Button
+                       type="button"
+                       variant="outline"
+                       size="sm"
+                       className="w-full"
+                       disabled={!newEmbedCode.trim()}
+                       onClick={() => {
+                         if (newEmbedCode.trim()) {
+                           setSocialEmbeds(prev => [...prev, {
+                             platform: newEmbedPlatform,
+                             embed_code: newEmbedCode.trim(),
+                           }]);
+                           setNewEmbedCode('');
+                         }
+                       }}
+                     >
+                       <Plus className="mr-2 h-4 w-4" />
+                       Add Embed
+                     </Button>
+                   </div>
+
+                   <p className="text-xs text-muted-foreground">
+                     Paste embed codes from Instagram, TikTok, X, or YouTube to display alongside the article.
+                   </p>
                  </CardContent>
                </Card>
 

@@ -7,6 +7,11 @@ import type { Database } from '@/integrations/supabase/types';
 
 type DatabaseBlogPost = Database['public']['Tables']['blog_posts']['Row'];
 
+export interface SocialEmbed {
+  platform: string;
+  embed_code: string;
+}
+
 export interface BlogPost {
   id: string;
   title: string;
@@ -21,9 +26,10 @@ export interface BlogPost {
   seo_title?: string | null;
   seo_description?: string | null;
   seo_keywords?: string[] | null;
-  category: string | null; // Keep for backward compatibility
-  categories?: string[] | null; // New multiple categories field
+  category: string | null;
+  categories?: string[] | null;
   read_time: string | null;
+  social_embeds?: any; // JSON from DB, cast to SocialEmbed[] at usage
   created_at: string;
   updated_at: string;
 }
@@ -155,6 +161,7 @@ export const useBlogPosts = () => {
         category: postData.category || null,
         categories: postData.categories || null,
         read_time: postData.read_time || null,
+        social_embeds: postData.social_embeds || [],
       };
       
       console.log('Insert data prepared:', insertData);

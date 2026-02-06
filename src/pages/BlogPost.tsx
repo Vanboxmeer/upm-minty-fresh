@@ -12,8 +12,9 @@ import { BlogNavigation } from "@/components/BlogNavigation";
 import { BlogPostCTA } from "@/components/BlogPostCTA";
 import { LeadMagnet } from "@/components/LeadMagnet";
 import MobileBottomNav from "@/components/MobileBottomNav";
+import { SocialEmbedsRenderer } from "@/components/SocialEmbedsRenderer";
 import DOMPurify from 'dompurify';
-import { useBlogPosts, type BlogPost } from "@/hooks/useBlogPosts";
+import { useBlogPosts, type BlogPost, type SocialEmbed } from "@/hooks/useBlogPosts";
 import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
 
 const setMeta = (post: BlogPost) => {
@@ -193,6 +194,13 @@ const BlogPost = () => {
           <div className="max-w-3xl mx-auto">
             <BlogPostCTA variant="end" />
           </div>
+
+          {/* Social Embeds */}
+          {(post as any).social_embeds && (post as any).social_embeds.length > 0 && (
+            <div className="max-w-3xl mx-auto my-12">
+              <SocialEmbedsRenderer embeds={(post as any).social_embeds as SocialEmbed[]} />
+            </div>
+          )}
 
           {/* Suggested Social Posts + Traditional Social Share Buttons */}
           <div className="max-w-3xl mx-auto mb-12 space-y-6">
