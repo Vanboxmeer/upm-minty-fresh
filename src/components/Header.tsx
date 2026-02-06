@@ -137,7 +137,21 @@ const Header = () => {
             </DropdownMenu>
             
             <button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer">Contact</button>
-            <a href="/blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
+            {/* Blog Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1 text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer">
+                Blog
+                <ChevronDown className="h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="min-w-[180px] bg-popover border border-border">
+                <DropdownMenuItem asChild>
+                  <a href="/blog" className="w-full cursor-pointer">Blog</a>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <a href="/trending" className="w-full cursor-pointer">🔥 Trending News</a>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
             <a href="/our-products" className="text-foreground hover:text-primary transition-colors">Apps</a>
           </nav>
           
@@ -199,6 +213,7 @@ const Header = () => {
             
             <button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer text-left">Contact</button>
             <a href="/blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
+            <a href="/trending" className="text-foreground hover:text-primary transition-colors pl-4 text-sm">🔥 Trending News</a>
             <a href="/our-products" className="text-foreground hover:text-primary transition-colors">Apps</a>
             <div className="flex flex-col space-y-2 pt-4 border-t border-border">
               <ThemeToggle />

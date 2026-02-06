@@ -34,6 +34,7 @@ import OurProducts from "./pages/OurProducts";
 import NotFound from "./pages/NotFound";
 import RSSFeed from "./pages/RSSFeed";
 import SitemapXML from "./pages/SitemapXML";
+import TrendingNews from "./pages/TrendingNews";
 
 // Admin imports
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -67,6 +68,7 @@ const App = () => (
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/case-studies" element={<CaseStudies />} />
+          <Route path="/trending" element={<TrendingNews />} />
           <Route path="/payment/growth" element={<PaymentGrowth />} />
           <Route path="/payment/scale" element={<PaymentScale />} />
           <Route path="/payment/dominate" element={<PaymentDominate />} />
