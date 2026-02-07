@@ -10,7 +10,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu";
-import { Menu, X, ChevronDown, Building2, Users, Palette, Code } from "lucide-react";
+import { Menu, X, ChevronDown, Building2, Users, Palette, Code, BookOpen, Flame } from "lucide-react";
 import { useState } from "react";
 import confetti from "canvas-confetti";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -136,7 +136,6 @@ const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
             
-            <button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer">Contact</button>
             {/* Blog Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center gap-1 text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer">
@@ -145,14 +144,21 @@ const Header = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" className="min-w-[180px] bg-popover border border-border">
                 <DropdownMenuItem asChild>
-                  <a href="/blog" className="w-full cursor-pointer">Blog</a>
+                  <a href="/blog" className="w-full cursor-pointer flex items-center">
+                    <BookOpen className="h-4 w-4 mr-2" />
+                    Blog
+                  </a>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <a href="/trending" className="w-full cursor-pointer">🔥 Trending News</a>
+                  <a href="/trending" className="w-full cursor-pointer flex items-center">
+                    <Flame className="h-4 w-4 mr-2" />
+                    Trending News
+                  </a>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             <a href="/our-products" className="text-foreground hover:text-primary transition-colors">Apps</a>
+            <button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer">Contact</button>
           </nav>
           
             <div className="flex items-center space-x-4">
@@ -211,10 +217,10 @@ const Header = () => {
               </div>
             </div>
             
-            <button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer text-left">Contact</button>
             <a href="/blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
             <a href="/trending" className="text-foreground hover:text-primary transition-colors pl-4 text-sm">🔥 Trending News</a>
             <a href="/our-products" className="text-foreground hover:text-primary transition-colors">Apps</a>
+            <button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer text-left">Contact</button>
             <div className="flex flex-col space-y-2 pt-4 border-t border-border">
               <ThemeToggle />
               <Button variant="synthwave" size="sm" className="group relative overflow-hidden" onClick={scrollToCoveragePackages}>

@@ -16,6 +16,7 @@ import { SocialEmbedsRenderer } from "@/components/SocialEmbedsRenderer";
 import DOMPurify from 'dompurify';
 import { useBlogPosts, type BlogPost, type SocialEmbed } from "@/hooks/useBlogPosts";
 import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
+import AnimatedStarfield from "@/components/AnimatedStarfield";
 
 const setMeta = (post: BlogPost) => {
   const title = post.title;
@@ -103,8 +104,11 @@ const BlogPost = () => {
     return (
       <>
         <Header />
-        <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
-        <main className="container mx-auto px-4 py-16">
+        <div className="min-h-screen relative pt-16 pb-16 md:pb-0" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%)' }}>
+        <div className="absolute inset-0 z-0">
+          <AnimatedStarfield />
+        </div>
+        <main className="container mx-auto px-4 py-16 relative z-10">
           <div className="animate-pulse space-y-4">
             <div className="h-8 bg-muted rounded w-1/3"></div>
             <div className="h-64 bg-muted rounded"></div>
@@ -121,8 +125,11 @@ const BlogPost = () => {
     return (
       <>
         <Header />
-        <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
-        <main className="container mx-auto px-4 py-16">
+        <div className="min-h-screen relative pt-16 pb-16 md:pb-0" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%)' }}>
+        <div className="absolute inset-0 z-0">
+          <AnimatedStarfield />
+        </div>
+        <main className="container mx-auto px-4 py-16 relative z-10">
           <Card className="p-8">
             <h1 className="text-3xl font-bold mb-2">Article not found</h1>
             <p className="text-muted-foreground mb-6">The article you're looking for doesn't exist or was moved.</p>
@@ -139,8 +146,11 @@ const BlogPost = () => {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
-      <main className="container mx-auto px-4 py-16">
+      <div className="min-h-screen relative pt-16 pb-16 md:pb-0" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%)' }}>
+      <div className="absolute inset-0 z-0">
+        <AnimatedStarfield />
+      </div>
+      <main className="container mx-auto px-4 py-16 relative z-10 text-white">
         <article>
           <header className="max-w-3xl mx-auto text-center mb-10">
             <div className="flex flex-col items-center gap-3 mb-4">
@@ -175,7 +185,7 @@ const BlogPost = () => {
             </figure>
           )}
 
-          <section className="prose prose-neutral dark:prose-invert max-w-3xl mx-auto mb-12">
+          <section className="prose prose-invert max-w-3xl mx-auto mb-12">
             {/* First part of content */}
             <div dangerouslySetInnerHTML={{ __html: contentWithCTA.firstPart }} />
             
