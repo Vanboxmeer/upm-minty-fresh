@@ -13,6 +13,7 @@ import spinquestIcon from "@/assets/apps/spinquest.png";
 import amplifyhubIcon from "@/assets/apps/amplifyhub.png";
 import rewriteableIcon from "@/assets/apps/rewriteable-ai.png";
 import readingRaceIcon from "@/assets/apps/reading-race.png";
+import everythingNightlifeIcon from "@/assets/apps/everything-nightlife.png";
 
 const products = [
   {
@@ -64,6 +65,16 @@ const products = [
     gradient: "from-rose-500/20 to-red-500/20",
     isWide: false,
     rounded: true
+  },
+  {
+    name: "Everything Nightlife",
+    tagline: "AI-Powered Event Directory",
+    description: "Discover nightlife events near you with an AI-powered event directory. Find clubs, concerts, festivals, and parties based on your preferences using intelligent prompt-based search.",
+    url: "https://everythingnightlife.com/",
+    icon: everythingNightlifeIcon,
+    gradient: "from-fuchsia-500/20 to-violet-500/20",
+    isWide: true,
+    rounded: false
   }
 ];
 
