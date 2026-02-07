@@ -105,7 +105,7 @@ const BlogPost = () => {
       <>
         <Header />
         <div className="min-h-screen relative pt-16 pb-16 md:pb-0" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%)' }}>
-        <div className="absolute inset-0 z-0">
+        <div className="fixed inset-0 z-0 pointer-events-none">
           <AnimatedStarfield />
         </div>
         <main className="container mx-auto px-4 py-16 relative z-10">
@@ -126,7 +126,7 @@ const BlogPost = () => {
       <>
         <Header />
         <div className="min-h-screen relative pt-16 pb-16 md:pb-0" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%)' }}>
-        <div className="absolute inset-0 z-0">
+        <div className="fixed inset-0 z-0 pointer-events-none">
           <AnimatedStarfield />
         </div>
         <main className="container mx-auto px-4 py-16 relative z-10">
@@ -147,7 +147,7 @@ const BlogPost = () => {
     <>
       <Header />
       <div className="min-h-screen relative pt-16 pb-16 md:pb-0" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%)' }}>
-      <div className="absolute inset-0 z-0">
+      <div className="fixed inset-0 z-0 pointer-events-none">
         <AnimatedStarfield />
       </div>
       <main className="container mx-auto px-4 py-16 relative z-10 text-white">
