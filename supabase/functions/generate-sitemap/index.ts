@@ -47,6 +47,7 @@ serve(async (req) => {
       { url: 'help-center', priority: '0.5', changefreq: 'monthly' },
       { url: 'contact', priority: '0.5', changefreq: 'monthly' },
       { url: 'affiliate-signup', priority: '0.4', changefreq: 'monthly' },
+      { url: 'trending', priority: '0.8', changefreq: 'daily' },
       { url: 'privacy-policy', priority: '0.3', changefreq: 'yearly' },
       { url: 'terms-of-service', priority: '0.3', changefreq: 'yearly' },
     ]
