@@ -81,7 +81,7 @@ const products = [
     name: "Vaporsmooth",
     tagline: "Cannabis Marketplace",
     description: "Discover the finest vaporizers, CBD/THC products, and accessories. Learn about cannabis, take quizzes, and stay up to date with top trending cannabis news.",
-    url: "https://vaporsmooth.lovable.app",
+    url: "https://vaporsmooth.com",
     icon: vaporsmoothIcon,
     gradient: "from-green-500/20 to-emerald-500/20",
     isWide: false,
