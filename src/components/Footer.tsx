@@ -1308,7 +1308,7 @@ const Footer = () => {
               <li><a href="https://re-writeable-ai.lovable.app/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Re-Writeable AI</a></li>
               <li><a href="https://readingrace.com/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Reading Race</a></li>
               <li><a href="https://everythingnightlife.lovable.app" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Everything Nightlife</a></li>
-              <li><a href="https://vaporsmooth.lovable.app" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Vaporsmooth</a></li>
+              <li><a href="https://vaporsmooth.com" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Vaporsmooth</a></li>
             </ul>
           </div>
           
