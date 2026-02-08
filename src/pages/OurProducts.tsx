@@ -14,6 +14,7 @@ import amplifyhubIcon from "@/assets/apps/amplifyhub.png";
 import rewriteableIcon from "@/assets/apps/rewriteable-ai.png";
 import readingRaceIcon from "@/assets/apps/reading-race.png";
 import everythingNightlifeIcon from "@/assets/apps/everything-nightlife.png";
+import vaporsmoothIcon from "@/assets/apps/vaporsmooth.png";
 
 const products = [
   {
@@ -70,11 +71,21 @@ const products = [
     name: "Everything Nightlife",
     tagline: "AI-Powered Event Directory",
     description: "Discover nightlife events near you with an AI-powered event directory. Find clubs, concerts, festivals, and parties based on your preferences using intelligent prompt-based search.",
-    url: "https://everythingnightlife.com/",
+    url: "https://everythingnightlife.lovable.app",
     icon: everythingNightlifeIcon,
     gradient: "from-fuchsia-500/20 to-violet-500/20",
     isWide: true,
     rounded: false
+  },
+  {
+    name: "Vaporsmooth",
+    tagline: "Cannabis Marketplace",
+    description: "Discover the finest vaporizers, CBD/THC products, and accessories. Learn about cannabis, take quizzes, and stay up to date with top trending cannabis news.",
+    url: "https://vaporsmooth.lovable.app",
+    icon: vaporsmoothIcon,
+    gradient: "from-green-500/20 to-emerald-500/20",
+    isWide: false,
+    rounded: true
   }
 ];
 
@@ -82,8 +93,8 @@ const OurProducts = () => {
   useEffect(() => {
     updateMetaTags({
       title: "Our Apps | UPM Ecosystem",
-      description: "Explore the UPM ecosystem of digital apps including Watch Crypto, SpinQuest, AmplifyHub, Re-Writeable AI, and Reading Race. Tools for crypto, community engagement, collaboration, and content creation.",
-      keywords: "UPM apps, Watch Crypto, SpinQuest, AmplifyHub, Re-Writeable AI, Reading Race, crypto tools, community apps, content AI"
+      description: "Explore the UPM ecosystem of digital apps including Watch Crypto, SpinQuest, AmplifyHub, Re-Writeable AI, Reading Race, Everything Nightlife, and Vaporsmooth. Tools for crypto, community engagement, collaboration, content creation, events, and cannabis.",
+      keywords: "UPM apps, Watch Crypto, SpinQuest, AmplifyHub, Re-Writeable AI, Reading Race, Everything Nightlife, Vaporsmooth, crypto tools, community apps, content AI, cannabis marketplace"
     });
   }, []);
 
