@@ -16,6 +16,10 @@ const Services = () => {
     title: "Features, Interviews, Spaces",
     description: "Get featured in top media, have your CEO as a guest on a popular show, or co-host a community event.",
     features: ["Top-tier media placements", "Executive interview opportunities", "Community event hosting", "Thought leadership positioning"]
+  }, {
+    title: "Social Content Creation",
+    description: "Custom branded social content — posts, reels, videos & ads that actually feel like you, starting from ~$25/post.",
+    features: ["Instagram Reels & TikTok videos", "Branded memes & product showcases", "AI-powered video ads", "Monthly plans from 4–28 posts"]
   }];
 
   const { elementRef: heroRef, isVisible: heroVisible } = useScrollAnimation();
@@ -60,7 +64,7 @@ AI, GameFi, DeFi, and Web3</span>
           </div>
         </div>
 
-        <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => <Card 
               key={index} 
               className={`group border-border card-hover card-glow-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5 ${

@@ -2,164 +2,340 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import PackageSelector from "@/components/PackageSelector";
+import MobileBottomNav from "@/components/MobileBottomNav";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
 import { usePackageSelection } from "@/contexts/PackageSelectionContext";
-import { Sparkles, Video, Image as ImageIcon, Zap, Target, Layers, CheckCircle2 } from "lucide-react";
+import {
+  Sparkles, Video, Target, Zap, CheckCircle2, Palette,
+  Instagram, MessageCircle, Film, ImageIcon, Megaphone, Clock, Heart
+} from "lucide-react";
+
+const pricingTiers = [
+  {
+    name: "Light",
+    posts: "4 posts",
+    price: "~$100–120",
+    bestFor: "Founders who post occasionally",
+  },
+  {
+    name: "Steady",
+    posts: "8–12 posts",
+    price: "~$200–280",
+    bestFor: "Growing communities & app updates",
+  },
+  {
+    name: "Growth",
+    posts: "16–20 posts",
+    price: "~$380–480",
+    bestFor: "Active engagement & brand building",
+    popular: true,
+  },
+  {
+    name: "Full Presence",
+    posts: "28 posts",
+    price: "~$650–700",
+    bestFor: "Serious projects & launches",
+  },
+];
+
+const contentTypes = [
+  "Instagram Reels & TikTok short-form videos",
+  "X / Twitter carousels, threads, video posts & quote cards",
+  "Branded memes, relatable lifestyle scenes, Web3 culture jokes",
+  "Product showcases, app demos, before/afters, feature highlights",
+  "Educational explainers (DeFi, AI, tokenomics, roadmap updates…)",
+];
+
+const bonusFeatures = [
+  "5–60 second video commercials with sound design",
+  "Vertical video ads ready for TikTok, Reels, Telegram, YouTube Shorts",
+  "Banner & display creatives optimized for Brave Ads & native placements",
+  "Telegram Ads-ready visuals & short clips",
+  "Consistent character + world-building for long-term brand campaigns",
+];
+
+const perfectFor = [
+  "App builders & indie teams who want to look pro without hiring a full-time social media manager",
+  "Web3 founders who need consistent messaging during token launches, mainnet, partnerships",
+  "Creators & brands who want content that converts without losing personality",
+  "Teams who already have a vision but no time to execute weekly",
+];
 
 const MediaForBrands = () => {
   const { setSelectedPackage, setUserType } = usePackageSelection();
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Set user type to brand for this page
     setUserType('brand');
-
-    // Auto-select Media for Brands package
     setSelectedPackage({
-      name: "Media for Brands",
-      price: "Custom",
-      description: "AI-powered video and image generation using Grok Imagine with character continuity",
+      name: "Social Content Creation",
+      price: "From $100/mo",
+      description: "Custom branded social content — posts, reels, videos & ads",
       features: [
-        "Instagram Reels, TikTok clips, and social media content",
-        "10-30s video ads with sound and character continuity",
-        "Banner/display creatives for Brave, Native, Telegram Ads",
-        "Photorealistic 1024×1024 images and short videos",
-        "Unlimited iterations with Grok Imagine infinite scroll",
-        "Web3, crypto, and tech-optimized content generation"
+        "4–28 posts/month depending on plan",
+        "Instagram Reels, TikTok, X/Twitter content",
+        "Branded memes & product showcases",
+        "AI-powered video ads with character continuity",
+        "Monthly contracts, cancel anytime",
       ],
-      popular: false
+      popular: false,
     });
 
-    // SEO optimization
     updateMetaTags({
-      title: "Media for Brands | AI Video & Image Ads | UPM",
-      description: "Generate character-consistent videos, images & commercials with Grok Imagine. Perfect for Web3 socials and paid ads.",
-      keywords: "AI video generation, Grok Imagine, character continuity, Web3 marketing, crypto ads, AI-generated content, social media content, AI commercials, brand media",
-      canonical: "https://unitedpressmedia.com/media-for-brands",
-      ogTitle: "Media for Brands - AI-Powered Visual Content Generation",
-      ogDescription: "Generate character-consistent videos, images & commercials instantly with xAI's Grok Imagine. Perfect for digital marketing campaigns.",
+      title: "Social Content Creation | UPM - United Press Media",
+      description: "Quality branded social content that actually feels like you. Custom posts, reels, videos & ads starting from ~$25/post. No hidden fees.",
+      keywords: "social content creation, branded content, social media management, Instagram Reels, TikTok content, Web3 social media, crypto content, content marketing",
+      canonical: "https://unitedpress.media/media-for-brands",
+      ogTitle: "Social Content Creation by UPM",
+      ogDescription: "Scroll-stopping, on-brand content so you can focus on building, not posting. Starting from ~$25/post.",
       ogType: "website",
-      ogImage: "https://unitedpressmedia.com/lovable-uploads/4ed87a93-4a52-47a8-a969-1b8e2ddac6d9.png",
       twitterCard: "summary_large_image",
       structuredData: [
         generateStructuredData('organization', {}),
-        generateStructuredData('website', {})
-      ]
+        generateStructuredData('website', {}),
+      ],
     });
   }, [setSelectedPackage, setUserType]);
-
 
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-background pt-16">
-      
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-50 via-indigo-50 to-purple-50 dark:from-slate-900 dark:via-blue-900/60 dark:to-slate-900">
-        {/* Animated Background Orbs */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-primary/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '0s' }} />
-          <div className="absolute top-40 right-20 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-          <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-accent/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }} />
-        </div>
+      <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
+        {/* Hero Section */}
+        <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-50 via-indigo-50 to-purple-50 dark:from-slate-900 dark:via-blue-900/60 dark:to-slate-900">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-primary/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '0s' }} />
+            <div className="absolute top-40 right-20 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+            <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-accent/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }} />
+          </div>
 
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-5xl mx-auto text-center">
-            <Badge className="mb-6 px-4 py-2 text-sm bg-primary/20 text-primary border-primary/30">
-              <Sparkles className="w-4 h-4 mr-2 inline" />
-              Powered by xAI's Grok Imagine
-            </Badge>
-            
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-purple-600 to-secondary bg-clip-text text-transparent leading-tight">
-              Content Creation for Brands
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              AI-Powered Videos, Images & Commercials with <span className="text-primary font-semibold">Character Continuity</span>
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="max-w-4xl mx-auto text-center">
+              <Badge className="mb-6 px-4 py-2 text-sm bg-primary/20 text-primary border-primary/30">
+                <Palette className="w-4 h-4 mr-2 inline" />
+                Social Content Creation
+              </Badge>
+
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-purple-600 to-secondary bg-clip-text text-transparent leading-tight">
+                Content That Actually Feels Like You
+              </h1>
+
+              <p className="text-xl md:text-2xl text-muted-foreground mb-4 max-w-3xl mx-auto">
+                Without you having to live in Canva or CapCut 24/7.
+              </p>
+
+              <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+                We create scroll-stopping, on-brand content so you can focus on building, not posting.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button
+                  onClick={() => navigate('/contact')}
+                  size="lg"
+                  className="text-lg px-8 py-6 bg-primary hover:bg-primary/90"
+                >
+                  Start Your Content Plan
+                  <Zap className="ml-2 h-5 w-5" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="text-lg px-8 py-6"
+                  onClick={() => {
+                    const pricingSection = document.getElementById('pricing');
+                    if (pricingSection) {
+                      pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }}
+                >
+                  View Pricing
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* What We Do */}
+        <section className="py-20 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">What We Actually Do For You</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Full-service or light-touch monthly content packages. You choose how much support you want.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
+              <Card className="p-6 text-center border-2 hover:border-primary/50 transition-all">
+                <Clock className="w-8 h-8 text-primary mx-auto mb-3" />
+                <h3 className="font-semibold mb-2">Just Filler Content?</h3>
+                <p className="text-sm text-muted-foreground">2 residency days/week — perfect when your team is busy shipping</p>
+              </Card>
+              <Card className="p-6 text-center border-2 hover:border-primary/50 transition-all">
+                <MessageCircle className="w-8 h-8 text-primary mx-auto mb-3" />
+                <h3 className="font-semibold mb-2">Steady Presence?</h3>
+                <p className="text-sm text-muted-foreground">1–3 posts/week to keep your community engaged</p>
+              </Card>
+              <Card className="p-6 text-center border-2 hover:border-primary/50 transition-all">
+                <Sparkles className="w-8 h-8 text-primary mx-auto mb-3" />
+                <h3 className="font-semibold mb-2">Serious Growth?</h3>
+                <p className="text-sm text-muted-foreground">5–7 posts/week (up to 28 posts/month)</p>
+              </Card>
+            </div>
+
+            <p className="text-center text-muted-foreground max-w-xl mx-auto">
+              All posts are <span className="text-foreground font-medium">100% custom</span>, aligned with your voice, visuals, and current campaign goals.
             </p>
-            
+          </div>
+        </section>
 
-            <Button 
+        {/* Content Types + Bonus */}
+        <section className="py-20 bg-background">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+              {/* Content Types */}
+              <Card className="p-8 border-2 hover:border-primary/50 transition-all hover:shadow-lg">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-3 bg-primary/10 rounded-lg">
+                    <Video className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="text-2xl font-semibold">Content Types We Create</h3>
+                </div>
+                <ul className="space-y-3 text-muted-foreground">
+                  {contentTypes.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Card>
+
+              {/* Bonus: AI-Powered */}
+              <Card className="p-8 border-2 hover:border-secondary/50 transition-all hover:shadow-lg">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-3 bg-secondary/10 rounded-lg">
+                    <Target className="w-6 h-6 text-secondary" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-semibold">AI-Powered Video & Ads</h3>
+                    <Badge variant="secondary" className="mt-1">Bonus</Badge>
+                  </div>
+                </div>
+                <ul className="space-y-3 text-muted-foreground">
+                  {bonusFeatures.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing Table */}
+        <section id="pricing" className="py-20 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Simple, Fair Pricing</h2>
+              <p className="text-lg text-muted-foreground">
+                Base rate ≈ <span className="text-foreground font-semibold">$25 per post</span> (final price depends on volume & complexity)
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto mb-12">
+              {pricingTiers.map((tier) => (
+                <Card
+                  key={tier.name}
+                  className={`p-6 text-center border-2 transition-all hover:shadow-lg relative ${
+                    tier.popular
+                      ? 'border-primary shadow-primary/20 shadow-lg'
+                      : 'hover:border-primary/50'
+                  }`}
+                >
+                  {tier.popular && (
+                    <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground">
+                      Most Popular
+                    </Badge>
+                  )}
+                  <h3 className="text-xl font-bold mb-2">{tier.name}</h3>
+                  <p className="text-2xl font-bold text-primary mb-1">{tier.price}</p>
+                  <p className="text-sm text-muted-foreground mb-3">{tier.posts}/month</p>
+                  <p className="text-xs text-muted-foreground">{tier.bestFor}</p>
+                </Card>
+              ))}
+            </div>
+
+            {/* Long-term discounts */}
+            <div className="max-w-2xl mx-auto">
+              <Card className="p-6 border-2 border-dashed border-primary/30 bg-primary/5">
+                <div className="flex items-center gap-3 mb-4">
+                  <Heart className="w-5 h-5 text-primary" />
+                  <h3 className="font-semibold text-lg">Long-Term Love Discounts</h3>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-4 text-sm">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                    <span>Commit to <strong>3 months</strong> → <strong>5% off</strong> every month</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                    <span>Commit to <strong>12 months</strong> → <strong>10% off</strong> every month</span>
+                  </div>
+                </div>
+                <p className="text-xs text-muted-foreground mt-4">
+                  No hidden fees. No "surprise revision rounds". Clear deliverables. Monthly contracts (cancel anytime after the first month).
+                </p>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Perfect For */}
+        <section className="py-20 bg-background">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">Perfect For</h2>
+              <div className="space-y-4">
+                {perfectFor.map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-4 p-4 rounded-lg bg-muted/50">
+                    <CheckCircle2 className="w-6 h-6 text-primary shrink-0 mt-0.5" />
+                    <p className="text-muted-foreground">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="py-20 bg-gradient-to-b from-primary/10 to-background">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Ready to Stop Stressing About Content?
+            </h2>
+            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Let us take the posting pressure off your plate — so you can ship faster and show up stronger.
+            </p>
+            <Button
               onClick={() => navigate('/contact')}
               size="lg"
               className="text-lg px-8 py-6 bg-primary hover:bg-primary/90"
             >
-              Start Your Campaign
+              Start Your Content Plan
               <Zap className="ml-2 h-5 w-5" />
             </Button>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* What We Deliver Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">What We Deliver</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              From social content to commercial ads, all generated with AI-powered precision
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-12">
-            {/* Social Media Content */}
-            <Card className="p-8 border-2 hover:border-primary/50 transition-all hover:shadow-lg">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-primary/10 rounded-lg">
-                  <Video className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="text-2xl font-semibold">Social Media Content</h3>
-              </div>
-              <ul className="space-y-3 text-muted-foreground">
-                {[
-                  "Instagram Reels & TikTok clips",
-                  "X/Twitter carousels & video posts",
-                  "Branded memes & lifestyle scenes",
-                  "Product showcases & demos"
-                ].map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-
-            {/* Ad Media & Commercials */}
-            <Card className="p-8 border-2 hover:border-primary/50 transition-all hover:shadow-lg">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-secondary/10 rounded-lg">
-                  <Target className="w-6 h-6 text-secondary" />
-                </div>
-                <h3 className="text-2xl font-semibold">Ad Media & Commercials</h3>
-              </div>
-              <ul className="space-y-3 text-muted-foreground">
-                {[
-                  "5-60s video ads with sound",
-                  "Banner/display creatives for Brave Ads",
-                  "Native advertising formats",
-                  "Telegram Ads channel placements",
-                  "Full character-consistent campaigns"
-                ].map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-          </div>
-
-        </div>
-      </section>
-
-        {/* Footer with Contact Form */}
         <Footer />
       </div>
+      <MobileBottomNav />
     </>
   );
 };

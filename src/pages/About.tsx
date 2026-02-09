@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import BlogSection from "@/components/BlogSection";
 import AnimatedStarfield from "@/components/AnimatedStarfield";
 import { Button } from "@/components/ui/button";
-import { FileText, Megaphone, Users, CheckCircle, Clock, Headphones, Code2, ExternalLink, ArrowRight, Rocket } from "lucide-react";
+import { FileText, Megaphone, Users, CheckCircle, Clock, Headphones, Code2, ExternalLink, ArrowRight, Rocket, Palette } from "lucide-react";
 import { Link } from "react-router-dom";
 import { updateMetaTags } from "@/utils/seoUtils";
 
@@ -44,6 +44,12 @@ const services = [
     title: "KOL Collaborations",
     description: "Connect with key opinion leaders and content creators to amplify your message through authentic, engaging sponsored content.",
     link: "/services#kol-collaborations",
+  },
+  {
+    icon: Palette,
+    title: "Social Content Creation",
+    description: "Custom branded social content — posts, reels, videos & ads that feel like you. From ~$25/post with monthly plans.",
+    link: "/media-for-brands",
   },
   {
     icon: Code2,
@@ -111,7 +117,7 @@ const About = () => {
           <section className="py-16">
             <div className="container mx-auto px-4 max-w-6xl">
               <h2 className="text-3xl font-semibold mb-10 text-white text-center">What We Do</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
                 {services.map((service) => (
                   <Link
                     key={service.title}
