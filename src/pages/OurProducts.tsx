@@ -51,7 +51,7 @@ const products = [
     name: "Re-Writeable AI",
     tagline: "SEO Content Humanizer",
     description: "Transform your content strategy with advanced RAG-powered AI that generates, optimizes, and humanizes content. Create SEO-optimized content that passes as human-written while ensuring authenticity and performance.",
-    url: "https://re-writeable-ai.lovable.app/",
+    url: "https://rewriteable.lovable.app/",
     icon: rewriteableIcon,
     gradient: "from-amber-500/20 to-orange-500/20",
     isWide: false,

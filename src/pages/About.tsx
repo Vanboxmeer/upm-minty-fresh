@@ -17,11 +17,11 @@ import everythingNightlifeIcon from "@/assets/apps/everything-nightlife.png";
 import vaporsmoothIcon from "@/assets/apps/vaporsmooth.png";
 
 const apps = [
-  { name: "Watch Crypto", icon: watchCryptoIcon, url: "https://watchcrypto.lovable.app" },
-  { name: "SpinQuest", icon: spinquestIcon, url: "https://spinquest.lovable.app" },
-  { name: "AmplifyHub", icon: amplifyHubIcon, url: "https://amplifyhub.lovable.app" },
-  { name: "Re-Writeable AI", icon: rewriteableIcon, url: "https://rewriteable.lovable.app" },
-  { name: "Reading Race", icon: readingRaceIcon, url: "https://readingrace.lovable.app" },
+  { name: "Watch Crypto", icon: watchCryptoIcon, url: "https://watchcrypto.info/" },
+  { name: "SpinQuest", icon: spinquestIcon, url: "https://spinquest.app/" },
+  { name: "AmplifyHub", icon: amplifyHubIcon, url: "https://amplifyhub.base44.app" },
+  { name: "Re-Writeable AI", icon: rewriteableIcon, url: "https://rewriteable.lovable.app/" },
+  { name: "Reading Race", icon: readingRaceIcon, url: "https://readingrace.com/" },
   { name: "Everything Nightlife", icon: everythingNightlifeIcon, url: "https://everythingnightlife.lovable.app" },
   { name: "Vaporsmooth", icon: vaporsmoothIcon, url: "https://vaporsmooth.com" },
 ];
@@ -181,7 +181,7 @@ const About = () => {
                       <img
                         src={app.icon}
                         alt={app.name}
-                        className="h-16 w-16 md:h-20 md:w-20 rounded-xl object-cover shadow-lg group-hover:scale-110 transition-transform duration-300 group-hover:shadow-purple-500/30"
+                        className="h-16 w-16 md:h-20 md:w-20 rounded-xl object-contain p-1 shadow-lg group-hover:scale-110 transition-transform duration-300 group-hover:shadow-purple-500/30"
                       />
                       <ExternalLink className="absolute -top-1 -right-1 h-4 w-4 text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
@@ -222,9 +222,8 @@ const About = () => {
               </Button>
             </div>
           </section>
+          <Footer />
         </main>
-
-        <Footer />
       </div>
     </>
   );

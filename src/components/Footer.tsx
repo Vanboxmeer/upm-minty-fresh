@@ -1305,7 +1305,7 @@ const Footer = () => {
               <li><a href="https://watchcrypto.info/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Watch Crypto</a></li>
               <li><a href="https://spinquest.app/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">SpinQuest</a></li>
               <li><a href="https://amplifyhub.base44.app" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">AmplifyHub</a></li>
-              <li><a href="https://re-writeable-ai.lovable.app/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Re-Writeable AI</a></li>
+              <li><a href="https://rewriteable.lovable.app/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Re-Writeable AI</a></li>
               <li><a href="https://readingrace.com/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Reading Race</a></li>
               <li><a href="https://everythingnightlife.lovable.app" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Everything Nightlife</a></li>
               <li><a href="https://vaporsmooth.com" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Vaporsmooth</a></li>
