@@ -42,18 +42,14 @@ const pricingTiers = [
 ];
 
 const contentTypes = [
-  "Instagram Reels & TikTok short-form videos",
-  "X / Twitter carousels, threads, video posts & quote cards",
-  "Branded memes, relatable lifestyle scenes, Web3 culture jokes",
-  "Product showcases, app demos, before/afters, feature highlights",
-  "Educational explainers (DeFi, AI, tokenomics, roadmap updates…)",
+  "Instagram, TikTok, X, LinkedIn, YouTube social posts (posts and short form videos)",
+  "Branded memes, relatable lifestyle scenes, niche culture jokes, educational content, product content, and more",
+  "Engaging content with well written descriptions and strategized hashtags and audio associations",
 ];
 
 const bonusFeatures = [
   "5–60 second video commercials with sound design",
-  "Vertical video ads ready for TikTok, Reels, Telegram, YouTube Shorts",
-  "Banner & display creatives optimized for Brave Ads & native placements",
-  "Telegram Ads-ready visuals & short clips",
+  "Vertical video ads ready for TikTok, Reels, Telegram, YouTube Shorts, LinkedIn Posts or Videos",
   "Consistent character + world-building for long-term brand campaigns",
 ];
 
@@ -86,11 +82,11 @@ const MediaForBrands = () => {
 
     updateMetaTags({
       title: "Social Content Creation | UPM - United Press Media",
-      description: "Quality branded social content that actually feels like you. Custom posts, reels, videos & ads starting from ~$25/post. No hidden fees.",
+      description: "Quality branded social content. Custom posts, reels, videos & ads starting from ~$25/post. No hidden fees.",
       keywords: "social content creation, branded content, social media management, Instagram Reels, TikTok content, Web3 social media, crypto content, content marketing",
       canonical: "https://unitedpress.media/media-for-brands",
       ogTitle: "Social Content Creation by UPM",
-      ogDescription: "Scroll-stopping, on-brand content so you can focus on building, not posting. Starting from ~$25/post.",
+      ogDescription: "Scroll-stopping, on-brand social content. Starting from ~$25/post.",
       ogType: "website",
       twitterCard: "summary_large_image",
       structuredData: [
@@ -120,14 +116,10 @@ const MediaForBrands = () => {
               </Badge>
 
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-purple-600 to-secondary bg-clip-text text-transparent leading-tight">
-                Content That Actually Feels Like You
+                Quality Branded Social Content
               </h1>
 
-              <p className="text-xl md:text-2xl text-muted-foreground mb-4 max-w-3xl mx-auto">
-                Without you having to live in Canva or CapCut 24/7.
-              </p>
-
-              <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+              <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
                 We create scroll-stopping, on-brand content so you can focus on building, not posting.
               </p>
 
@@ -220,10 +212,7 @@ const MediaForBrands = () => {
                   <div className="p-3 bg-secondary/10 rounded-lg">
                     <Target className="w-6 h-6 text-secondary" />
                   </div>
-                  <div>
-                    <h3 className="text-2xl font-semibold">AI-Powered Video & Ads</h3>
-                    <Badge variant="secondary" className="mt-1">Bonus</Badge>
-                  </div>
+              <h3 className="text-2xl font-semibold">AI-Powered Videos and Images</h3>
                 </div>
                 <ul className="space-y-3 text-muted-foreground">
                   {bonusFeatures.map((item, idx) => (
