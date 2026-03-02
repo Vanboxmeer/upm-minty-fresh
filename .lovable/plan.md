@@ -1,65 +1,40 @@
 
 
-# Fix About Page: Form, App Links, Icons + Update AmplifyHub Icon and Re-Writeable AI Link
+# Fix: Footer Form Visibility on Blog Posts + Form Submission Error
 
-## Issues and Fixes
+## Two Issues Found
 
-### 1. Contact Form Not Displaying on About Page
+### Issue 1: Footer form hidden on blog posts
+Same z-index problem as the About page had. In `BlogPost.tsx`, the `<Footer />` is placed outside `<main className="relative z-10">` but inside the starfield container. The fixed starfield at `z-0` covers the Footer since it has no z-index. This affects all 3 render paths in BlogPost (loading, not-found, and normal view).
 
-The Footer component (which contains the contact form) is placed outside the `<main className="relative z-10">` tag on the About page. The starfield uses `fixed inset-0 z-0`, and since the Footer lacks a z-index, it renders behind the starfield -- making the form invisible (only Radix dropdown portals poke through since they render outside the DOM tree).
+**Fix:** Move `<Footer />` inside the `<main>` tag (or give it `relative z-10`) in all 3 render branches of `BlogPost.tsx`.
 
-**Fix:** Move `<Footer />` inside the `<main>` wrapper so it inherits the `relative z-10` stacking context.
+### Issue 2: Form submission fails with validation error
+The edge function logs show the exact error:
+```
+referrerName: "Expected string, received null"
+referrerCode: "Expected string, received null"
+```
 
-### 2. Update AmplifyHub Icon
+In `Footer.tsx` line 369-370, the code sends:
+```js
+referrerName: referrerName || null,
+referrerCode: referrerCode || null,
+```
 
-Replace the current AmplifyHub icon asset with the newly uploaded logo (the blue/purple triangle "A" icon).
+But the Zod schema in the edge function uses `.optional()`, which accepts `undefined` but **not** `null`. Sending `null` fails validation.
 
-**Files:** Copy the uploaded image to `src/assets/apps/amplifyhub.png` (overwrite existing).
+Also, the message validation fails because "fd" (2 chars) doesn't meet the 10-character minimum -- but that's user error. The `null` issue would cause failures even with valid messages.
 
-### 3. Update Re-Writeable AI Link
+**Fix:** In `Footer.tsx`, change `|| null` to `|| undefined` (or just use `|| ""` which is valid for optional strings). Alternatively, update the edge function schema to accept `.nullable()` on those fields.
 
-Change the URL from `https://re-writeable-ai.lovable.app/` to `https://rewriteable.lovable.app/` in:
-- `src/pages/OurProducts.tsx` (product card)
-- `src/components/Footer.tsx` (footer apps list)
+I'll fix both sides for robustness:
+- **Footer.tsx**: Send `undefined` instead of `null` for empty referrer fields
+- **Edge function**: Add `.nullable()` to `referrerName` and `referrerCode` as defense-in-depth
+- **BlogPost.tsx**: Move Footer inside the z-10 wrapper in all 3 render paths
 
-The About page already has the correct URL for this one.
-
-### 4. Fix App Links on About Page
-
-The About page uses incorrect `.lovable.app` placeholder domains. Update to match the production URLs used on the Our Products page and Footer:
-
-| App | Current (Wrong) | Correct |
-|-----|-----------------|---------|
-| Watch Crypto | watchcrypto.lovable.app | watchcrypto.info/ |
-| SpinQuest | spinquest.lovable.app | spinquest.app/ |
-| AmplifyHub | amplifyhub.lovable.app | amplifyhub.base44.app |
-| Reading Race | readingrace.lovable.app | readingrace.com/ |
-
-Everything Nightlife and Vaporsmooth are already correct.
-
-### 5. Fix SpinQuest and Everything Nightlife Icon Sizing on About Page
-
-These two icons are wider/non-square logos that get cropped by the current `object-cover` class. The fix:
-- Change `object-cover` to `object-contain` on all app icons in the About page grid
-- Add a small padding inside the icon container so logos have breathing room and don't get cut off at the edges
-
----
-
-## Technical Details
-
-### Files Modified
-
-**`src/pages/About.tsx`**
-- Move `<Footer />` inside `<main className="relative z-10">` so the form renders above the starfield
-- Update the `apps` array URLs to use correct production domains
-- Change the icon `<img>` class from `object-cover` to `object-contain` and add `p-1` padding to the icon container
-
-**`src/pages/OurProducts.tsx`**
-- Update Re-Writeable AI URL from `https://re-writeable-ai.lovable.app/` to `https://rewriteable.lovable.app/`
-
-**`src/components/Footer.tsx`**
-- Update Re-Writeable AI link from `https://re-writeable-ai.lovable.app/` to `https://rewriteable.lovable.app/`
-
-**`src/assets/apps/amplifyhub.png`**
-- Replaced with the new uploaded AmplifyHub logo asset
+## Files Modified
+- `src/pages/BlogPost.tsx` -- move Footer inside z-10 main in 3 places
+- `src/components/Footer.tsx` -- change `|| null` to `|| undefined` on referrerName/referrerCode
+- `supabase/functions/send-contact-email/index.ts` -- add `.nullable()` to referrerName and referrerCode in Zod schema
 
