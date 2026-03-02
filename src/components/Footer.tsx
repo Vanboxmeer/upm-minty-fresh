@@ -366,8 +366,8 @@ const Footer = () => {
           telegram,
           country,
           message: selectionSummary ? `${selectionSummary}\n\n${message}` : message,
-          referrerName: referrerName || null,
-          referrerCode: referrerCode || null,
+          referrerName: referrerName || undefined,
+          referrerCode: referrerCode || undefined,
           vibeCodingData: selectedPackage?.name === 'Vibe Coding App Development' ? vibeCodingData : undefined,
         },
       });

@@ -113,8 +113,8 @@ const BlogPost = () => {
             <div className="h-8 bg-muted rounded w-1/3"></div>
             <div className="h-64 bg-muted rounded"></div>
           </div>
+          <Footer />
         </main>
-        <Footer />
         </div>
         <MobileBottomNav />
       </>
@@ -135,8 +135,8 @@ const BlogPost = () => {
             <p className="text-muted-foreground mb-6">The article you're looking for doesn't exist or was moved.</p>
             <Link to="/blog" className="text-primary underline">Back to Blog</Link>
           </Card>
+          <Footer />
         </main>
-        <Footer />
         </div>
         <MobileBottomNav />
       </>
@@ -249,8 +249,8 @@ const BlogPost = () => {
 
         {/* Related Posts */}
         <RelatedPosts currentPost={post} />
+        <Footer />
       </main>
-      <Footer />
       </div>
       <MobileBottomNav />
     </>
