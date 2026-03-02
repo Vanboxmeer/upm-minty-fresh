@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import tankIcon from "@/assets/tank-icon.png";
+import boltIcon from "@/assets/bolt-icon.png";
 
 interface Message {
   role: "user" | "assistant";
@@ -210,17 +210,17 @@ const TankChatWidget = () => {
           <Button
             onClick={() => setIsOpen(true)}
             className="h-14 w-14 rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-110 bg-gradient-to-br from-primary to-primary-electric text-primary-foreground animate-pulse-glow [box-shadow:0_0_20px_var(--primary-glow),0_0_40px_var(--primary-glow)] hover:[box-shadow:0_0_30px_var(--primary-glow),0_0_60px_var(--primary-glow)] p-0 overflow-hidden"
-            aria-label="Chat with Tank AI"
+            aria-label="Chat with Bolt AI"
           >
             <img
-              src={tankIcon}
-              alt="Tank AI Assistant"
+              src={boltIcon}
+              alt="Bolt AI Assistant"
               className="h-12 w-12 object-contain rounded-full"
             />
           </Button>
           <div className="absolute -top-12 right-0 bg-card/95 backdrop-blur-sm border border-primary/30 rounded-lg px-3 py-2 shadow-lg animate-bounce-subtle">
             <p className="text-xs font-medium text-foreground whitespace-nowrap">
-              💬 Ask Tank anything!
+              ⚡ Ask Bolt anything!
             </p>
           </div>
         </div>
@@ -229,11 +229,11 @@ const TankChatWidget = () => {
           <Button
             onClick={() => setIsOpen(true)}
             className="h-12 w-12 rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 bg-gradient-to-br from-primary to-primary-electric text-primary-foreground p-0 overflow-hidden"
-            aria-label="Chat with Tank AI"
+            aria-label="Chat with Bolt AI"
           >
             <img
-              src={tankIcon}
-              alt="Tank AI Assistant"
+              src={boltIcon}
+              alt="Bolt AI Assistant"
               className="h-10 w-10 object-contain rounded-full"
             />
           </Button>
@@ -250,11 +250,11 @@ const TankChatWidget = () => {
           <Button
             onClick={() => setIsMinimized(false)}
             className="h-14 w-14 rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-110 bg-gradient-to-br from-primary to-primary-electric text-primary-foreground p-0 overflow-hidden relative"
-            aria-label="Expand Tank chat"
+            aria-label="Expand Bolt chat"
           >
             <img
-              src={tankIcon}
-              alt="Tank AI Assistant"
+              src={boltIcon}
+              alt="Bolt AI Assistant"
               className="h-12 w-12 object-contain rounded-full"
             />
             {messages.length > 0 && (
@@ -269,11 +269,11 @@ const TankChatWidget = () => {
           <Button
             onClick={() => setIsMinimized(false)}
             className="h-12 w-12 rounded-full shadow-lg transition-all duration-300 bg-gradient-to-br from-primary to-primary-electric text-primary-foreground p-0 overflow-hidden relative"
-            aria-label="Expand Tank chat"
+            aria-label="Expand Bolt chat"
           >
             <img
-              src={tankIcon}
-              alt="Tank AI Assistant"
+              src={boltIcon}
+              alt="Bolt AI Assistant"
               className="h-10 w-10 object-contain rounded-full"
             />
             {messages.length > 0 && (
@@ -296,12 +296,12 @@ const TankChatWidget = () => {
           <div className="bg-gradient-to-r from-primary to-primary-electric p-3 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <img
-                src={tankIcon}
-                alt="Tank"
+                src={boltIcon}
+                alt="Bolt"
                 className="h-8 w-8 rounded-full border-2 border-white/30 object-contain bg-white/20"
               />
               <div>
-                <h3 className="font-bold text-white text-sm">Tank AI</h3>
+                <h3 className="font-bold text-white text-sm">⚡ Bolt AI</h3>
                 <p className="text-xs text-white/80">Marketing Advisor</p>
               </div>
             </div>
@@ -333,10 +333,10 @@ const TankChatWidget = () => {
             {messages.length === 0 ? (
               <div className="h-full flex flex-col items-center justify-center text-center px-4">
                 <div className="bg-primary/10 rounded-full p-4 mb-4">
-                  <img src={tankIcon} alt="Tank" className="h-10 w-10 object-contain rounded-full" />
+                  <img src={boltIcon} alt="Bolt" className="h-10 w-10 object-contain rounded-full" />
                 </div>
                 <h4 className="font-semibold text-foreground mb-2">
-                  Hi! I'm Tank 👋
+                  Hi! I'm Bolt ⚡
                 </h4>
                 <p className="text-sm text-muted-foreground mb-4">
                   Your AI marketing advisor. Ask me about Web3 marketing, press releases, or growth strategies!
@@ -397,7 +397,7 @@ const TankChatWidget = () => {
                   <div className="flex justify-start">
                     <div className="bg-muted rounded-xl px-3 py-2 flex items-center gap-2">
                       <Loader2 className="h-4 w-4 animate-spin text-primary" />
-                      <span className="text-xs text-muted-foreground">Tank is thinking...</span>
+                      <span className="text-xs text-muted-foreground">⚡ Bolt is thinking...</span>
                     </div>
                   </div>
                 )}
@@ -447,12 +447,12 @@ const TankChatWidget = () => {
         <div className="bg-gradient-to-r from-primary to-primary-electric p-3 flex items-center justify-between mt-16">
           <div className="flex items-center gap-2">
             <img
-              src={tankIcon}
-              alt="Tank"
+              src={boltIcon}
+              alt="Bolt"
               className="h-8 w-8 rounded-full border-2 border-white/30 object-contain bg-white/20"
             />
             <div>
-              <h3 className="font-bold text-white text-sm">Tank AI</h3>
+              <h3 className="font-bold text-white text-sm">⚡ Bolt AI</h3>
               <p className="text-xs text-white/80">Marketing Advisor</p>
             </div>
           </div>
@@ -474,10 +474,10 @@ const TankChatWidget = () => {
           {messages.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-center px-4">
               <div className="bg-primary/10 rounded-full p-4 mb-4">
-                <img src={tankIcon} alt="Tank" className="h-10 w-10 object-contain rounded-full" />
+                <img src={boltIcon} alt="Bolt" className="h-10 w-10 object-contain rounded-full" />
               </div>
               <h4 className="font-semibold text-foreground mb-2">
-                Hi! I'm Tank 👋
+                Hi! I'm Bolt ⚡
               </h4>
               <p className="text-sm text-muted-foreground mb-4">
                 Your AI marketing advisor. Ask me about Web3 marketing!
@@ -538,7 +538,7 @@ const TankChatWidget = () => {
                 <div className="flex justify-start">
                   <div className="bg-muted rounded-xl px-3 py-2 flex items-center gap-2">
                     <Loader2 className="h-4 w-4 animate-spin text-primary" />
-                    <span className="text-xs text-muted-foreground">Tank is thinking...</span>
+                    <span className="text-xs text-muted-foreground">⚡ Bolt is thinking...</span>
                   </div>
                 </div>
               )}

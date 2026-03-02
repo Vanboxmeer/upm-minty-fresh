@@ -23,7 +23,7 @@ const contactSchema = z.object({
   phone: z.string().max(30, 'Phone number too long').optional(),
   telegram: z.string().max(100, 'Telegram handle too long').optional(),
   country: z.string().min(1, 'Country is required').max(100, 'Country name too long'),
-  message: z.string().min(10, 'Message must be at least 10 characters').max(5000, 'Message must be under 5000 characters'),
+  message: z.string().min(1, 'Message is required').max(5000, 'Message must be under 5000 characters'),
   referrerName: z.string().max(200).optional().nullable(),
   referrerCode: z.string().max(50).optional().nullable(),
   vibeCodingData: vibeCodingSchema
@@ -142,6 +142,7 @@ const handler = async (req: Request): Promise<Response> => {
     if (!teamNotification.ok) {
       const errorText = await teamNotification.text();
       console.error('Team notification error:', errorText);
+      throw new Error('Failed to send notification email. Please try again.');
     }
 
     // Send confirmation email to user
