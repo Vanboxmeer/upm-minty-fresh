@@ -321,10 +321,19 @@ const Footer = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!firstName || !lastName || !email || !country || !message) {
+    const trimmedMessage = message.trim();
+    if (!firstName || !lastName || !email || !country || !trimmedMessage) {
       toast({
         title: "Error",
         description: "Please fill in all required fields including country",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (trimmedMessage.length < 10) {
+      toast({
+        title: "Message too short",
+        description: "Please provide at least 10 characters describing your inquiry.",
         variant: "destructive",
       });
       return;
@@ -409,9 +418,28 @@ const Footer = () => {
       setSubscribeToNewsletter(false);
     } catch (error) {
       console.error("Error sending message:", error);
+      // Parse specific error details from edge function response
+      let errorMessage = "Failed to send message. Please try again.";
+      if (error?.message) {
+        try {
+          const parsed = JSON.parse(error.message);
+          if (parsed?.details) {
+            errorMessage = parsed.details;
+          } else if (parsed?.error) {
+            errorMessage = parsed.error;
+          }
+        } catch {
+          // If not JSON, check for known patterns
+          if (error.message.includes('10 characters')) {
+            errorMessage = "Your message is too short. Please provide more details about your inquiry.";
+          } else if (error.message !== 'Failed to send function') {
+            errorMessage = error.message;
+          }
+        }
+      }
       toast({
         title: "Error",
-        description: "Failed to send message. Please try again.",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {

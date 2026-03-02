@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { updateMetaTags } from "@/utils/seoUtils";
-import tankMascot from "@/assets/tank-mascot.png";
+import boltMascot from "@/assets/bolt-icon.png";
 
 interface Message {
   role: 'user' | 'assistant';
@@ -243,19 +243,19 @@ const ThinkTank = () => {
             <span className="text-sm font-semibold">AI-Powered Marketing Strategy</span>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-primary-glow to-primary bg-clip-text text-transparent animate-fade-in">
-            Welcome to the Think Tank
+            ⚡ Welcome to the Think Tank
           </h1>
           <p className="text-lg md:text-xl text-slate-300 mb-8 animate-fade-in">
             Your AI marketing advisor specialized in Web3, crypto, and digital growth strategies. 
             Get personalized advice and discover how UPM can amplify your success.
           </p>
           
-          {/* Tank Mascot */}
+          {/* Bolt Mascot */}
           <div className="mt-8 mb-4 animate-fade-in flex justify-center">
             <img 
-              src={tankMascot} 
-              alt="Tank - UPM's AI Marketing Advisor Mascot" 
-              className="w-full max-w-2xl h-auto object-contain drop-shadow-2xl"
+              src={boltMascot} 
+              alt="Bolt - UPM's AI Marketing Advisor" 
+              className="w-64 h-64 object-contain drop-shadow-2xl rounded-full"
             />
           </div>
         </div>
@@ -363,8 +363,8 @@ const ThinkTank = () => {
                               </div>
                             </div>
                             <div className="flex flex-col">
-                              <span className="text-sm font-semibold text-foreground">Analyzing your question...</span>
-                              <span className="text-xs text-muted-foreground">Crafting expert advice</span>
+                              <span className="text-sm font-semibold text-foreground">⚡ Analyzing your question...</span>
+                              <span className="text-xs text-muted-foreground">Bolt is crafting expert advice</span>
                             </div>
                           </div>
                         </div>

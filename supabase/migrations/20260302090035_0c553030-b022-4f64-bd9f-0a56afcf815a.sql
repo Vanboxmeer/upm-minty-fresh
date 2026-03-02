@@ -1,0 +1,1 @@
+ALTER TABLE public.referral_stats ADD CONSTRAINT referral_stats_affiliate_id_unique UNIQUE (affiliate_id);

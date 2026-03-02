@@ -440,7 +440,7 @@ export type Database = {
           {
             foreignKeyName: "referral_stats_affiliate_id_fkey"
             columns: ["affiliate_id"]
-            isOneToOne: false
+            isOneToOne: true
             referencedRelation: "affiliates"
             referencedColumns: ["id"]
           },
