@@ -24,8 +24,8 @@ const contactSchema = z.object({
   telegram: z.string().max(100, 'Telegram handle too long').optional(),
   country: z.string().min(1, 'Country is required').max(100, 'Country name too long'),
   message: z.string().min(10, 'Message must be at least 10 characters').max(5000, 'Message must be under 5000 characters'),
-  referrerName: z.string().max(200).optional(),
-  referrerCode: z.string().max(50).optional(),
+  referrerName: z.string().max(200).optional().nullable(),
+  referrerCode: z.string().max(50).optional().nullable(),
   vibeCodingData: vibeCodingSchema
 });
 
