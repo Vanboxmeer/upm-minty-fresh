@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
 import { BlogCardSkeleton } from "@/components/ui/skeleton";
-import AnimatedStarfield from "@/components/AnimatedStarfield";
+import { getCategoryColor } from "@/components/magazine/categoryColors";
 
 const BlogSection = () => {
   const { fetchPublicPosts, posts, loading } = useBlogPosts();
@@ -19,76 +19,72 @@ const BlogSection = () => {
 
   return (
     <section className="py-16 bg-background">
-      {/* Cosmic Space Header with Animated Starfield */}
-      <div className="relative overflow-hidden mb-12">
-        <AnimatedStarfield />
-        
-        {/* Bottom fade overlay - forced dark to match cosmic background */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 z-10" style={{ background: 'linear-gradient(to top, #0c1929, transparent)' }} />
-        
-        {/* Content */}
-        <div className="relative container mx-auto px-4 py-16 text-center z-20">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Latest from Our Blog</h2>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Latest from UP Megazine</h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             News, trends, and innovation in Web3, AI, VR, and GameFi.
           </p>
         </div>
-      </div>
-      
-      <div className="container mx-auto px-4">
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {loading ? (
-            // Skeleton loaders while loading
             <>
               <BlogCardSkeleton />
               <BlogCardSkeleton />
               <BlogCardSkeleton />
             </>
           ) : (
-            recent.map((post) => (
-              <Card key={post.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden card-glow-hover">
-                <div className="h-2 bg-primary"></div>
-                <Link to={`/blog/${post.slug}`} className="block focus:outline-none">
-                  <AspectRatio ratio={16 / 9}>
-                    <img 
-                      src={post.featured_image || '/placeholder.svg'} 
-                      alt={post.featured_image_alt || post.title} 
-                      loading="lazy" 
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
-                    />
-                  </AspectRatio>
-                  <CardHeader className="pb-3">
-                    <div className="flex items-center justify-between mb-2">
-                      <Link 
-                        to={`/blog?category=${encodeURIComponent(post.category || '')}`}
-                        className="bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full font-medium hover:bg-primary/80 transition-colors"
-                      >
-                        {post.category}
-                      </Link>
-                      <span className="text-xs text-muted-foreground">
-                        {new Date(post.publish_date || post.created_at).toLocaleDateString()} • {post.read_time}
-                      </span>
-                    </div>
-                    <CardTitle className="text-lg group-hover:text-primary transition-colors">
-                      {post.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-sm leading-relaxed">
-                      {post.excerpt || post.content?.substring(0, 150) + '...'}
-                    </CardDescription>
-                  </CardContent>
-                </Link>
-              </Card>
-            ))
+            recent.map((post) => {
+              const category = post.categories?.[0] || post.category || '';
+              const accentColor = getCategoryColor(category);
+              const claps = (post as any).claps || 0;
+
+              return (
+                <Card key={post.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden card-glow-hover">
+                  <div className="h-1.5" style={{ backgroundColor: accentColor }} />
+                  <Link to={`/blog/${post.slug}`} className="block focus:outline-none">
+                    <AspectRatio ratio={16 / 9}>
+                      <img
+                        src={post.featured_image || '/placeholder.svg'}
+                        alt={post.featured_image_alt || post.title}
+                        loading="lazy"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </AspectRatio>
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center justify-between mb-2">
+                        <span
+                          className="text-xs px-2 py-0.5 rounded-full font-medium text-white"
+                          style={{ backgroundColor: accentColor }}
+                        >
+                          {category || 'General'}
+                        </span>
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <span>{new Date(post.publish_date || post.created_at).toLocaleDateString()}</span>
+                          {claps > 0 && <span>👏 {claps}</span>}
+                        </div>
+                      </div>
+                      <CardTitle className="text-lg group-hover:text-primary transition-colors">
+                        {post.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription className="text-sm leading-relaxed">
+                        {post.excerpt || post.content?.substring(0, 150) + '...'}
+                      </CardDescription>
+                    </CardContent>
+                  </Link>
+                </Card>
+              );
+            })
           )}
         </div>
 
         <div className="text-center">
           <Button variant="outline" size="lg" asChild>
             <a href="/blog" className="inline-flex items-center gap-2">
-              View All Articles
+              View UP Megazine
               <ArrowRight className="h-4 w-4" />
             </a>
           </Button>
