@@ -29,7 +29,9 @@ export interface BlogPost {
   category: string | null;
   categories?: string[] | null;
   read_time: string | null;
-  social_embeds?: any; // JSON from DB, cast to SocialEmbed[] at usage
+  social_embeds?: any;
+  claps?: number;
+  post_type?: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -416,6 +418,15 @@ export const useBlogPosts = () => {
     fetchPosts();
   }, []);
 
+  const incrementClaps = async (postId: string, amount = 1) => {
+    try {
+      const { error } = await supabase.rpc('increment_claps' as any, { post_id: postId, amount });
+      if (error) throw error;
+    } catch (err) {
+      console.error('Failed to increment claps:', err);
+    }
+  };
+
   return {
     posts,
     displayedPosts,
@@ -432,5 +443,6 @@ export const useBlogPosts = () => {
     getPostBySlug,
     getRelatedPosts,
     getAdjacentPosts,
+    incrementClaps,
   };
 };

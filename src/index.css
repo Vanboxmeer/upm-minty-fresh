@@ -633,3 +633,37 @@ All colors MUST be HSL.
   will-change: transform;
   backface-visibility: hidden;
 }
+
+/* ========================================
+   Magazine Styles
+   ======================================== */
+
+.magazine-card-fade-in {
+  animation: magazine-fade-up 0.5s ease-out both;
+}
+
+@keyframes magazine-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hide scrollbar for filter chips */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Magazine prose enhancements */
+.prose h2,
+.prose h3 {
+  scroll-margin-top: 5rem;
+}

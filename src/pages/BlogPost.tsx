@@ -4,117 +4,86 @@ import Footer from "@/components/Footer";
 import { useParams, Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import NewsletterSignup from "@/components/NewsletterSignup";
-import { SocialShareButtons } from "@/components/SocialShareButtons";
-import { SuggestedSocialPosts } from "@/components/SuggestedSocialPosts";
-import { CategoryBreadcrumbs } from "@/components/CategoryBreadcrumbs";
-import { RelatedPosts } from "@/components/RelatedPosts";
 import { BlogNavigation } from "@/components/BlogNavigation";
 import { BlogPostCTA } from "@/components/BlogPostCTA";
 import { LeadMagnet } from "@/components/LeadMagnet";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import { SocialEmbedsRenderer } from "@/components/SocialEmbedsRenderer";
-import DOMPurify from 'dompurify';
-import { useBlogPosts, type BlogPost, type SocialEmbed } from "@/hooks/useBlogPosts";
+import { useBlogPosts, type BlogPost as BlogPostType, type SocialEmbed } from "@/hooks/useBlogPosts";
 import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
-import AnimatedStarfield from "@/components/AnimatedStarfield";
+import ReadingProgressBar from "@/components/magazine/ReadingProgressBar";
+import PostSidebar from "@/components/magazine/PostSidebar";
+import ClapButton from "@/components/magazine/ClapButton";
+import TemplateRenderer from "@/components/magazine/TemplateRenderer";
+import { getCategoryColor } from "@/components/magazine/categoryColors";
 
-const setMeta = (post: BlogPost) => {
-  const title = post.title;
-  const description = post.excerpt || post.content?.substring(0, 160) || '';
+const setMeta = (post: BlogPostType) => {
   const baseUrl = 'https://unitedpress.media';
-  const imageUrl = post.featured_image ? 
-    (post.featured_image.startsWith('http') ? post.featured_image : `${baseUrl}${post.featured_image}`) : 
-    `${baseUrl}/lovable-uploads/4ed87a93-4a52-47a8-a969-1b8e2ddac6d9.png`;
+  const imageUrl = post.featured_image?.startsWith('http') ? post.featured_image : `${baseUrl}${post.featured_image || '/lovable-uploads/4ed87a93-4a52-47a8-a969-1b8e2ddac6d9.png'}`;
   const postUrl = `${baseUrl}/blog/${post.slug}`;
-  
+
   updateMetaTags({
-    title: `${title} | UPM Blog`,
-    description,
-    keywords: post.seo_keywords?.join(', ') || "web3 marketing, crypto marketing, digital marketing, KOL, press release",
+    title: `${post.title} | UP Megazine`,
+    description: post.excerpt || post.content?.substring(0, 160) || '',
+    keywords: post.seo_keywords?.join(', ') || "web3 marketing, crypto marketing",
     canonical: postUrl,
-    ogTitle: title,
-    ogDescription: description,
+    ogTitle: post.title,
+    ogDescription: post.excerpt || '',
     ogType: "article",
     ogImage: imageUrl,
     ogUrl: postUrl,
     twitterCard: "summary_large_image",
-    twitterTitle: title,
-    twitterDescription: description,
+    twitterTitle: post.title,
+    twitterDescription: post.excerpt || '',
     twitterImage: imageUrl,
-    structuredData: generateStructuredData('article', post)
+    structuredData: generateStructuredData('article', post),
   });
 };
 
 const BlogPost = () => {
   const { slug } = useParams();
-  const { getPostBySlug } = useBlogPosts();
-  const [post, setPost] = useState<BlogPost | null>(null);
+  const { getPostBySlug, getRelatedPosts } = useBlogPosts();
+  const [post, setPost] = useState<BlogPostType | null>(null);
+  const [relatedPosts, setRelatedPosts] = useState<BlogPostType[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!slug) return;
-    
     setLoading(true);
     setPost(null);
 
     const fetchPost = async () => {
       try {
         const postData = await getPostBySlug(slug);
-        setPost(postData as BlogPost);
-        
+        setPost(postData as BlogPostType);
         if (postData) {
-          setMeta(postData as BlogPost);
+          setMeta(postData as BlogPostType);
+          const cats = postData.categories || (postData.category ? [postData.category] : []);
+          const related = await getRelatedPosts(postData.id, cats, 3);
+          setRelatedPosts(related);
         }
-      } catch (error) {
-        console.error('Failed to fetch post:', error);
-        setPost(null);
-      } finally {
-        setLoading(false);
-      }
+      } catch { setPost(null); }
+      finally { setLoading(false); }
     };
-
     fetchPost();
-  }, [slug, getPostBySlug]);
+  }, [slug, getPostBySlug, getRelatedPosts]);
 
-  // Determine where to insert mid-article CTA (after ~40% of content)
-  // Must be called before any conditional returns to satisfy Rules of Hooks
-  const contentWithCTA = useMemo(() => {
-    if (!post?.content) return { firstPart: '', secondPart: '' };
-    
-    const sanitized = DOMPurify.sanitize(post.content, {
-      ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'blockquote', 'a', 'img', 'code', 'pre'],
-      ALLOWED_ATTR: ['href', 'src', 'alt', 'title', 'target', 'rel']
-    });
-    
-    // Find a good split point (after ~40% of paragraphs)
-    const paragraphs = sanitized.split(/<\/p>/i);
-    const splitIndex = Math.floor(paragraphs.length * 0.4);
-    
-    if (paragraphs.length <= 3) {
-      return { firstPart: sanitized, secondPart: '' };
-    }
-    
-    const firstPart = paragraphs.slice(0, splitIndex).join('</p>') + '</p>';
-    const secondPart = paragraphs.slice(splitIndex).join('</p>');
-    
-    return { firstPart, secondPart };
-  }, [post?.content]);
+  const category = post?.categories?.[0] || post?.category || '';
+  const accentColor = getCategoryColor(category);
 
   if (loading) {
     return (
       <>
         <Header />
-        <div className="min-h-screen relative pt-16 pb-16 md:pb-0" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%)' }}>
-        <div className="fixed inset-0 z-0 pointer-events-none">
-          <AnimatedStarfield />
-        </div>
-        <main className="container mx-auto px-4 py-16 relative z-10">
-          <div className="animate-pulse space-y-4">
-            <div className="h-8 bg-muted rounded w-1/3"></div>
-            <div className="h-64 bg-muted rounded"></div>
+        <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
+          <div className="container mx-auto px-4 py-16">
+            <div className="animate-pulse space-y-4 max-w-3xl mx-auto">
+              <div className="h-8 bg-muted rounded w-1/3" />
+              <div className="h-64 bg-muted rounded" />
+              <div className="h-4 bg-muted rounded w-2/3" />
+              <div className="h-4 bg-muted rounded w-1/2" />
+            </div>
           </div>
-          <Footer />
-        </main>
         </div>
         <MobileBottomNav />
       </>
@@ -125,18 +94,14 @@ const BlogPost = () => {
     return (
       <>
         <Header />
-        <div className="min-h-screen relative pt-16 pb-16 md:pb-0" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%)' }}>
-        <div className="fixed inset-0 z-0 pointer-events-none">
-          <AnimatedStarfield />
-        </div>
-        <main className="container mx-auto px-4 py-16 relative z-10">
-          <Card className="p-8">
-            <h1 className="text-3xl font-bold mb-2">Article not found</h1>
-            <p className="text-muted-foreground mb-6">The article you're looking for doesn't exist or was moved.</p>
-            <Link to="/blog" className="text-primary underline">Back to Blog</Link>
-          </Card>
-          <Footer />
-        </main>
+        <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
+          <div className="container mx-auto px-4 py-16">
+            <Card className="p-8 max-w-xl mx-auto">
+              <h1 className="text-3xl font-bold mb-2">Article not found</h1>
+              <p className="text-muted-foreground mb-6">The article you're looking for doesn't exist or was moved.</p>
+              <Link to="/blog" className="text-primary underline">Back to UP Megazine</Link>
+            </Card>
+          </div>
         </div>
         <MobileBottomNav />
       </>
@@ -145,112 +110,98 @@ const BlogPost = () => {
 
   return (
     <>
+      <ReadingProgressBar category={category} />
       <Header />
-      <div className="min-h-screen relative pt-16 pb-16 md:pb-0" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%)' }}>
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <AnimatedStarfield />
-      </div>
-      <main className="container mx-auto px-4 py-16 relative z-10 text-white">
-        <article>
-          <header className="max-w-3xl mx-auto text-center mb-10">
-            <div className="flex flex-col items-center gap-3 mb-4">
-              {/* Multiple Categories Display */}
-              <CategoryBreadcrumbs 
-                categories={post.categories || (post.category ? [post.category] : [])} 
-                size="md"
-                showAll={true}
-                className="justify-center"
-                linkTo={(category) => `/blog?category=${encodeURIComponent(category)}`}
-              />
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <span>{new Date(post.publish_date || post.created_at).toLocaleDateString()}</span>
-                <span>•</span>
-                <span>{post.read_time}</span>
-              </div>
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">{post.title}</h1>
-            {post.excerpt && (
-              <p className="text-lg text-muted-foreground">{post.excerpt}</p>
+      <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
+        {/* Full-width hero image */}
+        {post.featured_image && (
+          <div className="relative w-full h-[50vh] md:h-[60vh] overflow-hidden">
+            <img
+              src={post.featured_image}
+              alt={post.featured_image_alt || post.title}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+          </div>
+        )}
+
+        <div className="container mx-auto px-4">
+          {/* Header section */}
+          <header className="max-w-3xl mx-auto text-center -mt-20 relative z-10 mb-10">
+            {category && (
+              <span
+                className="inline-block px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full text-white mb-4"
+                style={{ backgroundColor: accentColor }}
+              >
+                {category}
+              </span>
             )}
+            <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-4 text-foreground">
+              {post.title}
+            </h1>
+            <div className="flex items-center justify-center gap-3 text-sm text-muted-foreground">
+              <span>{post.author}</span>
+              <span>•</span>
+              <span>{new Date(post.publish_date || post.created_at).toLocaleDateString()}</span>
+              <span>•</span>
+              <span>{post.read_time}</span>
+            </div>
           </header>
 
-          {post.featured_image && (
-            <figure className="max-w-4xl mx-auto mb-12 overflow-hidden rounded-lg">
-              <img
-                src={post.featured_image}
-                alt={post.featured_image_alt || post.title}
-                loading="lazy"
-                className="w-full h-auto object-cover"
-              />
-            </figure>
-          )}
+          {/* Main content + sidebar */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-10 max-w-5xl mx-auto">
+            <article>
+              <section className="prose prose-invert max-w-[720px] mx-auto mb-12">
+                <TemplateRenderer post={post} />
+              </section>
 
-          <section className="prose prose-invert max-w-3xl mx-auto mb-12">
-            {/* First part of content */}
-            <div dangerouslySetInnerHTML={{ __html: contentWithCTA.firstPart }} />
-            
-            {/* Mid-article CTA (only if there's a second part) */}
-            {contentWithCTA.secondPart && (
-              <BlogPostCTA variant="inline" />
-            )}
-            
-            {/* Second part of content */}
-            {contentWithCTA.secondPart && (
-              <div dangerouslySetInnerHTML={{ __html: contentWithCTA.secondPart }} />
-            )}
-          </section>
+              {/* Social Embeds */}
+              {(post as any).social_embeds?.length > 0 && (
+                <div className="max-w-[720px] mx-auto my-12">
+                  <SocialEmbedsRenderer embeds={(post as any).social_embeds as SocialEmbed[]} />
+                </div>
+              )}
 
-          {/* End-article CTA */}
-          <div className="max-w-3xl mx-auto">
-            <BlogPostCTA variant="end" />
+              {/* Mid-article CTA */}
+              <div className="max-w-[720px] mx-auto">
+                <BlogPostCTA variant="inline" />
+              </div>
+
+              {/* Bottom clap CTA */}
+              <div className="max-w-[720px] mx-auto my-12 text-center">
+                <p className="text-lg font-medium text-foreground mb-4">Clap if this hit different 👏</p>
+                <ClapButton
+                  postId={post.id}
+                  initialClaps={(post as any).claps || 0}
+                  category={category}
+                  size="lg"
+                />
+              </div>
+
+              {/* End-article CTA */}
+              <div className="max-w-[720px] mx-auto">
+                <BlogPostCTA variant="end" />
+              </div>
+
+              {/* Blog Navigation */}
+              <BlogNavigation currentPost={post} />
+
+              {/* Lead Magnet */}
+              <div className="max-w-[720px] mx-auto my-12">
+                <LeadMagnet />
+              </div>
+
+              {/* Newsletter */}
+              <div className="max-w-xl mx-auto">
+                <NewsletterSignup variant="blog" />
+              </div>
+            </article>
+
+            {/* Sidebar - stacks below on mobile */}
+            <PostSidebar post={post} relatedPosts={relatedPosts} />
           </div>
-
-          {/* Social Embeds */}
-          {(post as any).social_embeds && (post as any).social_embeds.length > 0 && (
-            <div className="max-w-3xl mx-auto my-12">
-              <SocialEmbedsRenderer embeds={(post as any).social_embeds as SocialEmbed[]} />
-            </div>
-          )}
-
-          {/* Suggested Social Posts + Traditional Social Share Buttons */}
-          <div className="max-w-3xl mx-auto mb-12 space-y-6">
-            <SuggestedSocialPosts
-              postUrl={`https://unitedpress.media/blog/${post.slug}`}
-              title={post.title}
-              excerpt={post.excerpt || ''}
-              content={post.content}
-            />
-
-            <div className="flex justify-center">
-              <SocialShareButtons 
-                url={`https://unitedpress.media/blog/${post.slug}`}
-                title={post.title}
-                description={post.excerpt || post.content?.substring(0, 160) || ''}
-                twitterHandles={(post as any).twitter_handles || []}
-                linkedinHandles={(post as any).linkedin_handles || []}
-                className="border rounded-lg p-4 bg-muted/50"
-              />
-            </div>
-          </div>
-
-          {/* Blog Navigation */}
-          <BlogNavigation currentPost={post} />
-
-          {/* Lead Magnet */}
-          <div className="max-w-3xl mx-auto my-12">
-            <LeadMagnet />
-          </div>
-
-          {/* Newsletter Signup */}
-          <div className="max-w-2xl mx-auto">
-            <NewsletterSignup variant="blog" />
-          </div>
-        </article>
-
-        {/* Related Posts */}
-        <RelatedPosts currentPost={post} />
+        </div>
         <Footer />
-      </main>
       </div>
       <MobileBottomNav />
     </>

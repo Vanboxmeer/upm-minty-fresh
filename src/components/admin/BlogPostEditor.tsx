@@ -59,6 +59,7 @@ const blogPostSchema = z.object({
   publish_date: z.string().optional(),
   twitter_handles: z.array(z.string()).optional(),
   linkedin_handles: z.array(z.string()).optional(),
+  post_type: z.string().optional(),
 });
 
 type BlogPostFormData = z.infer<typeof blogPostSchema>;
@@ -112,6 +113,7 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
       })() : '',
       twitter_handles: (post as any)?.twitter_handles || [],
       linkedin_handles: (post as any)?.linkedin_handles || [],
+      post_type: (post as any)?.post_type || '',
     },
   });
 
@@ -360,6 +362,7 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
         publish_date: publishDate,
         category: data.categories?.[0] || 'General',
         social_embeds: socialEmbeds,
+        post_type: data.post_type === 'default' ? null : (data.post_type || null),
       };
 
       await onSave(postData);
@@ -737,6 +740,35 @@ export const BlogPostEditor = ({ post, onSave, loading }: BlogPostEditorProps) =
                         <FormControl>
                           <Input placeholder="5 min read" {...field} />
                         </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="post_type"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Post Template</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value || ''}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Default (no template)" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="default">Default</SelectItem>
+                            <SelectItem value="trending">🔥 Trending</SelectItem>
+                            <SelectItem value="underdog">💎 Underdog</SelectItem>
+                            <SelectItem value="spotlight">⭐ Spotlight</SelectItem>
+                            <SelectItem value="list">📋 Top List</SelectItem>
+                            <SelectItem value="press">📰 Press Release</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <p className="text-xs text-muted-foreground">
+                          Choose a magazine template for this post
+                        </p>
                         <FormMessage />
                       </FormItem>
                     )}

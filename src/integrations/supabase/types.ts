@@ -168,6 +168,7 @@ export type Database = {
           author: string
           categories: string[] | null
           category: string | null
+          claps: number
           content: string
           created_at: string
           excerpt: string | null
@@ -176,6 +177,7 @@ export type Database = {
           gallery_images: Json | null
           id: string
           linkedin_handles: string[] | null
+          post_type: string | null
           publish_date: string | null
           read_time: string | null
           seo_description: string | null
@@ -192,6 +194,7 @@ export type Database = {
           author?: string
           categories?: string[] | null
           category?: string | null
+          claps?: number
           content: string
           created_at?: string
           excerpt?: string | null
@@ -200,6 +203,7 @@ export type Database = {
           gallery_images?: Json | null
           id?: string
           linkedin_handles?: string[] | null
+          post_type?: string | null
           publish_date?: string | null
           read_time?: string | null
           seo_description?: string | null
@@ -216,6 +220,7 @@ export type Database = {
           author?: string
           categories?: string[] | null
           category?: string | null
+          claps?: number
           content?: string
           created_at?: string
           excerpt?: string | null
@@ -224,6 +229,7 @@ export type Database = {
           gallery_images?: Json | null
           id?: string
           linkedin_handles?: string[] | null
+          post_type?: string | null
           publish_date?: string | null
           read_time?: string | null
           seo_description?: string | null
@@ -620,6 +626,10 @@ export type Database = {
       generate_referral_code: { Args: never; Returns: string }
       generate_slug: { Args: { title: string }; Returns: string }
       get_content_age_days: { Args: { reviewed_date: string }; Returns: number }
+      increment_claps: {
+        Args: { amount?: number; post_id: string }
+        Returns: undefined
+      }
       is_admin_user: { Args: { check_email: string }; Returns: boolean }
     }
     Enums: {
