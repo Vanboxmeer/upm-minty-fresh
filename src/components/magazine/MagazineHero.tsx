@@ -37,7 +37,7 @@ const MagazineHero = ({ post }: MagazineHeroProps) => {
               </span>
             )}
 
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight" style={{ textShadow: '0 2px 12px rgba(0,0,0,0.7), 0 1px 3px rgba(0,0,0,0.5)' }}>
               {post.title}
             </h1>
 

@@ -268,7 +268,7 @@ export const useBlogPosts = () => {
     }
   }, []);
 
-  const getRelatedPosts = async (currentPostId: string, categories: string[], limit = 3) => {
+  const getRelatedPosts = useCallback(async (currentPostId: string, categories: string[], limit = 3) => {
     try {
       const { data: allPosts, error } = await supabase
         .from('blog_posts')
@@ -350,9 +350,9 @@ export const useBlogPosts = () => {
       console.error('Failed to fetch related posts:', err);
       return [];
     }
-  };
+  }, []);
 
-  const getAdjacentPosts = async (currentPost: BlogPost) => {
+  const getAdjacentPosts = useCallback(async (currentPost: BlogPost) => {
     try {
       const { data: allPosts, error } = await supabase
         .from('blog_posts')
@@ -412,7 +412,7 @@ export const useBlogPosts = () => {
       console.error('Failed to fetch adjacent posts:', err);
       return { nextPost: null, previousPost: null };
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchPosts();
