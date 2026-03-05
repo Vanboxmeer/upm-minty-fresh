@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
@@ -7,14 +7,14 @@ import { useSearchParams } from "react-router-dom";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
 import { updateMetaTags } from "@/utils/seoUtils";
 import { Loader2 } from "lucide-react";
-import MagazineHero from "@/components/magazine/MagazineHero";
+import MagazineBanner from "@/components/magazine/MagazineBanner";
 import MagazinePostCard from "@/components/magazine/MagazinePostCard";
 import CategoryFilterChips from "@/components/magazine/CategoryFilterChips";
 
 const Blog = () => {
   const [searchParams] = useSearchParams();
   const categoryFilter = searchParams.get('category');
-  const { fetchPublicPosts, displayedPosts, posts, loading, loadingMore, hasMorePosts, loadMore } = useBlogPosts();
+  const { fetchPublicPosts, displayedPosts, loading, loadingMore, hasMorePosts, loadMore } = useBlogPosts();
 
   useEffect(() => {
     updateMetaTags({
@@ -34,18 +34,13 @@ const Blog = () => {
     fetchPublicPosts(true, categoryFilter || undefined);
   }, [categoryFilter, fetchPublicPosts]);
 
-  const featuredPost = posts[0];
-  const gridPosts = categoryFilter ? displayedPosts : displayedPosts.slice(1);
-
   return (
     <>
       <Header />
       <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
         <div className="container mx-auto px-4 py-8 space-y-8">
-          {/* Magazine Hero */}
-          {!loading && featuredPost && !categoryFilter && (
-            <MagazineHero post={featuredPost} />
-          )}
+          {/* Branded Banner */}
+          <MagazineBanner />
 
           {/* Category Filter Chips */}
           <CategoryFilterChips />
@@ -59,10 +54,10 @@ const Blog = () => {
             </div>
           )}
 
-          {/* Masonry grid */}
+          {/* Masonry grid — all posts in grid, no special hero */}
           {!loading && (
             <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-              {gridPosts.map((post) => (
+              {displayedPosts.map((post) => (
                 <div key={post.id} className="break-inside-avoid">
                   <MagazinePostCard post={post} />
                 </div>
