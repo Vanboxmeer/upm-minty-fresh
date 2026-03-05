@@ -113,21 +113,9 @@ const BlogPost = () => {
       <ReadingProgressBar category={category} />
       <Header />
       <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
-        {/* Full-width hero image */}
-        {post.featured_image && (
-          <div className="relative w-full h-[50vh] md:h-[60vh] overflow-hidden">
-            <img
-              src={post.featured_image}
-              alt={post.featured_image_alt || post.title}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
-          </div>
-        )}
-
         <div className="container mx-auto px-4">
-          {/* Header section */}
-          <header className="max-w-3xl mx-auto text-center -mt-20 relative z-10 mb-10">
+          {/* Header section — title above image */}
+          <header className="max-w-3xl mx-auto text-center pt-10 mb-8">
             {category && (
               <span
                 className="inline-block px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full text-white mb-4"
@@ -148,6 +136,17 @@ const BlogPost = () => {
             </div>
           </header>
 
+          {/* Featured image below title */}
+          {post.featured_image && (
+            <div className="max-w-5xl mx-auto mb-10 rounded-2xl overflow-hidden">
+              <img
+                src={post.featured_image}
+                alt={post.featured_image_alt || post.title}
+                className="w-full h-auto object-cover"
+              />
+            </div>
+          )}
+
           {/* Main content + sidebar */}
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-10 max-w-5xl mx-auto">
             <article>
@@ -167,16 +166,6 @@ const BlogPost = () => {
                 <BlogPostCTA variant="inline" />
               </div>
 
-              {/* Bottom clap CTA */}
-              <div className="max-w-[720px] mx-auto my-12 text-center">
-                <p className="text-lg font-medium text-foreground mb-4">Clap if this hit different 👏</p>
-                <ClapButton
-                  postId={post.id}
-                  initialClaps={(post as any).claps || 0}
-                  category={category}
-                  size="lg"
-                />
-              </div>
 
               {/* End-article CTA */}
               <div className="max-w-[720px] mx-auto">
