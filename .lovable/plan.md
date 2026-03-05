@@ -1,35 +1,43 @@
 
 
-# Fix: Blog Posts Not Opening + Minor Design Polish
+# Fix Blog Category Filtering + Restore Blog Cover + Dynamic Tags
 
-## Critical Bug: Infinite Re-render Loop
+## Root Cause Analysis
 
-When clicking any blog post, the page gets stuck on the loading skeleton forever. Root cause:
+The category filter chips are **hardcoded** to 5 fantasy categories (`Trending`, `Underdogs`, `Spotlight`, `Top Lists`, `Press Releases`) that **don't match actual database categories**. Real categories are things like `Web3` (39 posts), `Crypto` (31), `Blockchain` (22), `AI` (18), `Trending News` (8), etc. The filter does a case-insensitive match but `"Trending" !== "Trending News"`, so clicking "Trending" returns zero results.
 
-In `useBlogPosts.ts`, `getRelatedPosts` (line 271) is a regular async function -- not wrapped in `useCallback`. But in `BlogPost.tsx` (line 69), it's listed as a useEffect dependency:
+## Plan
 
-```js
-}, [slug, getPostBySlug, getRelatedPosts]);
-```
+### 1. Dynamic Category Chips from Database (CategoryFilterChips.tsx)
 
-Every render creates a new `getRelatedPosts` reference → triggers useEffect → fetches data → sets state → re-renders → new reference → infinite loop. Console confirms: `getRelatedPosts` logs repeat endlessly.
+Replace hardcoded `FILTER_CATEGORIES` with a dynamic query. Fetch the top 10 most-used categories from `blog_posts` (by counting `unnest(categories)`), display them as chips with an "All" chip first, and a "View More" button that expands to show all remaining categories.
 
-**Fix**: Wrap `getRelatedPosts` in `useCallback` in `useBlogPosts.ts`, same as `getPostBySlug` already is. This is a one-line structural change that immediately fixes post pages.
+- Query actual categories and counts from Supabase on mount
+- Show "All" + top 10 categories initially
+- "View More" toggles to reveal the rest
+- Keep accent colors for known categories (Trending News, Underdogs, etc.), use default cyan for others
+- Update `categoryColors.ts` to include `'Trending News'` as a recognized accent color (same purple as Trending)
 
-Also wrap `getAdjacentPosts` in `useCallback` for the same reason (used similarly in `BlogNavigation`).
+### 2. Restore Blog Cover Hero (Blog.tsx + new MagazineBanner component)
 
-## Design: Minimal Polish (Not a Rewrite)
+Replace the `MagazineHero` (which shows the latest post's image as cover) with a branded banner:
 
-The listing page (/blog) actually looks good -- cinematic hero, category chips, masonry cards all work. The user's complaint is mainly that **posts don't open** (the infinite loop), which makes the whole thing feel broken.
+- UPM logo centered
+- "UP Megazine" title + tagline ("Your source for trending Web3 stories, hidden gems, and innovation in crypto, AI, VR, and GameFi")
+- Dark gradient background with subtle purple glow (consistent with site branding)
+- The latest/featured post card stays in the grid below, not as a special hero
 
-Minimal design touches to enhance "magazine feel" without changing layout:
-- Make post card headlines slightly larger/bolder (`text-lg font-bold` → `text-xl font-extrabold`)
-- Add subtle text shadow on the MagazineHero headline for better readability over busy images
-- Ensure the hero headline text doesn't clash with the background image text (the screenshot shows "Video Game News" watermark bleeding through)
+### 3. Fix Category Color Map (categoryColors.ts)
 
-## Files to Edit
+Add real categories to the color map so chips and badges render proper colors:
+- `'Trending News'` → purple (same as Trending)
+- `'AI'`, `'AI Agents'`, `'AI News'` → a distinct color
+- Keep existing mappings but add fallback logic
 
-1. **`src/hooks/useBlogPosts.ts`** — Wrap `getRelatedPosts` and `getAdjacentPosts` in `useCallback`
-2. **`src/components/magazine/MagazineHero.tsx`** — Add text-shadow to headline for readability over busy images
-3. **`src/components/magazine/MagazinePostCard.tsx`** — Slightly bolder headlines
+### 4. Files to Edit
+
+1. **`src/components/magazine/CategoryFilterChips.tsx`** — Rewrite to fetch categories dynamically from Supabase, show top 10 + "View More"
+2. **`src/components/magazine/categoryColors.ts`** — Add `'Trending News'` and other real categories to color map, remove fake `FILTER_CATEGORIES` export
+3. **`src/pages/Blog.tsx`** — Replace `MagazineHero` with a branded UPM banner (logo + tagline), show all posts in the grid (no special first-post hero)
+4. **`src/components/magazine/MagazineHero.tsx`** — Repurpose as the branded banner component (UPM logo, title, tagline, gradient background)
 
