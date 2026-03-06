@@ -18,12 +18,12 @@ const Blog = () => {
 
   useEffect(() => {
     updateMetaTags({
-      title: "UP Megazine | Web3 & Crypto Digital Magazine",
-      description: "UP Megazine — your source for trending Web3 stories, hidden gems, spotlights, top lists, and press releases in crypto, AI, VR, and GameFi.",
-      keywords: "web3 magazine, crypto news, KOL guides, press release, digital marketing, blockchain",
+      title: "UPM News & Insights | Tech, AI, Crypto & Gaming",
+      description: "Where tech, AI, crypto, and gaming converge — the latest stories, analysis, and innovation from United Press Media.",
+      keywords: "web3 news, crypto insights, AI news, gaming, digital marketing, blockchain",
       canonical: "https://unitedpressmedia.com/blog",
-      ogTitle: "UP Megazine: Web3 & Crypto Digital Magazine",
-      ogDescription: "Trending stories, hidden gems, spotlights, and top lists in crypto and Web3.",
+      ogTitle: "UPM News & Insights",
+      ogDescription: "Where tech, AI, crypto, and gaming converge — the latest stories, analysis, and innovation.",
       ogType: "website",
       ogImage: "https://unitedpressmedia.com/lovable-uploads/4ed87a93-4a52-47a8-a969-1b8e2ddac6d9.png",
       twitterCard: "summary_large_image",

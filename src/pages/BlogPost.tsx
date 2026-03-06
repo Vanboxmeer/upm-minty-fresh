@@ -6,7 +6,6 @@ import { Card } from "@/components/ui/card";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { BlogNavigation } from "@/components/BlogNavigation";
 import { BlogPostCTA } from "@/components/BlogPostCTA";
-import { LeadMagnet } from "@/components/LeadMagnet";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import { SocialEmbedsRenderer } from "@/components/SocialEmbedsRenderer";
 import { useBlogPosts, type BlogPost as BlogPostType, type SocialEmbed } from "@/hooks/useBlogPosts";
@@ -161,11 +160,20 @@ const BlogPost = () => {
                 </div>
               )}
 
+              {/* Clap button — right after article content on all devices */}
+              <div className="max-w-[720px] mx-auto my-8 flex justify-center">
+                <ClapButton
+                  postId={post.id}
+                  initialClaps={(post as any).claps || 0}
+                  category={category}
+                  size="lg"
+                />
+              </div>
+
               {/* Mid-article CTA */}
               <div className="max-w-[720px] mx-auto">
                 <BlogPostCTA variant="inline" />
               </div>
-
 
               {/* End-article CTA */}
               <div className="max-w-[720px] mx-auto">
@@ -174,11 +182,6 @@ const BlogPost = () => {
 
               {/* Blog Navigation */}
               <BlogNavigation currentPost={post} />
-
-              {/* Lead Magnet */}
-              <div className="max-w-[720px] mx-auto my-12">
-                <LeadMagnet />
-              </div>
 
               {/* Newsletter */}
               <div className="max-w-xl mx-auto">

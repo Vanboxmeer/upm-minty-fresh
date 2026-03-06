@@ -1267,7 +1267,7 @@ const Footer = () => {
               />
             </div>
             <p className="text-sm opacity-80 mb-4">
-              United Press Media - Your trusted partner for digital marketing success.
+              United Press | Media Agency - Your trusted partner for digital marketing success.
             </p>
             <div className="flex space-x-3">
               <a 
