@@ -5,63 +5,56 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
-  DropdownMenuLabel,
   DropdownMenuSub,
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu";
-import { Menu, X, ChevronDown, Building2, Users, Palette, Code, BookOpen, Flame } from "lucide-react";
+import { Menu, X, ChevronDown, Building2, Users, Palette, Code } from "lucide-react";
 import { useState } from "react";
 import confetti from "canvas-confetti";
 import { ThemeToggle } from "@/components/ThemeToggle";
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const scrollToCoveragePackages = () => {
-    // Navigate to home if not there, then scroll
     if (window.location.pathname !== '/') {
       window.location.href = '/#package-selector';
     } else {
       const packageSection = document.querySelector('[data-section="package-selector"]');
       if (packageSection) {
         const offsetTop = packageSection.getBoundingClientRect().top + window.pageYOffset - 80;
-        window.scrollTo({
-          top: offsetTop,
-          behavior: 'smooth'
-        });
+        window.scrollTo({ top: offsetTop, behavior: 'smooth' });
       }
     }
   };
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact-form');
     if (contactSection) {
-      const offsetTop = contactSection.offsetTop - 80; // Account for header height
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth'
-      });
+      const offsetTop = contactSection.offsetTop - 80;
+      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
     }
   };
 
   const handleLogoHover = () => {
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 }
-    });
+    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
   };
-  return <header className="w-full bg-background/95 backdrop-blur-sm border-b border-border fixed top-0 left-0 right-0 z-50">
+
+  return (
+    <header className="w-full bg-background/95 backdrop-blur-sm border-b border-border fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto px-4 py-2 flex items-center justify-between">
         <div className="flex items-center">
           <a href="/" className="block" onMouseEnter={handleLogoHover}>
             <img src="/lovable-uploads/upm-logo.png" alt="UPM Logo" className="h-12 w-auto retro-logo-hover header-logo-pulse" />
           </a>
         </div>
-        
-        {/* Desktop Navigation */}
+
+        {/* Desktop Navigation — Order: Home, News, Apps, Services, Contact */}
         <div className="hidden md:flex items-center space-x-8">
           <nav className="flex items-center space-x-8">
             <a href="/" className="text-foreground hover:text-primary transition-colors">Home</a>
-            
+            <a href="/blog" className="text-foreground hover:text-primary transition-colors">News</a>
+            <a href="/our-products" className="text-foreground hover:text-primary transition-colors">Apps</a>
+
             {/* Services Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center gap-1 text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer">
@@ -69,7 +62,6 @@ const Header = () => {
                 <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" className="min-w-[200px] bg-popover border border-border">
-                {/* Brands with sub-items */}
                 <DropdownMenuSub>
                   <DropdownMenuSubTrigger className="cursor-pointer">
                     <Building2 className="h-4 w-4 mr-2" />
@@ -83,29 +75,19 @@ const Header = () => {
                       </DropdownMenuSubTrigger>
                       <DropdownMenuSubContent className="bg-popover border border-border">
                         <DropdownMenuItem asChild>
-                          <a href="/services#kol-collaborations" className="w-full cursor-pointer text-sm">
-                            KOL Collaborations
-                          </a>
+                          <a href="/services#kol-collaborations" className="w-full cursor-pointer text-sm">KOL Collaborations</a>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
-                          <a href="/services#press-release" className="w-full cursor-pointer text-sm">
-                            Press Release Services
-                          </a>
+                          <a href="/services#press-release" className="w-full cursor-pointer text-sm">Press Release Services</a>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
-                          <a href="/services#publications" className="w-full cursor-pointer text-sm">
-                            Publications
-                          </a>
+                          <a href="/services#publications" className="w-full cursor-pointer text-sm">Publications</a>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
-                          <a href="/services#interviews" className="w-full cursor-pointer text-sm">
-                            Interviews & Spaces
-                          </a>
+                          <a href="/services#interviews" className="w-full cursor-pointer text-sm">Interviews & Spaces</a>
                         </DropdownMenuItem>
                         <DropdownMenuItem asChild>
-                          <a href="/services#paid-advertising" className="w-full cursor-pointer text-sm">
-                            Managed Paid Advertising
-                          </a>
+                          <a href="/services#paid-advertising" className="w-full cursor-pointer text-sm">Managed Paid Advertising</a>
                         </DropdownMenuItem>
                       </DropdownMenuSubContent>
                     </DropdownMenuSub>
@@ -123,10 +105,7 @@ const Header = () => {
                     </DropdownMenuItem>
                   </DropdownMenuSubContent>
                 </DropdownMenuSub>
-                
                 <DropdownMenuSeparator />
-                
-                {/* Creators */}
                 <DropdownMenuItem asChild>
                   <a href="/creators" className="w-full cursor-pointer flex items-center">
                     <Users className="h-4 w-4 mr-2" />
@@ -135,43 +114,21 @@ const Header = () => {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            
-            {/* Blog Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1 text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer">
-                Blog
-                <ChevronDown className="h-4 w-4" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="min-w-[180px] bg-popover border border-border">
-                <DropdownMenuItem asChild>
-                  <a href="/blog" className="w-full cursor-pointer flex items-center">
-                    <BookOpen className="h-4 w-4 mr-2" />
-                    Blog
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="/trending" className="w-full cursor-pointer flex items-center">
-                    <Flame className="h-4 w-4 mr-2" />
-                    Trending News
-                  </a>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <a href="/our-products" className="text-foreground hover:text-primary transition-colors">Apps</a>
+
             <button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer">Contact</button>
           </nav>
-          
-            <div className="flex items-center space-x-4">
-              <ThemeToggle />
-              <Button variant="synthwave" size="sm" className="group relative overflow-hidden" onClick={scrollToCoveragePackages}>
-                Start a Campaign
-                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-retro-cyan/20 to-transparent group-hover:animate-[synthwave-scan_1s_ease-in-out] pointer-events-none" />
-              </Button>
-            </div>
+
+          <div className="flex items-center space-x-4">
+            <ThemeToggle />
+            <Button variant="synthwave" size="sm" className="group relative overflow-hidden" onClick={scrollToCoveragePackages}>
+              Start a Campaign
+              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-retro-cyan/20 to-transparent group-hover:animate-[synthwave-scan_1s_ease-in-out] pointer-events-none" />
+            </Button>
+          </div>
         </div>
-        
+
         {/* Mobile Menu Button */}
-        <button 
+        <button
           className="md:hidden p-2"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle mobile menu"
@@ -179,17 +136,19 @@ const Header = () => {
           {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
-      
-      {/* Mobile Navigation */}
-      {isMenuOpen && <div className="md:hidden bg-background border-t border-border">
+
+      {/* Mobile Navigation — Order: Home, News, Apps, Services, Contact */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-background border-t border-border">
           <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4">
             <a href="/" className="text-foreground hover:text-primary transition-colors">Home</a>
-            
+            <a href="/blog" className="text-foreground hover:text-primary transition-colors">News</a>
+            <a href="/our-products" className="text-foreground hover:text-primary transition-colors">Apps</a>
+
             {/* Mobile Services Menu */}
             <div className="flex flex-col space-y-2">
               <span className="text-foreground font-medium">Services</span>
               <div className="pl-4 space-y-3">
-                {/* For Brands Section */}
                 <div className="space-y-2">
                   <span className="text-muted-foreground text-sm font-medium flex items-center">
                     <Building2 className="h-4 w-4 mr-2" />
@@ -208,18 +167,13 @@ const Header = () => {
                     <a href="/vibe-coding" className="text-foreground hover:text-primary transition-colors block text-sm">Vibe Coding</a>
                   </div>
                 </div>
-                
-                {/* For Creators */}
                 <a href="/creators" className="text-foreground hover:text-primary transition-colors flex items-center">
                   <Users className="h-4 w-4 mr-2" />
                   For Creators
                 </a>
               </div>
             </div>
-            
-            <a href="/blog" className="text-foreground hover:text-primary transition-colors">Blog</a>
-            <a href="/trending" className="text-foreground hover:text-primary transition-colors pl-4 text-sm">🔥 Trending News</a>
-            <a href="/our-products" className="text-foreground hover:text-primary transition-colors">Apps</a>
+
             <button onClick={scrollToContact} className="text-foreground hover:text-primary transition-colors bg-transparent border-none cursor-pointer text-left">Contact</button>
             <div className="flex flex-col space-y-2 pt-4 border-t border-border">
               <ThemeToggle />
@@ -229,7 +183,10 @@ const Header = () => {
               </Button>
             </div>
           </nav>
-        </div>}
-    </header>;
+        </div>
+      )}
+    </header>
+  );
 };
+
 export default Header;
