@@ -74,46 +74,37 @@ export const useBlogPosts = () => {
     }
   };
 
+  // Lightweight columns for listing views (no content field to save egress)
+  const LISTING_COLUMNS = 'id, title, slug, excerpt, author, featured_image, featured_image_alt, status, publish_date, seo_title, seo_description, seo_keywords, category, categories, read_time, claps, post_type, created_at, updated_at' as const;
+
   // Separate method for public posts (published + not in future)
   const fetchPublicPosts = useCallback(async (resetPagination = true, categoryFilter?: string) => {
     try {
       setLoading(true);
-      const { data: allPosts, error } = await supabase
+      const now = new Date().toISOString();
+      
+      let query = supabase
         .from('blog_posts')
-        .select('*')
-        .eq('status', 'published');
+        .select(LISTING_COLUMNS)
+        .eq('status', 'published')
+        .or(`publish_date.is.null,publish_date.lte.${now}`)
+        .order('publish_date', { ascending: false, nullsFirst: false })
+        .order('created_at', { ascending: false });
+
+      // Server-side category filter using Supabase array contains
+      if (categoryFilter) {
+        query = query.contains('categories', [categoryFilter]);
+      }
+      
+      const { data: sortedPosts, error } = await query;
       
       if (error) throw error;
       
-      // Get current date/time in UTC to ensure consistent comparison
-      const now = new Date();
-      
-      // Filter posts client-side to ensure proper date comparison and category filtering
-      const filteredPosts = (allPosts || []).filter(post => {
-        // Date filter
-        if (post.publish_date && new Date(post.publish_date) > now) return false;
-        
-        // Category filter
-        if (categoryFilter) {
-          const postCategories = post.categories || (post.category ? [post.category] : []);
-          return postCategories.some(cat => cat.toLowerCase() === categoryFilter.toLowerCase());
-        }
-        
-        return true;
-      });
-      
-      // Sort by publish_date (desc), then created_at (desc)  
-      const sortedPosts = filteredPosts.sort((a, b) => {
-        const aDate = new Date(a.publish_date || a.created_at);
-        const bDate = new Date(b.publish_date || b.created_at);
-        return bDate.getTime() - aDate.getTime();
-      });
-      
-      setPosts(sortedPosts as BlogPost[]);
+      setPosts((sortedPosts || []) as BlogPost[]);
       
       // Only reset displayed posts if explicitly requested (initial load)
       if (resetPagination) {
-        setDisplayedPosts(sortedPosts.slice(0, INITIAL_POSTS) as BlogPost[]);
+        setDisplayedPosts((sortedPosts || []).slice(0, INITIAL_POSTS) as BlogPost[]);
         setCurrentPage(1);
       }
     } catch (err) {
@@ -270,21 +261,18 @@ export const useBlogPosts = () => {
 
   const getRelatedPosts = useCallback(async (currentPostId: string, categories: string[], limit = 3) => {
     try {
+      const now = new Date().toISOString();
       const { data: allPosts, error } = await supabase
         .from('blog_posts')
-        .select('*')
+        .select(LISTING_COLUMNS)
         .eq('status', 'published')
+        .or(`publish_date.is.null,publish_date.lte.${now}`)
         .neq('id', currentPostId);
       
       if (error) throw error;
       
-      const now = new Date();
       
-      // Filter out future posts
-      const validPosts = (allPosts || []).filter(post => {
-        if (post.publish_date && new Date(post.publish_date) > now) return false;
-        return true;
-      });
+      const validPosts = (allPosts || []);
 
       console.log('Valid posts for related:', validPosts.length);
       console.log('Current post categories:', categories);
@@ -354,26 +342,18 @@ export const useBlogPosts = () => {
 
   const getAdjacentPosts = useCallback(async (currentPost: BlogPost) => {
     try {
+      const now = new Date().toISOString();
       const { data: allPosts, error } = await supabase
         .from('blog_posts')
         .select('id, title, slug, publish_date, created_at')
-        .eq('status', 'published');
+        .eq('status', 'published')
+        .or(`publish_date.is.null,publish_date.lte.${now}`)
+        .order('publish_date', { ascending: false, nullsFirst: false })
+        .order('created_at', { ascending: false });
       
       if (error) throw error;
       
-      const now = new Date();
-      
-      // Filter out future posts and sort by publish date (newest first)
-      const validPosts = (allPosts || [])
-        .filter(post => {
-          if (post.publish_date && new Date(post.publish_date) > now) return false;
-          return true;
-        })
-        .sort((a, b) => {
-          const aDate = new Date(a.publish_date || a.created_at);
-          const bDate = new Date(b.publish_date || b.created_at);
-          return bDate.getTime() - aDate.getTime();
-        });
+      const validPosts = allPosts || [];
       
       console.log('All valid posts for navigation:', validPosts.length);
       console.log('Current post ID:', currentPost.id);

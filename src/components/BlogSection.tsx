@@ -9,13 +9,13 @@ import { BlogCardSkeleton } from "@/components/ui/skeleton";
 import { getCategoryColor } from "@/components/magazine/categoryColors";
 
 const BlogSection = () => {
-  const { fetchPublicPosts, posts, loading } = useBlogPosts();
+  const { fetchPublicPosts, displayedPosts, loading } = useBlogPosts();
 
   useEffect(() => {
     fetchPublicPosts();
   }, [fetchPublicPosts]);
 
-  const recent = posts.slice(0, 3);
+  const recent = displayedPosts.slice(0, 3);
 
   return (
     <section className="py-16 bg-background">
