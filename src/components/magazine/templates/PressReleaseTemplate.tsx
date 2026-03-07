@@ -36,7 +36,7 @@ const PressReleaseTemplate = ({ post }: Props) => {
 
       {/* Content */}
       <div
-        className="prose prose-invert max-w-none prose-headings:text-foreground prose-p:text-foreground/90 prose-a:text-primary prose-strong:text-foreground"
+        className="prose dark:prose-invert max-w-none prose-headings:text-foreground prose-p:text-foreground/90 prose-a:text-primary prose-strong:text-foreground"
         dangerouslySetInnerHTML={{ __html: sanitized }}
       />
 
