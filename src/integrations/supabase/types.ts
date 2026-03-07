@@ -625,6 +625,7 @@ export type Database = {
       cleanup_newsletter_rate_limits: { Args: never; Returns: undefined }
       generate_referral_code: { Args: never; Returns: string }
       generate_slug: { Args: { title: string }; Returns: string }
+      get_admin_dashboard_stats: { Args: never; Returns: Json }
       get_content_age_days: { Args: { reviewed_date: string }; Returns: number }
       increment_claps: {
         Args: { amount?: number; post_id: string }
