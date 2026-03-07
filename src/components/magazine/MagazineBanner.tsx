@@ -18,7 +18,7 @@ const MagazineBanner = () => {
           className="w-24 h-24 md:w-32 md:h-32 object-contain header-logo-pulse"
         />
         <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white">
-          UPM News & Insights
+          News & Insights
         </h1>
         <p className="text-gray-300 text-sm md:text-base max-w-xl leading-relaxed">
           Where tech, AI, crypto, and gaming converge — the latest stories, analysis, and innovation.
