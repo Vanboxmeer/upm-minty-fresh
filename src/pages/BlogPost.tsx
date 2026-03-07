@@ -179,16 +179,12 @@ const BlogPost = () => {
                 <BlogPostCTA variant="inline" />
               </div>
 
-              {/* End-article CTA */}
-              <div className="max-w-[720px] mx-auto">
-                <BlogPostCTA variant="end" />
-              </div>
 
               {/* Blog Navigation */}
               <BlogNavigation currentPost={post} />
 
               {/* Newsletter */}
-              <div className="max-w-xl mx-auto">
+              <div className="max-w-xl mx-auto mb-16">
                 <NewsletterSignup variant="blog" />
               </div>
             </article>

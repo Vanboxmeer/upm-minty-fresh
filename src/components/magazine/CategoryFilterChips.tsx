@@ -9,12 +9,14 @@ interface CategoryCount {
   count: number;
 }
 
+const CHUNK_SIZE = 10;
+const MIN_POST_COUNT = 2;
+
 const CategoryFilterChips = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const active = searchParams.get('category') || '';
   const [categories, setCategories] = useState<CategoryCount[]>([]);
-  const [expanded, setExpanded] = useState(false);
-  const VISIBLE_COUNT = 10;
+  const [visibleCount, setVisibleCount] = useState(CHUNK_SIZE);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -25,7 +27,6 @@ const CategoryFilterChips = () => {
 
       if (error || !data) return;
 
-      // Count categories from the categories array field
       const counts: Record<string, number> = {};
       data.forEach((post) => {
         const cats = post.categories || [];
@@ -35,6 +36,7 @@ const CategoryFilterChips = () => {
       });
 
       const sorted = Object.entries(counts)
+        .filter(([, count]) => count >= MIN_POST_COUNT)
         .map(([name, count]) => ({ name, count }))
         .sort((a, b) => b.count - a.count);
 
@@ -52,13 +54,13 @@ const CategoryFilterChips = () => {
     }
   };
 
-  const visibleCategories = expanded ? categories : categories.slice(0, VISIBLE_COUNT);
-  const hasMore = categories.length > VISIBLE_COUNT;
+  const visibleCategories = categories.slice(0, visibleCount);
+  const remaining = categories.length - visibleCount;
+  const hasMore = remaining > 0;
 
   return (
     <div className="space-y-2">
       <div className="flex gap-2 flex-wrap">
-        {/* All chip */}
         <button
           onClick={() => handleClick('')}
           className="shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 border whitespace-nowrap"
@@ -93,15 +95,21 @@ const CategoryFilterChips = () => {
 
         {hasMore && (
           <button
-            onClick={() => setExpanded(!expanded)}
+            onClick={() => setVisibleCount((c) => c + CHUNK_SIZE)}
             className="shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 border whitespace-nowrap flex items-center gap-1"
             style={{ backgroundColor: 'transparent', color: 'hsl(var(--muted-foreground))', borderColor: 'hsl(var(--border))' }}
           >
-            {expanded ? (
-              <>View Less <ChevronUp className="w-3 h-3" /></>
-            ) : (
-              <>View More ({categories.length - VISIBLE_COUNT}) <ChevronDown className="w-3 h-3" /></>
-            )}
+            View More ({remaining}) <ChevronDown className="w-3 h-3" />
+          </button>
+        )}
+
+        {visibleCount > CHUNK_SIZE && (
+          <button
+            onClick={() => setVisibleCount(CHUNK_SIZE)}
+            className="shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 border whitespace-nowrap flex items-center gap-1"
+            style={{ backgroundColor: 'transparent', color: 'hsl(var(--muted-foreground))', borderColor: 'hsl(var(--border))' }}
+          >
+            View Less <ChevronUp className="w-3 h-3" />
           </button>
         )}
       </div>
