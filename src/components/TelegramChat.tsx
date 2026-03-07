@@ -64,7 +64,7 @@ const TelegramChat = () => {
         </Button>
         <div className="absolute -top-12 right-0 bg-card/95 backdrop-blur-sm border border-primary/30 rounded-lg px-3 py-2 shadow-lg animate-bounce-subtle">
           <p className="text-xs font-medium text-foreground whitespace-nowrap">
-            💬 DM us on Telegram
+            💬 DM us
           </p>
         </div>
       </div>

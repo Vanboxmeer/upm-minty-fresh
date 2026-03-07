@@ -22,7 +22,7 @@ const setMeta = (post: BlogPostType) => {
   const postUrl = `${baseUrl}/blog/${post.slug}`;
 
   updateMetaTags({
-    title: `${post.title} | UP Megazine`,
+    title: `${post.title} | UPM News`,
     description: post.excerpt || post.content?.substring(0, 160) || '',
     keywords: post.seo_keywords?.join(', ') || "web3 marketing, crypto marketing",
     canonical: postUrl,
@@ -98,7 +98,7 @@ const BlogPost = () => {
             <Card className="p-8 max-w-xl mx-auto">
               <h1 className="text-3xl font-bold mb-2">Article not found</h1>
               <p className="text-muted-foreground mb-6">The article you're looking for doesn't exist or was moved.</p>
-              <Link to="/blog" className="text-primary underline">Back to UP Megazine</Link>
+              <Link to="/blog" className="text-primary underline">Back to News</Link>
             </Card>
           </div>
         </div>
@@ -149,7 +149,7 @@ const BlogPost = () => {
           {/* Main content + sidebar */}
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-10 max-w-5xl mx-auto">
             <article>
-              <section className="prose prose-invert max-w-[720px] mx-auto mb-12">
+              <section className="prose dark:prose-invert max-w-[720px] mx-auto mb-12">
                 <TemplateRenderer post={post} />
               </section>
 
@@ -169,6 +169,10 @@ const BlogPost = () => {
                   size="lg"
                 />
               </div>
+
+              <p className="text-xs text-muted-foreground text-center italic max-w-[720px] mx-auto mt-4">
+                This article may contain AI-assisted content. All information is editorially reviewed.
+              </p>
 
               {/* Mid-article CTA */}
               <div className="max-w-[720px] mx-auto">

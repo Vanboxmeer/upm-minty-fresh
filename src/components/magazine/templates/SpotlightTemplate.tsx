@@ -24,31 +24,11 @@ const SpotlightTemplate = ({ post }: Props) => {
         </span>
       </div>
 
-      {/* Split view on desktop */}
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-        <div className="lg:col-span-3">
-          <div
-            className="prose prose-invert max-w-none prose-headings:text-foreground prose-p:text-foreground/90 prose-a:text-primary"
-            dangerouslySetInnerHTML={{ __html: sanitized }}
-          />
-        </div>
-        <div className="lg:col-span-2 space-y-6">
-          {post.featured_image && (
-            <img
-              src={post.featured_image}
-              alt={post.featured_image_alt || post.title}
-              className="w-full rounded-xl object-cover"
-            />
-          )}
-          {/* CEO quote */}
-          <div className="p-6 rounded-xl border" style={{ borderColor: accentColor + '40' }}>
-            <p className="text-xl italic text-foreground/80 leading-relaxed">
-              "Innovation doesn't wait for permission."
-            </p>
-            <span className="text-sm text-muted-foreground mt-2 block">— Featured Team</span>
-          </div>
-        </div>
-      </div>
+      {/* Full-width content */}
+      <div
+        className="prose dark:prose-invert max-w-none prose-headings:text-foreground prose-p:text-foreground/90 prose-a:text-primary"
+        dangerouslySetInnerHTML={{ __html: sanitized }}
+      />
     </div>
   );
 };

@@ -26,7 +26,7 @@ const ListTemplate = ({ post }: Props) => {
 
       {/* Content rendered as-is (the numbered items come from content) */}
       <div
-        className="prose prose-invert max-w-none prose-headings:text-foreground prose-p:text-foreground/90 prose-a:text-primary prose-li:marker:text-primary"
+        className="prose dark:prose-invert max-w-none prose-headings:text-foreground prose-p:text-foreground/90 prose-a:text-primary prose-li:marker:text-primary"
         dangerouslySetInnerHTML={{ __html: sanitized }}
       />
 

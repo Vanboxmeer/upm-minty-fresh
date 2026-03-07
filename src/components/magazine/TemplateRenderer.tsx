@@ -40,7 +40,7 @@ const TemplateRenderer = ({ post }: Props) => {
       }));
       return (
         <div
-          className="prose prose-invert max-w-none prose-headings:text-foreground prose-p:text-foreground/90 prose-a:text-primary"
+          className="prose dark:prose-invert max-w-none prose-headings:text-foreground prose-p:text-foreground/90 prose-a:text-primary"
           dangerouslySetInnerHTML={{ __html: sanitized }}
         />
       );

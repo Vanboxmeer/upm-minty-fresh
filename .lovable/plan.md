@@ -1,57 +1,43 @@
 
 
-# Fix Blog Light Theme, Spotlight Layout, Branding & Chat Labels
+# Fix Blog Category Filtering + Restore Blog Cover + Dynamic Tags
 
-## Issues Identified
+## Root Cause Analysis
 
-1. **Light mode text unreadable**: All templates + BlogPost use `prose-invert` which forces light-colored text — invisible on white backgrounds. Need `dark:prose-invert` instead.
-2. **No AI disclaimer**: Need an "AI-assisted content" disclaimer at end of articles.
-3. **Homepage BlogSection still says "UP Megazine"**: Title and button text need updating. No starfield banner on homepage section.
-4. **MagazineBanner says "UPM News & Insights"**: Should say just "News & Insights".
-5. **SpotlightTemplate splits content into 3/5 + 2/5 columns** with duplicate featured image and hardcoded quote — should be full-width like other templates.
-6. **Chat widget labels**: "Ask Bolt anything!" → "Ask Bolt" and "DM us on Telegram" → "DM us".
+The category filter chips are **hardcoded** to 5 fantasy categories (`Trending`, `Underdogs`, `Spotlight`, `Top Lists`, `Press Releases`) that **don't match actual database categories**. Real categories are things like `Web3` (39 posts), `Crypto` (31), `Blockchain` (22), `AI` (18), `Trending News` (8), etc. The filter does a case-insensitive match but `"Trending" !== "Trending News"`, so clicking "Trending" returns zero results.
 
-## Changes
+## Plan
 
-### 1. Fix light mode text (5 files)
+### 1. Dynamic Category Chips from Database (CategoryFilterChips.tsx)
 
-Replace `prose-invert` with `dark:prose-invert` in:
-- `src/pages/BlogPost.tsx` (line 152)
-- `src/components/magazine/TemplateRenderer.tsx` (default case)
-- `src/components/magazine/templates/TrendingTemplate.tsx`
-- `src/components/magazine/templates/UnderdogTemplate.tsx`
-- `src/components/magazine/templates/SpotlightTemplate.tsx`
+Replace hardcoded `FILTER_CATEGORIES` with a dynamic query. Fetch the top 10 most-used categories from `blog_posts` (by counting `unnest(categories)`), display them as chips with an "All" chip first, and a "View More" button that expands to show all remaining categories.
 
-### 2. Add AI disclaimer to BlogPost.tsx
+- Query actual categories and counts from Supabase on mount
+- Show "All" + top 10 categories initially
+- "View More" toggles to reveal the rest
+- Keep accent colors for known categories (Trending News, Underdogs, etc.), use default cyan for others
+- Update `categoryColors.ts` to include `'Trending News'` as a recognized accent color (same purple as Trending)
 
-After the ClapButton block (line 171), add a small disclaimer:
-```
-<p className="text-xs text-muted-foreground text-center italic max-w-[720px] mx-auto mt-4">
-  This article may contain AI-assisted content. All information is editorially reviewed.
-</p>
-```
+### 2. Restore Blog Cover Hero (Blog.tsx + new MagazineBanner component)
 
-### 3. Update homepage BlogSection
+Replace the `MagazineHero` (which shows the latest post's image as cover) with a branded banner:
 
-- Change title from "Latest from UP Megazine" → "News & Insights"
-- Change button text from "View UP Megazine" → "View All News"
-- Add the UPM logo above the title and the starfield background to match the blog listing page banner style.
+- UPM logo centered
+- "UP Megazine" title + tagline ("Your source for trending Web3 stories, hidden gems, and innovation in crypto, AI, VR, and GameFi")
+- Dark gradient background with subtle purple glow (consistent with site branding)
+- The latest/featured post card stays in the grid below, not as a special hero
 
-### 4. Update MagazineBanner (blog listing page)
+### 3. Fix Category Color Map (categoryColors.ts)
 
-- Change h1 from "UPM News & Insights" → "News & Insights"
+Add real categories to the color map so chips and badges render proper colors:
+- `'Trending News'` → purple (same as Trending)
+- `'AI'`, `'AI Agents'`, `'AI News'` → a distinct color
+- Keep existing mappings but add fallback logic
 
-### 5. Fix SpotlightTemplate — make full-width
+### 4. Files to Edit
 
-Remove the 3/5 + 2/5 grid split, the duplicate featured image, and the hardcoded quote. Render content full-width like Trending/Underdog templates, keeping only the "Featured Spotlight" badge.
-
-### 6. Update chat widget text
-
-- `TankChatWidget.tsx` line 223: "⚡ Ask Bolt anything!" → "⚡ Ask Bolt"
-- `TelegramChat.tsx` line 67: "💬 DM us on Telegram" → "💬 DM us"
-
-### 7. SEO title update
-
-- `BlogPost.tsx` line 25: "UP Megazine" → "UPM News"
-- `BlogPost.tsx` line 101: "Back to UP Megazine" → "Back to News"
+1. **`src/components/magazine/CategoryFilterChips.tsx`** — Rewrite to fetch categories dynamically from Supabase, show top 10 + "View More"
+2. **`src/components/magazine/categoryColors.ts`** — Add `'Trending News'` and other real categories to color map, remove fake `FILTER_CATEGORIES` export
+3. **`src/pages/Blog.tsx`** — Replace `MagazineHero` with a branded UPM banner (logo + tagline), show all posts in the grid (no special first-post hero)
+4. **`src/components/magazine/MagazineHero.tsx`** — Repurpose as the branded banner component (UPM logo, title, tagline, gradient background)
 
