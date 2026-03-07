@@ -1,43 +1,101 @@
 
 
-# Fix Blog Category Filtering + Restore Blog Cover + Dynamic Tags
+# Blog Post Cleanup, Category Pagination, Newsletter Fix & Admin Dashboard Upgrade
 
-## Root Cause Analysis
+## 1. Remove "Ready to Scale Your Brand?" CTA from Blog Posts
 
-The category filter chips are **hardcoded** to 5 fantasy categories (`Trending`, `Underdogs`, `Spotlight`, `Top Lists`, `Press Releases`) that **don't match actual database categories**. Real categories are things like `Web3` (39 posts), `Crypto` (31), `Blockchain` (22), `AI` (18), `Trending News` (8), etc. The filter does a case-insensitive match but `"Trending" !== "Trending News"`, so clicking "Trending" returns zero results.
+**File:** `src/pages/BlogPost.tsx`
+- Remove the `<BlogPostCTA variant="end" />` block (lines 182-185) — this is the "Ready to Scale Your Brand?" section
+- Keep the inline CTA ("Need help with your marketing strategy?") as it's a lighter, less intrusive prompt
 
-## Plan
+## 2. Newsletter Spacing Fix
 
-### 1. Dynamic Category Chips from Database (CategoryFilterChips.tsx)
+**File:** `src/pages/BlogPost.tsx`
+- Add `mb-16` to the newsletter wrapper div (line 191) to add breathing room before the footer
+- The newsletter edge function works — there are 4 subscribers in the database. The reason the admin dashboard shows **0** is an RLS issue (see item 4 below)
 
-Replace hardcoded `FILTER_CATEGORIES` with a dynamic query. Fetch the top 10 most-used categories from `blog_posts` (by counting `unnest(categories)`), display them as chips with an "All" chip first, and a "View More" button that expands to show all remaining categories.
+## 3. Category Chips — Paginated "View More" with 2+ Post Threshold
 
-- Query actual categories and counts from Supabase on mount
-- Show "All" + top 10 categories initially
-- "View More" toggles to reveal the rest
-- Keep accent colors for known categories (Trending News, Underdogs, etc.), use default cyan for others
-- Update `categoryColors.ts` to include `'Trending News'` as a recognized accent color (same purple as Trending)
+**File:** `src/components/magazine/CategoryFilterChips.tsx`
+- Filter out categories with `count < 2` before displaying
+- Change "View More" to reveal the **next 10** tags each click (not all at once), with the button updating to show remaining count
+- Track a `visibleCount` state that increments by 10 on each click, instead of a boolean `expanded` toggle
 
-### 2. Restore Blog Cover Hero (Blog.tsx + new MagazineBanner component)
+## 4. Admin Dashboard — Fix Newsletter Count & Add Control Panel Features
 
-Replace the `MagazineHero` (which shows the latest post's image as cover) with a branded banner:
+### Newsletter Count Fix (RLS issue)
+The SELECT policy on `newsletter_subscribers` requires `auth.jwt() ->> 'email'` to match an `admin_users` record. The admin is authenticated via Supabase Auth magic link, so this should work — but the dashboard query runs client-side with the anon key and only works if the admin is actually signed in via Supabase Auth session. 
 
-- UPM logo centered
-- "UP Megazine" title + tagline ("Your source for trending Web3 stories, hidden gems, and innovation in crypto, AI, VR, and GameFi")
-- Dark gradient background with subtle purple glow (consistent with site branding)
-- The latest/featured post card stays in the grid below, not as a special hero
+**Fix:** Create a `get_admin_dashboard_stats` database function (SECURITY DEFINER) that returns all counts server-side, bypassing RLS. The dashboard calls this single function instead of multiple client-side queries. This also reduces egress.
 
-### 3. Fix Category Color Map (categoryColors.ts)
+### Admin Dashboard Upgrade
 
-Add real categories to the color map so chips and badges render proper colors:
-- `'Trending News'` → purple (same as Trending)
-- `'AI'`, `'AI Agents'`, `'AI News'` → a distinct color
-- Keep existing mappings but add fallback logic
+**File:** `src/pages/admin/AdminDashboard.tsx` — Major rewrite to add:
 
-### 4. Files to Edit
+1. **Stats Cards Row** (keep existing, fix newsletter count via DB function):
+   - Total Posts (published/drafts)
+   - Affiliates (active/pending)
+   - Newsletter Subscribers (actual count)
+   - Total Claps / Engagement
 
-1. **`src/components/magazine/CategoryFilterChips.tsx`** — Rewrite to fetch categories dynamically from Supabase, show top 10 + "View More"
-2. **`src/components/magazine/categoryColors.ts`** — Add `'Trending News'` and other real categories to color map, remove fake `FILTER_CATEGORIES` export
-3. **`src/pages/Blog.tsx`** — Replace `MagazineHero` with a branded UPM banner (logo + tagline), show all posts in the grid (no special first-post hero)
-4. **`src/components/magazine/MagazineHero.tsx`** — Repurpose as the branded banner component (UPM logo, title, tagline, gradient background)
+2. **New: Newsletter Subscribers Panel**
+   - Table showing recent subscribers (email, source, date)
+   - Export CSV button
+   - Unsubscribe/remove action
+
+3. **New: Site Health / Heartbeat Widget**
+   - Edge function status checks (ping key functions)
+   - Last deploy timestamp
+   - Content freshness summary (already exists, keep it)
+
+4. **New: Recent Activity Feed**
+   - Latest published posts
+   - Latest affiliate applications
+   - Latest newsletter signups
+
+5. **Existing sections** (keep): Blog Management, Affiliate Management, Content Freshness, Analytics & Tools links
+
+### Database Migration
+Create a `get_admin_dashboard_stats` SECURITY DEFINER function:
+```sql
+CREATE OR REPLACE FUNCTION public.get_admin_dashboard_stats()
+RETURNS json
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public
+AS $$
+DECLARE result json;
+BEGIN
+  -- Verify caller is admin
+  IF NOT EXISTS (
+    SELECT 1 FROM admin_users 
+    WHERE email = (auth.jwt() ->> 'email')
+  ) THEN
+    RAISE EXCEPTION 'Unauthorized';
+  END IF;
+  
+  SELECT json_build_object(
+    'total_posts', (SELECT count(*) FROM blog_posts),
+    'published_posts', (SELECT count(*) FROM blog_posts WHERE status = 'published'),
+    'draft_posts', (SELECT count(*) FROM blog_posts WHERE status = 'draft'),
+    'total_affiliates', (SELECT count(*) FROM affiliates),
+    'pending_affiliates', (SELECT count(*) FROM affiliates WHERE status = 'pending'),
+    'approved_affiliates', (SELECT count(*) FROM affiliates WHERE status = 'approved'),
+    'newsletter_subscribers', (SELECT count(*) FROM newsletter_subscribers),
+    'recent_subscribers', (
+      SELECT json_agg(row_to_json(s))
+      FROM (SELECT id, email, source, created_at FROM newsletter_subscribers ORDER BY created_at DESC LIMIT 10) s
+    )
+  ) INTO result;
+  
+  RETURN result;
+END;
+$$;
+```
+
+### Files to Edit
+1. `src/pages/BlogPost.tsx` — Remove end CTA, fix newsletter spacing
+2. `src/components/magazine/CategoryFilterChips.tsx` — Paginated view more, 2+ post filter
+3. `src/pages/admin/AdminDashboard.tsx` — Use new DB function, add subscriber table, activity feed, health widget
+4. **DB migration** — `get_admin_dashboard_stats` function
 
