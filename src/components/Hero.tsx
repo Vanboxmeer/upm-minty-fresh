@@ -6,9 +6,9 @@ const Hero = () => {
   const brandTypes = ["AI Brands", "Web3 Brands", "GameFi Brands", "VR Brands", "Crypto Brands", "Tech Brands"];
   const currentBrand = useTypewriter({
     words: brandTypes,
-    typeSpeed: 50,
-    deleteSpeed: 25,
-    delayBetweenWords: 2000,
+    typeSpeed: 35,
+    deleteSpeed: 18,
+    delayBetweenWords: 1400,
   });
 
   // Parallax effects for background layers
@@ -85,7 +85,7 @@ const Hero = () => {
             </span>
           </h1>
           
-          <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto animate-fade-in">UPM helps you get in front of the right audience through powerful kol collaborations, PR distribution, native ad placements, and earned tier 1 media features.</p>
+          <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto animate-fade-in">UPM helps you get in front of the right audience through powerful kol collaborations, PR distribution, native ad placements, branded social media content, and earned tier 1 media features.</p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
             <Button variant="retro" size="lg" className="px-8 py-6 text-lg group relative overflow-hidden cta-pulse cta-shimmer cta-glow-hover" onClick={scrollToCoveragePackages}>
