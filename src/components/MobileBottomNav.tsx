@@ -14,8 +14,8 @@ interface NavItem {
 const navItems: NavItem[] = [
   { icon: <Home className="w-5 h-5" />, label: "Home", href: "/" },
   { icon: <LayoutGrid className="w-5 h-5" />, label: "Services", href: "/services" },
-  { icon: <Rocket className="w-5 h-5" />, label: "Start", href: "/#package-selector", isPrimary: true },
-  { icon: <Newspaper className="w-5 h-5" />, label: "Blog", href: "/blog" },
+  { icon: <Newspaper className="w-5 h-5" />, label: "News", href: "/blog" },
+  { icon: <Rocket className="w-5 h-5" />, label: "Apps", href: "/our-products" },
   { icon: <MessageCircle className="w-5 h-5" />, label: "Chat", href: "http://t.me/unitedpressmedia", isExternal: true },
 ];
 

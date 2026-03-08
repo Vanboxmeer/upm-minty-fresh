@@ -9,7 +9,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu";
-import { Menu, X, ChevronDown, Building2, Users, Palette, Code } from "lucide-react";
+import { Menu, X, ChevronDown, Palette, Code } from "lucide-react";
 import { useState } from "react";
 import confetti from "canvas-confetti";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -64,52 +64,36 @@ const Header = () => {
               <DropdownMenuContent align="start" className="min-w-[200px] bg-popover border border-border">
                 <DropdownMenuSub>
                   <DropdownMenuSubTrigger className="cursor-pointer">
-                    <Building2 className="h-4 w-4 mr-2" />
-                    For Brands
+                    Marketing Services
                   </DropdownMenuSubTrigger>
                   <DropdownMenuSubContent className="bg-popover border border-border">
-                    <DropdownMenuSub>
-                      <DropdownMenuSubTrigger className="cursor-pointer">
-                        <Building2 className="h-4 w-4 mr-2 opacity-60" />
-                        Marketing Services
-                      </DropdownMenuSubTrigger>
-                      <DropdownMenuSubContent className="bg-popover border border-border">
-                        <DropdownMenuItem asChild>
-                          <a href="/services#kol-collaborations" className="w-full cursor-pointer text-sm">KOL Collaborations</a>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem asChild>
-                          <a href="/services#press-release" className="w-full cursor-pointer text-sm">Press Release Services</a>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem asChild>
-                          <a href="/services#publications" className="w-full cursor-pointer text-sm">Publications</a>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem asChild>
-                          <a href="/services#interviews" className="w-full cursor-pointer text-sm">Interviews & Spaces</a>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem asChild>
-                          <a href="/services#paid-advertising" className="w-full cursor-pointer text-sm">Managed Paid Advertising</a>
-                        </DropdownMenuItem>
-                      </DropdownMenuSubContent>
-                    </DropdownMenuSub>
                     <DropdownMenuItem asChild>
-                      <a href="/media-for-brands" className="w-full cursor-pointer flex items-center">
-                        <Palette className="h-4 w-4 mr-2 opacity-60" />
-                        Content Creation
-                      </a>
+                      <a href="/services#kol-collaborations" className="w-full cursor-pointer text-sm">KOL Collaborations</a>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                      <a href="/vibe-coding" className="w-full cursor-pointer flex items-center">
-                        <Code className="h-4 w-4 mr-2 opacity-60" />
-                        Vibe Coding
-                      </a>
+                      <a href="/services#press-release" className="w-full cursor-pointer text-sm">Press Release Services</a>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <a href="/services#publications" className="w-full cursor-pointer text-sm">Publications</a>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <a href="/services#interviews" className="w-full cursor-pointer text-sm">Interviews & Spaces</a>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <a href="/services#paid-advertising" className="w-full cursor-pointer text-sm">Managed Paid Advertising</a>
                     </DropdownMenuItem>
                   </DropdownMenuSubContent>
                 </DropdownMenuSub>
-                <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <a href="/creators" className="w-full cursor-pointer flex items-center">
-                    <Users className="h-4 w-4 mr-2" />
-                    For Creators
+                  <a href="/media-for-brands" className="w-full cursor-pointer flex items-center">
+                    <Palette className="h-4 w-4 mr-2 opacity-60" />
+                    Content Creation
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <a href="/vibe-coding" className="w-full cursor-pointer flex items-center">
+                    <Code className="h-4 w-4 mr-2 opacity-60" />
+                    Vibe Coding
                   </a>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -148,29 +132,17 @@ const Header = () => {
             {/* Mobile Services Menu */}
             <div className="flex flex-col space-y-2">
               <span className="text-foreground font-medium">Services</span>
-              <div className="pl-4 space-y-3">
-                <div className="space-y-2">
-                  <span className="text-muted-foreground text-sm font-medium flex items-center">
-                    <Building2 className="h-4 w-4 mr-2" />
-                    For Brands
-                  </span>
-                  <div className="pl-6 space-y-2">
-                    <span className="text-muted-foreground text-xs font-medium">Marketing Services</span>
-                    <div className="pl-4 space-y-1">
-                      <a href="/services#kol-collaborations" className="text-foreground hover:text-primary transition-colors block text-xs">KOL Collaborations</a>
-                      <a href="/services#press-release" className="text-foreground hover:text-primary transition-colors block text-xs">Press Release Services</a>
-                      <a href="/services#publications" className="text-foreground hover:text-primary transition-colors block text-xs">Publications</a>
-                      <a href="/services#interviews" className="text-foreground hover:text-primary transition-colors block text-xs">Interviews & Spaces</a>
-                      <a href="/services#paid-advertising" className="text-foreground hover:text-primary transition-colors block text-xs">Managed Paid Advertising</a>
-                    </div>
-                    <a href="/media-for-brands" className="text-foreground hover:text-primary transition-colors block text-sm">Content Creation</a>
-                    <a href="/vibe-coding" className="text-foreground hover:text-primary transition-colors block text-sm">Vibe Coding</a>
-                  </div>
+              <div className="pl-4 space-y-2">
+                <span className="text-muted-foreground text-xs font-medium">Marketing Services</span>
+                <div className="pl-4 space-y-1">
+                  <a href="/services#kol-collaborations" className="text-foreground hover:text-primary transition-colors block text-xs">KOL Collaborations</a>
+                  <a href="/services#press-release" className="text-foreground hover:text-primary transition-colors block text-xs">Press Release Services</a>
+                  <a href="/services#publications" className="text-foreground hover:text-primary transition-colors block text-xs">Publications</a>
+                  <a href="/services#interviews" className="text-foreground hover:text-primary transition-colors block text-xs">Interviews & Spaces</a>
+                  <a href="/services#paid-advertising" className="text-foreground hover:text-primary transition-colors block text-xs">Managed Paid Advertising</a>
                 </div>
-                <a href="/creators" className="text-foreground hover:text-primary transition-colors flex items-center">
-                  <Users className="h-4 w-4 mr-2" />
-                  For Creators
-                </a>
+                <a href="/media-for-brands" className="text-foreground hover:text-primary transition-colors block text-sm">Content Creation</a>
+                <a href="/vibe-coding" className="text-foreground hover:text-primary transition-colors block text-sm">Vibe Coding</a>
               </div>
             </div>
 
