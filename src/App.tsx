@@ -33,7 +33,7 @@ import PartnerDashboard from "./pages/PartnerDashboard";
 import OurProducts from "./pages/OurProducts";
 import NotFound from "./pages/NotFound";
 import RSSFeed from "./pages/RSSFeed";
-import SitemapXML from "./pages/SitemapXML";
+
 import TrendingNews from "./pages/TrendingNews";
 
 // Admin imports
@@ -79,7 +79,7 @@ const App = () => (
                <Route path="/terms-of-service" element={<TermsOfService />} />
                <Route path="/rss" element={<RSSFeed />} />
                <Route path="/feed" element={<RSSFeed />} />
-               <Route path="/sitemap.xml" element={<SitemapXML />} />
+               
                
             <Route path="/contact" element={<Contact />} />
             <Route path="/affiliate-signup" element={<AffiliateSignup />} />
