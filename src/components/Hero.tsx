@@ -6,9 +6,9 @@ const Hero = () => {
   const brandTypes = ["AI Brands", "Web3 Brands", "GameFi Brands", "VR Brands", "Crypto Brands", "Tech Brands"];
   const currentBrand = useTypewriter({
     words: brandTypes,
-    typeSpeed: 35,
-    deleteSpeed: 18,
-    delayBetweenWords: 1400,
+    typeSpeed: 22,
+    deleteSpeed: 12,
+    delayBetweenWords: 1000,
   });
 
   // Parallax effects for background layers
@@ -81,7 +81,7 @@ const Hero = () => {
             <span className="block">Media Partner for</span>
             <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent inline-block min-h-[1em]">
               {currentBrand || '\u00A0'}
-              <span className="animate-pulse text-primary ml-1 font-thin">|</span>
+              <span className="animate-pulse text-primary ml-1 font-normal">|</span>
             </span>
           </h1>
           
