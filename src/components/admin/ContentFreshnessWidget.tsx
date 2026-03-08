@@ -2,18 +2,12 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { AlertCircle, CheckCircle, RefreshCw } from 'lucide-react';
+import { AlertCircle, CheckCircle } from 'lucide-react';
 import { useContentFreshness } from '@/hooks/useContentFreshness';
 import { formatDistanceToNow } from 'date-fns';
 
 export const ContentFreshnessWidget = () => {
-  const { freshness, loading, markAsReviewed, runFreshnessCheck } = useContentFreshness();
-
-  const getScoreColor = (score: number) => {
-    if (score >= 80) return 'text-green-600';
-    if (score >= 50) return 'text-yellow-600';
-    return 'text-red-600';
-  };
+  const { freshness, loading, markAsReviewed } = useContentFreshness();
 
   const getScoreBadgeVariant = (score: number): "default" | "destructive" | "outline" | "secondary" => {
     if (score >= 80) return 'default';
@@ -23,7 +17,7 @@ export const ContentFreshnessWidget = () => {
 
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between">
+      <CardHeader>
         <div>
           <CardTitle className="flex items-center gap-2">
             <AlertCircle className="h-5 w-5" />
@@ -33,15 +27,6 @@ export const ContentFreshnessWidget = () => {
             Posts that may need updating
           </CardDescription>
         </div>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={runFreshnessCheck}
-          disabled={loading}
-        >
-          <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
-          Check Now
-        </Button>
       </CardHeader>
       <CardContent>
         {loading && freshness.length === 0 ? (
