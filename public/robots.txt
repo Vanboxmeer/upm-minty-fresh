@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://unitedpress.media/sitemap.xml
+Sitemap: https://ftjdmvdyeetiubmziwav.supabase.co/functions/v1/generate-sitemap
