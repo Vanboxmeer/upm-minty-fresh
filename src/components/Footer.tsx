@@ -1310,7 +1310,7 @@ const Footer = () => {
               <li><a href="/creators" className="hover:text-primary transition-colors">Creator Services</a></li>
               <li><a href="/media-for-brands" className="hover:text-primary transition-colors">Content Creation for Brands</a></li>
               <li><a href="/vibe-coding" className="hover:text-primary transition-colors">Vibe Coding App Development</a></li>
-              <li><a href="https://watchcrypto.info/about/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Web3 Directory Listings</a></li>
+              
             </ul>
           </div>
           
