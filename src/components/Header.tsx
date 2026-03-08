@@ -9,7 +9,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu";
-import { Menu, X, ChevronDown, Palette, Code } from "lucide-react";
+import { Menu, X, ChevronDown, Palette, Code, Megaphone } from "lucide-react";
 import { useState } from "react";
 import confetti from "canvas-confetti";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -64,6 +64,7 @@ const Header = () => {
               <DropdownMenuContent align="start" className="min-w-[200px] bg-popover border border-border">
                 <DropdownMenuSub>
                   <DropdownMenuSubTrigger className="cursor-pointer">
+                    <Megaphone className="h-4 w-4 mr-2 opacity-60" />
                     Marketing Services
                   </DropdownMenuSubTrigger>
                   <DropdownMenuSubContent className="bg-popover border border-border">
@@ -133,7 +134,7 @@ const Header = () => {
             <div className="flex flex-col space-y-2">
               <span className="text-foreground font-medium">Services</span>
               <div className="pl-4 space-y-2">
-                <span className="text-muted-foreground text-xs font-medium">Marketing Services</span>
+                <a href="/services" className="text-foreground hover:text-primary transition-colors block text-sm">Marketing Services</a>
                 <div className="pl-4 space-y-1">
                   <a href="/services#kol-collaborations" className="text-foreground hover:text-primary transition-colors block text-xs">KOL Collaborations</a>
                   <a href="/services#press-release" className="text-foreground hover:text-primary transition-colors block text-xs">Press Release Services</a>
