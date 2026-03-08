@@ -12,6 +12,15 @@ function generateSitemapPlugin() {
         const supabaseUrl = 'https://ftjdmvdyeetiubmziwav.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ0amRtdmR5ZWV0aXVibXppd2F2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5NDYxNDcsImV4cCI6MjA3MDUyMjE0N30.FxpqvXDjsPIjD6k2toPLUCYrhprjv9sGYFc9Y2Znmgw';
         
+        const res = await fetch(
+          `${supabaseUrl}/rest/v1/blog_posts?select=slug,updated_at,publish_date&status=eq.published`,
+          {
+            headers: {
+              'apikey': supabaseKey,
+              'Authorization': `Bearer ${supabaseKey}`,
+            },
+          }
+        );
         const resData = await res.json();
         const blogPosts: Array<{ slug: string; updated_at: string | null; publish_date: string | null }> = Array.isArray(resData) ? resData : [];
         const now = new Date();
