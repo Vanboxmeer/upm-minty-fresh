@@ -22,7 +22,7 @@ function generateSitemapPlugin() {
           }
         );
         
-        const blogPosts = await res.json();
+        const blogPosts: Array<{ slug: string; updated_at: string | null; publish_date: string | null }> = await res.json();
         const now = new Date();
         const today = now.toISOString().split('T')[0];
         
