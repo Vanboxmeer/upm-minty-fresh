@@ -98,7 +98,7 @@ const AdminDashboard = () => {
 
   const checkHealth = async () => {
     setHealthChecking(true);
-    const functions = ['rss-feed', 'generate-sitemap', 'subscribe-newsletter'];
+    const functions = ['rss-feed', 'generate-sitemap'];
     const results: Record<string, 'ok' | 'error' | 'checking'> = {};
     functions.forEach(f => { results[f] = 'checking'; });
     setHealthResults({ ...results });
@@ -107,7 +107,7 @@ const AdminDashboard = () => {
       try {
         const { error } = await supabase.functions.invoke(fn, {
           method: 'POST',
-          body: fn === 'subscribe-newsletter' ? { email: 'healthcheck@test.invalid', name: 'healthcheck', consent: false } : {},
+          body: {},
         });
         results[fn] = error ? 'error' : 'ok';
       } catch {

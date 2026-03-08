@@ -30,23 +30,8 @@ verify_jwt = false
 [functions.validate-admin-email]
 verify_jwt = false
 
-[functions.send-webmentions]
-verify_jwt = false
-
-[functions.receive-webmention]
-verify_jwt = false
-
-[functions.auto-post-to-social]
-verify_jwt = false
-
 [functions.suggest-internal-links]
 verify_jwt = true
 
 [functions.suggest-categories-keywords]
 verify_jwt = true
-
-[functions.suggest-social-handles]
-verify_jwt = false
-
-[functions.check-content-freshness]
-verify_jwt = false

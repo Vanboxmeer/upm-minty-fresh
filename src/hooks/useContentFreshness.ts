@@ -80,35 +80,9 @@ export const useContentFreshness = () => {
     }
   };
 
-  const runFreshnessCheck = async () => {
-    try {
-      setLoading(true);
-      const { data, error } = await supabase.functions.invoke('check-content-freshness');
-
-      if (error) throw error;
-
-      toast({
-        title: 'Freshness Check Complete',
-        description: `Checked ${data.checked} posts, found ${data.needsUpdate} needing updates`,
-      });
-
-      fetchFreshness();
-    } catch (error) {
-      console.error('Error running freshness check:', error);
-      toast({
-        title: 'Error',
-        description: 'Failed to run freshness check',
-        variant: 'destructive',
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return {
     freshness,
     loading,
     markAsReviewed,
-    runFreshnessCheck,
   };
 };
