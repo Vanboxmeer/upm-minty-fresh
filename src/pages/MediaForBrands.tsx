@@ -10,7 +10,7 @@ import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
 import { usePackageSelection } from "@/contexts/PackageSelectionContext";
 import {
   Sparkles, Video, Target, Zap, CheckCircle2, Palette,
-  Instagram, MessageCircle, Film, ImageIcon, Megaphone, Clock, Heart
+  MessageCircle, Clock, Percent
 } from "lucide-react";
 
 const pricingTiers = [
@@ -82,7 +82,7 @@ const MediaForBrands = () => {
 
     updateMetaTags({
       title: "Social Content Creation | UPM - United Press Media",
-      description: "Quality branded social content. Custom posts, reels, videos & ads starting from ~$25/post. No hidden fees.",
+      description: "Activate your content conveyor belt. Custom posts, reels, videos & ads starting from ~$25/post. No hidden fees.",
       keywords: "social content creation, branded content, social media management, Instagram Reels, TikTok content, Web3 social media, crypto content, content marketing",
       canonical: "https://unitedpress.media/media-for-brands",
       ogTitle: "Social Content Creation by UPM",
@@ -101,33 +101,41 @@ const MediaForBrands = () => {
       <Header />
       <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
         {/* Hero Section */}
-        <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-blue-50 via-indigo-50 to-purple-50 dark:from-slate-900 dark:via-blue-900/60 dark:to-slate-900">
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-20 left-10 w-72 h-72 bg-primary/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '0s' }} />
-            <div className="absolute top-40 right-20 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-            <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-accent/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }} />
+        <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-background">
+          {/* Layered background */}
+          <div className="absolute inset-0">
+            <div className="absolute inset-0 bg-gradient-to-br from-muted/80 via-background to-muted/60" />
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] -translate-y-1/3 translate-x-1/4" />
+            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-secondary/8 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4" />
+            {/* Grid pattern */}
+            <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]" style={{
+              backgroundImage: 'linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)',
+              backgroundSize: '60px 60px',
+            }} />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              <Badge className="mb-6 px-4 py-2 text-sm bg-primary/20 text-primary border-primary/30">
+              <Badge className="mb-6 px-4 py-2 text-sm bg-primary/10 text-primary border-primary/20">
                 <Palette className="w-4 h-4 mr-2 inline" />
                 Social Content Creation
               </Badge>
 
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-purple-600 to-secondary bg-clip-text text-transparent leading-tight">
-                Quality Branded Social Content
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-foreground">
+                Activate Your{" "}
+                <span className="text-primary">Content Conveyor Belt</span>
               </h1>
 
-              <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+              <p className="text-xl md:text-2xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed">
                 We create scroll-stopping, on-brand content so you can focus on building, not posting.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
                   onClick={() => navigate('/contact')}
+                  variant="hero"
                   size="lg"
-                  className="text-lg px-8 py-6 bg-primary hover:bg-primary/90"
+                  className="text-lg px-8 py-6"
                 >
                   Start Your Content Plan
                   <Zap className="ml-2 h-5 w-5" />
@@ -150,11 +158,11 @@ const MediaForBrands = () => {
           </div>
         </section>
 
-        {/* What We Do */}
+        {/* Flexible Content Packages */}
         <section className="py-20 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">What We Actually Do For You</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Flexible Content Packages</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Full-service or light-touch monthly content packages. You choose how much support you want.
               </p>
@@ -188,7 +196,6 @@ const MediaForBrands = () => {
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              {/* Content Types */}
               <Card className="p-8 border-2 hover:border-primary/50 transition-all hover:shadow-lg">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="p-3 bg-primary/10 rounded-lg">
@@ -206,13 +213,12 @@ const MediaForBrands = () => {
                 </ul>
               </Card>
 
-              {/* Bonus: AI-Powered */}
               <Card className="p-8 border-2 hover:border-secondary/50 transition-all hover:shadow-lg">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="p-3 bg-secondary/10 rounded-lg">
                     <Target className="w-6 h-6 text-secondary" />
                   </div>
-              <h3 className="text-2xl font-semibold">AI-Powered Videos and Images</h3>
+                  <h3 className="text-2xl font-semibold">AI-Powered Videos and Images</h3>
                 </div>
                 <ul className="space-y-3 text-muted-foreground">
                   {bonusFeatures.map((item, idx) => (
@@ -260,28 +266,20 @@ const MediaForBrands = () => {
               ))}
             </div>
 
-            {/* Long-term discounts */}
-            <div className="max-w-2xl mx-auto">
-              <Card className="p-6 border-2 border-dashed border-primary/30 bg-primary/5">
-                <div className="flex items-center gap-3 mb-4">
-                  <Heart className="w-5 h-5 text-primary" />
-                  <h3 className="font-semibold text-lg">Long-Term Love Discounts</h3>
-                </div>
-                <div className="grid sm:grid-cols-2 gap-4 text-sm">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
-                    <span>Commit to <strong>3 months</strong> → <strong>5% off</strong> every month</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
-                    <span>Commit to <strong>12 months</strong> → <strong>10% off</strong> every month</span>
-                  </div>
-                </div>
-                <p className="text-xs text-muted-foreground mt-4">
-                  No hidden fees. No "surprise revision rounds". Clear deliverables. Monthly contracts (cancel anytime after the first month).
-                </p>
-              </Card>
+            {/* Long-term discounts — integrated into pricing section */}
+            <div className="max-w-3xl mx-auto grid sm:grid-cols-2 gap-4">
+              <div className="flex items-center gap-3 p-4 rounded-lg bg-background border border-border">
+                <Percent className="w-5 h-5 text-primary shrink-0" />
+                <span className="text-sm">Commit to <strong>3 months</strong> → <strong className="text-primary">5% off</strong> every month</span>
+              </div>
+              <div className="flex items-center gap-3 p-4 rounded-lg bg-background border border-border">
+                <Percent className="w-5 h-5 text-primary shrink-0" />
+                <span className="text-sm">Commit to <strong>12 months</strong> → <strong className="text-primary">10% off</strong> every month</span>
+              </div>
             </div>
+            <p className="text-center text-xs text-muted-foreground mt-4 max-w-lg mx-auto">
+              No hidden fees. Clear deliverables. Monthly contracts — cancel anytime after the first month.
+            </p>
           </div>
         </section>
 
@@ -313,8 +311,9 @@ const MediaForBrands = () => {
             </p>
             <Button
               onClick={() => navigate('/contact')}
+              variant="hero"
               size="lg"
-              className="text-lg px-8 py-6 bg-primary hover:bg-primary/90"
+              className="text-lg px-8 py-6"
             >
               Start Your Content Plan
               <Zap className="ml-2 h-5 w-5" />
