@@ -18,14 +18,14 @@ import vaporsmoothIcon from "@/assets/apps/vaporsmooth.png";
 
 const products = [
   {
-    name: "Watch Crypto",
-    tagline: "Cryptoverse Explorer",
-    description: "Track crypto news, projects, and market trends with our comprehensive cryptoverse explorer. Stay informed with real-time updates and in-depth analysis of the blockchain ecosystem.",
-    url: "https://watchcrypto.info/",
-    icon: watchCryptoIcon,
-    gradient: "from-emerald-500/20 to-teal-500/20",
+    name: "Reading Race",
+    tagline: "Competitive AI EPUB Reader",
+    description: "The world's first competitive AI EPUB reader. Race through books with friends, experience immersive scene changes, and become the fastest reader you can be.",
+    url: "https://readingrace.com/",
+    icon: readingRaceIcon,
+    gradient: "from-rose-500/20 to-red-500/20",
     isWide: false,
-    rounded: false
+    rounded: true
   },
   {
     name: "SpinQuest",
@@ -36,6 +36,26 @@ const products = [
     gradient: "from-purple-500/20 to-pink-500/20",
     isWide: true,
     rounded: false
+  },
+  {
+    name: "Watch Crypto",
+    tagline: "Cryptoverse Explorer",
+    description: "Track crypto news, projects, and market trends with our comprehensive cryptoverse explorer. Stay informed with real-time updates and in-depth analysis of the blockchain ecosystem.",
+    url: "https://watchcrypto.info/",
+    icon: watchCryptoIcon,
+    gradient: "from-emerald-500/20 to-teal-500/20",
+    isWide: false,
+    rounded: false
+  },
+  {
+    name: "Vaporsmooth",
+    tagline: "Cannabis Marketplace",
+    description: "Discover the finest vaporizers, CBD/THC products, and accessories. Learn about cannabis, take quizzes, and stay up to date with top trending cannabis news.",
+    url: "https://vaporsmooth.com",
+    icon: vaporsmoothIcon,
+    gradient: "from-green-500/20 to-emerald-500/20",
+    isWide: false,
+    rounded: true
   },
   {
     name: "AmplifyHub",
@@ -58,16 +78,6 @@ const products = [
     rounded: true
   },
   {
-    name: "Reading Race",
-    tagline: "Competitive AI EPUB Reader",
-    description: "The world's first competitive AI EPUB reader. Race through books with friends, experience immersive scene changes, and become the fastest reader you can be.",
-    url: "https://readingrace.com/",
-    icon: readingRaceIcon,
-    gradient: "from-rose-500/20 to-red-500/20",
-    isWide: false,
-    rounded: true
-  },
-  {
     name: "Everything Nightlife",
     tagline: "AI-Powered Event Directory",
     description: "Discover nightlife events near you with an AI-powered event directory. Find clubs, concerts, festivals, and parties based on your preferences using intelligent prompt-based search.",
@@ -76,16 +86,6 @@ const products = [
     gradient: "from-fuchsia-500/20 to-violet-500/20",
     isWide: true,
     rounded: false
-  },
-  {
-    name: "Vaporsmooth",
-    tagline: "Cannabis Marketplace",
-    description: "Discover the finest vaporizers, CBD/THC products, and accessories. Learn about cannabis, take quizzes, and stay up to date with top trending cannabis news.",
-    url: "https://vaporsmooth.com",
-    icon: vaporsmoothIcon,
-    gradient: "from-green-500/20 to-emerald-500/20",
-    isWide: false,
-    rounded: true
   }
 ];
 
