@@ -63,7 +63,7 @@ const About = () => {
   useEffect(() => {
     updateMetaTags({
       title: "About UPM | United Press - Media Agency",
-      description: "Learn about UPM (United Press - Media Agency), a leading digital marketing service provider specializing in press release distribution, media placements, KOL collaborations, and vibe coding.",
+      description: "Meet UPM: a digital marketing agency for press release distribution, KOL collaborations, tier-1 media placements, and vibe coding.",
       keywords: "about UPM, United Press Media Agency, digital marketing, press release, KOL, vibe coding, web3 marketing",
       canonical: "https://unitedpress.media/about",
       ogTitle: "About UPM | United Press - Media Agency",
