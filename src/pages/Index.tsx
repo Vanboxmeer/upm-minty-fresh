@@ -24,14 +24,15 @@ const Index = () => {
   useEffect(() => {
     // SEO optimization for homepage
     updateMetaTags({
-      title: "UPM - United Press - Media Agency | Digital Marketing Growth Platform",
+      title: "UPM | Digital Marketing & Press Release Distribution",
       description: "Growth platform built for digital marketing with press release distribution, KOL collaborations, and tier-1 media placements. Trusted by 1500+ marketing teams.",
       keywords: "digital marketing, press release distribution, KOL collaborations, web3 marketing, crypto marketing, tier-1 media, content promotion, growth platform",
-      canonical: "https://unitedpressmedia.com/",
-      ogTitle: "UPM - United Press - Media Agency | Digital Marketing Growth Platform",
+      canonical: "https://unitedpress.media/",
+      ogTitle: "UPM | Digital Marketing & Press Release Distribution",
       ogDescription: "Growth platform built for digital marketing with press release distribution, KOL collaborations, and tier-1 media placements.",
       ogType: "website",
-      ogImage: "https://unitedpressmedia.com/lovable-uploads/4ed87a93-4a52-47a8-a969-1b8e2ddac6d9.png",
+      ogUrl: "https://unitedpress.media/",
+      ogImage: "https://unitedpress.media/og-image.png",
       twitterCard: "summary_large_image",
       structuredData: [
         generateStructuredData('organization', {}),
