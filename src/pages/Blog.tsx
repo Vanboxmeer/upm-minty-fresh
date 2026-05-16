@@ -28,6 +28,18 @@ const Blog = () => {
       ogUrl: "https://unitedpress.media/blog",
       ogImage: "https://unitedpress.media/og-image.png",
       twitterCard: "summary_large_image",
+      structuredData: {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        name: "UPM News & Insights",
+        description: "Articles and analysis from United Press Media on tech, AI, crypto, and gaming.",
+        url: "https://unitedpress.media/blog",
+        isPartOf: {
+          "@type": "WebSite",
+          name: "United Press Media",
+          url: "https://unitedpress.media",
+        },
+      },
     });
   }, []);
 
