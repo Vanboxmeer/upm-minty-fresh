@@ -15,6 +15,18 @@ import featuresInterviewsImg from "/lovable-uploads/8d2ae042-e00e-4b60-acfe-8d2f
 import { updateMetaTags } from "@/utils/seoUtils";
 import { useTypewriter } from "@/hooks/useTypewriter";
 const ServicesPage = () => {
+  useEffect(() => {
+    updateMetaTags({
+      title: "UPM Services | KOL, Press Release & Media Placements",
+      description: "Explore UPM's marketing services: KOL collaborations, press release distribution, tier-1 media placements, interviews, and paid advertising for Web3 and tech brands.",
+      keywords: "UPM services, KOL collaborations, press release distribution, tier-1 media, paid advertising, web3 marketing",
+      canonical: "https://unitedpress.media/services",
+      ogTitle: "UPM Services | KOL, Press Release & Media Placements",
+      ogDescription: "Marketing services for Web3 and tech brands: KOLs, press releases, tier-1 media, and paid ads.",
+      ogType: "website",
+      ogUrl: "https://unitedpress.media/services",
+    });
+  }, []);
   const brandTypes = ["AI Brands", "Web3 Brands", "GameFi Brands", "VR Brands", "Crypto Brands", "Tech Brands"];
   const currentBrand = useTypewriter({
     words: brandTypes,

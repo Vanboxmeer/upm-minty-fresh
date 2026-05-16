@@ -1,8 +1,22 @@
+import { useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
+import { updateMetaTags } from "@/utils/seoUtils";
 
 const Contact = () => {
+  useEffect(() => {
+    updateMetaTags({
+      title: "Contact UPM | Talk to Our Marketing Team",
+      description: "Get in touch with UPM to amplify your brand with press releases, KOL collaborations, and tier-1 media placements. Email or message us on Telegram.",
+      keywords: "contact UPM, United Press Media contact, digital marketing agency contact",
+      canonical: "https://unitedpress.media/contact",
+      ogTitle: "Contact UPM | Talk to Our Marketing Team",
+      ogDescription: "Reach the UPM team for press releases, KOL collaborations, and tier-1 media placements.",
+      ogType: "website",
+      ogUrl: "https://unitedpress.media/contact",
+    });
+  }, []);
   return <>
     <Header />
     <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
