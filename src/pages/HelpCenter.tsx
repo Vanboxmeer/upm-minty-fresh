@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { updateMetaTags } from "@/utils/seoUtils";
 
 const HelpCenter = () => {
   const faqs = [
@@ -33,6 +35,24 @@ const HelpCenter = () => {
       answer: "We work with businesses across various industries. Primarily AI, Gaming, and Web3 industries. Let's talk about your specific needs, and we'll see how we can help."
     }
   ];
+
+  useEffect(() => {
+    updateMetaTags({
+      title: "Help Center | UPM FAQs & Support",
+      description: "Answers to common questions about UPM press release distribution, KOL collaborations, pricing, refunds, and campaign timelines.",
+      canonical: "https://unitedpress.media/help-center",
+      ogUrl: "https://unitedpress.media/help-center",
+      structuredData: {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((f) => ({
+          "@type": "Question",
+          name: f.question,
+          acceptedAnswer: { "@type": "Answer", text: f.answer },
+        })),
+      },
+    });
+  }, []);
 
   return (
     <>
