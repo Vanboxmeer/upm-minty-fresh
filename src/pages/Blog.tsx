@@ -21,11 +21,12 @@ const Blog = () => {
       title: "UPM News & Insights | Tech, AI, Crypto & Gaming",
       description: "Where tech, AI, crypto, and gaming converge — the latest stories, analysis, and innovation from United Press Media.",
       keywords: "web3 news, crypto insights, AI news, gaming, digital marketing, blockchain",
-      canonical: "https://unitedpressmedia.com/blog",
+      canonical: "https://unitedpress.media/blog",
       ogTitle: "UPM News & Insights",
       ogDescription: "Where tech, AI, crypto, and gaming converge — the latest stories, analysis, and innovation.",
       ogType: "website",
-      ogImage: "https://unitedpressmedia.com/lovable-uploads/4ed87a93-4a52-47a8-a969-1b8e2ddac6d9.png",
+      ogUrl: "https://unitedpress.media/blog",
+      ogImage: "https://unitedpress.media/og-image.png",
       twitterCard: "summary_large_image",
     });
   }, []);
