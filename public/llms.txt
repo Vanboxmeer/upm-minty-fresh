@@ -1,0 +1,25 @@
+# United Press Media (UPM)
+
+> UPM is a digital marketing agency offering press release distribution, tier-1 media placements, KOL collaborations, sponsored content, and vibe coding (rapid MVP development).
+
+## Pages
+
+- [Home](/): Overview of UPM's growth platform for digital marketing.
+- [Services](/services): KOL collaborations, press releases, tier-1 media, paid ads.
+- [Media for Brands](/media-for-brands): Earned media and PR for Web3 and tech brands.
+- [Creators](/creators): Programs and platform for content creators and KOLs.
+- [Vibe Coding](/vibe-coding): Rapid MVP and app development services.
+- [Apps We've Built](/our-products): UPM's portfolio of apps including Reading Race, SpinQuest, Watch Crypto, Vaporsmooth, AmplifyHub, Re-Writeable AI, and Everything Nightlife.
+- [Case Studies](/case-studies): Client results and campaign breakdowns.
+- [Trending News](/trending): Curated top stories in tech, AI, crypto, and gaming.
+- [Think Tank](/think-tank): Research and strategy insights.
+- [Blog](/blog): UPM news and insights — tech, AI, crypto, gaming.
+- [About](/about): About United Press Media.
+- [Contact](/contact): Get in touch with the UPM team.
+- [Help Center](/help-center): Support and FAQs.
+
+## Optional
+
+- [Affiliate Signup](/affiliate-signup): Join the UPM affiliate program.
+- [Privacy Policy](/privacy-policy)
+- [Terms of Service](/terms-of-service)
