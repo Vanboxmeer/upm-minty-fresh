@@ -170,7 +170,7 @@ const About = () => {
               <p className="text-gray-400 text-center mb-10 max-w-xl mx-auto">
                 Built with UPM Vibe Coding services — explore our portfolio of modern web applications.
               </p>
-              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-4 md:gap-6 mb-8">
+              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 md:gap-6 mb-8">
                 {apps.map((app) => (
                   <a
                     key={app.name}
