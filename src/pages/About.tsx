@@ -9,20 +9,16 @@ import { Link } from "react-router-dom";
 import { updateMetaTags } from "@/utils/seoUtils";
 
 import readingRaceIcon from "@/assets/apps/reading-race.png";
-import spinquestIcon from "@/assets/apps/spinquest.png";
+import spinquestAsset from "@/assets/apps/spinquest-logo.svg.asset.json";
 import watchCryptoIcon from "@/assets/apps/watch-crypto.png";
 import vaporsmoothIcon from "@/assets/apps/vaporsmooth.png";
-import amplifyHubIcon from "@/assets/apps/amplifyhub.png";
-import rewriteableIcon from "@/assets/apps/rewriteable-ai.png";
 import everythingNightlifeIcon from "@/assets/apps/everything-nightlife.png";
 
 const apps = [
+  { name: "SpinQuest", icon: spinquestAsset.url, url: "https://spinquest.app/" },
   { name: "Reading Race", icon: readingRaceIcon, url: "https://readingrace.com/" },
-  { name: "SpinQuest", icon: spinquestIcon, url: "https://spinquest.app/" },
   { name: "Watch Crypto", icon: watchCryptoIcon, url: "https://watchcrypto.info/" },
   { name: "Vaporsmooth", icon: vaporsmoothIcon, url: "https://vaporsmooth.com" },
-  { name: "AmplifyHub", icon: amplifyHubIcon, url: "https://amplifyhub.base44.app" },
-  { name: "Re-Writeable AI", icon: rewriteableIcon, url: "https://rewriteable.lovable.app/" },
   { name: "Everything Nightlife", icon: everythingNightlifeIcon, url: "https://everythingnightlife.lovable.app" },
 ];
 
