@@ -9,14 +9,22 @@ import AnimatedStarfield from "@/components/AnimatedStarfield";
 
 // Import app icons
 import watchCryptoIcon from "@/assets/apps/watch-crypto.png";
-import spinquestIcon from "@/assets/apps/spinquest.png";
-import amplifyhubIcon from "@/assets/apps/amplifyhub.png";
-import rewriteableIcon from "@/assets/apps/rewriteable-ai.png";
+import spinquestAsset from "@/assets/apps/spinquest-logo.svg.asset.json";
 import readingRaceIcon from "@/assets/apps/reading-race.png";
 import everythingNightlifeIcon from "@/assets/apps/everything-nightlife.png";
 import vaporsmoothIcon from "@/assets/apps/vaporsmooth.png";
 
 const products = [
+  {
+    name: "SpinQuest",
+    tagline: "Activity & Adventure Randomizer",
+    description: "A web app featuring activity and adventure randomizers with quests designed for brand communities. Includes multiplayer mini games to boost engagement and community interaction.",
+    url: "https://spinquest.app/",
+    icon: spinquestAsset.url,
+    gradient: "from-purple-500/20 to-pink-500/20",
+    isWide: true,
+    rounded: false
+  },
   {
     name: "Reading Race",
     tagline: "Competitive AI EPUB Reader",
@@ -26,16 +34,6 @@ const products = [
     gradient: "from-rose-500/20 to-red-500/20",
     isWide: false,
     rounded: true
-  },
-  {
-    name: "SpinQuest",
-    tagline: "Activity & Adventure Randomizer",
-    description: "A web app featuring activity and adventure randomizers with quests designed for brand communities. Includes multiplayer mini games to boost engagement and community interaction.",
-    url: "https://spinquest.app/",
-    icon: spinquestIcon,
-    gradient: "from-purple-500/20 to-pink-500/20",
-    isWide: true,
-    rounded: false
   },
   {
     name: "Watch Crypto",
@@ -58,26 +56,6 @@ const products = [
     rounded: true
   },
   {
-    name: "AmplifyHub",
-    tagline: "Brand & Creator Collaboration Platform",
-    description: "Connect brands with developers and creators for seamless project collaboration. Brands can share project details, track progress, and communicate directly with their team of creators and developers.",
-    url: "https://amplifyhub.base44.app",
-    icon: amplifyhubIcon,
-    gradient: "from-blue-500/20 to-cyan-500/20",
-    isWide: false,
-    rounded: true
-  },
-  {
-    name: "Re-Writeable AI",
-    tagline: "SEO Content Humanizer",
-    description: "Transform your content strategy with advanced RAG-powered AI that generates, optimizes, and humanizes content. Create SEO-optimized content that passes as human-written while ensuring authenticity and performance.",
-    url: "https://rewriteable.lovable.app/",
-    icon: rewriteableIcon,
-    gradient: "from-amber-500/20 to-orange-500/20",
-    isWide: false,
-    rounded: true
-  },
-  {
     name: "Everything Nightlife",
     tagline: "AI-Powered Event Directory",
     description: "Discover nightlife events near you with an AI-powered event directory. Find clubs, concerts, festivals, and parties based on your preferences using intelligent prompt-based search.",
@@ -93,8 +71,8 @@ const OurProducts = () => {
   useEffect(() => {
     updateMetaTags({
       title: "Our Apps | UPM Ecosystem",
-      description: "Explore the UPM ecosystem of digital apps including Watch Crypto, SpinQuest, AmplifyHub, Re-Writeable AI, Reading Race, Everything Nightlife, and Vaporsmooth. Tools for crypto, community engagement, collaboration, content creation, events, and cannabis.",
-      keywords: "UPM apps, Watch Crypto, SpinQuest, AmplifyHub, Re-Writeable AI, Reading Race, Everything Nightlife, Vaporsmooth, crypto tools, community apps, content AI, cannabis marketplace"
+      description: "A few of the apps built by UPM, including SpinQuest, Reading Race, Watch Crypto, Everything Nightlife, and Vaporsmooth.",
+      keywords: "UPM apps, SpinQuest, Reading Race, Watch Crypto, Everything Nightlife, Vaporsmooth, crypto tools, community apps, cannabis marketplace"
     });
   }, []);
 
@@ -140,7 +118,7 @@ const OurProducts = () => {
               </span>
             </h1>
             <p className="text-lg md:text-xl text-gray-300 mb-6">
-              Discover the suite of digital apps and platforms built by UPM to empower creators, brands, and communities.
+              Here are a few of the apps we’ve built — a small sample of the platforms UPM has created for creators, brands, and communities.
             </p>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary">
               <span className="text-sm font-medium">Built with UPM Vibe Coding Services</span>
