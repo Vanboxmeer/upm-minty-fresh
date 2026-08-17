@@ -1,17 +1,21 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import fs from "fs";
-import { componentTagger } from "lovable-tagger";
 
-function generateSitemapPlugin() {
+function generateSitemapPlugin(env: Record<string, string | undefined>) {
   return {
     name: 'generate-sitemap',
     closeBundle: async () => {
+      const supabaseUrl = env.VITE_SUPABASE_URL;
+      const supabaseKey = env.VITE_SUPABASE_PUBLISHABLE_KEY;
+
+      if (!supabaseUrl || !supabaseKey) {
+        console.warn('⚠️ Skipping sitemap generation: VITE_SUPABASE_URL and/or VITE_SUPABASE_PUBLISHABLE_KEY not found in environment.');
+        return;
+      }
+
       try {
-        const supabaseUrl = 'https://ftjdmvdyeetiubmziwav.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ0amRtdmR5ZWV0aXVibXppd2F2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5NDYxNDcsImV4cCI6MjA3MDUyMjE0N30.FxpqvXDjsPIjD6k2toPLUCYrhprjv9sGYFc9Y2Znmgw';
-        
         const res = await fetch(
           `${supabaseUrl}/rest/v1/blog_posts?select=slug,updated_at,publish_date&status=eq.published`,
           {
@@ -89,19 +93,21 @@ function generateSitemapPlugin() {
 }
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
-  server: {
-    host: "::",
-    port: 8080,
-  },
-  plugins: [
-    react(),
-    mode === 'development' && componentTagger(),
-    mode === 'production' && generateSitemapPlugin(),
-  ].filter(Boolean),
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
+export default defineConfig(({ mode }) => {
+  const env = { ...loadEnv(mode, process.cwd(), ''), ...process.env };
+  return {
+    server: {
+      host: "::",
+      port: 8080,
     },
-  },
-}));
+    plugins: [
+      react(),
+      mode === 'production' && generateSitemapPlugin(env),
+    ].filter(Boolean),
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
+      },
+    },
+  };
+});
