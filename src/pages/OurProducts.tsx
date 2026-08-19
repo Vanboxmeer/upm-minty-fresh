@@ -9,7 +9,7 @@ import AnimatedStarfield from "@/components/AnimatedStarfield";
 
 // Import app icons
 import watchCryptoIcon from "@/assets/apps/watch-crypto.png";
-import spinquestAsset from "@/assets/apps/spinquest-logo.svg.asset.json";
+import spinquestIcon from "@/assets/apps/spinquest-logo.png";
 import readingRaceIcon from "@/assets/apps/reading-race.png";
 import everythingNightlifeIcon from "@/assets/apps/everything-nightlife.png";
 import vaporsmoothIcon from "@/assets/apps/vaporsmooth.png";
@@ -20,7 +20,7 @@ const products = [
     tagline: "Activity & Adventure Randomizer",
     description: "A web app featuring activity and adventure randomizers with quests designed for brand communities. Includes multiplayer mini games to boost engagement and community interaction.",
     url: "https://spinquest.app/",
-    icon: spinquestAsset.url,
+    icon: spinquestIcon,
     gradient: "from-purple-500/20 to-pink-500/20",
     isWide: true,
     rounded: false

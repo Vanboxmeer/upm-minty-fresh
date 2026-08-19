@@ -9,13 +9,13 @@ import { Link } from "react-router-dom";
 import { updateMetaTags } from "@/utils/seoUtils";
 
 import readingRaceIcon from "@/assets/apps/reading-race.png";
-import spinquestAsset from "@/assets/apps/spinquest-logo.svg.asset.json";
+import spinquestIcon from "@/assets/apps/spinquest-logo.png";
 import watchCryptoIcon from "@/assets/apps/watch-crypto.png";
 import vaporsmoothIcon from "@/assets/apps/vaporsmooth.png";
 import everythingNightlifeIcon from "@/assets/apps/everything-nightlife.png";
 
 const apps = [
-  { name: "SpinQuest", icon: spinquestAsset.url, url: "https://spinquest.app/" },
+  { name: "SpinQuest", icon: spinquestIcon, url: "https://spinquest.app/" },
   { name: "Reading Race", icon: readingRaceIcon, url: "https://readingrace.com/" },
   { name: "Watch Crypto", icon: watchCryptoIcon, url: "https://watchcrypto.info/" },
   { name: "Vaporsmooth", icon: vaporsmoothIcon, url: "https://vaporsmooth.com" },
