@@ -369,5 +369,20 @@ export default defineConfig(({ mode }) => {
         "@": path.resolve(__dirname, "./src"),
       },
     },
+    build: {
+      // Split long-lived third-party code out of the app bundle so that a
+      // content change does not invalidate the whole download for returning
+      // visitors, and so the initial parse is smaller.
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+            'vendor-query': ['@tanstack/react-query'],
+            'vendor-supabase': ['@supabase/supabase-js'],
+          },
+        },
+      },
+      chunkSizeWarningLimit: 700,
+    },
   };
 });
