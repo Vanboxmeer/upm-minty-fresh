@@ -13,8 +13,19 @@ import spinquestIcon from "@/assets/apps/spinquest-logo.png";
 import readingRaceIcon from "@/assets/apps/reading-race.png";
 import everythingNightlifeIcon from "@/assets/apps/everything-nightlife.png";
 import vaporsmoothIcon from "@/assets/apps/vaporsmooth.png";
+import contentConveyorBeltIcon from "@/assets/apps/content-conveyor-belt.svg";
 
 const products = [
+  {
+    name: "Content Conveyor Belt",
+    tagline: "Social Content Pipeline",
+    description: "The content engine behind UPM's social packages. Plan a month of on-brand posts, generate the images and short video to go with them, run everything through approval, and track what has gone live on each platform — all from one belt.",
+    url: "https://content-conveyor-belt.vercel.app/",
+    icon: contentConveyorBeltIcon,
+    gradient: "from-violet-500/20 to-indigo-500/20",
+    isWide: false,
+    rounded: true
+  },
   {
     name: "SpinQuest",
     tagline: "Activity & Adventure Randomizer",
@@ -57,9 +68,9 @@ const products = [
   },
   {
     name: "Everything Nightlife",
-    tagline: "AI-Powered Event Directory",
-    description: "Discover nightlife events near you with an AI-powered event directory. Find clubs, concerts, festivals, and parties based on your preferences using intelligent prompt-based search.",
-    url: "https://everythingnightlife.lovable.app",
+    tagline: "Global Event & Ticket Hub",
+    description: "Find the night you'll remember. Everything Nightlife lists club nights, concerts, festivals and shows across major cities worldwide, indexed from official ticketing partners so you buy straight from the seller — no markups.",
+    url: "https://everythingnightlife.com",
     icon: everythingNightlifeIcon,
     gradient: "from-fuchsia-500/20 to-violet-500/20",
     isWide: true,
@@ -71,8 +82,8 @@ const OurProducts = () => {
   useEffect(() => {
     updateMetaTags({
       title: "Our Apps | UPM Ecosystem",
-      description: "A few of the apps built by UPM, including SpinQuest, Reading Race, Watch Crypto, Everything Nightlife, and Vaporsmooth.",
-      keywords: "UPM apps, SpinQuest, Reading Race, Watch Crypto, Everything Nightlife, Vaporsmooth, crypto tools, community apps, cannabis marketplace"
+      description: "A few of the apps built by UPM, including the Content Conveyor Belt, SpinQuest, Reading Race, Watch Crypto, Everything Nightlife, and Vaporsmooth.",
+      keywords: "UPM apps, Content Conveyor Belt, social content calendar, SpinQuest, Reading Race, Watch Crypto, Everything Nightlife, Vaporsmooth, crypto tools, community apps, cannabis marketplace"
     });
   }, []);
 
