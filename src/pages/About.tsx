@@ -13,13 +13,15 @@ import spinquestIcon from "@/assets/apps/spinquest-logo.png";
 import watchCryptoIcon from "@/assets/apps/watch-crypto.png";
 import vaporsmoothIcon from "@/assets/apps/vaporsmooth.png";
 import everythingNightlifeIcon from "@/assets/apps/everything-nightlife.png";
+import contentConveyorBeltIcon from "@/assets/apps/content-conveyor-belt.svg";
 
 const apps = [
+  { name: "Content Conveyor Belt", icon: contentConveyorBeltIcon, url: "https://content-conveyor-belt.vercel.app/" },
   { name: "SpinQuest", icon: spinquestIcon, url: "https://spinquest.app/" },
   { name: "Reading Race", icon: readingRaceIcon, url: "https://readingrace.com/" },
   { name: "Watch Crypto", icon: watchCryptoIcon, url: "https://watchcrypto.info/" },
   { name: "Vaporsmooth", icon: vaporsmoothIcon, url: "https://vaporsmooth.com" },
-  { name: "Everything Nightlife", icon: everythingNightlifeIcon, url: "https://everythingnightlife.lovable.app" },
+  { name: "Everything Nightlife", icon: everythingNightlifeIcon, url: "https://everythingnightlife.com" },
 ];
 
 const services = [
