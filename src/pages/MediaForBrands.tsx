@@ -10,7 +10,7 @@ import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
 import { usePackageSelection } from "@/contexts/PackageSelectionContext";
 import {
   Sparkles, Video, Target, Zap, CheckCircle2, Palette,
-  MessageCircle, Clock, Percent
+  MessageCircle, Clock, Percent, ExternalLink
 } from "lucide-react";
 
 const pricingTiers = [
@@ -126,8 +126,22 @@ const MediaForBrands = () => {
                 <span className="text-primary">Content Conveyor Belt</span>
               </h1>
 
-              <p className="text-xl md:text-2xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl md:text-2xl text-muted-foreground mb-6 max-w-3xl mx-auto leading-relaxed">
                 We create scroll-stopping, on-brand content so you can focus on building, not posting.
+              </p>
+
+              <p className="text-base text-muted-foreground mb-10">
+                Every post runs through our own tool,{" "}
+                <a
+                  href="https://content-conveyor-belt.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary font-semibold hover:underline inline-flex items-center gap-1"
+                >
+                  the Content Conveyor Belt
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+                {" "}— planned, approved, scheduled and tracked in one place.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -230,6 +244,44 @@ const MediaForBrands = () => {
                 </ul>
               </Card>
             </div>
+          </div>
+        </section>
+
+        {/* Content Conveyor Belt app */}
+        <section className="pb-20 bg-background">
+          <div className="container mx-auto px-4">
+            <Card className="max-w-6xl mx-auto p-8 border-2 border-primary/30 bg-primary/5">
+              <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+                <div className="flex-1">
+                  <Badge className="mb-4 px-3 py-1 text-xs bg-primary/10 text-primary border-primary/20">
+                    <Sparkles className="w-3.5 h-3.5 mr-1.5 inline" />
+                    Built by UPM
+                  </Badge>
+                  <h3 className="text-2xl md:text-3xl font-semibold mb-3">
+                    Inside the Content Conveyor Belt
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    The Content Conveyor Belt is the app your content actually runs on. A rolling
+                    calendar of posts, the images and short video that go with them, an approval
+                    step before anything ships, and per-platform tracking of what has already gone
+                    live. Clients get a login so nothing about their content plan is a mystery.
+                  </p>
+                </div>
+                <div className="shrink-0">
+                  <Button asChild size="lg" variant="hero" className="text-base px-8 py-6">
+                    <a
+                      href="https://content-conveyor-belt.vercel.app/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2"
+                    >
+                      Open the Content Conveyor Belt
+                      <ExternalLink className="w-5 h-5" />
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </Card>
           </div>
         </section>
 
