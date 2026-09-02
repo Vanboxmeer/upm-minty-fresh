@@ -9,7 +9,7 @@
 - [Media for Brands](/media-for-brands): Earned media and PR for Web3 and tech brands.
 - [Creators](/creators): Programs and platform for content creators and KOLs.
 - [Vibe Coding](/vibe-coding): Rapid MVP and app development services.
-- [Apps We've Built](/our-products): UPM's portfolio of apps including Reading Race, SpinQuest, Watch Crypto, Vaporsmooth, AmplifyHub, Re-Writeable AI, and Everything Nightlife.
+- [Apps We've Built](/our-products): UPM's portfolio of apps including the Content Conveyor Belt (https://content-conveyor-belt.vercel.app/), Reading Race, SpinQuest, Watch Crypto, Vaporsmooth, AmplifyHub, Re-Writeable AI, and Everything Nightlife (https://everythingnightlife.com).
 - [Case Studies](/case-studies): Client results and campaign breakdowns.
 - [Trending News](/trending): Curated top stories in tech, AI, crypto, and gaming.
 - [Think Tank](/think-tank): Research and strategy insights.
