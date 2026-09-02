@@ -1330,11 +1330,12 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Our Apps</h4>
             <ul className="space-y-2 text-sm opacity-80">
+              <li><a href="https://content-conveyor-belt.vercel.app/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Content Conveyor Belt</a></li>
               <li><a href="https://spinquest.app/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">SpinQuest</a></li>
               <li><a href="https://readingrace.com/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Reading Race</a></li>
               <li><a href="https://watchcrypto.info/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Watch Crypto</a></li>
               <li><a href="https://vaporsmooth.com" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Vaporsmooth</a></li>
-              <li><a href="https://everythingnightlife.lovable.app" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Everything Nightlife</a></li>
+              <li><a href="https://everythingnightlife.com" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Everything Nightlife</a></li>
             </ul>
           </div>
           
