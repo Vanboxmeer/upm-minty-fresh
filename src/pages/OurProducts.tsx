@@ -11,7 +11,7 @@ import AnimatedStarfield from "@/components/AnimatedStarfield";
 import watchCryptoIcon from "@/assets/apps/watch-crypto.png";
 import spinquestIcon from "@/assets/apps/spinquest-logo.png";
 import readingRaceIcon from "@/assets/apps/reading-race.png";
-import everythingNightlifeIcon from "@/assets/apps/everything-nightlife.png";
+import everythingNightlifeIcon from "@/assets/apps/everything-nightlife-mark.svg";
 import vaporsmoothIcon from "@/assets/apps/vaporsmooth.png";
 import contentConveyorBeltIcon from "@/assets/apps/content-conveyor-belt.svg";
 
@@ -73,8 +73,8 @@ const products = [
     url: "https://everythingnightlife.com",
     icon: everythingNightlifeIcon,
     gradient: "from-fuchsia-500/20 to-violet-500/20",
-    isWide: true,
-    rounded: false
+    isWide: false,
+    rounded: true
   }
 ];
 
