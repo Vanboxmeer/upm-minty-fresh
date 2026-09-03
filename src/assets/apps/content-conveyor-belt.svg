@@ -1,44 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Content Conveyor Belt">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Content Conveyor Belt">
   <defs>
-    <linearGradient id="ccbBg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#241F3D"/>
-      <stop offset="100%" stop-color="#15121F"/>
-    </linearGradient>
-    <linearGradient id="ccbAccent" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#A78BFA"/>
-      <stop offset="100%" stop-color="#6D5BE8"/>
-    </linearGradient>
-    <linearGradient id="ccbCard" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#F5F3FF"/>
-      <stop offset="100%" stop-color="#C4B5FD"/>
+    <linearGradient id="lg1" x1="4" y1="2" x2="60" y2="62" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7C6CF6"/><stop offset="1" stop-color="#B0459C"/>
     </linearGradient>
   </defs>
-
-  <rect width="128" height="128" rx="28" fill="url(#ccbBg)"/>
-  <rect x="1" y="1" width="126" height="126" rx="27" fill="none" stroke="#6D5BE8" stroke-opacity="0.35" stroke-width="2"/>
-
-  <!-- content cards riding the belt -->
-  <g>
-    <rect x="22" y="34" width="24" height="30" rx="5" fill="url(#ccbCard)" opacity="0.55"/>
-    <rect x="52" y="26" width="26" height="38" rx="6" fill="url(#ccbCard)"/>
-    <rect x="57" y="33" width="16" height="3" rx="1.5" fill="#6D5BE8" opacity="0.8"/>
-    <rect x="57" y="40" width="16" height="3" rx="1.5" fill="#6D5BE8" opacity="0.55"/>
-    <rect x="57" y="47" width="10" height="3" rx="1.5" fill="#6D5BE8" opacity="0.4"/>
-    <rect x="84" y="38" width="22" height="26" rx="5" fill="url(#ccbCard)" opacity="0.55"/>
-  </g>
-
-  <!-- belt -->
-  <rect x="16" y="72" width="96" height="16" rx="8" fill="url(#ccbAccent)"/>
-  <g fill="#15121F" opacity="0.35">
-    <rect x="28" y="76" width="4" height="8" rx="2"/>
-    <rect x="44" y="76" width="4" height="8" rx="2"/>
-    <rect x="60" y="76" width="4" height="8" rx="2"/>
-    <rect x="76" y="76" width="4" height="8" rx="2"/>
-    <rect x="92" y="76" width="4" height="8" rx="2"/>
-  </g>
-
-  <!-- rollers -->
-  <circle cx="30" cy="100" r="11" fill="none" stroke="url(#ccbAccent)" stroke-width="5"/>
-  <circle cx="64" cy="100" r="11" fill="none" stroke="url(#ccbAccent)" stroke-width="5" opacity="0.75"/>
-  <circle cx="98" cy="100" r="11" fill="none" stroke="url(#ccbAccent)" stroke-width="5"/>
+  <rect width="64" height="64" rx="15" fill="url(#lg1)"/>
+  <line x1="12" y1="31" x2="18" y2="25" stroke="#fff" stroke-width="3.2" stroke-linecap="round" opacity=".35"/>
+  <line x1="18" y1="36" x2="26" y2="28" stroke="#fff" stroke-width="3.2" stroke-linecap="round" opacity=".55"/>
+  <rect x="9" y="38" width="46" height="9" rx="4.5" fill="#fff"/>
+  <rect x="29" y="14" width="24" height="26" rx="6.5" fill="#fff"/>
 </svg>
