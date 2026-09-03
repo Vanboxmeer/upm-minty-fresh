@@ -12,7 +12,7 @@ import readingRaceIcon from "@/assets/apps/reading-race.png";
 import spinquestIcon from "@/assets/apps/spinquest-logo.png";
 import watchCryptoIcon from "@/assets/apps/watch-crypto.png";
 import vaporsmoothIcon from "@/assets/apps/vaporsmooth.png";
-import everythingNightlifeIcon from "@/assets/apps/everything-nightlife.png";
+import everythingNightlifeIcon from "@/assets/apps/everything-nightlife-mark.svg";
 import contentConveyorBeltIcon from "@/assets/apps/content-conveyor-belt.svg";
 
 const apps = [
