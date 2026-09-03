@@ -3,17 +3,17 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, Code2, Rocket, Zap, Sparkles, Layers, Clock } from "lucide-react";
+import { CheckCircle, Code2, Rocket, Zap, Sparkles, Layers, Clock, Terminal, GitBranch } from "lucide-react";
 import { updateMetaTags } from "@/utils/seoUtils";
 
 const VibeCoding = () => {
   useEffect(() => {
     updateMetaTags({
-      title: "Vibe Coding Agency - MVP App Development with Base44 & Lovable | UPM",
-      description: "Launch your MVP faster with Vibe Coding Agency. Expert app development using Base44 and Lovable platforms. From idea to launch in weeks, not months.",
-      keywords: "vibe coding, app development, MVP development, Base44, Lovable, rapid development, no-code, low-code, startup apps",
-      ogTitle: "Vibe Coding Agency - Rapid MVP Development",
-      ogDescription: "Turn your app idea into reality with expert development using Base44 and Lovable platforms",
+      title: "Vibe Coding Agency - Claude-Native MVP Development | UPM",
+      description: "We build MVPs with Claude Code and Claude Cowork on your Supabase, Vercel and GitHub. Lovable and Base44 builds available too, driven through Claude. Idea to live URL in 2-6 weeks.",
+      keywords: "vibe coding, Claude Code, Claude Cowork, app development, MVP development, Supabase, Vercel, Lovable, Base44, AI development agency, platform migration",
+      ogTitle: "Vibe Coding Agency - Claude-Native MVP Development",
+      ogDescription: "Claude Code and Claude Cowork build it, humans review it, and you own the repo, the database and the hosting.",
     });
   }, []);
 
@@ -21,57 +21,80 @@ const VibeCoding = () => {
     {
       icon: Rocket,
       title: "Launch Faster",
-      description: "Get your MVP to market in weeks instead of months using cutting-edge development platforms"
+      description: "Claude Code ships working features in hours rather than sprints. Most MVPs go from scope to live URL in two to six weeks."
+    },
+    {
+      icon: GitBranch,
+      title: "You Own Everything",
+      description: "The repo sits in your GitHub, the data in your Supabase, the site on your Vercel. No platform can hold your product hostage."
     },
     {
       icon: Zap,
       title: "Cost-Effective",
-      description: "Save up to 70% on development costs compared to traditional custom development"
+      description: "Save up to 70% against traditional custom development. The build loop is Claude-driven; the judgement stays human."
     },
     {
       icon: Layers,
-      title: "Scalable Architecture",
-      description: "Built on robust platforms that scale seamlessly as your user base grows"
-    },
-    {
-      icon: Sparkles,
-      title: "Modern Tech Stack",
-      description: "Leverage the latest technologies including React, AI-assisted development, and cloud infrastructure"
+      title: "Built to Keep Going",
+      description: "Preview deploys, migrations and edge functions set up properly, so the next developer can pick it up without a rewrite."
     }
   ];
 
-  const platforms = [
+  const stack = ["Claude Code", "Claude Cowork", "Supabase", "Vercel", "GitHub", "React + Vite", "Next.js", "Lovable", "Base44"];
+
+  const tracks = [
     {
-      name: "Lovable",
-      description: "AI-powered development platform that turns ideas into production-ready apps",
+      name: "Claude-Native Build",
+      tag: "How we build by default",
+      icon: Terminal,
+      recommended: true,
+      description: "Claude Code and Claude Cowork do the building, a person reviews every change, and the app runs on infrastructure you own from day one.",
       features: [
-        "AI-assisted code generation",
-        "Real-time preview and editing",
-        "Built-in authentication & database",
-        "Automatic deployment",
-        "Responsive design out of the box"
+        "Claude Code writes, refactors and tests directly in the repo",
+        "Claude Cowork handles the longer jobs — migrations, content, research",
+        "Supabase for database, auth, storage and edge functions",
+        "Vercel for hosting, with a preview URL on every push",
+        "Your GitHub repo, your accounts, full commit history"
       ],
-      useCases: ["Web Applications", "SaaS Products", "Internal Tools", "Marketing Websites"]
+      useCases: ["SaaS products", "Client dashboards", "Marketplaces", "Internal tools"]
     },
     {
-      name: "Base44",
-      description: "Professional low-code platform for complex business applications",
+      name: "Lovable or Base44, Driven by Claude",
+      tag: "Platform builds",
+      icon: Sparkles,
+      recommended: false,
+      description: "Want the visual editor and instant preview a builder gives you? We still use one — with Claude planning and writing the work that goes into it.",
       features: [
-        "Enterprise-grade security",
-        "Custom business logic",
-        "Advanced integrations",
-        "Workflow automation",
-        "Multi-tenant architecture"
+        "Claude plans the build, then executes inside the platform",
+        "The visual editor stays available for you to adjust things yourself",
+        "GitHub sync kept switched on so the code is never trapped",
+        "Backend on Supabase wherever the platform allows it",
+        "A clear exit path if you outgrow the builder later"
       ],
-      useCases: ["Enterprise Apps", "B2B Platforms", "Complex Workflows", "Data Management Systems"]
+      useCases: ["Fast prototypes", "Non-technical founders", "Teams already on a builder"]
+    },
+    {
+      name: "Get Off the Platform",
+      tag: "Migrations and rescues",
+      icon: GitBranch,
+      recommended: false,
+      description: "Already have a Lovable or Base44 app and want it somewhere you control? We move it without losing your commit history and without taking the site down.",
+      features: [
+        "Repo moved into your GitHub with history intact",
+        "Hosting moved to your Vercel; DNS cut over only once it is verified",
+        "Database stays on Supabase, or moves into your own organisation",
+        "The platform build kept frozen as a rollback until you are happy",
+        "A migration we have run on our own products first"
+      ],
+      useCases: ["Outgrown the builder", "Lock-in concerns", "Paying for hosting you could own"]
     }
   ];
 
   const process = [
     {
       step: "01",
-      title: "Discovery & Planning",
-      description: "We analyze your requirements, define features, and create a development roadmap",
+      title: "Discovery & Scope",
+      description: "We map the features, pick the track that fits, and write the spec Claude builds from",
       duration: "1-2 days"
     },
     {
@@ -83,13 +106,13 @@ const VibeCoding = () => {
     {
       step: "03",
       title: "Development",
-      description: "Build your MVP using the most suitable platform (Lovable or Base44)",
+      description: "Claude Code writes it and a person reviews every change, while you follow along on a live preview URL from the first day",
       duration: "1-3 weeks"
     },
     {
       step: "04",
-      title: "Testing & Launch",
-      description: "Quality assurance, bug fixes, and deployment to production",
+      title: "Launch & Handover",
+      description: "Production deploy on your Vercel, repo access, and a walkthrough so your team can keep shipping",
       duration: "2-3 days"
     }
   ];
@@ -197,8 +220,9 @@ const VibeCoding = () => {
             </h1>
             
             <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-fade-in">
-              Expert app development using <span className="font-semibold text-foreground">Base44</span> and <span className="font-semibold text-foreground">Lovable</span> platforms. 
-              Launch faster, spend less, and validate your market fit with a production-ready MVP.
+              We build with <span className="font-semibold text-foreground">Claude Code</span> and <span className="font-semibold text-foreground">Claude Cowork</span> — on your Supabase,
+              your Vercel and your GitHub repo. Still want <span className="font-semibold text-foreground">Lovable</span> or <span className="font-semibold text-foreground">Base44</span>?
+              We drive those through Claude too.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
@@ -234,7 +258,7 @@ const VibeCoding = () => {
             <div className="grid grid-cols-3 gap-8 mt-16 max-w-2xl mx-auto">
               <div className="text-center">
                 <div className="text-3xl font-bold text-foreground mb-2">2-6 weeks</div>
-                <div className="text-sm text-muted-foreground">Average Timeline</div>
+                <div className="text-sm text-muted-foreground">Scope to live URL</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-foreground mb-2">70%</div>
@@ -242,7 +266,7 @@ const VibeCoding = () => {
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-foreground mb-2">100%</div>
-                <div className="text-sm text-muted-foreground">Client Satisfaction</div>
+                <div className="text-sm text-muted-foreground">Of the code is yours</div>
               </div>
             </div>
           </div>
@@ -257,7 +281,7 @@ const VibeCoding = () => {
               Why Choose Vibe Coding Agency?
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              We combine cutting-edge technology with expert development to deliver exceptional results
+              Claude does the typing. People do the deciding. You keep the code.
             </p>
           </div>
 
@@ -284,39 +308,50 @@ const VibeCoding = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Our Development Platforms
+              Three Ways We Build
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              We leverage the best platforms in the industry to build your MVP
+              Same team, same tooling. The track depends on how much of the platform you want to keep.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {platforms.map((platform, index) => (
-              <Card key={index} className="border-2 border-border hover:border-primary/50 transition-all duration-300">
+          <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {tracks.map((track, index) => (
+              <Card
+                key={index}
+                className={"relative flex flex-col border-2 transition-all duration-300 " + (track.recommended ? "border-primary/60 shadow-lg shadow-primary/5" : "border-border hover:border-primary/50")}
+              >
+                {track.recommended && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <span className="bg-primary text-primary-foreground px-4 py-1 rounded-full text-xs font-semibold whitespace-nowrap">
+                      Recommended
+                    </span>
+                  </div>
+                )}
                 <CardHeader>
-                  <CardTitle className="text-2xl flex items-center gap-3">
-                    <Sparkles className="h-6 w-6 text-primary" />
-                    {platform.name}
+                  <div className="text-xs font-semibold uppercase tracking-wider text-primary mb-2">{track.tag}</div>
+                  <CardTitle className="text-xl flex items-start gap-3">
+                    <track.icon className="h-6 w-6 text-primary flex-shrink-0 mt-0.5" />
+                    <span>{track.name}</span>
                   </CardTitle>
-                  <CardDescription className="text-base">{platform.description}</CardDescription>
+                  <CardDescription className="text-base">{track.description}</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-6 flex-1 flex flex-col">
                   <div>
-                    <h4 className="font-semibold mb-3">Key Features:</h4>
+                    <h4 className="font-semibold mb-3">What you get:</h4>
                     <ul className="space-y-2">
-                      {platform.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
+                      {track.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <CheckCircle className="h-4 w-4 text-primary flex-shrink-0 mt-1" />
                           <span className="text-sm">{feature}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-                  <div>
-                    <h4 className="font-semibold mb-3">Best For:</h4>
+                  <div className="mt-auto">
+                    <h4 className="font-semibold mb-3">Best for:</h4>
                     <div className="flex flex-wrap gap-2">
-                      {platform.useCases.map((useCase, idx) => (
+                      {track.useCases.map((useCase, idx) => (
                         <span key={idx} className="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full">
                           {useCase}
                         </span>
@@ -326,6 +361,20 @@ const VibeCoding = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+
+          {/* Stack strip */}
+          <div className="max-w-4xl mx-auto mt-14 text-center">
+            <div className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">
+              The stack we hand over
+            </div>
+            <div className="flex flex-wrap justify-center gap-2.5">
+              {stack.map((item, idx) => (
+                <span key={idx} className="px-4 py-1.5 rounded-full border border-border bg-background text-sm font-medium">
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -376,7 +425,8 @@ const VibeCoding = () => {
               Transparent Pricing
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Choose the package that fits your needs and budget
+              Choose the package that fits your needs and budget. Every tier ships the repo into your GitHub,
+              with the app running on your own Supabase and Vercel.
             </p>
           </div>
 
