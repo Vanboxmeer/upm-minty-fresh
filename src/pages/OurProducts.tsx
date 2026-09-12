@@ -13,18 +13,17 @@ import spinquestIcon from "@/assets/apps/spinquest-logo.png";
 import readingRaceIcon from "@/assets/apps/reading-race.png";
 import everythingNightlifeIcon from "@/assets/apps/everything-nightlife-mark.svg";
 import vaporsmoothIcon from "@/assets/apps/vaporsmooth.png";
-import contentConveyorBeltIcon from "@/assets/apps/content-conveyor-belt.svg";
 
 const products = [
   {
-    name: "Content Conveyor Belt",
-    tagline: "Social Content Pipeline",
-    description: "The content engine behind UPM's social packages. Plan a month of on-brand posts, generate the images and short video to go with them, run everything through approval, and track what has gone live on each platform — all from one belt.",
-    url: "https://content-conveyor-belt.vercel.app/",
-    icon: contentConveyorBeltIcon,
-    gradient: "from-violet-500/20 to-indigo-500/20",
+    name: "Fullmedia Alchemist",
+    tagline: "AI Social Content Platform",
+    description: "The content engine behind UPM's social packages. Start a campaign and it drafts on-brand posts grounded in your brand's real details — never invented — ships them fully designed across eight platforms, then reviews what actually went live to sharpen the next batch.",
+    url: "https://www.fullmediaalchemist.com/",
+    icon: "https://ftjdmvdyeetiubmziwav.supabase.co/storage/v1/object/public/blog-images/fullmedia-alchemist-mark.png",
+    gradient: "from-amber-500/20 to-emerald-500/20",
     isWide: false,
-    rounded: true
+    rounded: false
   },
   {
     name: "SpinQuest",
@@ -82,8 +81,8 @@ const OurProducts = () => {
   useEffect(() => {
     updateMetaTags({
       title: "Our Apps | UPM Ecosystem",
-      description: "A few of the apps built by UPM, including the Content Conveyor Belt, SpinQuest, Reading Race, Watch Crypto, Everything Nightlife, and Vaporsmooth.",
-      keywords: "UPM apps, Content Conveyor Belt, social content calendar, SpinQuest, Reading Race, Watch Crypto, Everything Nightlife, Vaporsmooth, crypto tools, community apps, cannabis marketplace"
+      description: "A few of the apps built by UPM, including Fullmedia Alchemist, SpinQuest, Reading Race, Watch Crypto, Everything Nightlife, and Vaporsmooth.",
+      keywords: "UPM apps, Fullmedia Alchemist, AI social content, social content calendar, SpinQuest, Reading Race, Watch Crypto, Everything Nightlife, Vaporsmooth, crypto tools, community apps, cannabis marketplace"
     });
   }, []);
 
