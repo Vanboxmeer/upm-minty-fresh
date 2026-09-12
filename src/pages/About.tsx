@@ -13,10 +13,9 @@ import spinquestIcon from "@/assets/apps/spinquest-logo.png";
 import watchCryptoIcon from "@/assets/apps/watch-crypto.png";
 import vaporsmoothIcon from "@/assets/apps/vaporsmooth.png";
 import everythingNightlifeIcon from "@/assets/apps/everything-nightlife-mark.svg";
-import contentConveyorBeltIcon from "@/assets/apps/content-conveyor-belt.svg";
 
 const apps = [
-  { name: "Content Conveyor Belt", icon: contentConveyorBeltIcon, url: "https://content-conveyor-belt.vercel.app/" },
+  { name: "Fullmedia Alchemist", icon: "https://ftjdmvdyeetiubmziwav.supabase.co/storage/v1/object/public/blog-images/fullmedia-alchemist-mark.png", url: "https://www.fullmediaalchemist.com/" },
   { name: "SpinQuest", icon: spinquestIcon, url: "https://spinquest.app/" },
   { name: "Reading Race", icon: readingRaceIcon, url: "https://readingrace.com/" },
   { name: "Watch Crypto", icon: watchCryptoIcon, url: "https://watchcrypto.info/" },
