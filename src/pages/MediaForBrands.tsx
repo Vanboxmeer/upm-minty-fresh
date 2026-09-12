@@ -82,8 +82,8 @@ const MediaForBrands = () => {
 
     updateMetaTags({
       title: "Social Content Creation | UPM - United Press Media",
-      description: "Activate your content conveyor belt. Custom posts, reels, videos & ads starting from ~$25/post. No hidden fees.",
-      keywords: "social content creation, branded content, social media management, Instagram Reels, TikTok content, Web3 social media, crypto content, content marketing",
+      description: "On-brand social posts, reels, videos and ads from ~$25/post, built on Fullmedia Alchemist — drafted from your real brand details, never invented, and reviewed after they go live.",
+      keywords: "social content creation, Fullmedia Alchemist, AI social content, branded content, social media management, Instagram Reels, TikTok content, Web3 social media, crypto content, content marketing",
       canonical: "https://unitedpress.media/media-for-brands",
       ogTitle: "Social Content Creation by UPM",
       ogDescription: "Scroll-stopping, on-brand social content. Starting from ~$25/post.",
@@ -122,8 +122,8 @@ const MediaForBrands = () => {
               </Badge>
 
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-foreground">
-                Activate Your{" "}
-                <span className="text-primary">Content Conveyor Belt</span>
+                Social Content That{" "}
+                <span className="text-primary">Gets Sharper Every Post</span>
               </h1>
 
               <p className="text-xl md:text-2xl text-muted-foreground mb-6 max-w-3xl mx-auto leading-relaxed">
@@ -131,17 +131,17 @@ const MediaForBrands = () => {
               </p>
 
               <p className="text-base text-muted-foreground mb-10">
-                Every post runs through our own tool,{" "}
+                Every post runs through our own platform,{" "}
                 <a
-                  href="https://content-conveyor-belt.vercel.app/"
+                  href="https://www.fullmediaalchemist.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary font-semibold hover:underline inline-flex items-center gap-1"
                 >
-                  the Content Conveyor Belt
+                  Fullmedia Alchemist
                   <ExternalLink className="w-4 h-4" />
                 </a>
-                {" "}— planned, approved, scheduled and tracked in one place.
+                {" "}— drafted from your brand's real details, never invented, and reviewed after it goes live.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -247,7 +247,7 @@ const MediaForBrands = () => {
           </div>
         </section>
 
-        {/* Content Conveyor Belt app */}
+        {/* Fullmedia Alchemist app */}
         <section className="pb-20 bg-background">
           <div className="container mx-auto px-4">
             <Card className="max-w-6xl mx-auto p-8 border-2 border-primary/30 bg-primary/5">
@@ -258,27 +258,36 @@ const MediaForBrands = () => {
                     Built by UPM
                   </Badge>
                   <h3 className="text-2xl md:text-3xl font-semibold mb-3">
-                    Inside the Content Conveyor Belt
+                    Inside Fullmedia Alchemist
                   </h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    The Content Conveyor Belt is the app your content actually runs on. A rolling
-                    calendar of posts, the images and short video that go with them, an approval
-                    step before anything ships, and per-platform tracking of what has already gone
-                    live. Clients get a login so nothing about their content plan is a mystery.
+                    Fullmedia Alchemist is the platform your content actually runs on. You fill in
+                    your voice, colours, niches and no-go list once. Start a campaign and the batch
+                    gets drafted to spec and shipped fully designed across eight platforms. One
+                    click approves it, or you send it back with a reason and it redrafts. Then,
+                    once posts are live, it reviews the real copy, hashtags and your own notes to
+                    sharpen the next campaign.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed mt-4">
+                    Nothing gets invented. Every post is grounded in details your brand actually
+                    published — and clients get their own login, so no part of the plan is a mystery.
                   </p>
                 </div>
                 <div className="shrink-0">
                   <Button asChild size="lg" variant="hero" className="text-base px-8 py-6">
                     <a
-                      href="https://content-conveyor-belt.vercel.app/"
+                      href="https://www.fullmediaalchemist.com/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-center gap-2"
                     >
-                      Open the Content Conveyor Belt
+                      Open Fullmedia Alchemist
                       <ExternalLink className="w-5 h-5" />
                     </a>
                   </Button>
+                  <p className="text-xs text-muted-foreground text-center mt-3">
+                    Free plan available — no card required.
+                  </p>
                 </div>
               </div>
             </Card>
