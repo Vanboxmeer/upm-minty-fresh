@@ -15,29 +15,29 @@ import {
 
 const pricingTiers = [
   {
-    name: "Light",
-    posts: "4 posts",
-    price: "~$100–120",
-    bestFor: "Founders who post occasionally",
+    name: "Free",
+    posts: "3 content pieces",
+    price: "$0/mo",
+    bestFor: "Try it before you commit to a plan",
   },
   {
-    name: "Steady",
-    posts: "8–12 posts",
-    price: "~$200–280",
-    bestFor: "Growing communities & app updates",
+    name: "Starter",
+    posts: "30 content pieces",
+    price: "$79/mo",
+    bestFor: "One brand, steady output",
   },
   {
     name: "Growth",
-    posts: "16–20 posts",
-    price: "~$380–480",
-    bestFor: "Active engagement & brand building",
+    posts: "100 content pieces",
+    price: "$249/mo",
+    bestFor: "Up to 3 brands, 3 concurrent campaigns",
     popular: true,
   },
   {
-    name: "Full Presence",
-    posts: "28 posts",
-    price: "~$650–700",
-    bestFor: "Serious projects & launches",
+    name: "Agency",
+    posts: "300 content pieces",
+    price: "$799/mo",
+    bestFor: "Up to 10 brands, unlimited campaigns",
   },
 ];
 
@@ -68,25 +68,25 @@ const MediaForBrands = () => {
     setUserType('brand');
     setSelectedPackage({
       name: "Social Content Creation",
-      price: "From $100/mo",
+      price: "Free, then from $79/mo",
       description: "Custom branded social content — posts, reels, videos & ads",
       features: [
-        "4–28 posts/month depending on plan",
+        "3–300 content pieces/month depending on plan",
         "Instagram Reels, TikTok, X/Twitter content",
         "Branded memes & product showcases",
         "AI-powered video ads with character continuity",
-        "Monthly contracts, cancel anytime",
+        "Free plan available — no card required",
       ],
       popular: false,
     });
 
     updateMetaTags({
       title: "Social Content Creation | UPM - United Press Media",
-      description: "On-brand social posts, reels, videos and ads from ~$25/post, built on Fullmedia Alchemist — drafted from your real brand details, never invented, and reviewed after they go live.",
+      description: "On-brand social posts, reels, videos and ads on Fullmedia Alchemist. Free plan, then $79, $249 or $799/mo — drafted from your real brand details, never invented, and reviewed after they go live.",
       keywords: "social content creation, Fullmedia Alchemist, AI social content, branded content, social media management, Instagram Reels, TikTok content, Web3 social media, crypto content, content marketing",
       canonical: "https://unitedpress.media/media-for-brands",
       ogTitle: "Social Content Creation by UPM",
-      ogDescription: "Scroll-stopping, on-brand social content. Starting from ~$25/post.",
+      ogDescription: "Scroll-stopping, on-brand social content. Free plan, then from $79/mo.",
       ogType: "website",
       twitterCard: "summary_large_image",
       structuredData: [
@@ -185,18 +185,18 @@ const MediaForBrands = () => {
             <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
               <Card className="p-6 text-center border-2 hover:border-primary/50 transition-all">
                 <Clock className="w-8 h-8 text-primary mx-auto mb-3" />
-                <h3 className="font-semibold mb-2">Just Filler Content?</h3>
-                <p className="text-sm text-muted-foreground">2 residency days/week — perfect when your team is busy shipping</p>
+                <h3 className="font-semibold mb-2">Just Testing?</h3>
+                <p className="text-sm text-muted-foreground">Three pieces a month on the free plan — enough to see whether the drafts sound like you</p>
               </Card>
               <Card className="p-6 text-center border-2 hover:border-primary/50 transition-all">
                 <MessageCircle className="w-8 h-8 text-primary mx-auto mb-3" />
                 <h3 className="font-semibold mb-2">Steady Presence?</h3>
-                <p className="text-sm text-muted-foreground">1–3 posts/week to keep your community engaged</p>
+                <p className="text-sm text-muted-foreground">30–100 pieces a month to keep your community engaged</p>
               </Card>
               <Card className="p-6 text-center border-2 hover:border-primary/50 transition-all">
                 <Sparkles className="w-8 h-8 text-primary mx-auto mb-3" />
                 <h3 className="font-semibold mb-2">Serious Growth?</h3>
-                <p className="text-sm text-muted-foreground">5–7 posts/week (up to 28 posts/month)</p>
+                <p className="text-sm text-muted-foreground">Up to 300 pieces a month across as many as 10 brands</p>
               </Card>
             </div>
 
@@ -300,7 +300,7 @@ const MediaForBrands = () => {
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Simple, Fair Pricing</h2>
               <p className="text-lg text-muted-foreground">
-                Base rate ≈ <span className="text-foreground font-semibold">$25 per post</span> (final price depends on volume & complexity)
+                The same four plans you get on <span className="text-foreground font-semibold">Fullmedia Alchemist</span> — billed monthly, cancel anytime.
               </p>
             </div>
 
@@ -331,15 +331,15 @@ const MediaForBrands = () => {
             <div className="max-w-3xl mx-auto grid sm:grid-cols-2 gap-4">
               <div className="flex items-center gap-3 p-4 rounded-lg bg-background border border-border">
                 <Percent className="w-5 h-5 text-primary shrink-0" />
-                <span className="text-sm">Commit to <strong>3 months</strong> → <strong className="text-primary">5% off</strong> every month</span>
+                <span className="text-sm">Pay <strong>annually</strong> → <strong className="text-primary">2 months free</strong></span>
               </div>
               <div className="flex items-center gap-3 p-4 rounded-lg bg-background border border-border">
                 <Percent className="w-5 h-5 text-primary shrink-0" />
-                <span className="text-sm">Commit to <strong>12 months</strong> → <strong className="text-primary">10% off</strong> every month</span>
+                <span className="text-sm">Extra pieces <strong className="text-primary">$1 each</strong> · extra brand slots from <strong className="text-primary">$29/mo</strong></span>
               </div>
             </div>
             <p className="text-center text-xs text-muted-foreground mt-4 max-w-lg mx-auto">
-              No hidden fees. Clear deliverables. Monthly contracts — cancel anytime after the first month.
+              No card required to start on Free. Every plan includes Review &amp; Improve at one credit per platform reviewed, and CSV export to Metricool.
             </p>
           </div>
         </section>
