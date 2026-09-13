@@ -13,6 +13,7 @@ import spinquestIcon from "@/assets/apps/spinquest-logo.png";
 import readingRaceIcon from "@/assets/apps/reading-race.png";
 import everythingNightlifeIcon from "@/assets/apps/everything-nightlife-mark.svg";
 import vaporsmoothIcon from "@/assets/apps/vaporsmooth.png";
+import fullmediaAlchemistIcon from "@/assets/apps/fullmedia-alchemist.svg";
 
 const products = [
   {
@@ -20,7 +21,7 @@ const products = [
     tagline: "AI Social Content Platform",
     description: "The content engine behind UPM's social packages. Start a campaign and it drafts on-brand posts grounded in your brand's real details — never invented — ships them fully designed across eight platforms, then reviews what actually went live to sharpen the next batch.",
     url: "https://www.fullmediaalchemist.com/",
-    icon: "https://ftjdmvdyeetiubmziwav.supabase.co/storage/v1/object/public/blog-images/fullmedia-alchemist-mark.png",
+    icon: fullmediaAlchemistIcon,
     gradient: "from-amber-500/20 to-emerald-500/20",
     isWide: false,
     rounded: false
