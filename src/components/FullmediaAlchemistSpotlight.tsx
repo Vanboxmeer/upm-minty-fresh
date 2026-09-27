@@ -3,6 +3,10 @@ import { ArrowRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import fullmediaAlchemistIcon from "@/assets/apps/fullmedia-alchemist.svg";
 
+// The Alchemist character art, as published by the app itself on fullmediaalchemist.com
+const ALCHEMIST_CHARACTER =
+  "https://tpqvvrdglnsdljdpzwfl.supabase.co/storage/v1/object/public/wheel-assets/content-calendar/platform-brand/assistant-wave.png";
+
 const FullmediaAlchemistSpotlight = () => {
   const { elementRef, isVisible } = useScrollAnimation();
 
@@ -22,9 +26,13 @@ const FullmediaAlchemistSpotlight = () => {
                 style={{ background: "linear-gradient(135deg, rgba(245,158,11,0.3), rgba(16,185,129,0.3))" }}
               />
               <img
-                src={fullmediaAlchemistIcon}
-                alt="Fullmedia Alchemist icon"
-                className="relative h-40 w-40 md:h-48 md:w-48 object-contain"
+                src={ALCHEMIST_CHARACTER}
+                alt="The Alchemist, the brand assistant inside Fullmedia Alchemist"
+                loading="lazy"
+                width={1024}
+                height={1536}
+                onError={(e) => { e.currentTarget.src = fullmediaAlchemistIcon; }}
+                className="relative w-[200px] md:w-[260px] h-auto object-contain"
               />
             </div>
           </div>
