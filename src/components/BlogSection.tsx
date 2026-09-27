@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
 import { BlogCardSkeleton } from "@/components/ui/skeleton";
 import { getCategoryColor } from "@/components/magazine/categoryColors";
-import AnimatedStarfield from "@/components/AnimatedStarfield";x
+import AnimatedStarfield from "@/components/AnimatedStarfield";
 import { handleImageError } from "@/lib/imageFallback";
 
 const BlogSection = () => {
