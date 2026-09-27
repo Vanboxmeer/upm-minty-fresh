@@ -133,7 +133,7 @@ const Footer = () => {
       features: [
         "Instagram Reels, TikTok clips, and social media content",
         "10-30s video ads with sound and character continuity",
-        "Banner/display creatives for Brave, Native, Telegram Ads",
+        "Banner and display creatives for niche-site placements",
         "Photorealistic 1024×1024 images and short videos",
         "Unlimited iterations with Grok Imagine infinite scroll",
         "Web3, crypto, and tech-optimized content generation"
@@ -165,7 +165,7 @@ const Footer = () => {
       annualPrice: 0,
       description: "Perfect for testing our services before committing to membership",
       features: ["Discovery media deck", "Campaign builder form", "Quote builder and shortlisting assistance", "Order facilitation"],
-      excludedFeatures: ["KPI tracking", "Dedicated account manager and campaign advisor", "Managed Brave Ads and Telegram Ads", "Press negotiations", "Membership pricing"],
+      excludedFeatures: ["KPI tracking", "Dedicated account manager and campaign advisor", "Managed paid placements on niche sites and newsletters", "Press negotiations", "Membership pricing"],
       popular: false,
       hasBilling: false,
       type: 'brand' as const
@@ -177,7 +177,7 @@ const Footer = () => {
       monthlyPrice: 250,
       annualPrice: 2500, // 10 months pricing
       description: "Designed for medium sized campaigns with reduced service fees",
-      features: ["Members media deck", "Campaign builder", "Order facilitation", "Quote builder and shortlist assistance", "KPI tracking", "Dedicated account manager and campaign advisor", "Managed Brave Ads and Telegram Ads", "KOL communications", "Press negotiations", "Free-coverage outreach: 15 requests per month — these are outreach attempts, not guaranteed placements. Extra requests $20 each. Paid-placement outreach is never capped.", "Silver members pricing - service fees reduced to just 3.45%"],
+      features: ["Members media deck", "Campaign builder", "Order facilitation", "Quote builder and shortlist assistance", "KPI tracking", "Dedicated account manager and campaign advisor", "Managed paid placements on niche sites and newsletters", "KOL communications", "Press negotiations", "Free-coverage outreach: 15 requests per month — these are outreach attempts, not guaranteed placements. Extra requests $20 each. Paid-placement outreach is never capped.", "Silver members pricing - service fees reduced to just 3.45%"],
       excludedFeatures: [],
       popular: true,
       hasBilling: true,
@@ -190,7 +190,7 @@ const Footer = () => {
       monthlyPrice: 995,
       annualPrice: 9950, // 10 months pricing
       description: "Designed for large and highly active marketing campaigns requiring administrative work",
-      features: ["Members media deck", "Campaign builder", "Order facilitation", "Quote builder and shortlist assistance", "KPI tracking", "Dedicated account manager and campaign advisor", "Managed Brave Ads and Telegram Ads", "KOL communications", "Press negotiations", "Free-coverage outreach: 50 requests per month — these are outreach attempts, not guaranteed placements. Extra requests $20 each. Paid-placement outreach is never capped.", "Gold members pricing - service fees reduced to just 1%"],
+      features: ["Members media deck", "Campaign builder", "Order facilitation", "Quote builder and shortlist assistance", "KPI tracking", "Dedicated account manager and campaign advisor", "Managed paid placements on niche sites and newsletters", "KOL communications", "Press negotiations", "Free-coverage outreach: 50 requests per month — these are outreach attempts, not guaranteed placements. Extra requests $20 each. Paid-placement outreach is never capped.", "Gold members pricing - service fees reduced to just 1%"],
       excludedFeatures: [],
       popular: false,
       hasBilling: true,
@@ -1306,7 +1306,7 @@ const Footer = () => {
               <li><a href="/services#kol-collaborations" className="hover:text-primary transition-colors">KOL Collaborations</a></li>
               <li><a href="/services#press-release-services" className="hover:text-primary transition-colors">Press Release Services</a></li>
               <li><a href="/services#features--interviews--spaces" className="hover:text-primary transition-colors">Features, Interviews, Spaces</a></li>
-              <li><a href="/services" className="hover:text-primary transition-colors">Managed Paid Advertising</a></li>
+              <li><a href="/services#paid-advertising" className="hover:text-primary transition-colors">Niche Site Placements</a></li>
               <li><a href="/creators" className="hover:text-primary transition-colors">Creator Services</a></li>
               <li><a href="/dealflow" className="hover:text-primary transition-colors">Dealflow (Outreach System)</a></li>
               <li><a href="/media-for-brands" className="hover:text-primary transition-colors">Fullmedia Alchemist (Social Content App)</a></li>
