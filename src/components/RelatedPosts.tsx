@@ -4,9 +4,10 @@ import { Card } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import type { BlogPost } from "@/hooks/useBlogPosts";
 import { CategoryBreadcrumbs } from "@/components/CategoryBreadcrumbs";
+import { handleImageError, PLACEHOLDER_IMAGE } from "@/lib/imageFallback";
 
 interface RelatedPostsProps {
-  currentPost: BlogPost;
+  currentPost: BlogPost;x
 }
 
 export const RelatedPosts = ({ currentPost }: RelatedPostsProps) => {
@@ -116,7 +117,8 @@ export const RelatedPosts = ({ currentPost }: RelatedPostsProps) => {
               {post.featured_image && (
                 <div className="aspect-video overflow-hidden rounded-t-lg">
                   <img
-                    src={post.featured_image}
+                    src={post.featured_image || PLACEHOLDER_IMAGE}
+                    onError={handleImageError}
                     alt={post.featured_image_alt || post.title}
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
