@@ -1324,7 +1324,6 @@ const Footer = () => {
               <li><a href="/contact" className="hover:text-primary transition-colors">Contact</a></li>
               <li><a href="/our-products" className="hover:text-primary transition-colors">Our Apps</a></li>
               <li><a href="/affiliate-signup" className="hover:text-secondary transition-colors font-medium">Referral Program</a></li>
-              <li><a href="/partner-dashboard" className="hover:text-primary transition-colors">Partner Login</a></li>
             </ul>
           </div>
 
