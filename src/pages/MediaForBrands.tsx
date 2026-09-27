@@ -32,10 +32,10 @@ const sans = { fontFamily: '"IBM Plex Sans", -apple-system, system-ui, sans-seri
 const mono = { fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' };
 
 const pricingTiers = [
-  { name: "Free", posts: "3 content pieces", price: "$0/mo", bestFor: "Try it before you commit to a plan" },
-  { name: "Starter", posts: "30 content pieces", price: "$79/mo", bestFor: "One brand, steady output" },
-  { name: "Growth", posts: "100 content pieces", price: "$249/mo", bestFor: "Up to 3 brands, 3 concurrent campaigns", popular: true },
-  { name: "Agency", posts: "300 content pieces", price: "$799/mo", bestFor: "Up to 10 brands, unlimited campaigns" },
+  { name: "Free", posts: "3 content pieces", price: "$0/mo", bestFor: "Try it before you commit to a plan", video: "No video" },
+  { name: "Starter", posts: "30 content pieces", price: "$79/mo", bestFor: "One brand, steady output", video: "Video add-on, $8 each" },
+  { name: "Growth", posts: "100 content pieces", price: "$249/mo", bestFor: "Up to 3 brands, 3 concurrent campaigns", popular: true, video: "10 AI videos/mo (coming soon)" },
+  { name: "Agency", posts: "300 content pieces", price: "$799/mo", bestFor: "Up to 10 brands, unlimited campaigns", video: "30 AI videos/mo (coming soon)" },
 ];
 
 const loop = [
@@ -232,11 +232,23 @@ const MediaForBrands = () => {
         <section className="py-20" style={{ background: FMA.ink }}>
           <div className="container mx-auto px-4">
             <div className="text-center mb-14">
+              <div className="flex justify-center mb-6">
+                <div className="relative">
+                  <div className="absolute -inset-6 rounded-full blur-2xl opacity-60" style={{ background: 'radial-gradient(circle, rgba(46,156,116,0.35), rgba(232,163,61,0.15))' }} />
+                  <img src={alchemistMark} alt="" className="relative h-24 w-24 object-contain" />
+                </div>
+              </div>
               <h2 className="text-3xl md:text-5xl mb-4" style={{ ...serif, color: FMA.paper, fontWeight: 600 }}>
-                Inside the <span className="italic" style={{ color: FMA.emerald }}>Alchemist</span>
+                Meet the <span className="italic" style={{ color: FMA.emerald }}>Alchemist</span>
               </h2>
-              <p className="text-lg max-w-2xl mx-auto" style={{ color: FMA.muted }}>
-                Four steps, and the fourth one is why the work compounds instead of resetting every month.
+              <p className="text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: FMA.muted }}>
+                The Alchemist is the assistant that actually makes your content. It learns your brand
+                once, writes only from things you have really published, and hands the work back
+                finished rather than as a draft for you to fix — then goes back over what went live
+                and gets better at it.
+              </p>
+              <p className="text-sm mt-4" style={{ ...mono, color: FMA.amber }}>
+                Four habits worth knowing about
               </p>
             </div>
 
@@ -332,7 +344,8 @@ const MediaForBrands = () => {
                   <h3 className="text-xl mb-2" style={{ ...serif, color: FMA.paper, fontWeight: 600 }}>{tier.name}</h3>
                   <p className="text-3xl mb-1" style={{ ...serif, color: FMA.amber, fontWeight: 600 }}>{tier.price}</p>
                   <p className="text-sm mb-3" style={{ color: FMA.paperDim }}>{tier.posts}/month</p>
-                  <p className="text-xs" style={{ color: FMA.muted }}>{tier.bestFor}</p>
+                  <p className="text-xs mb-3" style={{ color: FMA.muted }}>{tier.bestFor}</p>
+                  <p className="text-[11px] pt-3" style={{ ...mono, color: FMA.amber, borderTop: '1px solid ' + FMA.line }}>{tier.video}</p>
                 </div>
               ))}
             </div>
@@ -344,12 +357,13 @@ const MediaForBrands = () => {
               </div>
               <div className="flex items-center gap-3 p-4 rounded-lg" style={{ background: FMA.panel, border: '1px solid ' + FMA.line }}>
                 <Percent className="w-5 h-5 shrink-0" style={{ color: FMA.amber }} />
-                <span className="text-sm" style={{ color: FMA.paperDim }}>Extra pieces <strong style={{ color: FMA.amber }}>$1 each</strong> · extra brand slots from <strong style={{ color: FMA.amber }}>$29/mo</strong></span>
+                <span className="text-sm" style={{ color: FMA.paperDim }}>Video is priced separately from stills · extra brand slots from <strong style={{ color: FMA.amber }}>$29/mo</strong></span>
               </div>
             </div>
             <p className="text-center text-xs mt-5 max-w-lg mx-auto" style={{ color: FMA.muted }}>
               No card required to start on Free. Every plan includes Review &amp; Improve at one credit per
-              platform reviewed, and CSV export to Metricool.
+              platform reviewed, and CSV export to Metricool. Video is counted and priced on its own —
+              see each plan above.
             </p>
 
             <div className="text-center mt-10">
