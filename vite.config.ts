@@ -43,6 +43,7 @@ function generateSitemapPlugin(env: Record<string, string | undefined>) {
           { url: 'media-for-brands', priority: '0.9', changefreq: 'monthly' },
           { url: 'vibe-coding', priority: '0.9', changefreq: 'monthly' },
           { url: 'creators', priority: '0.8', changefreq: 'monthly' },
+          { url: 'dealflow', priority: '0.7', changefreq: 'monthly' },
           { url: 'blog', priority: '0.8', changefreq: 'daily' },
           { url: 'our-products', priority: '0.7', changefreq: 'monthly' },
           { url: 'case-studies', priority: '0.7', changefreq: 'monthly' },
@@ -125,20 +126,24 @@ const STATIC_META: Record<string, { title: string; description: string }> = {
     description: 'From KOL collaborations to press releases and tier-1 media features. Comprehensive Web3 and crypto marketing packages from $5K to $100K.',
   },
   'media-for-brands': {
-    title: 'Media for Brands | UPM',
-    description: 'Earned media, native placements and branded content for brands reaching crypto, Web3 and technology audiences.',
+    title: 'Fullmedia Alchemist | Social Content for Your Own Channels | UPM',
+    description: 'On-brand social posts, reels and video for the accounts you own, drafted and scheduled by The Alchemist. Free plan, then $79, $249 or $799/mo.',
+  },
+  'dealflow': {
+    title: 'Dealflow by UPM | Creator & Press Outreach System',
+    description: 'The outreach system behind every UPM campaign. Researched shortlists, free and paid coverage tracked side by side, logged rates and follow-ups that never go cold.',
   },
   'vibe-coding': {
-    title: 'Vibe Coding | Web3 MVPs & Rapid App Development | UPM',
-    description: 'Web3 MVPs, token dashboards and landing pages built fast. UPM ships production apps from idea to launch.',
+    title: 'App Development & AI Automations | Agentic Builds | UPM',
+    description: 'Apps, internal tools and automations built with agentic development and AI integrations — across Sheets, Supabase, Vercel and more, in a fraction of the usual time.',
   },
   'creators': {
-    title: 'For Creators | KOL & Influencer Partnerships | UPM',
-    description: 'Join UPM\u2019s network of 500+ KOLs and creators across Twitter/X, YouTube and Telegram. Paid collaborations with vetted Web3 brands.',
+    title: 'For Creators, Publishers & Newsletters | UPM',
+    description: 'Hear first about news in the industries you cover. Earned coverage when a story stands on its own, paid campaigns when there is a budget. No listing fees, no exclusivity.',
   },
   'our-products': {
     title: 'Our Apps | UPM Ecosystem',
-    description: 'A few of the apps built by UPM, including SpinQuest, Reading Race, Watch Crypto, Everything Nightlife and Vaporsmooth.',
+    description: 'A few of the apps built by UPM, including Fullmedia Alchemist, Dealflow, SpinQuest, Reading Race, Watch Crypto, Everything Nightlife and Vaporsmooth.',
   },
   'case-studies': {
     title: 'Case Studies | Campaign Results | UPM',
@@ -169,8 +174,8 @@ const STATIC_META: Record<string, { title: string; description: string }> = {
     description: 'Get in touch with United Press Media to scope a press, KOL or paid media campaign for your project.',
   },
   'affiliate-signup': {
-    title: 'Affiliate Program | Earn With UPM',
-    description: 'Refer clients to United Press Media and earn commission on campaigns you introduce.',
+    title: 'Referral Program | Earn 10% With UPM',
+    description: 'Refer a brand to UPM and earn 10% of what they spend with us. Free to join, no exclusivity, and your referral link works the moment you sign up.',
   },
   'privacy-policy': {
     title: 'Privacy Policy | UPM',
