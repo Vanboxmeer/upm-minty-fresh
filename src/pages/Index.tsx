@@ -51,8 +51,8 @@ const Index = () => {
       <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
         <Hero />
         <Services />
-        <DealflowSpotlight />
         <CreatorCoverage />
+        <DealflowSpotlight />
         <InfluencerPlatforms />
         <PaidAdvertising />
         <FullmediaAlchemistSpotlight />
