@@ -7,41 +7,41 @@ const PaidAdvertising = () => {
 
   const platforms = [
     {
-      name: "Telegram Ads",
+      name: "Niche Site Placements",
+      icon: Globe,
+      color: "text-primary",
+      description: "Banner, display and native slots on the industry sites your buyers already read",
+      features: [
+        "Display and banner inventory",
+        "Native and sponsored content slots",
+        "Sites chosen for audience fit, not raw traffic",
+        "Rates checked against what comparable sites charge",
+      ],
+    },
+    {
+      name: "Newsletter Sponsorships",
       icon: Send,
       color: "text-primary",
-      description: "Reach crypto-native audiences in targeted communities",
+      description: "Paid placement inside newsletters with an audience that opted in to hear about your category",
       features: [
-        "Channel & Group Sponsorships",
-        "Targeted Community Reach",
-        "Crypto-Native Audience",
-        "High Engagement Rates"
-      ]
+        "Dedicated sends and inline placements",
+        "Subscriber numbers and open rates confirmed before booking",
+        "Copy written to match the newsletter's voice",
+        "Live links reported back to you",
+      ],
     },
     {
-      name: "Brave Ads",
+      name: "Community Sponsorships",
       icon: Shield,
-      color: "text-orange-500",
-      description: "Privacy-focused advertising with rewarded attention",
+      color: "text-primary",
+      description: "Sponsored slots in the groups, servers and channels where your market already gathers",
       features: [
-        "Privacy-First Advertising",
-        "Rewarded User Attention",
-        "Web3-Savvy Users",
-        "Performance Tracking"
-      ]
+        "Group, channel and server placements",
+        "Pinned posts, AMAs and event sponsorships",
+        "Negotiated directly with the community owner",
+        "No spray-and-pray blasting",
+      ],
     },
-    {
-      name: "Native Ads",
-      icon: Globe,
-      color: "text-green-500",
-      description: "Seamless advertising on niche-specific industry sites",
-      features: [
-        "Banner & Display Ads",
-        "Branded Content Links",
-        "Niche Site Placements",
-        "Native Content Integration"
-      ]
-    }
   ];
 
 
@@ -57,16 +57,17 @@ const PaidAdvertising = () => {
           }`}
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-            Managed Paid Advertising
+            Paid Placements on Niche Sites
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Strategic paid advertising campaigns on platforms where your audience is most active. 
-            We handle everything from setup to optimization for maximum impact.
+            Bought inventory on the sites, newsletters and communities your buyers already read.
+            We find the placement, check the rate against what comparable channels charge, and
+            handle the booking.
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
-            <span className="px-4 py-2 bg-primary/10 rounded-full">Full Campaign Management</span>
-            <span className="px-4 py-2 bg-primary/10 rounded-full">Performance Optimization</span>
-            <span className="px-4 py-2 bg-primary/10 rounded-full">Detailed Analytics</span>
+            <span className="px-4 py-2 bg-primary/10 rounded-full">Placement Sourced For You</span>
+            <span className="px-4 py-2 bg-primary/10 rounded-full">Rates Benchmarked</span>
+            <span className="px-4 py-2 bg-primary/10 rounded-full">Live Links Reported Back</span>
           </div>
         </div>
 
