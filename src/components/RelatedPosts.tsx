@@ -7,7 +7,7 @@ import { CategoryBreadcrumbs } from "@/components/CategoryBreadcrumbs";
 import { handleImageError, PLACEHOLDER_IMAGE } from "@/lib/imageFallback";
 
 interface RelatedPostsProps {
-  currentPost: BlogPost;x
+  currentPost: BlogPost;
 }
 
 export const RelatedPosts = ({ currentPost }: RelatedPostsProps) => {
