@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Dealflow by UPM">
+  <defs>
+    <linearGradient id="dfBadge" x1="8" y1="6" x2="120" y2="122" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2B4FA8"/>
+      <stop offset="1" stop-color="#1E3A8A"/>
+    </linearGradient>
+    <linearGradient id="dfCheck" x1="40" y1="66" x2="92" y2="104" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FBBF24"/>
+      <stop offset="1" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="64" cy="64" r="60" fill="url(#dfBadge)"/>
+  <circle cx="64" cy="64" r="60" fill="none" stroke="#0F172A" stroke-opacity="0.45" stroke-width="3"/>
+
+  <!-- flow arcs: deals moving through the pipeline toward the close -->
+  <path d="M26 54 A 44 44 0 0 1 102 54" fill="none" stroke="#93B4F5" stroke-opacity="0.55"
+        stroke-width="6" stroke-linecap="round"/>
+  <path d="M38 38 A 34 34 0 0 1 90 38" fill="none" stroke="#DCE8FD" stroke-opacity="0.5"
+        stroke-width="5" stroke-linecap="round"/>
+
+  <!-- the close -->
+  <path d="M42 72 L58 88 L90 54" fill="none" stroke="url(#dfCheck)" stroke-width="13"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
