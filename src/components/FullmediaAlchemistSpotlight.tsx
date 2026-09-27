@@ -15,7 +15,7 @@ const FullmediaAlchemistSpotlight = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <div className="flex justify-center lg:justify-start">
+          <div className="flex justify-center">
             <div className="relative">
               <div
                 className="absolute -inset-8 rounded-full blur-3xl opacity-40"
