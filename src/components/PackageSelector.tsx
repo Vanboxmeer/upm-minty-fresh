@@ -89,7 +89,7 @@ const PackageSelector = () => {
       annualPrice: 0,
       description: "Perfect for testing our services before committing to membership",
       features: ["Discovery media deck", "Campaign builder form", "Quote builder and shortlisting assistance", "Order facilitation"],
-      excludedFeatures: ["KPI tracking", "Dedicated account manager and campaign advisor", "Managed Brave Ads and Telegram Ads", "Press negotiations", "Membership pricing"],
+      excludedFeatures: ["KPI tracking", "Dedicated account manager and campaign advisor", "Managed paid placements on niche sites and newsletters", "Press negotiations", "Membership pricing"],
       popular: false,
       hasBilling: false
     },
@@ -100,7 +100,7 @@ const PackageSelector = () => {
       monthlyPrice: 250,
       annualPrice: 2500, // 10 months pricing
       description: "Designed for medium sized campaigns with reduced service fees",
-      features: ["Members media deck", "Campaign builder", "Order facilitation", "Quote builder and shortlist assistance", "KPI tracking", "Dedicated account manager and campaign advisor", "Managed Brave Ads and Telegram Ads", "KOL communications", "Press negotiations", "Free-coverage outreach: 15 requests per month — these are outreach attempts, not guaranteed placements. Extra requests $20 each. Paid-placement outreach is never capped.", "Silver members pricing - service fees reduced to just 3.45%"],
+      features: ["Members media deck", "Campaign builder", "Order facilitation", "Quote builder and shortlist assistance", "KPI tracking", "Dedicated account manager and campaign advisor", "Managed paid placements on niche sites and newsletters", "KOL communications", "Press negotiations", "Free-coverage outreach: 15 requests per month — these are outreach attempts, not guaranteed placements. Extra requests $20 each. Paid-placement outreach is never capped.", "Silver members pricing - service fees reduced to just 3.45%"],
       excludedFeatures: [],
       popular: true,
       hasBilling: true
@@ -112,7 +112,7 @@ const PackageSelector = () => {
       monthlyPrice: 995,
       annualPrice: 9950, // 10 months pricing
       description: "Designed for large and highly active marketing campaigns requiring administrative work",
-      features: ["Members media deck", "Campaign builder", "Order facilitation", "Quote builder and shortlist assistance", "KPI tracking", "Dedicated account manager and campaign advisor", "Managed Brave Ads and Telegram Ads", "KOL communications", "Press negotiations", "Free-coverage outreach: 50 requests per month — these are outreach attempts, not guaranteed placements. Extra requests $20 each. Paid-placement outreach is never capped.", "Gold members pricing - service fees reduced to just 1%"],
+      features: ["Members media deck", "Campaign builder", "Order facilitation", "Quote builder and shortlist assistance", "KPI tracking", "Dedicated account manager and campaign advisor", "Managed paid placements on niche sites and newsletters", "KOL communications", "Press negotiations", "Free-coverage outreach: 50 requests per month — these are outreach attempts, not guaranteed placements. Extra requests $20 each. Paid-placement outreach is never capped.", "Gold members pricing - service fees reduced to just 1%"],
       excludedFeatures: [],
       popular: false,
       hasBilling: true
