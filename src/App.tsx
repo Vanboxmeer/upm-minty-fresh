@@ -26,6 +26,7 @@ import Index from "./pages/Index";
 const Services = lazy(() => import("./pages/Services"));
 const Creators = lazy(() => import("./pages/Creators"));
 const MediaForBrands = lazy(() => import("./pages/MediaForBrands"));
+const Dealflow = lazy(() => import("./pages/Dealflow"));
 const VibeCoding = lazy(() => import("./pages/VibeCoding"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
@@ -110,6 +111,7 @@ const App = () => (
                   <Route path="/" element={<Index />} />
                   <Route path="/services" element={<Services />} />
                   <Route path="/creators" element={<Creators />} />
+                  <Route path="/dealflow" element={<Dealflow />} />
                   <Route path="/media-for-brands" element={<MediaForBrands />} />
                   <Route path="/vibe-coding" element={<VibeCoding />} />
                   <Route path="/blog" element={<Blog />} />
