@@ -41,7 +41,6 @@ const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 const Contact = lazy(() => import("./pages/Contact"));
 const AffiliateSignup = lazy(() => import("./pages/AffiliateSignup"));
-const PartnerDashboard = lazy(() => import("./pages/PartnerDashboard"));
 const OurProducts = lazy(() => import("./pages/OurProducts"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const RSSFeed = lazy(() => import("./pages/RSSFeed"));
@@ -130,7 +129,6 @@ const App = () => (
                   <Route path="/feed" element={<RSSFeed />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/affiliate-signup" element={<AffiliateSignup />} />
-                  <Route path="/partner-dashboard" element={<PartnerDashboard />} />
                   <Route path="/our-products" element={<OurProducts />} />
 
                   {/* Admin Routes */}
