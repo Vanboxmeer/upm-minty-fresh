@@ -117,7 +117,7 @@ const DealflowSpotlight = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" variant="hero">
               <Link
-                to="/blog/dealflow-by-upm-how-we-stopped-losing-creator-deals-in-our-inbox"
+                to="/dealflow"
                 className="flex items-center justify-center gap-2"
               >
                 How Dealflow works
