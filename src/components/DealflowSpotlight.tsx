@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, GitBranch, Users, MessageSquareText, Gift } from "lucide-react";
+import { ArrowRight, Sparkles, Tag, Clock, Gift } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import dealflowLogo from "@/assets/apps/dealflow-logo.svg";
 
@@ -9,28 +9,28 @@ const DealflowSpotlight = () => {
 
   const points = [
     {
-      icon: Users,
-      title: "One list, every brand",
+      icon: Sparkles,
+      title: "AI-researched shortlists",
       description:
-        "Every creator and publication we've researched lives in a single shared list — so two of your campaigns never quote the same channel twice with different numbers."
-    },
-    {
-      icon: MessageSquareText,
-      title: "Every conversation logged",
-      description:
-        "First message, reply, quoted rate, counter-offer, next action, follow-up date. Picking a thread back up after two weeks takes seconds, not an inbox search."
+        "We don't start from a generic influencer database. Creators and outlets are researched against your brand, your niche and your actual audience, then shortlisted and sanity-checked before a single message goes out."
     },
     {
       icon: Gift,
-      title: "Free coverage counts",
+      title: "Free and paid, side by side",
       description:
-        "\"Said yes for free\" is tracked as a real outcome alongside paid placements — not buried in a notes column as a consolation prize."
+        "Every shortlist gets worked for organic coverage as well as paid. \"Said yes for free\" is tracked as a real outcome, so your budget goes to the placements that genuinely need paying for."
     },
     {
-      icon: GitBranch,
-      title: "Built to keep growing",
+      icon: Tag,
+      title: "Rates we can actually check",
       description:
-        "New brand, new niche, new creators — it extends without a rebuild. Adding a client doesn't mean starting another spreadsheet from scratch."
+        "Every quote we've ever been given is logged. When a rate comes back high we know it, because we can see what comparable channels charged — so you're negotiating from evidence, not vibes."
+    },
+    {
+      icon: Clock,
+      title: "Nothing goes cold",
+      description:
+        "Next action and follow-up date on every thread. The creator who said \"not now\" in March gets picked back up in June, instead of quietly disappearing from an inbox."
     }
   ];
 
@@ -64,16 +64,16 @@ const DealflowSpotlight = () => {
               </div>
             </div>
             <span className="inline-block px-4 py-1 rounded-full bg-primary/20 text-primary-glow text-sm font-medium mb-4 border border-primary/30">
-              A UPM Tool
+              Our own tool, not for sale
             </span>
             <h2 className="text-3xl md:text-5xl font-bold mb-5 text-white">
               Dealflow by UPM
             </h2>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              The outreach system behind every campaign we run. When you work with UPM you
-              aren't trusting an inbox — every creator we approach for you, every reply and
-              every quoted rate is tracked in one place, so you always know exactly where a
-              conversation stands.
+              Dealflow is the outreach system we built for ourselves. It isn't a product you
+              subscribe to — it's the reason a UPM campaign finds the right creators fast,
+              approaches every one of them professionally and in one consistent voice, and keeps
+              the conversation moving until it turns into coverage.
             </p>
           </div>
 
@@ -108,7 +108,7 @@ const DealflowSpotlight = () => {
                 to="/blog/dealflow-by-upm-how-we-stopped-losing-creator-deals-in-our-inbox"
                 className="flex items-center justify-center gap-2"
               >
-                See how Dealflow works
+                How Dealflow works
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </Button>
