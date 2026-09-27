@@ -11,6 +11,7 @@ import { CategoryBreadcrumbs } from "@/components/CategoryBreadcrumbs";
 import { updateMetaTags } from "@/utils/seoUtils";
 import { Loader2, TrendingUp, Zap } from "lucide-react";
 import AnimatedStarfield from "@/components/AnimatedStarfield";
+import { handleImageError } from "@/lib/imageFallback";
 
 const TrendingNews = () => {
   const { fetchPublicPosts, displayedPosts, loading } = useBlogPosts();
@@ -98,7 +99,8 @@ const TrendingNews = () => {
                     <Link to={`/blog/${post.slug}`} className="block focus:outline-none">
                       <AspectRatio ratio={16 / 9}>
                         <img 
-                          src={post.featured_image || '/placeholder.svg'} 
+                          src={post.featured_image || '/placeholder.svg'}
+                          onError={handleImageError}
                           alt={post.featured_image_alt || post.title}
                           loading="lazy"
                           className="w-full h-full object-cover"
