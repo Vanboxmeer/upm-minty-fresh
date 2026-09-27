@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { getCategoryColor } from './categoryColors';
 import type { BlogPost } from '@/hooks/useBlogPosts';
+import { handleImageError } from '@/lib/imageFallback';
 
 interface MagazineHeroProps {
   post: BlogPost;
@@ -17,6 +18,7 @@ const MagazineHero = ({ post }: MagazineHeroProps) => {
       <div className="w-full overflow-hidden rounded-2xl">
         <img
           src={post.featured_image || '/placeholder.svg'}
+          onError={handleImageError}
           alt={post.featured_image_alt || post.title}
           className="w-full h-auto max-h-[60vh] object-cover transition-transform duration-700 group-hover:scale-105"
         />
