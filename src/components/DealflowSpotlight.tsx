@@ -64,16 +64,18 @@ const DealflowSpotlight = () => {
               </div>
             </div>
             <span className="inline-block px-4 py-1 rounded-full bg-primary/20 text-primary-glow text-sm font-medium mb-4 border border-primary/30">
-              Our own tool, not for sale
+              A service we manage — coverage on other people&apos;s channels
             </span>
             <h2 className="text-3xl md:text-5xl font-bold mb-5 text-white">
               Dealflow by UPM
             </h2>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Dealflow is the outreach system we built for ourselves. It isn't a product you
-              subscribe to — it's the reason a UPM campaign finds the right creators fast,
-              approaches every one of them professionally and in one consistent voice, and keeps
-              the conversation moving until it turns into coverage.
+              Dealflow is how we get <strong className="text-white">other people</strong> — creators,
+              publications and outlets — to cover your brand on their channels, in whatever format
+              suits them, free or paid. It is not something you subscribe to and it is not for posting
+              on your own accounts; it is the outreach system we built for ourselves, and the reason a
+              UPM campaign finds the right people fast, approaches every one of them professionally in
+              one consistent voice, and keeps the conversation moving until it turns into coverage.
             </p>
           </div>
 
@@ -107,6 +109,8 @@ const DealflowSpotlight = () => {
               Dealflow runs behind <span className="font-semibold text-white">both Silver and Gold</span> memberships,
               and pairs directly with the <span className="font-semibold text-white">UPM Campaign Organizer</span> —
               the shared tracker where you approve what runs and follow the status of every placement.
+              Posting on your <em>own</em> accounts is a separate thing entirely:{" "}
+              <Link to="/media-for-brands" className="underline text-primary-glow">Fullmedia Alchemist</Link>, an app you run yourself.
             </p>
           </div>
 
