@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
@@ -7,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
 import { usePackageSelection } from "@/contexts/PackageSelectionContext";
 import {
-  Sparkles, CheckCircle2, Zap, Percent, ExternalLink,
+  Sparkles, CheckCircle2, Percent, ExternalLink,
   PenLine, LayoutGrid, RefreshCw, ShieldCheck
 } from "lucide-react";
 import alchemistMark from "@/assets/apps/fullmedia-alchemist.svg";
@@ -92,7 +91,6 @@ const Wordmark = ({ size = "text-3xl" }: { size?: string }) => (
 
 const MediaForBrands = () => {
   const { setSelectedPackage, setUserType } = usePackageSelection();
-  const navigate = useNavigate();
 
   useEffect(() => {
     setUserType('brand');
@@ -163,14 +161,16 @@ const MediaForBrands = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button
-                  onClick={() => navigate('/contact')}
-                  className="text-lg px-8 py-4 rounded-lg font-semibold transition-transform hover:-translate-y-0.5"
+                <a
+                  href="https://www.fullmediaalchemist.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-lg px-8 py-4 rounded-lg font-semibold transition-transform hover:-translate-y-0.5 inline-flex items-center justify-center gap-2"
                   style={{ background: FMA.amber, color: FMA.amberInk }}
                 >
-                  Start your content plan
-                  <Zap className="ml-2 h-5 w-5 inline" />
-                </button>
+                  Start free on Fullmedia Alchemist
+                  <ExternalLink className="h-5 w-5" />
+                </a>
                 <button
                   className="text-lg px-8 py-4 rounded-lg font-semibold transition-colors"
                   style={{ border: '1px solid ' + FMA.line, color: FMA.paperDim }}
@@ -190,33 +190,19 @@ const MediaForBrands = () => {
         <section className="relative" style={{ background: FMA.ink }}>
           <div className="container mx-auto px-4 py-16 md:py-20">
             <div className="max-w-5xl mx-auto">
-              <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
-                <div className="flex flex-col items-center gap-3">
-                  <img src="/lovable-uploads/upm-logo.png" alt="UPM" className="h-16 w-16 object-contain" />
-                  <span className="text-xs tracking-[0.2em] uppercase" style={{ ...mono, color: FMA.muted }}>Built by UPM</span>
-                </div>
-
-                <div className="flex items-center gap-3" aria-hidden="true">
-                  <span className="hidden md:block h-px w-20" style={{ background: 'linear-gradient(90deg, rgba(0,191,255,0.5), ' + FMA.emerald + ')' }} />
-                  <span className="text-xs tracking-[0.3em] uppercase" style={{ ...mono, color: FMA.emerald }}>you run</span>
-                  <span className="hidden md:block h-px w-20" style={{ background: 'linear-gradient(90deg, ' + FMA.emerald + ', rgba(232,163,61,0.6))' }} />
-                </div>
-
+              <div className="flex flex-col items-center justify-center">
                 <div className="flex flex-col items-center gap-3">
                   <div className="relative">
                     <div className="absolute -inset-5 rounded-full blur-2xl opacity-60" style={{ background: 'radial-gradient(circle, rgba(46,156,116,0.4), rgba(232,163,61,0.18))' }} />
                     <img src={alchemistMark} alt="Fullmedia Alchemist" className="relative h-20 w-20 object-contain" />
                   </div>
-                  <span className="text-xs tracking-[0.2em] uppercase" style={{ ...mono, color: FMA.muted }}>On your own accounts</span>
+                  <span className="text-xs tracking-[0.3em] uppercase" style={{ ...mono, color: FMA.emerald }}>You run it, on your own accounts</span>
                 </div>
               </div>
 
               <div className="text-center mt-10">
                 <div className="inline-flex items-center gap-3 flex-wrap justify-center">
                   <Wordmark size="text-3xl md:text-4xl" />
-                  <span className="px-2.5 py-1 rounded-full text-[11px] tracking-[0.18em] uppercase" style={{ ...mono, color: FMA.amber, border: '1px solid rgba(232,163,61,0.5)' }}>
-                    By UPM
-                  </span>
                 </div>
                 <p className="mt-5 text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: FMA.muted }}>
                   Fullmedia Alchemist is an app you log into and run yourself. The Alchemist plans,
@@ -428,16 +414,19 @@ const MediaForBrands = () => {
               Ready to stop stressing about content?
             </h2>
             <p className="text-lg mb-8 max-w-2xl mx-auto" style={{ color: FMA.muted }}>
-              Let us take the posting pressure off your plate — so you can ship faster and show up stronger.
+              Set your brand up once, then let the Alchemist keep your own accounts posting. Start on the
+              free plan — no card required.
             </p>
-            <button
-              onClick={() => navigate('/contact')}
-              className="text-lg px-8 py-4 rounded-lg font-semibold transition-transform hover:-translate-y-0.5"
+            <a
+              href="https://www.fullmediaalchemist.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-lg px-8 py-4 rounded-lg font-semibold transition-transform hover:-translate-y-0.5 inline-flex items-center justify-center gap-2"
               style={{ background: FMA.amber, color: FMA.amberInk }}
             >
-              Start your content plan
-              <Zap className="ml-2 h-5 w-5 inline" />
-            </button>
+              Open Fullmedia Alchemist
+              <ExternalLink className="h-5 w-5" />
+            </a>
           </div>
         </section>
 
