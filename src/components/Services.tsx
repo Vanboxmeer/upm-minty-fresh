@@ -17,9 +17,9 @@ const Services = () => {
     description: "Get featured in top media, have your CEO as a guest on a popular show, or co-host a community event.",
     features: ["Top-tier media placements", "Executive interview opportunities", "Community event hosting", "Thought leadership positioning"]
   }, {
-    title: "Social Content Creation",
-    description: "Custom branded social content — posts, reels, videos & ads that actually feel like you, starting from ~$25/post.",
-    features: ["Instagram Reels & TikTok videos", "Branded memes & product showcases", "AI-powered video ads", "Monthly plans from 4–28 posts"]
+    title: "App Development & AI Automations",
+    description: "Agentic development and AI integrations that ship apps, internal tools and automations in a fraction of the usual time.",
+    features: ["Apps and client-facing products", "Automations across Sheets, Supabase and Vercel", "Skills, agents and internal tools", "Faster and cheaper than a traditional build"]
   }];
 
   const { elementRef: heroRef, isVisible: heroVisible } = useScrollAnimation();
