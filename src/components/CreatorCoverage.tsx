@@ -24,8 +24,8 @@ const CreatorCoverage = () => {
     },
     {
       icon: ShieldCheck,
-      title: "Included On Membership",
-      description: "Free & paid creator coverage sourcing comes standard with both Silver and Gold Membership — no separate line item."
+      title: "A Metered Courtesy, Not a Blank Cheque",
+      description: "Free-coverage outreach is a bonus on top of the paid work, so it comes with a monthly allowance — 15 requests on Silver, 50 on Gold. Those are outreach attempts, not guaranteed placements, and extra requests are $20 each."
     }
   ];
 
@@ -44,8 +44,8 @@ const CreatorCoverage = () => {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Not every worthwhile placement needs a budget line. Alongside paid influencer
             collaborations, we reach out to creators who might genuinely value your project
-            and are open to covering it for free or at low cost — included with your
-            membership.
+            and are open to covering it for free or at low cost. It is a courtesy service with a
+            monthly allowance rather than an open tap — paid-placement outreach is never capped.
           </p>
         </div>
 
