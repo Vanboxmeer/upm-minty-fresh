@@ -11,6 +11,10 @@ import {
 } from "lucide-react";
 import alchemistMark from "@/assets/apps/fullmedia-alchemist.svg";
 
+// The Alchemist character art, as published by the app itself on fullmediaalchemist.com
+const ALCHEMIST_CHARACTER =
+  "https://tpqvvrdglnsdljdpzwfl.supabase.co/storage/v1/object/public/wheel-assets/content-calendar/platform-brand/assistant-hero.png";
+
 /* Fullmedia Alchemist brand tokens — taken from fullmediaalchemist.com/brand-assets.html */
 const FMA = {
   ink: "#12160f",
@@ -240,10 +244,21 @@ const MediaForBrands = () => {
         <section className="py-20" style={{ background: FMA.ink }}>
           <div className="container mx-auto px-4">
             <div className="text-center mb-14">
-              <div className="flex justify-center mb-6">
+              <div className="flex justify-center mb-8">
                 <div className="relative">
-                  <div className="absolute -inset-6 rounded-full blur-2xl opacity-60" style={{ background: 'radial-gradient(circle, rgba(46,156,116,0.35), rgba(232,163,61,0.15))' }} />
-                  <img src={alchemistMark} alt="" className="relative h-24 w-24 object-contain" />
+                  <div
+                    className="absolute -inset-10 rounded-full blur-3xl opacity-70"
+                    style={{ background: 'radial-gradient(circle at 50% 62%, rgba(232,163,61,0.32), rgba(46,156,116,0.16) 55%, transparent 76%)' }}
+                  />
+                  <img
+                    src={ALCHEMIST_CHARACTER}
+                    alt="The Alchemist, the brand assistant inside Fullmedia Alchemist, holding a glowing flask"
+                    loading="lazy"
+                    width={1024}
+                    height={1536}
+                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                    className="relative w-[220px] sm:w-[260px] md:w-[300px] h-auto object-contain"
+                  />
                 </div>
               </div>
               <h2 className="text-3xl md:text-5xl mb-4" style={{ ...serif, color: FMA.paper, fontWeight: 600 }}>
