@@ -15,6 +15,7 @@ import PostSidebar from "@/components/magazine/PostSidebar";
 import ClapButton from "@/components/magazine/ClapButton";
 import TemplateRenderer from "@/components/magazine/TemplateRenderer";
 import { getCategoryColor } from "@/components/magazine/categoryColors";
+import { handleImageError, PLACEHOLDER_IMAGE } from "@/lib/imageFallback";
 
 const setMeta = (post: BlogPostType) => {
   const baseUrl = 'https://unitedpress.media';
@@ -139,7 +140,8 @@ const BlogPost = () => {
           {post.featured_image && (
             <div className="max-w-5xl mx-auto mb-10 rounded-2xl overflow-hidden">
               <img
-                src={post.featured_image}
+                src={post.featured_image || PLACEHOLDER_IMAGE}
+                onError={handleImageError}
                 alt={post.featured_image_alt || post.title}
                 className="w-full h-auto object-cover"
               />
