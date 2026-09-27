@@ -7,7 +7,8 @@ import { Link } from "react-router-dom";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
 import { BlogCardSkeleton } from "@/components/ui/skeleton";
 import { getCategoryColor } from "@/components/magazine/categoryColors";
-import AnimatedStarfield from "@/components/AnimatedStarfield";
+import AnimatedStarfield from "@/components/AnimatedStarfield";x
+import { handleImageError } from "@/lib/imageFallback";
 
 const BlogSection = () => {
   const { fetchPublicPosts, displayedPosts, loading } = useBlogPosts();
@@ -62,6 +63,7 @@ const BlogSection = () => {
                     <AspectRatio ratio={16 / 9}>
                       <img
                         src={post.featured_image || '/placeholder.svg'}
+                        onError={handleImageError}
                         alt={post.featured_image_alt || post.title}
                         loading="lazy"
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
