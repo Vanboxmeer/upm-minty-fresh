@@ -19,7 +19,7 @@ const products = [
   {
     name: "Fullmedia Alchemist",
     tagline: "AI Social Content Platform",
-    description: "The content engine behind UPM's social packages. Start a campaign and it drafts on-brand posts grounded in your brand's real details — never invented — ships them fully designed across eight platforms, then reviews what actually went live to sharpen the next batch.",
+    description: "A social content app for your brand's own accounts, with an agentic brand assistant — The Alchemist — who builds and improves your campaigns. It drafts on-brand posts grounded in your brand's real details, never invented, ships them fully designed across eight platforms on your posting schedule, then reviews what actually went live to sharpen the next campaign.",
     url: "https://www.fullmediaalchemist.com/",
     icon: fullmediaAlchemistIcon,
     gradient: "from-amber-500/20 to-emerald-500/20",
