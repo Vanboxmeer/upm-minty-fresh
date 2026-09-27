@@ -87,7 +87,7 @@ const Dealflow = () => {
                 className="inline-block px-3.5 py-1 rounded-full text-[11px] tracking-[0.18em] uppercase mb-6"
                 style={{ ...mono, color: DF.amber, border: '1px solid rgba(245,158,11,0.45)' }}
               >
-                An in-house UPM tool
+                Our outreach system
               </span>
 
               <h1 className="text-4xl md:text-6xl mb-6 leading-[1.05]" style={{ ...heading, color: DF.paper, fontWeight: 700 }}>
@@ -99,11 +99,10 @@ const Dealflow = () => {
               </p>
 
               <p className="text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: DF.muted }}>
-                Dealflow is how we get <strong style={{ color: DF.paper }}>other people</strong> &mdash;
-                creators, publications and outlets &mdash; to cover a brand on their own channels, in
-                whatever format suits them, free or paid. It finds the right people fast, approaches
-                every one of them professionally in one consistent voice, and keeps the conversation
-                moving until it turns into coverage.
+                Good coverage dies in shared inboxes. Someone forgets to follow up, nobody remembers
+                what a channel quoted last time, and the creator who said &ldquo;not now&rdquo; is never
+                asked again. So we built our own system to run outreach properly &mdash; and every
+                campaign we take on runs through it.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
@@ -170,10 +169,10 @@ const Dealflow = () => {
             <div className="max-w-5xl mx-auto">
               <div className="text-center mb-12">
                 <h2 className="text-3xl md:text-4xl mb-4" style={{ ...heading, color: DF.paper, fontWeight: 600 }}>
-                  Where it fits
+                  What it means for your campaign
                 </h2>
                 <p className="text-lg max-w-2xl mx-auto" style={{ color: DF.muted }}>
-                  You do not subscribe to Dealflow. It runs underneath the work we already do for you.
+                  Included with Silver and Gold, working from the day your campaign starts.
                 </p>
               </div>
 
@@ -182,10 +181,10 @@ const Dealflow = () => {
                   <div className="p-3 rounded-lg inline-flex mb-4" style={{ background: 'rgba(245,158,11,0.14)', border: '1px solid rgba(245,158,11,0.35)' }}>
                     <CheckCircle2 className="h-6 w-6" style={{ color: DF.amber }} />
                   </div>
-                  <h3 className="text-lg mb-2" style={{ ...heading, color: DF.paper, fontWeight: 600 }}>Silver and Gold</h3>
+                  <h3 className="text-lg mb-2" style={{ ...heading, color: DF.paper, fontWeight: 600 }}>Included in your plan</h3>
                   <p className="text-sm leading-relaxed" style={{ color: DF.muted }}>
-                    Every campaign on either membership is run through Dealflow. It is not an add-on and
-                    there is nothing extra to buy.
+                    Silver and Gold campaigns are run on Dealflow from day one, at no extra cost. It is
+                    simply how we work.
                   </p>
                 </div>
 
@@ -193,10 +192,10 @@ const Dealflow = () => {
                   <div className="p-3 rounded-lg inline-flex mb-4" style={{ background: 'rgba(30,58,138,0.35)', border: '1px solid rgba(59,91,191,0.45)' }}>
                     <ClipboardList className="h-6 w-6" style={{ color: DF.paperDim }} />
                   </div>
-                  <h3 className="text-lg mb-2" style={{ ...heading, color: DF.paper, fontWeight: 600 }}>The Campaign Organizer</h3>
+                  <h3 className="text-lg mb-2" style={{ ...heading, color: DF.paper, fontWeight: 600 }}>You see the whole board</h3>
                   <p className="text-sm leading-relaxed" style={{ color: DF.muted }}>
-                    Dealflow pairs directly with the shared tracker where you approve what runs and follow
-                    the status of every placement.
+                    It feeds your Campaign Organizer, so you approve what runs and watch every placement
+                    move without chasing anyone for a status update.
                   </p>
                 </div>
 
@@ -204,11 +203,10 @@ const Dealflow = () => {
                   <div className="p-3 rounded-lg inline-flex mb-4" style={{ background: 'rgba(46,156,116,0.14)', border: '1px solid rgba(46,156,116,0.4)' }}>
                     <Users className="h-6 w-6" style={{ color: '#38bdf8' }} />
                   </div>
-                  <h3 className="text-lg mb-2" style={{ ...heading, color: DF.paper, fontWeight: 600 }}>Not your own accounts</h3>
+                  <h3 className="text-lg mb-2" style={{ ...heading, color: DF.paper, fontWeight: 600 }}>Budget where it counts</h3>
                   <p className="text-sm leading-relaxed" style={{ color: DF.muted }}>
-                    Dealflow is for coverage on <em>other</em> people&apos;s channels. Posting on the accounts
-                    you own is a different thing entirely &mdash;{" "}
-                    <Link to="/media-for-brands" style={{ color: '#38bdf8' }}>Fullmedia Alchemist</Link>, an app you run yourself.
+                    Free coverage is chased as hard as paid, and every rate is checked against what similar
+                    channels quoted us before &mdash; so you spend on the placements worth paying for.
                   </p>
                 </div>
               </div>
