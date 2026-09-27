@@ -9,23 +9,23 @@ const CreatorCoverage = () => {
   const points = [
     {
       icon: Gift,
-      title: "Free & Organic Coverage",
-      description: "We don't only chase paid slots. Our team reaches out to creators who are a genuine fit for your brand and asks whether they'd cover it for free, at a reduced rate, or as a mutual promo."
+      title: "Free and paid, worked together",
+      description: "Every shortlist gets asked both ways. When a story is genuinely good, plenty of creators cover it for nothing — which leaves your budget for the placements that actually need paying for."
     },
     {
       icon: Handshake,
-      title: "Paid Collaborations",
-      description: "When budget calls for it, we negotiate paid placements directly with creators and publications — quoted rates, no hidden markups on top of what's disclosed to you."
+      title: "Rates negotiated on your side",
+      description: "We price against what comparable channels have quoted us before, so an inflated number gets spotted for what it is. No markup hidden on top of what we disclose to you."
     },
     {
       icon: ListChecks,
-      title: "Tracked, Not Guesswork",
-      description: "Every outreach, reply, and quote is logged so you always know where a conversation stands — from first message to booked coverage."
+      title: "Every conversation visible",
+      description: "Outreach, replies, quotes and next steps sit in your campaign tracker. You can see which placements are moving, which are booked, and which have gone quiet."
     },
     {
       icon: ShieldCheck,
-      title: "A Metered Courtesy, Not a Blank Cheque",
-      description: "Free-coverage outreach is a bonus on top of the paid work, so it comes with a monthly allowance — 15 requests on Silver, 50 on Gold. Those are outreach attempts, not guaranteed placements, and extra requests are $20 each."
+      title: "Free outreach, with a fair limit",
+      description: "Free-coverage requests are a bonus on top of the paid work, so Silver includes 15 a month and Gold 50, with extras at $20. Paid-placement outreach is never capped."
     }
   ];
 
@@ -39,13 +39,12 @@ const CreatorCoverage = () => {
           }`}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Free & Paid Creator Coverage
+            Get Covered by People Your Market Already Trusts
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Not every worthwhile placement needs a budget line. Alongside paid influencer
-            collaborations, we reach out to creators who might genuinely value your project
-            and are open to covering it for free or at low cost. It is a courtesy service with a
-            monthly allowance rather than an open tap — paid-placement outreach is never capped.
+            Creators, publications and community channels that reach the audience you want —
+            approached properly, negotiated on your behalf, and tracked from first message to
+            published post. Some of it costs money. A useful amount of it does not.
           </p>
         </div>
 
