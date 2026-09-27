@@ -906,7 +906,7 @@ const Footer = () => {
                     
                     <div className="grid md:grid-cols-2 gap-4">
                       <Input
-                        placeholder="Current Rates (e.g., $500 per post)"
+                        placeholder="Your rates, if you have them (e.g. $500 per post) — optional"
                         value={creatorData.currentRates || ""}
                         onChange={(e) => updateCreatorField('currentRates', e.target.value)}
                         className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
@@ -916,7 +916,7 @@ const Footer = () => {
                     <div>
                       <label className="block text-sm font-medium mb-2 text-white/90">What are you interested in?</label>
                       <div className="grid grid-cols-2 gap-2">
-                        {['Web3 Quest Development', 'KOL Collaborations', 'Brand Sponsorships', 'Coverage Requests', 'Web3 Directory Listings', 'Community Building', 'Content Partnerships', 'Media Placements'].map((interest) => (
+                        {['Industry news in my niche', 'Earned / editorial coverage', 'Paid promotions & sponsorships', 'Newsletter placements', 'KOL Collaborations', 'Web3 Quest Development', 'Web3 Directory Listings', 'Community Building', 'Content Partnerships', 'Media Placements'].map((interest) => (
                           <div key={interest} className="flex items-center space-x-2">
                             <Checkbox
                               id={`interest-${interest}`}
@@ -1308,8 +1308,9 @@ const Footer = () => {
               <li><a href="/services#features--interviews--spaces" className="hover:text-primary transition-colors">Features, Interviews, Spaces</a></li>
               <li><a href="/services" className="hover:text-primary transition-colors">Managed Paid Advertising</a></li>
               <li><a href="/creators" className="hover:text-primary transition-colors">Creator Services</a></li>
-              <li><a href="/media-for-brands" className="hover:text-primary transition-colors">Content Creation for Brands</a></li>
-              <li><a href="/vibe-coding" className="hover:text-primary transition-colors">Vibe Coding App Development</a></li>
+              <li><a href="/dealflow" className="hover:text-primary transition-colors">Dealflow (Outreach System)</a></li>
+              <li><a href="/media-for-brands" className="hover:text-primary transition-colors">Fullmedia Alchemist (Social Content App)</a></li>
+              <li><a href="/vibe-coding" className="hover:text-primary transition-colors">App Development &amp; Automations</a></li>
               
             </ul>
           </div>
@@ -1331,6 +1332,7 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">Our Apps</h4>
             <ul className="space-y-2 text-sm opacity-80">
               <li><a href="https://www.fullmediaalchemist.com/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Fullmedia Alchemist</a></li>
+              <li><a href="/dealflow" className="hover:text-primary transition-colors">Dealflow</a></li>
               <li><a href="https://spinquest.app/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">SpinQuest</a></li>
               <li><a href="https://readingrace.com/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Reading Race</a></li>
               <li><a href="https://watchcrypto.info/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Watch Crypto</a></li>
