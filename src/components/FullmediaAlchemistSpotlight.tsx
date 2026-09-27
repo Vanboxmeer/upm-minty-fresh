@@ -31,17 +31,19 @@ const FullmediaAlchemistSpotlight = () => {
 
           <div>
             <span className="inline-block px-4 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
-              Another UPM Service
+              A UPM app — for your own channels
             </span>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Fullmedia Alchemist
             </h2>
             <p className="text-lg text-muted-foreground mb-6">
-              The AI content engine behind UPM's social packages — and a service every UPM
-              client can put to work directly. Start a campaign and it drafts on-brand posts
-              grounded in your brand's real details (never invented), ships them fully
-              designed across eight platforms, then reviews what actually went live to
-              sharpen the next batch.
+              An app you log into and run yourself, with an agentic brand assistant —
+              <strong className="text-foreground"> The Alchemist</strong> — who builds and improves your
+              content campaigns. It drafts on-brand posts grounded in your brand&apos;s real details
+              (never invented), ships them fully designed across eight platforms on your posting
+              schedule, then reviews what actually went live to sharpen the next campaign. This is for
+              your own social accounts — getting covered on someone else&apos;s channel is a different
+              service, and that one we manage for you.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" variant="hero">
