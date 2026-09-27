@@ -102,6 +102,14 @@ const DealflowSpotlight = () => {
             })}
           </div>
 
+          <div className="max-w-3xl mx-auto mb-10 p-5 rounded-xl bg-white/5 border border-white/10 text-center">
+            <p className="text-base text-gray-300 leading-relaxed">
+              Dealflow runs behind <span className="font-semibold text-white">both Silver and Gold</span> memberships,
+              and pairs directly with the <span className="font-semibold text-white">UPM Campaign Organizer</span> —
+              the shared tracker where you approve what runs and follow the status of every placement.
+            </p>
+          </div>
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" variant="hero">
               <Link
