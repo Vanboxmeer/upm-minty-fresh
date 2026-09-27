@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { getCategoryColor } from './categoryColors';
 import type { BlogPost } from '@/hooks/useBlogPosts';
+import { handleImageError } from '@/lib/imageFallback';
 
 interface MagazinePostCardProps {
   post: BlogPost;
@@ -18,6 +19,7 @@ const MagazinePostCard = ({ post }: MagazinePostCardProps) => {
         <div className="relative aspect-video overflow-hidden">
           <img
             src={post.featured_image || '/placeholder.svg'}
+            onError={handleImageError}
             alt={post.featured_image_alt || post.title}
             loading="lazy"
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
