@@ -94,7 +94,7 @@ const Header = () => {
                 <DropdownMenuItem asChild>
                   <a href="/vibe-coding" className="w-full cursor-pointer flex items-center">
                     <Code className="h-4 w-4 mr-2 opacity-60" />
-                    Vibe Coding
+                    App Development
                   </a>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -143,7 +143,7 @@ const Header = () => {
                   <a href="/services#paid-advertising" className="text-foreground hover:text-primary transition-colors block text-xs">Managed Paid Advertising</a>
                 </div>
                 <a href="/media-for-brands" className="text-foreground hover:text-primary transition-colors block text-sm">Content Creation</a>
-                <a href="/vibe-coding" className="text-foreground hover:text-primary transition-colors block text-sm">Vibe Coding</a>
+                <a href="/vibe-coding" className="text-foreground hover:text-primary transition-colors block text-sm">App Development</a>
               </div>
             </div>
 
