@@ -17,12 +17,10 @@ import PageLoader from "@/components/PageLoader";
 import TelegramChat from "@/components/TelegramChat";
 import MobileBottomNav from "@/components/MobileBottomNav";
 
-import { useReferralTracking } from "@/hooks/useReferralTracking";
 import { updateMetaTags, generateStructuredData } from "@/utils/seoUtils";
 
 const Index = () => {
   
-  useReferralTracking(); // Track referral visits
   
   useEffect(() => {
     // SEO optimization for homepage
