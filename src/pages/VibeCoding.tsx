@@ -3,117 +3,117 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, Code2, Rocket, Zap, Sparkles, Layers, Clock, Terminal, GitBranch } from "lucide-react";
+import { CheckCircle, Code2, Rocket, Zap, Sparkles, Layers, Clock, Terminal, GitBranch, Workflow } from "lucide-react";
 import { updateMetaTags } from "@/utils/seoUtils";
 
 const VibeCoding = () => {
   useEffect(() => {
     updateMetaTags({
-      title: "Vibe Coding Agency - Claude-Native MVP Development | UPM",
-      description: "We build MVPs with Claude Code and Claude Cowork on your Supabase, Vercel and GitHub. Lovable and Base44 builds available too, driven through Claude. Idea to live URL in 2-6 weeks.",
-      keywords: "vibe coding, Claude Code, Claude Cowork, app development, MVP development, Supabase, Vercel, Lovable, Base44, AI development agency, platform migration",
-      ogTitle: "Vibe Coding Agency - Claude-Native MVP Development",
-      ogDescription: "Claude Code and Claude Cowork build it, humans review it, and you own the repo, the database and the hosting.",
+      title: "App Development & AI Automations | Agentic Builds | UPM",
+      description: "We build apps, automations, skills and internal tools with agentic AI development — connecting Google Sheets, Supabase, Vercel, Stripe and the rest of your stack. Faster and cheaper than traditional custom development.",
+      keywords: "app development, AI automation, agentic development, business process automation, Google Sheets automation, Supabase, Vercel, AI integrations, Claude Skills, MCP connectors, internal tools, custom software, vibe coding, MVP development",
+      ogTitle: "App Development & AI Automations Built With Agentic Development",
+      ogDescription: "Apps, automations, skills and internal tools — built fast, connected to the tools you already use, and owned entirely by you.",
     });
   }, []);
 
   const benefits = [
     {
       icon: Rocket,
-      title: "Launch Faster",
-      description: "Claude Code ships working features in hours rather than sprints. Most MVPs go from scope to live URL in two to six weeks."
+      title: "Built in Days, Not Quarters",
+      description: "Agentic development means the build loop runs continuously — plan, write, test, fix — instead of waiting on sprint cycles. Most internal tools and automations land in days; full products in weeks."
+    },
+    {
+      icon: Workflow,
+      title: "Your Tools, Actually Connected",
+      description: "The value is usually in the joins: a Google Sheet your team already lives in, talking to Supabase, triggered from Vercel, notifying Slack or email. We build the plumbing between what you already use."
+    },
+    {
+      icon: Zap,
+      title: "Cheaper Than the Alternative",
+      description: "Save up to 70% against traditional custom development. You are not paying a team to type — you are paying for the judgement about what gets built and the review that keeps it correct."
     },
     {
       icon: GitBranch,
       title: "You Own Everything",
-      description: "The repo sits in your GitHub, the data in your Supabase, the site on your Vercel. No platform can hold your product hostage."
-    },
-    {
-      icon: Zap,
-      title: "Cost-Effective",
-      description: "Save up to 70% against traditional custom development. The build loop is Claude-driven; the judgement stays human."
-    },
-    {
-      icon: Layers,
-      title: "Built to Keep Going",
-      description: "Preview deploys, migrations and edge functions set up properly, so the next developer can pick it up without a rewrite."
+      description: "The repo sits in your GitHub, the data in your Supabase, the site on your Vercel, the automation in your workspace. No platform, and no agency, can hold your process hostage."
     }
   ];
 
-  const stack = ["Claude Code", "Claude Cowork", "Supabase", "Vercel", "GitHub", "React + Vite", "Next.js", "Lovable", "Base44"];
+  const stack = ["Claude Code", "Claude Cowork", "Claude Skills", "MCP connectors", "Supabase", "Vercel", "GitHub", "Google Sheets", "Google Apps Script", "Stripe", "Resend", "React + Vite", "Next.js", "Lovable", "Base44"];
 
   const tracks = [
     {
-      name: "Claude-Native Build",
-      tag: "How we build by default",
-      icon: Terminal,
+      name: "Apps & Client-Facing Products",
+      tag: "Ship the whole thing",
+      icon: Rocket,
       recommended: true,
-      description: "Claude Code and Claude Cowork do the building, a person reviews every change, and the app runs on infrastructure you own from day one.",
+      description: "A real product on infrastructure you own — database, auth, payments, hosting — built by agentic development with a person reviewing every change.",
       features: [
-        "Claude Code writes, refactors and tests directly in the repo",
-        "Claude Cowork handles the longer jobs — migrations, content, research",
         "Supabase for database, auth, storage and edge functions",
-        "Vercel for hosting, with a preview URL on every push",
-        "Your GitHub repo, your accounts, full commit history"
+        "Vercel hosting with a preview URL on every push",
+        "Stripe for payments, Resend for transactional email",
+        "Your GitHub repo, your accounts, full commit history",
+        "Already on Lovable or Base44? We can move it without losing history"
       ],
-      useCases: ["SaaS products", "Client dashboards", "Marketplaces", "Internal tools"]
+      useCases: ["SaaS products", "Marketplaces", "Client dashboards", "Directories"]
     },
     {
-      name: "Lovable or Base44, Driven by Claude",
-      tag: "Platform builds",
-      icon: Sparkles,
+      name: "Automations & Integrations",
+      tag: "Make the process stop hurting",
+      icon: Workflow,
       recommended: false,
-      description: "Want the visual editor and instant preview a builder gives you? We still use one — with Claude planning and writing the work that goes into it.",
+      description: "The job nobody has time for: the report rebuilt by hand every Monday, the data retyped between two systems, the follow-up that depends on someone remembering.",
       features: [
-        "Claude plans the build, then executes inside the platform",
-        "The visual editor stays available for you to adjust things yourself",
-        "GitHub sync kept switched on so the code is never trapped",
-        "Backend on Supabase wherever the platform allows it",
-        "A clear exit path if you outgrow the builder later"
+        "Google Sheets wired to a real database instead of being one",
+        "Scheduled jobs that run whether or not anyone is at a desk",
+        "Two systems that never spoke to each other, kept in sync",
+        "AI in the loop where judgement is needed — drafting, classifying, summarising",
+        "Alerts when something needs a human, silence when it does not"
       ],
-      useCases: ["Fast prototypes", "Non-technical founders", "Teams already on a builder"]
+      useCases: ["Ops reporting", "Data sync", "Client onboarding", "Content pipelines"]
     },
     {
-      name: "Get Off the Platform",
-      tag: "Migrations and rescues",
-      icon: GitBranch,
+      name: "Skills, Agents & Internal Tools",
+      tag: "Give your team leverage",
+      icon: Terminal,
       recommended: false,
-      description: "Already have a Lovable or Base44 app and want it somewhere you control? We move it without losing your commit history and without taking the site down.",
+      description: "Packaged capability your team can run themselves — a skill, an agent, a small internal tool — so the thing you currently ask a specialist for becomes a button.",
       features: [
-        "Repo moved into your GitHub with history intact",
-        "Hosting moved to your Vercel; DNS cut over only once it is verified",
-        "Database stays on Supabase, or moves into your own organisation",
-        "The platform build kept frozen as a rollback until you are happy",
-        "A migration we have run on our own products first"
+        "Claude Skills that encode how your team actually does a job",
+        "MCP connectors so an assistant can reach your own systems",
+        "Small internal tools for the workflow no SaaS product fits",
+        "Agents that run a recurring job end to end and report back",
+        "Documented and handed over, so it is not a black box"
       ],
-      useCases: ["Outgrown the builder", "Lock-in concerns", "Paying for hosting you could own"]
+      useCases: ["Repeatable expert work", "Internal dashboards", "Research & triage", "Custom assistants"]
     }
   ];
 
   const process = [
     {
       step: "01",
-      title: "Discovery & Scope",
-      description: "We map the features, pick the track that fits, and write the spec Claude builds from",
+      title: "Find the Real Bottleneck",
+      description: "We look at how the work happens now, and say plainly whether the answer is an app, an automation, a tool, or nothing at all",
       duration: "1-2 days"
     },
     {
       step: "02",
-      title: "Design & Prototyping",
-      description: "Create user-friendly interfaces and interactive prototypes for your approval",
-      duration: "2-3 days"
+      title: "Scope & Shape",
+      description: "Which systems it touches, what it must never do, and what done looks like — written down before anything is built",
+      duration: "1-3 days"
     },
     {
       step: "03",
-      title: "Development",
-      description: "Claude Code writes it and a person reviews every change, while you follow along on a live preview URL from the first day",
-      duration: "1-3 weeks"
+      title: "Build & Review",
+      description: "The agentic build loop runs while a person reviews every change, and you follow along on a live preview from the first day",
+      duration: "Days to 3 weeks"
     },
     {
       step: "04",
-      title: "Launch & Handover",
-      description: "Production deploy on your Vercel, repo access, and a walkthrough so your team can keep shipping",
-      duration: "2-3 days"
+      title: "Hand Over Properly",
+      description: "Deployed on your own accounts, with repo access and a walkthrough so your team can change it without calling us",
+      duration: "1-3 days"
     }
   ];
 
@@ -209,20 +209,21 @@ const VibeCoding = () => {
           <div className="max-w-5xl mx-auto">
             <div className="inline-flex items-center gap-2 bg-primary/10 backdrop-blur-sm border border-primary/20 rounded-full px-4 py-2 mb-6">
               <Code2 className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium text-foreground">Vibe Coding Agency</span>
+              <span className="text-sm font-medium text-foreground">App Development &amp; AI Automations</span>
             </div>
             
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in text-foreground">
-              <span className="block">Turn Your Idea Into an</span>
+              <span className="block">Apps, Tools and Automations,</span>
               <span className="bg-gradient-to-r from-primary via-secondary to-primary-glow bg-clip-text text-transparent">
-                MVP in Weeks
+                Built in a Fraction of the Time
               </span>
             </h1>
             
             <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-fade-in">
-              We build with <span className="font-semibold text-foreground">Claude Code</span> and <span className="font-semibold text-foreground">Claude Cowork</span> — on your Supabase,
-              your Vercel and your GitHub repo. Still want <span className="font-semibold text-foreground">Lovable</span> or <span className="font-semibold text-foreground">Base44</span>?
-              We drive those through Claude too.
+              We use <span className="font-semibold text-foreground">agentic development</span> and AI integrations to build software and
+              wire your tools together — <span className="font-semibold text-foreground">Google Sheets</span>, <span className="font-semibold text-foreground">Supabase</span>,
+              <span className="font-semibold text-foreground"> Vercel</span> and whatever else the job needs. Automations that fix a broken process,
+              and new products built from scratch.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
@@ -257,8 +258,8 @@ const VibeCoding = () => {
             {/* Quick stats */}
             <div className="grid grid-cols-3 gap-8 mt-16 max-w-2xl mx-auto">
               <div className="text-center">
-                <div className="text-3xl font-bold text-foreground mb-2">2-6 weeks</div>
-                <div className="text-sm text-muted-foreground">Scope to live URL</div>
+                <div className="text-3xl font-bold text-foreground mb-2">Days to weeks</div>
+                <div className="text-sm text-muted-foreground">Scope to live, not months</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-foreground mb-2">70%</div>
@@ -278,10 +279,10 @@ const VibeCoding = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Why Choose Vibe Coding Agency?
+              Why This Costs Less and Lands Sooner
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Claude does the typing. People do the deciding. You keep the code.
+              The AI does the building. People decide what gets built. You keep all of it.
             </p>
           </div>
 
@@ -308,10 +309,10 @@ const VibeCoding = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Three Ways We Build
+              What We Build
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Same team, same tooling. The track depends on how much of the platform you want to keep.
+              Same team, same tooling. Most engagements are one of these three, and plenty are a mix.
             </p>
           </div>
 
@@ -384,10 +385,10 @@ const VibeCoding = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Our Development Process
+              How a Build Actually Runs
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              A streamlined approach to get you from idea to launch
+              Short, visible, and pointed at the thing that is actually slowing you down
             </p>
           </div>
 
@@ -425,8 +426,9 @@ const VibeCoding = () => {
               Transparent Pricing
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Choose the package that fits your needs and budget. Every tier ships the repo into your GitHub,
-              with the app running on your own Supabase and Vercel.
+              Build packages for full products. Every tier ships the repo into your GitHub, with the app running on your
+              own Supabase and Vercel. Smaller automations, skills and internal tools are scoped on their own — ask and
+              we will price the specific job.
             </p>
           </div>
 
@@ -485,10 +487,10 @@ const VibeCoding = () => {
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Build Your MVP?
+              What Would You Build If It Were Cheap?
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              Let's turn your vision into reality. Get in touch with our team today and start your journey to launch.
+              Most teams have a list of things not worth building at agency prices. That list is worth revisiting. Tell us what is on yours.
             </p>
             <Button 
               variant="hero" 
