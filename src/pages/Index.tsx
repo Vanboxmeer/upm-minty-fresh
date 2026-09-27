@@ -3,8 +3,11 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import TrustedBy from "@/components/TrustedBy";
 import Services from "@/components/Services";
+import DealflowSpotlight from "@/components/DealflowSpotlight";
+import CreatorCoverage from "@/components/CreatorCoverage";
 import InfluencerPlatforms from "@/components/InfluencerPlatforms";
 import PaidAdvertising from "@/components/PaidAdvertising";
+import FullmediaAlchemistSpotlight from "@/components/FullmediaAlchemistSpotlight";
 import FeaturedInMedia from "@/components/FeaturedInMedia";
 import BlogSection from "@/components/BlogSection";
 import PackageSelector from "@/components/PackageSelector";
@@ -25,7 +28,7 @@ const Index = () => {
     // SEO optimization for homepage
     updateMetaTags({
       title: "UPM | Digital Marketing & Press Release Distribution",
-      description: "Growth platform built for digital marketing with press release distribution, KOL collaborations, and tier-1 media placements. Trusted by 1500+ marketing teams.",
+      description: "Growth platform built for digital marketing with press release distribution, KOL collaborations, and tier-1 media placements \u2014 powered by Dealflow by UPM and Fullmedia Alchemist.",
       keywords: "digital marketing, press release distribution, KOL collaborations, web3 marketing, crypto marketing, tier-1 media, content promotion, growth platform",
       canonical: "https://unitedpress.media/",
       ogTitle: "UPM | Digital Marketing & Press Release Distribution",
@@ -48,8 +51,11 @@ const Index = () => {
       <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
         <Hero />
         <Services />
+        <DealflowSpotlight />
+        <CreatorCoverage />
         <InfluencerPlatforms />
         <PaidAdvertising />
+        <FullmediaAlchemistSpotlight />
         <TrustedBy />
         <FeaturedInMedia />
         <BlogSection />
