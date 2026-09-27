@@ -88,7 +88,7 @@ const Header = () => {
                 <DropdownMenuItem asChild>
                   <a href="/media-for-brands" className="w-full cursor-pointer flex items-center">
                     <Palette className="h-4 w-4 mr-2 opacity-60" />
-                    Content Creation
+                    Fullmedia Alchemist
                   </a>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
@@ -142,7 +142,7 @@ const Header = () => {
                   <a href="/services#interviews" className="text-foreground hover:text-primary transition-colors block text-xs">Interviews & Spaces</a>
                   <a href="/services#paid-advertising" className="text-foreground hover:text-primary transition-colors block text-xs">Managed Paid Advertising</a>
                 </div>
-                <a href="/media-for-brands" className="text-foreground hover:text-primary transition-colors block text-sm">Content Creation</a>
+                <a href="/media-for-brands" className="text-foreground hover:text-primary transition-colors block text-sm">Fullmedia Alchemist</a>
                 <a href="/vibe-coding" className="text-foreground hover:text-primary transition-colors block text-sm">App Development</a>
               </div>
             </div>
