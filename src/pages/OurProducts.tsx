@@ -14,6 +14,7 @@ import readingRaceIcon from "@/assets/apps/reading-race.png";
 import everythingNightlifeIcon from "@/assets/apps/everything-nightlife-mark.svg";
 import vaporsmoothIcon from "@/assets/apps/vaporsmooth.png";
 import fullmediaAlchemistIcon from "@/assets/apps/fullmedia-alchemist.svg";
+import dealflowIcon from "@/assets/apps/dealflow-logo.svg";
 
 const products = [
   {
@@ -23,6 +24,18 @@ const products = [
     url: "https://www.fullmediaalchemist.com/",
     icon: fullmediaAlchemistIcon,
     gradient: "from-amber-500/20 to-emerald-500/20",
+    isWide: false,
+    rounded: false
+  },
+  {
+    name: "Dealflow",
+    tagline: "Creator & Press Outreach System",
+    description: "The outreach system behind every UPM campaign. AI-researched shortlists of creators and outlets, free and paid coverage tracked side by side, every rate we have ever been quoted logged for comparison, and a follow-up date on every thread so nothing goes cold. Used in house today — licensing to other agencies is being explored.",
+    url: "/dealflow",
+    internal: true,
+    cta: "See how Dealflow works",
+    icon: dealflowIcon,
+    gradient: "from-blue-800/20 to-amber-500/20",
     isWide: false,
     rounded: false
   },
@@ -82,8 +95,8 @@ const OurProducts = () => {
   useEffect(() => {
     updateMetaTags({
       title: "Our Apps | UPM Ecosystem",
-      description: "A few of the apps built by UPM, including Fullmedia Alchemist, SpinQuest, Reading Race, Watch Crypto, Everything Nightlife, and Vaporsmooth.",
-      keywords: "UPM apps, Fullmedia Alchemist, AI social content, social content calendar, SpinQuest, Reading Race, Watch Crypto, Everything Nightlife, Vaporsmooth, crypto tools, community apps, cannabis marketplace"
+      description: "A few of the apps built by UPM, including Fullmedia Alchemist, Dealflow, SpinQuest, Reading Race, Watch Crypto, Everything Nightlife, and Vaporsmooth.",
+      keywords: "UPM apps, Fullmedia Alchemist, Dealflow, creator outreach, AI social content, social content calendar, SpinQuest, Reading Race, Watch Crypto, Everything Nightlife, Vaporsmooth, crypto tools, community apps, cannabis marketplace"
     });
   }, []);
 
@@ -132,7 +145,7 @@ const OurProducts = () => {
               Here are a few of the apps we’ve built — a small sample of the platforms UPM has created for creators, brands, and communities.
             </p>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary">
-              <span className="text-sm font-medium">Built with UPM Vibe Coding Services</span>
+              <span className="text-sm font-medium">Built with UPM agentic development</span>
             </div>
           </div>
         </div>
@@ -161,8 +174,8 @@ const OurProducts = () => {
                       </div>
                       <a
                         href={product.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        target={"internal" in product && product.internal ? undefined : "_blank"}
+                        rel={"internal" in product && product.internal ? undefined : "noopener noreferrer"}
                         className="opacity-0 group-hover:opacity-100 transition-opacity"
                       >
                         <ExternalLink className="w-5 h-5 text-muted-foreground hover:text-primary" />
@@ -184,11 +197,11 @@ const OurProducts = () => {
                     >
                       <a 
                         href={product.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
+                        target={"internal" in product && product.internal ? undefined : "_blank"} 
+                        rel={"internal" in product && product.internal ? undefined : "noopener noreferrer"}
                         className="flex items-center justify-center gap-2"
                       >
-                        Visit {product.name}
+                        {"cta" in product && product.cta ? product.cta : `Visit ${product.name}`}
                         <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                       </a>
                     </Button>
@@ -204,14 +217,14 @@ const OurProducts = () => {
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Turn Your Idea Into an MVP in Weeks
+            Want Something Like This Built?
           </h2>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            All of these apps were built using our Vibe Coding services. Let UPM help you bring your vision to life with rapid MVP development and AI-powered tools.
+            Every app here was built in house with agentic development and AI integrations — apps, internal tools and automations, shipped in a fraction of the time a traditional build takes.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" variant="hero">
-              <a href="/vibe-coding">Learn About Vibe Coding</a>
+              <a href="/vibe-coding">See App Development</a>
             </Button>
             <Button asChild size="lg" variant="outline">
               <a href="/contact">Start Your Project</a>
