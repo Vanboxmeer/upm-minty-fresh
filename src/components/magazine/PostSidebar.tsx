@@ -3,6 +3,7 @@ import TableOfContents from './TableOfContents';
 import { SocialShareButtons } from '@/components/SocialShareButtons';
 import { Link } from 'react-router-dom';
 import type { BlogPost } from '@/hooks/useBlogPosts';
+import { handleImageError } from '@/lib/imageFallback';
 
 interface PostSidebarProps {
   post: BlogPost;
@@ -52,6 +53,7 @@ const PostSidebar = ({ post, relatedPosts }: PostSidebarProps) => {
                 {rp.featured_image && (
                   <img
                     src={rp.featured_image}
+                    onError={handleImageError}
                     alt={rp.title}
                     className="w-14 h-14 rounded-lg object-cover shrink-0"
                   />
