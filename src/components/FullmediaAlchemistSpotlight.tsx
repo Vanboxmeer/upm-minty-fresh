@@ -1,0 +1,69 @@
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import fullmediaAlchemistIcon from "@/assets/apps/fullmedia-alchemist.svg";
+
+const FullmediaAlchemistSpotlight = () => {
+  const { elementRef, isVisible } = useScrollAnimation();
+
+  return (
+    <section className="py-20 bg-white dark:bg-slate-900">
+      <div className="container mx-auto px-4">
+        <div
+          ref={elementRef}
+          className={`grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto transition-all duration-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
+          <div className="flex justify-center lg:justify-start">
+            <div className="relative">
+              <div
+                className="absolute -inset-8 rounded-full blur-3xl opacity-40"
+                style={{ background: "linear-gradient(135deg, rgba(245,158,11,0.3), rgba(16,185,129,0.3))" }}
+              />
+              <img
+                src={fullmediaAlchemistIcon}
+                alt="Fullmedia Alchemist icon"
+                className="relative h-40 w-40 md:h-48 md:w-48 object-contain"
+              />
+            </div>
+          </div>
+
+          <div>
+            <span className="inline-block px-4 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+              Another UPM Service
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Fullmedia Alchemist
+            </h2>
+            <p className="text-lg text-muted-foreground mb-6">
+              The AI content engine behind UPM's social packages — and a service every UPM
+              client can put to work directly. Start a campaign and it drafts on-brand posts
+              grounded in your brand's real details (never invented), ships them fully
+              designed across eight platforms, then reviews what actually went live to
+              sharpen the next batch.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button asChild size="lg" variant="hero">
+                <a
+                  href="https://www.fullmediaalchemist.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2"
+                >
+                  Visit Fullmedia Alchemist
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <a href="/our-products">See All UPM Apps</a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default FullmediaAlchemistSpotlight;
