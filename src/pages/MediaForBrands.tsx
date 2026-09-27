@@ -149,7 +149,7 @@ const MediaForBrands = () => {
                 style={{ ...mono, color: FMA.amber, border: '1px solid rgba(232,163,61,0.45)' }}
               >
                 <Sparkles className="w-3.5 h-3.5" />
-                UPM Social Content
+                Fullmedia Alchemist · a UPM app
               </span>
 
               <h1 className="text-4xl md:text-6xl lg:text-7xl mb-6 leading-[1.05]" style={{ ...serif, color: FMA.paper, fontWeight: 600 }}>
@@ -193,12 +193,12 @@ const MediaForBrands = () => {
               <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
                 <div className="flex flex-col items-center gap-3">
                   <img src="/lovable-uploads/upm-logo.png" alt="UPM" className="h-16 w-16 object-contain" />
-                  <span className="text-xs tracking-[0.2em] uppercase" style={{ ...mono, color: FMA.muted }}>The agency</span>
+                  <span className="text-xs tracking-[0.2em] uppercase" style={{ ...mono, color: FMA.muted }}>Built by UPM</span>
                 </div>
 
                 <div className="flex items-center gap-3" aria-hidden="true">
                   <span className="hidden md:block h-px w-20" style={{ background: 'linear-gradient(90deg, rgba(0,191,255,0.5), ' + FMA.emerald + ')' }} />
-                  <span className="text-xs tracking-[0.3em] uppercase" style={{ ...mono, color: FMA.emerald }}>runs on</span>
+                  <span className="text-xs tracking-[0.3em] uppercase" style={{ ...mono, color: FMA.emerald }}>you run</span>
                   <span className="hidden md:block h-px w-20" style={{ background: 'linear-gradient(90deg, ' + FMA.emerald + ', rgba(232,163,61,0.6))' }} />
                 </div>
 
@@ -207,7 +207,7 @@ const MediaForBrands = () => {
                     <div className="absolute -inset-5 rounded-full blur-2xl opacity-60" style={{ background: 'radial-gradient(circle, rgba(46,156,116,0.4), rgba(232,163,61,0.18))' }} />
                     <img src={alchemistMark} alt="Fullmedia Alchemist" className="relative h-20 w-20 object-contain" />
                   </div>
-                  <span className="text-xs tracking-[0.2em] uppercase" style={{ ...mono, color: FMA.muted }}>The platform</span>
+                  <span className="text-xs tracking-[0.2em] uppercase" style={{ ...mono, color: FMA.muted }}>On your own accounts</span>
                 </div>
               </div>
 
@@ -219,9 +219,31 @@ const MediaForBrands = () => {
                   </span>
                 </div>
                 <p className="mt-5 text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: FMA.muted }}>
-                  Every post in a UPM social package is made on our own platform — so what you buy from
-                  the agency and what you can log in and see are the same thing.
+                  Fullmedia Alchemist is an app you log into and run yourself. The Alchemist plans,
+                  writes and schedules content for your brand's <strong style={{ color: FMA.paper }}>own
+                  social accounts</strong> — your Instagram, your TikTok, your LinkedIn — and keeps
+                  improving them campaign after campaign.
                 </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto mt-12">
+                <div className="p-6 rounded-xl" style={{ background: 'rgba(46,156,116,0.08)', border: '1px solid rgba(46,156,116,0.4)' }}>
+                  <span className="text-[11px] tracking-[0.2em] uppercase" style={{ ...mono, color: FMA.emerald }}>Your own channels</span>
+                  <h3 className="text-xl mt-2 mb-2" style={{ ...serif, color: FMA.paper, fontWeight: 600 }}>Fullmedia Alchemist</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: FMA.muted }}>
+                    An app you use. The Alchemist builds campaigns and puts finished posts on a schedule
+                    for the accounts you already own. That is this page.
+                  </p>
+                </div>
+                <div className="p-6 rounded-xl" style={{ background: 'rgba(0,191,255,0.06)', border: '1px solid rgba(0,191,255,0.3)' }}>
+                  <span className="text-[11px] tracking-[0.2em] uppercase" style={{ ...mono, color: '#38bdf8' }}>Someone else&apos;s audience</span>
+                  <h3 className="text-xl mt-2 mb-2" style={{ ...serif, color: FMA.paper, fontWeight: 600 }}>UPM creator &amp; press coverage</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: FMA.muted }}>
+                    A service we manage. We approach creators, publications and outlets to cover your brand
+                    on <em>their</em> channels, free and paid — tracked in our own tool, Dealflow.{" "}
+                    <a href="/#dealflow" style={{ color: '#38bdf8' }}>See how that works</a>.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
