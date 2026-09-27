@@ -3,18 +3,69 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, Users, Newspaper, Mic, Star, Zap, Target, Crown, Sparkles, Rocket } from "lucide-react";
+import { CheckCircle, Users, Newspaper, Target, Sparkles, Megaphone, Inbox } from "lucide-react";
 import { updateMetaTags } from "@/utils/seoUtils";
-import CreatorPricing from "@/components/CreatorPricing";
 
-import creatorsHeroBg from "@/assets/creators-hero-bg.jpg";
+const scrollToForm = () => {
+  const el = document.querySelector('footer');
+  if (el) {
+    const offsetTop = el.getBoundingClientRect().top + window.pageYOffset - 80;
+    window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+  }
+};
+
+const whatYouGet = [
+  {
+    icon: Newspaper,
+    title: "First look at news in your niche",
+    body: "Tell us the industries you actually cover and we will bring you client announcements, launches and milestones as they happen — before they are everywhere else.",
+  },
+  {
+    icon: Megaphone,
+    title: "Earned coverage when it stands on its own",
+    body: "If a story is genuinely useful to your audience, no money needs to change hands. We will say so plainly, hand you the facts and assets, and leave the editorial call entirely to you.",
+  },
+  {
+    icon: Target,
+    title: "Paid campaigns when there is a budget",
+    body: "When a client is running a paid push, we come to you with the brief and the budget. Your rates, your formats, your call — we negotiate on the brand's side, never against yours.",
+  },
+  {
+    icon: Users,
+    title: "Collaborations beyond a single post",
+    body: "Co-hosted Spaces and AMAs, community quests, directory listings and introductions to other creators working the same beat.",
+  },
+  {
+    icon: Inbox,
+    title: "One contact, not six",
+    body: "Everything reaches you through Dealflow, the outreach system we built for ourselves. One consistent voice instead of a different account manager every month, a real brief instead of a copy-pasted DM, and a follow-up that arrives when we said it would.",
+  },
+];
+
+const howItWorks = [
+  {
+    step: "01",
+    title: "Tell us what you cover",
+    body: "Your channels, your beat, your audience. If you publish a newsletter, a site, a podcast or a feed, all of it counts.",
+  },
+  {
+    step: "02",
+    title: "Share rates only if you have them",
+    body: "If you sell promotions on your site, socials or newsletter, send us the numbers so we can match you to the right budgets. If you do not, that is fine — plenty of what we send is not a paid placement at all.",
+  },
+  {
+    step: "03",
+    title: "Hear from us when it is relevant",
+    body: "We reach out when there is a story or a campaign that genuinely fits what you cover. No obligation to take any of it, and nothing exclusive on your side.",
+  },
+];
 
 const CreatorsPage = () => {
   useEffect(() => {
     updateMetaTags({
-      title: "Creator & Publisher Services - UPM Digital Marketing",
-      description: "Join our exclusive media network for creators and publishers. Unlock premium brand partnerships, monetize your audience, and scale your influence.",
-      keywords: "creator services, publisher network, brand partnerships, monetization, influencer marketing, content creator"
+      title: "For Creators, Publishers & Newsletters | UPM",
+      description: "Hear first about news in the industries you cover. Earned coverage when a story stands on its own, paid campaigns when there is a budget. No listing fees, no exclusivity.",
+      keywords: "creators, publishers, newsletters, earned media, editorial coverage, press coverage, paid promotions, creator rates, media network"
     });
   }, []);
 
@@ -22,7 +73,7 @@ const CreatorsPage = () => {
     <>
       <Header />
       <div className="min-h-screen bg-background pt-16">
-      
+
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
         {/* Animated Background */}
@@ -59,26 +110,26 @@ const CreatorsPage = () => {
         <div className="relative container mx-auto px-4 py-12 text-center">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in text-foreground">
-              <span className="block">Services for</span>
+              <span className="block">For Creators,</span>
               <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
-                Creators & Publishers
+                Publishers &amp; Newsletters
               </span>
             </h1>
-            
-            <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in">
-              Join our network of creators and unlock exclusive opportunities for collaboration, sponsorships, and revenue growth.
+
+            <p className="text-lg sm:text-xl text-muted-foreground mb-4 max-w-2xl mx-auto animate-fade-in">
+              Hear first about news in the industries you already cover. Sometimes that comes with a
+              budget attached. Often it does not — and it is still worth publishing.
             </p>
-            
+
+            <p className="text-base text-muted-foreground/90 mb-8 max-w-2xl mx-auto animate-fade-in">
+              No listing fees. No exclusivity. Nothing to buy.
+            </p>
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
-              <Button variant="hero" size="lg" className="px-8 py-6 text-lg group" onClick={() => {
-                const pricingSection = document.querySelector('#creator-pricing');
-                if (pricingSection) {
-                  pricingSection.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}>
-                <span className="group-hover:scale-110 transition-transform duration-200">View Pricing Plans</span>
+              <Button variant="hero" size="lg" className="px-8 py-6 text-lg group" onClick={scrollToForm}>
+                <span className="group-hover:scale-110 transition-transform duration-200">Tell us what you cover</span>
               </Button>
-              
+
               <Button variant="outline" size="lg" className="px-8 py-6 text-lg group" asChild>
                 <a href="/affiliate-signup">
                   <span className="group-hover:scale-110 transition-transform duration-200">Join Referral Program</span>
@@ -89,138 +140,103 @@ const CreatorsPage = () => {
         </div>
       </section>
 
-      {/* Core Services */}
+      {/* Earned media */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 bg-primary/10 backdrop-blur-sm border border-primary/20 rounded-full px-4 py-2 mb-6">
+              <Sparkles className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium">How we think about coverage</span>
+            </div>
+
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Our <span className="text-primary">Core Services</span>
+              Not every story needs a <span className="text-primary">price tag</span>
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Comprehensive solutions designed to amplify your reach and maximize your earning potential in the digital space.
-            </p>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <Card className="group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5">
-              <CardHeader className="text-center pb-4">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary-glow shadow-lg border-2 border-primary/20 mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                  <Zap className="h-8 w-8 text-white" />
-                </div>
-                <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
-                  Quest Services
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground text-center leading-relaxed">
-                  Web3 quest integration and community engagement solutions for creators and brands.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5">
-              <CardHeader className="text-center pb-4">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-secondary to-secondary-glow shadow-lg border-2 border-secondary/20 mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                  <Users className="h-8 w-8 text-white" />
-                </div>
-                <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
-                  Collaboration Opportunities
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground text-center leading-relaxed">
-                  Connect with brands and other creators for strategic partnerships and joint ventures.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5">
-              <CardHeader className="text-center pb-4">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-accent to-accent-glow shadow-lg border-2 border-accent/20 mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                  <Crown className="h-8 w-8 text-white" />
-                </div>
-                <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
-                  Sponsorships
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground text-center leading-relaxed">
-                  Get matched with relevant brands looking for creators in your niche and audience size.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5">
-              <CardHeader className="text-center pb-4">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary-glow shadow-lg border-2 border-primary/20 mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                  <Newspaper className="h-8 w-8 text-white" />
-                </div>
-                <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
-                  Coverage Requests
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground text-center leading-relaxed">
-                  Media placement and press coverage to amplify your brand and reach new audiences.
-                </p>
-              </CardContent>
-            </Card>
+            <div className="space-y-5 text-lg text-muted-foreground leading-relaxed text-left sm:text-center">
+              <p>
+                Somewhere along the way the industry decided every mention had to be bought. We do not
+                work that way. When a client has a real launch, a funding round, a partnership or a
+                product that your audience would actually want to know about, we will bring it to you as
+                a story — not as an invoice.
+              </p>
+              <p>
+                That is the whole point of an audience subscribing to you in the first place. They came
+                for news they can use, from someone whose judgement they trust. Coverage that is earned
+                reads differently, ages better, and does more for the brand than a sponsored slot ever
+                will.
+              </p>
+              <p className="text-foreground font-medium">
+                So we encourage earned media wherever it makes sense, and we are upfront about which
+                is which. When there is money involved, we say so. When there is not, we say that too.
+              </p>
+              <p className="text-base">
+                Everything we send you is tracked in{" "}
+                <a href="/dealflow" className="text-primary underline underline-offset-4">Dealflow</a>, our
+                own outreach system &mdash; which is how free coverage gets counted as a real outcome on our
+                side instead of being treated as a failed sale.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <CreatorPricing />
+      {/* What you get */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              What you <span className="text-primary">get</span>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              We work with brands across AI, gaming, Web3, DeFi and consumer tech. What reaches you
+              depends entirely on what you tell us you cover.
+            </p>
+          </div>
 
-      {/* Benefits Section */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {whatYouGet.map((item) => {
+              const Icon = item.icon;
+              return (
+                <Card key={item.title} className="group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5">
+                  <CardHeader className="pb-4">
+                    <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary-glow shadow-lg border-2 border-primary/20 mb-4 group-hover:scale-110 transition-transform duration-300">
+                      <Icon className="h-7 w-7 text-white" />
+                    </div>
+                    <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
+                      {item.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground leading-relaxed">{item.body}</p>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* How it works */}
       <section className="py-20 bg-card/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Why Choose <span className="text-primary">Our Platform</span>
+              How it <span className="text-primary">works</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Experience the advantages that set us apart from other creator platforms and maximize your success.
+              Three steps, and only the first one needs anything from you.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="text-center group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5 p-8">
-              <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-primary to-primary-glow shadow-xl border-2 border-primary/30 mb-6 mx-auto group-hover:scale-110 transition-all duration-300">
-                <Star className="h-10 w-10 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">
-                Exclusive Access
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Access premium brands and campaigns that aren't available anywhere else.
-              </p>
-            </Card>
-
-            <Card className="text-center group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5 p-8">
-              <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-secondary to-secondary-glow shadow-xl border-2 border-secondary/30 mb-6 mx-auto group-hover:scale-110 transition-all duration-300">
-                <Zap className="h-10 w-10 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">
-                Priority Placement
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Get featured first when brands are looking for creators.
-              </p>
-            </Card>
-
-            <Card className="text-center group border-border card-hover bg-gradient-to-br from-card to-card/50 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-gradient-to-br hover:from-card hover:to-primary/5 p-8">
-              <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-accent to-accent-glow shadow-xl border-2 border-accent/30 mb-6 mx-auto group-hover:scale-110 transition-all duration-300">
-                <Target className="h-10 w-10 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">
-                Revenue Growth
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Multiple income streams including direct partnerships, referral commissions, 
-                and collaboration opportunities.
-              </p>
-            </Card>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {howItWorks.map((item) => (
+              <Card key={item.step} className="border-border bg-gradient-to-br from-card to-card/50 backdrop-blur-sm p-8">
+                <span className="text-sm font-mono tracking-[0.2em] text-primary">{item.step}</span>
+                <h3 className="text-xl font-bold mt-2 mb-4">{item.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{item.body}</p>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -231,47 +247,42 @@ const CreatorsPage = () => {
           <Card className="max-w-4xl mx-auto text-center bg-gradient-to-br from-card to-card/50 backdrop-blur-sm border-primary/20 shadow-2xl">
             <CardHeader className="pb-6">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Ready to <span className="text-primary">Get Started?</span>
+                Get on the <span className="text-primary">list</span>
               </h2>
               <p className="text-lg text-muted-foreground">
-                Join thousands of creators who are already earning with our platform. 
-                Get access to exclusive opportunities and start growing your revenue today.
+                Let us know you are interested in hearing about news in your industry — and share your
+                rates if promotions on your site, socials or newsletter are something you offer. Both
+                are useful. Neither is required.
               </p>
             </CardHeader>
-            
+
             <CardContent className="space-y-8">
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Button variant="cta" size="lg" className="px-8 py-6 text-lg" onClick={() => {
-                  const contactSection = document.querySelector('footer');
-                  if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}>
-                  Get Started Today
+                <Button variant="cta" size="lg" className="px-8 py-6 text-lg" onClick={scrollToForm}>
+                  Tell us what you cover
                 </Button>
-                
-                <Button variant="light" size="lg" className="px-8 py-6 text-lg" onClick={() => {
-                  const pricingSection = document.querySelector('#creator-pricing');
-                  if (pricingSection) {
-                    pricingSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}>
-                  View Pricing
+
+                <Button variant="light" size="lg" className="px-8 py-6 text-lg" asChild>
+                  <a href="/contact">Ask us a question</a>
                 </Button>
               </div>
-              
+
               <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-primary" />
-                  <span>No setup fees</span>
+                  <span>No listing fees</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-primary" />
-                  <span>Revenue share opportunities</span>
+                  <span>No exclusivity</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-primary" />
-                  <span>Priority client promotion</span>
+                  <span>Rates optional</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4 text-primary" />
+                  <span>You keep editorial control</span>
                 </div>
               </div>
             </CardContent>
