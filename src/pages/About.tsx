@@ -45,14 +45,14 @@ const services = [
   },
   {
     icon: Palette,
-    title: "Social Content Creation",
-    description: "Custom branded social content — posts, reels, videos & ads that feel like you. From ~$25/post with monthly plans.",
+    title: "Fullmedia Alchemist",
+    description: "Our social content app. An agentic brand assistant, The Alchemist, drafts and schedules posts for your own accounts — you log in and run it yourself.",
     link: "/media-for-brands",
   },
   {
     icon: Code2,
-    title: "Vibe Coding",
-    description: "Custom app development services — from concept to launch. We build modern, high-performance web applications for your brand.",
+    title: "App Development & Automations",
+    description: "Agentic development and AI integrations — apps, internal tools and automations built in a fraction of the usual time.",
     link: "/vibe-coding",
   },
 ];
