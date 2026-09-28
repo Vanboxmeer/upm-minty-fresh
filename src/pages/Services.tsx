@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import Header from "@/components/Header";
-import PaidAdvertising from "@/components/PaidAdvertising";
 import PackageSelector from "@/components/PackageSelector";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
@@ -182,13 +181,15 @@ const serviceDetails = [
   {
     id: "publications",
     icon: FileText,
-    title: "Publications & Feature Coverage",
-    pricing: "Depends on the outlet",
+    title: "Publications, Features & Placements",
+    pricing: "Free where we can get it, paid where it is worth it",
     description:
-      "Standalone features, reviews and thought-leadership placements. Some outlets charge for a slot; plenty will cover a genuinely newsworthy story for nothing, and we push for that first.",
+      "Features, reviews, and bought slots on the sites, newsletters and communities your buyers already read. Some outlets charge; plenty will cover a genuinely newsworthy story for nothing, and we push for that first either way.",
     features: [
-      "Sponsored placements where the audience justifies the rate",
       "Earned features when the story stands on its own",
+      "Sponsored articles and display slots where the audience justifies the rate",
+      "Newsletter sends and inline placements",
+      "Sponsored slots in the groups and channels your market gathers in",
       "Long-form thought leadership under your founder's name",
       "Every rate disclosed to you before anything is booked",
     ],
@@ -407,7 +408,6 @@ const ServicesPage = () => {
           </div>
         </section>
 
-        <PaidAdvertising />
         <PackageSelector />
         <Footer />
       </div>
