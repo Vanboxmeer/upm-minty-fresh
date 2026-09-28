@@ -10,7 +10,7 @@ const CreatorCoverage = () => {
     {
       icon: Gift,
       title: "Free and paid, worked together",
-      description: "Every shortlist gets asked both ways. When a story is genuinely good, plenty of creators cover it for nothing — which leaves your budget for the placements that actually need paying for."
+      description: "Every shortlist gets asked both ways. When a story is genuinely good, plenty of outlets and creators cover it for nothing — which leaves your budget for the placements that actually need paying for."
     },
     {
       icon: Handshake,
@@ -39,12 +39,13 @@ const CreatorCoverage = () => {
           }`}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Get Covered by People Your Market Already Trusts
+            Get Your Brand Covered
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Creators, publications and community channels that reach the audience you want —
-            approached properly, negotiated on your behalf, and tracked from first message to
-            published post. Some of it costs money. A useful amount of it does not.
+            News outlets, publications, creators and KOLs, newsletters, podcasts and community
+            channels — whoever actually reaches your market. We find the right ones, approach them
+            properly, negotiate the rate and track every thread to a published link. Some of it is
+            earned and costs nothing. Some of it is paid. Most campaigns are both.
           </p>
         </div>
 
