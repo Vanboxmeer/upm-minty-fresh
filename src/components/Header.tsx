@@ -75,13 +75,10 @@ const Header = () => {
                       <a href="/services#press-release" className="w-full cursor-pointer text-sm">Press Release Services</a>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                      <a href="/services#publications" className="w-full cursor-pointer text-sm">Publications</a>
+                      <a href="/services#publications" className="w-full cursor-pointer text-sm">Publications &amp; Placements</a>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
                       <a href="/services#interviews" className="w-full cursor-pointer text-sm">Interviews & Spaces</a>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <a href="/services#paid-advertising" className="w-full cursor-pointer text-sm">Niche Site Placements</a>
                     </DropdownMenuItem>
                   </DropdownMenuSubContent>
                 </DropdownMenuSub>
@@ -140,7 +137,6 @@ const Header = () => {
                   <a href="/services#press-release" className="text-foreground hover:text-primary transition-colors block text-xs">Press Release Services</a>
                   <a href="/services#publications" className="text-foreground hover:text-primary transition-colors block text-xs">Publications</a>
                   <a href="/services#interviews" className="text-foreground hover:text-primary transition-colors block text-xs">Interviews & Spaces</a>
-                  <a href="/services#paid-advertising" className="text-foreground hover:text-primary transition-colors block text-xs">Niche Site Placements</a>
                 </div>
                 <a href="/media-for-brands" className="text-foreground hover:text-primary transition-colors block text-sm">Fullmedia Alchemist</a>
                 <a href="/vibe-coding" className="text-foreground hover:text-primary transition-colors block text-sm">App Development</a>
