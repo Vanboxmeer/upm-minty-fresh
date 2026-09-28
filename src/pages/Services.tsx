@@ -302,8 +302,9 @@ const ServicesPage = () => {
                 </span>
               </h1>
               <p className="text-lg sm:text-xl text-muted-foreground mb-4">
-                Coverage on other people&apos;s channels, content on your own, and the occasional
-                app when the thing you need does not exist yet.
+                Getting your brand covered across media, creators and communities — plus the app
+                that keeps your own channels posting, and custom builds when you need something
+                that does not exist yet.
               </p>
               <p className="text-base text-muted-foreground/90 mb-8">
                 You set the campaign budget, we place it and show you where every pound went.
@@ -325,7 +326,7 @@ const ServicesPage = () => {
         <section className="py-20">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">What We Actually Do</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Six services for brands in AI, gaming, Web3, DeFi and consumer tech. Most clients
                 use two or three of them at once.
