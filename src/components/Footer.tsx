@@ -1304,9 +1304,9 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">Services</h4>
             <ul className="space-y-2 text-sm opacity-80">
               <li><a href="/services#kol-collaborations" className="hover:text-primary transition-colors">KOL Collaborations</a></li>
-              <li><a href="/services#press-release-services" className="hover:text-primary transition-colors">Press Release Services</a></li>
-              <li><a href="/services#features--interviews--spaces" className="hover:text-primary transition-colors">Features, Interviews, Spaces</a></li>
-              <li><a href="/services#paid-advertising" className="hover:text-primary transition-colors">Niche Site Placements</a></li>
+              <li><a href="/services#press-release" className="hover:text-primary transition-colors">Press Releases &amp; Distribution</a></li>
+              <li><a href="/services#publications" className="hover:text-primary transition-colors">Publications &amp; Placements</a></li>
+              <li><a href="/services#interviews" className="hover:text-primary transition-colors">Interviews, Spaces &amp; Podcasts</a></li>
               <li><a href="/creators" className="hover:text-primary transition-colors">Creator Services</a></li>
               <li><a href="/dealflow" className="hover:text-primary transition-colors">Dealflow (Outreach System)</a></li>
               <li><a href="/media-for-brands" className="hover:text-primary transition-colors">Fullmedia Alchemist (Social Content App)</a></li>
