@@ -35,7 +35,7 @@ const DealflowSpotlight = () => {
                 Powered by Dealflow
               </span>
               <h2 className="text-2xl md:text-3xl font-bold mt-2 mb-4 text-white">
-                The system that does the legwork
+                Every campaign runs on Dealflow
               </h2>
               <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-5">
                 Shortlists researched against your brand rather than pulled from a generic database.
