@@ -6,7 +6,6 @@ import Services from "@/components/Services";
 import DealflowSpotlight from "@/components/DealflowSpotlight";
 import CreatorCoverage from "@/components/CreatorCoverage";
 import InfluencerPlatforms from "@/components/InfluencerPlatforms";
-import PaidAdvertising from "@/components/PaidAdvertising";
 import FullmediaAlchemistSpotlight from "@/components/FullmediaAlchemistSpotlight";
 import FeaturedInMedia from "@/components/FeaturedInMedia";
 import BlogSection from "@/components/BlogSection";
@@ -52,7 +51,6 @@ const Index = () => {
         <CreatorCoverage />
         <DealflowSpotlight />
         <InfluencerPlatforms />
-        <PaidAdvertising />
         <FullmediaAlchemistSpotlight />
         <TrustedBy />
         <FeaturedInMedia />
