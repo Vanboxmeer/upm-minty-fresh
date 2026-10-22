@@ -43,7 +43,7 @@ function generateSitemapPlugin(env: Record<string, string | undefined>) {
           { url: 'media-for-brands', priority: '0.9', changefreq: 'monthly' },
           { url: 'vibe-coding', priority: '0.9', changefreq: 'monthly' },
           { url: 'creators', priority: '0.8', changefreq: 'monthly' },
-          { url: 'dealflow', priority: '0.7', changefreq: 'monthly' },
+          { url: 'dealflow', priority: '0.8', changefreq: 'monthly' },
           { url: 'blog', priority: '0.8', changefreq: 'daily' },
           { url: 'our-products', priority: '0.7', changefreq: 'monthly' },
           { url: 'case-studies', priority: '0.7', changefreq: 'monthly' },
@@ -130,8 +130,8 @@ const STATIC_META: Record<string, { title: string; description: string }> = {
     description: 'On-brand social posts, reels and video for the accounts you own, drafted and scheduled by The Alchemist. Free plan, then $79, $249 or $799/mo.',
   },
   'dealflow': {
-    title: 'Dealflow by UPM | Creator & Press Outreach System',
-    description: 'The outreach system behind every UPM campaign. Researched shortlists, free and paid coverage tracked side by side, logged rates and follow-ups that never go cold.',
+    title: 'Dealflow by UPM | Outreach, Deals & Negotiation Workspace',
+    description: 'The outreach workspace behind every UPM campaign, open to agencies and brands. Find options, draft, confirm, track replies and log every quoted rate from your own accounts.',
   },
   'vibe-coding': {
     title: 'App Development & AI Automations | Agentic Builds | UPM',
