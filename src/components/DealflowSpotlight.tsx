@@ -41,14 +41,14 @@ const DealflowSpotlight = () => {
                 Shortlists researched against your brand rather than pulled from a generic database.
                 One professional voice across every approach. A follow-up date on every thread, so the
                 creator who said &ldquo;not now&rdquo; in March gets asked again in June. It is our own
-                software, built after watching too many good deals die in a shared inbox &mdash; and it
-                comes with Silver and Gold.
+                software, built after watching too many good deals die in a shared inbox &mdash; included
+                with Silver and Gold, and open to agencies and brands as an early-access subscription.
               </p>
               <Link
                 to="/dealflow"
                 className="inline-flex items-center gap-2 font-semibold text-primary-glow hover:gap-3 transition-all"
               >
-                See how Dealflow works
+                Explore Dealflow
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

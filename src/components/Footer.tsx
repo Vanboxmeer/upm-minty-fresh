@@ -1308,7 +1308,7 @@ const Footer = () => {
               <li><a href="/services#publications" className="hover:text-primary transition-colors">Publications &amp; Placements</a></li>
               <li><a href="/services#interviews" className="hover:text-primary transition-colors">Interviews, Spaces &amp; Podcasts</a></li>
               <li><a href="/creators" className="hover:text-primary transition-colors">Creator Services</a></li>
-              <li><a href="/dealflow" className="hover:text-primary transition-colors">Dealflow (Outreach System)</a></li>
+              <li><a href="/dealflow" className="hover:text-primary transition-colors">Dealflow (Outreach Workspace)</a></li>
               <li><a href="/media-for-brands" className="hover:text-primary transition-colors">Fullmedia Alchemist (Social Content App)</a></li>
               <li><a href="/vibe-coding" className="hover:text-primary transition-colors">App Development &amp; Automations</a></li>
               

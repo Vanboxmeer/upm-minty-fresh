@@ -9,7 +9,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu";
-import { Menu, X, ChevronDown, Palette, Code, Megaphone } from "lucide-react";
+import { Menu, X, ChevronDown, Palette, Code, Megaphone, Handshake } from "lucide-react";
 import { useState } from "react";
 import confetti from "canvas-confetti";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -89,6 +89,12 @@ const Header = () => {
                   </a>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
+                  <a href="/dealflow" className="w-full cursor-pointer flex items-center">
+                    <Handshake className="h-4 w-4 mr-2 opacity-60" />
+                    Dealflow
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
                   <a href="/vibe-coding" className="w-full cursor-pointer flex items-center">
                     <Code className="h-4 w-4 mr-2 opacity-60" />
                     App Development
@@ -139,6 +145,7 @@ const Header = () => {
                   <a href="/services#interviews" className="text-foreground hover:text-primary transition-colors block text-xs">Interviews & Spaces</a>
                 </div>
                 <a href="/media-for-brands" className="text-foreground hover:text-primary transition-colors block text-sm">Fullmedia Alchemist</a>
+                <a href="/dealflow" className="text-foreground hover:text-primary transition-colors block text-sm">Dealflow</a>
                 <a href="/vibe-coding" className="text-foreground hover:text-primary transition-colors block text-sm">App Development</a>
               </div>
             </div>
