@@ -231,7 +231,7 @@ const MediaForBrands = () => {
                   <p className="text-sm leading-relaxed" style={{ color: FMA.muted }}>
                     A service we manage. We approach creators, publications and outlets to cover your brand
                     on <em>their</em> channels, free and paid — tracked in our own tool, Dealflow.{" "}
-                    <a href="/#dealflow" style={{ color: '#38bdf8' }}>See how that works</a>.
+                    <a href="/dealflow" style={{ color: "#38bdf8" }}>See Dealflow</a>.
                   </p>
                 </div>
               </div>
