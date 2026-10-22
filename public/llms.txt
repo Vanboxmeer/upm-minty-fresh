@@ -7,6 +7,7 @@
 - [Home](/): Overview of UPM's growth platform for digital marketing.
 - [Services](/services): KOL collaborations, press releases, tier-1 media, paid ads.
 - [Media for Brands](/media-for-brands): Earned media and PR for Web3 and tech brands.
+- [Dealflow](/dealflow): Outreach, deals and negotiation workspace for agencies and brands — find options, draft, confirm, track replies and log rates. Early access.
 - [Creators](/creators): Programs and platform for content creators and KOLs.
 - [Vibe Coding](/vibe-coding): Rapid MVP and app development services.
 - [Apps We've Built](/our-products): UPM's portfolio of apps including Fullmedia Alchemist (https://www.fullmediaalchemist.com/), Reading Race, SpinQuest, Watch Crypto, Vaporsmooth, AmplifyHub, Re-Writeable AI, and Everything Nightlife (https://everythingnightlife.com).
