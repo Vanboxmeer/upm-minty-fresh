@@ -3,6 +3,10 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "redirects": [
+    { "source": "/dealflow", "destination": "/alchemist-reach", "permanent": true },
+    { "source": "/blog/dealflow-by-upm-how-we-stopped-losing-creator-deals-in-our-inbox", "destination": "/blog/alchemist-reach-how-we-stopped-losing-creator-deals-in-our-inbox", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ],

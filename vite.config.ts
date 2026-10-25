@@ -43,7 +43,7 @@ function generateSitemapPlugin(env: Record<string, string | undefined>) {
           { url: 'media-for-brands', priority: '0.9', changefreq: 'monthly' },
           { url: 'vibe-coding', priority: '0.9', changefreq: 'monthly' },
           { url: 'creators', priority: '0.8', changefreq: 'monthly' },
-          { url: 'dealflow', priority: '0.8', changefreq: 'monthly' },
+          { url: 'alchemist-reach', priority: '0.8', changefreq: 'monthly' },
           { url: 'blog', priority: '0.8', changefreq: 'daily' },
           { url: 'our-products', priority: '0.7', changefreq: 'monthly' },
           { url: 'case-studies', priority: '0.7', changefreq: 'monthly' },
@@ -129,9 +129,9 @@ const STATIC_META: Record<string, { title: string; description: string }> = {
     title: 'Fullmedia Alchemist | Social Content for Your Own Channels | UPM',
     description: 'On-brand social posts, reels and video for the accounts you own, drafted and scheduled by The Alchemist. Free plan, then $79, $249 or $799/mo.',
   },
-  'dealflow': {
-    title: 'Dealflow by UPM | Outreach, Deals & Negotiation Workspace',
-    description: 'The outreach workspace behind every UPM campaign, open to agencies and brands. Find options, draft, confirm, track replies and log every quoted rate from your own accounts.',
+  'alchemist-reach': {
+    title: 'Alchemist Reach | Find Creators & Press, Track Every Deal | UPM',
+    description: 'Find the creators and outlets worth pitching, draft the outreach and track every deal to a close. Run it yourself on a free-to-start plan, or have UPM run it for you on Silver or Gold.',
   },
   'vibe-coding': {
     title: 'App Development & AI Automations | Agentic Builds | UPM',
@@ -143,7 +143,7 @@ const STATIC_META: Record<string, { title: string; description: string }> = {
   },
   'our-products': {
     title: 'Our Apps | UPM Ecosystem',
-    description: 'A few of the apps built by UPM, including Fullmedia Alchemist, Dealflow, SpinQuest, Reading Race, Watch Crypto, Everything Nightlife and Vaporsmooth.',
+    description: 'A few of the apps built by UPM, including Fullmedia Alchemist, Alchemist Reach, SpinQuest, Reading Race, Watch Crypto, Everything Nightlife and Vaporsmooth.',
   },
   'case-studies': {
     title: 'Case Studies | Campaign Results | UPM',
