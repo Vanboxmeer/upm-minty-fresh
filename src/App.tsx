@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import ScrollToTop from "@/components/ScrollToTop";
 import PageLoader from "@/components/PageLoader";
@@ -26,7 +26,7 @@ import Index from "./pages/Index";
 const Services = lazy(() => import("./pages/Services"));
 const Creators = lazy(() => import("./pages/Creators"));
 const MediaForBrands = lazy(() => import("./pages/MediaForBrands"));
-const Dealflow = lazy(() => import("./pages/Dealflow"));
+const AlchemistReach = lazy(() => import("./pages/AlchemistReach"));
 const VibeCoding = lazy(() => import("./pages/VibeCoding"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
@@ -110,7 +110,8 @@ const App = () => (
                   <Route path="/" element={<Index />} />
                   <Route path="/services" element={<Services />} />
                   <Route path="/creators" element={<Creators />} />
-                  <Route path="/dealflow" element={<Dealflow />} />
+                  <Route path="/alchemist-reach" element={<AlchemistReach />} />
+                  <Route path="/dealflow" element={<Navigate to="/alchemist-reach" replace />} />
                   <Route path="/media-for-brands" element={<MediaForBrands />} />
                   <Route path="/vibe-coding" element={<VibeCoding />} />
                   <Route path="/blog" element={<Blog />} />
