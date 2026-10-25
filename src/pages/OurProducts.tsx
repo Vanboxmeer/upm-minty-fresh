@@ -14,7 +14,6 @@ import readingRaceIcon from "@/assets/apps/reading-race.png";
 import everythingNightlifeIcon from "@/assets/apps/everything-nightlife-mark.svg";
 import vaporsmoothIcon from "@/assets/apps/vaporsmooth.png";
 import fullmediaAlchemistIcon from "@/assets/apps/fullmedia-alchemist.svg";
-import dealflowIcon from "@/assets/apps/dealflow-logo.svg";
 
 const products = [
   {
@@ -28,14 +27,14 @@ const products = [
     rounded: false
   },
   {
-    name: "Dealflow",
-    tagline: "Outreach, Deals & Negotiation Workspace",
-    description: "The outreach workspace behind every UPM campaign, open to agencies and brands in early access. Find options, draft, confirm and send from your own Gmail, track replies, log every quoted rate and keep a follow-up date on every thread.",
-    url: "/dealflow",
+    name: "Alchemist Reach",
+    tagline: "Outreach, Deals & Coverage Tool",
+    description: "The outreach tool inside Fullmedia Alchemist, and what UPM uses behind every managed campaign. Ask for a shortlist of creators and outlets with contacts and a first draft each, then track replies, quotes and deals to a close. Free to start. Run it yourself, or have UPM run it for you.",
+    url: "/alchemist-reach",
     internal: true,
-    cta: "Explore Dealflow",
-    icon: dealflowIcon,
-    gradient: "from-blue-800/20 to-amber-500/20",
+    cta: "Explore Alchemist Reach",
+    icon: fullmediaAlchemistIcon,
+    gradient: "from-emerald-500/20 to-amber-500/20",
     isWide: false,
     rounded: false
   },
@@ -95,8 +94,8 @@ const OurProducts = () => {
   useEffect(() => {
     updateMetaTags({
       title: "Our Apps | UPM Ecosystem",
-      description: "A few of the apps built by UPM, including Fullmedia Alchemist, Dealflow, SpinQuest, Reading Race, Watch Crypto, Everything Nightlife, and Vaporsmooth.",
-      keywords: "UPM apps, Fullmedia Alchemist, Dealflow, creator outreach, AI social content, social content calendar, SpinQuest, Reading Race, Watch Crypto, Everything Nightlife, Vaporsmooth, crypto tools, community apps, cannabis marketplace"
+      description: "A few of the apps built by UPM, including Fullmedia Alchemist, Alchemist Reach, SpinQuest, Reading Race, Watch Crypto, Everything Nightlife, and Vaporsmooth.",
+      keywords: "UPM apps, Fullmedia Alchemist, Alchemist Reach, creator outreach, AI social content, social content calendar, SpinQuest, Reading Race, Watch Crypto, Everything Nightlife, Vaporsmooth, crypto tools, community apps, cannabis marketplace"
     });
   }, []);
 

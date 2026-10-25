@@ -315,7 +315,7 @@ const ServicesPage = () => {
                   View Our Packages
                 </Button>
                 <Button variant="outline" size="lg" className="px-8 py-6 text-lg" asChild>
-                  <Link to="/dealflow">How our outreach works</Link>
+                  <Link to="/alchemist-reach">How our outreach works</Link>
                 </Button>
               </div>
             </div>
@@ -383,26 +383,27 @@ const ServicesPage = () => {
           </div>
         </section>
 
-        {/* Dealflow band */}
+        {/* Alchemist Reach band */}
         <section className="py-16 border-y border-border/60 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-2xl md:text-3xl font-bold mb-4">
-                The outreach runs on our own software, and you can use it too
+                The outreach runs on Alchemist Reach, and you can use it too
               </h2>
               <p className="text-lg text-muted-foreground mb-3">
-                Creator and press work is run through Dealflow: researched shortlists, one consistent
-                voice across every approach, logged rates, and a follow-up date on every thread so nothing
-                quietly dies in an inbox. It comes with Silver and Gold, and agencies and brands can
-                run it on their own accounts through an early-access subscription.
+                Creator and press work is run through Alchemist Reach, part of Fullmedia Alchemist:
+                researched shortlists, one consistent voice across every approach, logged rates, and a
+                follow-up date on every thread so nothing quietly dies in an inbox. Run it yourself on a
+                free-to-start plan at fullmediaalchemist.com, or let our team run it for you on Silver
+                or Gold, where we use the same tools and the service fee drops from 3.45% to 1%.
               </p>
               <p className="text-base text-muted-foreground/90 mb-8">
                 Free-coverage outreach is a bonus on top of the paid work, so it is metered — 15 requests
                 a month on Silver, 50 on Gold, extras at $20. Paid-placement outreach is never capped.
               </p>
               <Button variant="outline" size="lg" asChild>
-                <Link to="/dealflow" className="inline-flex items-center gap-2">
-                  See Dealflow
+                <Link to="/alchemist-reach" className="inline-flex items-center gap-2">
+                  See Alchemist Reach
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>

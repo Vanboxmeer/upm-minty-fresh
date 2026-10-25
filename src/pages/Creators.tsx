@@ -38,7 +38,7 @@ const whatYouGet = [
   {
     icon: Inbox,
     title: "One contact, not six",
-    body: "Everything reaches you through Dealflow, the outreach system we built for ourselves. One consistent voice instead of a different account manager every month, a real brief instead of a copy-pasted DM, and a follow-up that arrives when we said it would.",
+    body: "Everything reaches you through Alchemist Reach, the outreach system we built for ourselves. One consistent voice instead of a different account manager every month, a real brief instead of a copy-pasted DM, and a follow-up that arrives when we said it would.",
   },
 ];
 
@@ -172,7 +172,7 @@ const CreatorsPage = () => {
               </p>
               <p className="text-base">
                 Everything we send you is tracked in{" "}
-                <a href="/dealflow" className="text-primary underline underline-offset-4">Dealflow</a>, our
+                <a href="/alchemist-reach" className="text-primary underline underline-offset-4">Alchemist Reach</a>, our
                 own outreach system &mdash; which is how free coverage gets counted as a real outcome on our
                 side instead of being treated as a failed sale.
               </p>

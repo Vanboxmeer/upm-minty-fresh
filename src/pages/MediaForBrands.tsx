@@ -230,8 +230,8 @@ const MediaForBrands = () => {
                   <h3 className="text-xl mt-2 mb-2" style={{ ...serif, color: FMA.paper, fontWeight: 600 }}>UPM creator &amp; press coverage</h3>
                   <p className="text-sm leading-relaxed" style={{ color: FMA.muted }}>
                     A service we manage. We approach creators, publications and outlets to cover your brand
-                    on <em>their</em> channels, free and paid — tracked in our own tool, Dealflow.{" "}
-                    <a href="/dealflow" style={{ color: "#38bdf8" }}>See Dealflow</a>.
+                    on <em>their</em> channels, free and paid — tracked in our own tool, Alchemist Reach.{" "}
+                    <a href="/alchemist-reach" style={{ color: "#38bdf8" }}>See Alchemist Reach</a>.
                   </p>
                 </div>
               </div>
