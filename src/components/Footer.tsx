@@ -1308,7 +1308,7 @@ const Footer = () => {
               <li><a href="/services#publications" className="hover:text-primary transition-colors">Publications &amp; Placements</a></li>
               <li><a href="/services#interviews" className="hover:text-primary transition-colors">Interviews, Spaces &amp; Podcasts</a></li>
               <li><a href="/creators" className="hover:text-primary transition-colors">Creator Services</a></li>
-              <li><a href="/dealflow" className="hover:text-primary transition-colors">Dealflow (Outreach Workspace)</a></li>
+              <li><a href="/alchemist-reach" className="hover:text-primary transition-colors">Alchemist Reach (Outreach Tool)</a></li>
               <li><a href="/media-for-brands" className="hover:text-primary transition-colors">Fullmedia Alchemist (Social Content App)</a></li>
               <li><a href="/vibe-coding" className="hover:text-primary transition-colors">App Development &amp; Automations</a></li>
               
@@ -1331,7 +1331,7 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">Our Apps</h4>
             <ul className="space-y-2 text-sm opacity-80">
               <li><a href="https://www.fullmediaalchemist.com/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Fullmedia Alchemist</a></li>
-              <li><a href="/dealflow" className="hover:text-primary transition-colors">Dealflow</a></li>
+              <li><a href="/alchemist-reach" className="hover:text-primary transition-colors">Alchemist Reach</a></li>
               <li><a href="https://spinquest.app/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">SpinQuest</a></li>
               <li><a href="https://readingrace.com/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Reading Race</a></li>
               <li><a href="https://watchcrypto.info/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Watch Crypto</a></li>
