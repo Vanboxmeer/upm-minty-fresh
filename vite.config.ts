@@ -42,6 +42,7 @@ function generateSitemapPlugin(env: Record<string, string | undefined>) {
           { url: 'services', priority: '0.9', changefreq: 'monthly' },
           { url: 'media-for-brands', priority: '0.9', changefreq: 'monthly' },
           { url: 'vibe-coding', priority: '0.9', changefreq: 'monthly' },
+          { url: 'wallet-rescue', priority: '0.8', changefreq: 'monthly' },
           { url: 'creators', priority: '0.8', changefreq: 'monthly' },
           { url: 'alchemist-reach', priority: '0.8', changefreq: 'monthly' },
           { url: 'blog', priority: '0.8', changefreq: 'daily' },
@@ -132,6 +133,10 @@ const STATIC_META: Record<string, { title: string; description: string }> = {
   'alchemist-reach': {
     title: 'Alchemist Reach | Find Creators & Press, Track Every Deal | UPM',
     description: 'Find the creators and outlets worth pitching, draft the outreach and track every deal to a close. Run it yourself on a free-to-start plan, or have UPM run it for you on Silver or Gold.',
+  },
+  'wallet-rescue': {
+    title: 'Compromised Wallet Rescue Introductions | White-Hat Specialists | UPM',
+    description: 'Keys leaked but funds not yet drained? We introduce you to vetted white-hat specialists who can secure the assets still in your wallet. Introductions only.',
   },
   'vibe-coding': {
     title: 'App Development & AI Automations | Agentic Builds | UPM',
