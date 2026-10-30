@@ -10,6 +10,7 @@
 - [Alchemist Reach](/alchemist-reach): The outreach tool inside Fullmedia Alchemist (https://www.fullmediaalchemist.com/reach-features/) — ask for a shortlist of creators and outlets, draft, confirm, track replies and log rates. Run it yourself on a free-to-start plan, or have UPM run it for you on Silver or Gold.
 - [Creators](/creators): Programs and platform for content creators and KOLs.
 - [Vibe Coding](/vibe-coding): Rapid MVP and app development services.
+- [Compromised Wallet Rescue](/wallet-rescue): Introductions to white-hat specialists for wallets with exposed keys and funds not yet drained.
 - [Apps We've Built](/our-products): UPM's portfolio of apps including Fullmedia Alchemist (https://www.fullmediaalchemist.com/), Reading Race, SpinQuest, Watch Crypto, Vaporsmooth, AmplifyHub, Re-Writeable AI, and Everything Nightlife (https://everythingnightlife.com).
 - [Case Studies](/case-studies): Client results and campaign breakdowns.
 - [Trending News](/trending): Curated top stories in tech, AI, crypto, and gaming.
