@@ -28,6 +28,7 @@ const Creators = lazy(() => import("./pages/Creators"));
 const MediaForBrands = lazy(() => import("./pages/MediaForBrands"));
 const AlchemistReach = lazy(() => import("./pages/AlchemistReach"));
 const VibeCoding = lazy(() => import("./pages/VibeCoding"));
+const WalletRescue = lazy(() => import("./pages/WalletRescue"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const CaseStudies = lazy(() => import("./pages/CaseStudies"));
@@ -114,6 +115,7 @@ const App = () => (
                   <Route path="/dealflow" element={<Navigate to="/alchemist-reach" replace />} />
                   <Route path="/media-for-brands" element={<MediaForBrands />} />
                   <Route path="/vibe-coding" element={<VibeCoding />} />
+                  <Route path="/wallet-rescue" element={<WalletRescue />} />
                   <Route path="/blog" element={<Blog />} />
                   <Route path="/blog/:slug" element={<BlogPost />} />
                   <Route path="/case-studies" element={<CaseStudies />} />
