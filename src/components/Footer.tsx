@@ -1311,6 +1311,7 @@ const Footer = () => {
               <li><a href="/alchemist-reach" className="hover:text-primary transition-colors">Alchemist Reach (Outreach Tool)</a></li>
               <li><a href="/media-for-brands" className="hover:text-primary transition-colors">Fullmedia Alchemist (Social Content App)</a></li>
               <li><a href="/vibe-coding" className="hover:text-primary transition-colors">App Development &amp; Automations</a></li>
+              <li><a href="/wallet-rescue" className="hover:text-primary transition-colors">Compromised Wallet Rescue</a></li>
               
             </ul>
           </div>
