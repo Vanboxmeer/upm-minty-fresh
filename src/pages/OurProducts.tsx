@@ -8,7 +8,6 @@ import { updateMetaTags } from "@/utils/seoUtils";
 import AnimatedStarfield from "@/components/AnimatedStarfield";
 
 // Import app icons
-import watchCryptoIcon from "@/assets/apps/watch-crypto.png";
 import spinquestIcon from "@/assets/apps/spinquest-logo.png";
 import readingRaceIcon from "@/assets/apps/reading-race.png";
 import everythingNightlifeIcon from "@/assets/apps/everything-nightlife-mark.svg";
@@ -59,16 +58,6 @@ const products = [
     rounded: true
   },
   {
-    name: "Watch Crypto",
-    tagline: "Cryptoverse Explorer",
-    description: "Track crypto news, projects, and market trends with our comprehensive cryptoverse explorer. Stay informed with real-time updates and in-depth analysis of the blockchain ecosystem.",
-    url: "https://watchcrypto.info/",
-    icon: watchCryptoIcon,
-    gradient: "from-emerald-500/20 to-teal-500/20",
-    isWide: false,
-    rounded: false
-  },
-  {
     name: "Vaporsmooth",
     tagline: "Cannabis Marketplace",
     description: "Discover the finest vaporizers, CBD/THC products, and accessories. Learn about cannabis, take quizzes, and stay up to date with top trending cannabis news.",
@@ -94,8 +83,8 @@ const OurProducts = () => {
   useEffect(() => {
     updateMetaTags({
       title: "Our Apps | UPM Ecosystem",
-      description: "A few of the apps built by UPM, including Fullmedia Alchemist, Alchemist Reach, SpinQuest, Reading Race, Watch Crypto, Everything Nightlife, and Vaporsmooth.",
-      keywords: "UPM apps, Fullmedia Alchemist, Alchemist Reach, creator outreach, AI social content, social content calendar, SpinQuest, Reading Race, Watch Crypto, Everything Nightlife, Vaporsmooth, crypto tools, community apps, cannabis marketplace"
+      description: "A few of the apps built by UPM, including Fullmedia Alchemist, Alchemist Reach, SpinQuest, Reading Race, Everything Nightlife, and Vaporsmooth.",
+      keywords: "UPM apps, Fullmedia Alchemist, Alchemist Reach, creator outreach, AI social content, social content calendar, SpinQuest, Reading Race, Everything Nightlife, Vaporsmooth, crypto tools, community apps, cannabis marketplace"
     });
   }, []);
 

@@ -148,7 +148,7 @@ const STATIC_META: Record<string, { title: string; description: string }> = {
   },
   'our-products': {
     title: 'Our Apps | UPM Ecosystem',
-    description: 'A few of the apps built by UPM, including Fullmedia Alchemist, Alchemist Reach, SpinQuest, Reading Race, Watch Crypto, Everything Nightlife and Vaporsmooth.',
+    description: 'A few of the apps built by UPM, including Fullmedia Alchemist, Alchemist Reach, SpinQuest, Reading Race, Everything Nightlife and Vaporsmooth.',
   },
   'case-studies': {
     title: 'Case Studies | Campaign Results | UPM',
