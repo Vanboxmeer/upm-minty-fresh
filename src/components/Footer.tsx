@@ -1280,15 +1280,6 @@ const Footer = () => {
                 <Linkedin size={20} />
               </a>
               <a 
-                href="https://x.com/WatchCryptoNews" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="opacity-70 hover:text-primary transition-colors"
-                aria-label="Follow us on X (Twitter)"
-              >
-                <XIcon size={20} />
-              </a>
-              <a 
                 href="http://t.me/unitedpressmedia" 
                 target="_blank" 
                 rel="noopener noreferrer"
