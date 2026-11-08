@@ -1,15 +1,6 @@
 import { useEffect } from "react";
 import Header from "@/components/Header";
-import Hero from "@/components/Hero";
-import TrustedBy from "@/components/TrustedBy";
-import Services from "@/components/Services";
-import AlchemistReachSpotlight from "@/components/AlchemistReachSpotlight";
-import CreatorCoverage from "@/components/CreatorCoverage";
-import InfluencerPlatforms from "@/components/InfluencerPlatforms";
-import FullmediaAlchemistSpotlight from "@/components/FullmediaAlchemistSpotlight";
-import FeaturedInMedia from "@/components/FeaturedInMedia";
-import BlogSection from "@/components/BlogSection";
-import PackageSelector from "@/components/PackageSelector";
+import HomeV2 from "@/components/HomeV2";
 import Footer from "@/components/Footer";
 import PageLoader from "@/components/PageLoader";
 
@@ -46,16 +37,7 @@ const Index = () => {
       <PageLoader />
       <Header />
       <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
-        <Hero />
-        <Services />
-        <CreatorCoverage />
-        <AlchemistReachSpotlight />
-        <InfluencerPlatforms />
-        <FullmediaAlchemistSpotlight />
-        <TrustedBy />
-        <FeaturedInMedia />
-        <BlogSection />
-        <PackageSelector />
+        <HomeV2 />
         <Footer />
       </div>
       <TelegramChat />
