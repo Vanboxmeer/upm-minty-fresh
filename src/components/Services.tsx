@@ -10,12 +10,12 @@ const Services = () => {
     features: ["Verified influencer network", "Targeted audience matching", "Campaign performance tracking", "Content creation support"]
   }, {
     title: "Press Release Services",
-    description: "Distribute press releases to keep your investors and community up to date with important news and milestone events.",
-    features: ["Major publication distribution", "Investor-focused messaging", "Niche specific PR bundles (DeFi, NFT, AI, Tech)", "Fast turn around"]
+    description: "Distribute press releases to keep your customers, community and press up to date with launches and milestones.",
+    features: ["Major publication distribution", "Clear, newsworthy messaging", "Niche-specific PR bundles for your industry", "Fast turn around"]
   }, {
     title: "Features, Interviews, Spaces",
-    description: "Get featured in top media, have your CEO as a guest on a popular show, or co-host a community event.",
-    features: ["Top-tier media placements", "Executive interview opportunities", "Community event hosting", "Thought leadership positioning"]
+    description: "Get featured in top media, have your founder as a guest on a popular show, or co-host a community event.",
+    features: ["Top-tier media placements", "Founder interview opportunities", "Community event hosting", "Thought leadership positioning"]
   }, {
     title: "App Development & AI Automations",
     description: "Agentic development and AI integrations that ship apps, internal tools and automations in a fraction of the usual time.",
@@ -30,9 +30,8 @@ const Services = () => {
         <div ref={heroRef} className="grid lg:grid-cols-2 gap-12 items-center mb-16">
           <div className={`transition-all duration-700 ${heroVisible ? 'animate-fade-in' : 'opacity-0 translate-x-[-50px]'}`}>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Growth Services for Brands in{" "}
-              <span className="text-primary">
-AI, GameFi, DeFi, and Web3</span>
+              Growth Services for{" "}
+              <span className="text-primary">Every Kind of Brand</span>
             </h2>
             
             <p className="text-lg text-muted-foreground mb-8">

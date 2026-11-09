@@ -1,16 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { useTypewriter } from "@/hooks/useTypewriter";
 import { useParallax } from "@/hooks/useParallax";
 
 const Hero = () => {
-  const brandTypes = ["AI Brands", "Web3 Brands", "GameFi Brands", "VR Brands", "Crypto Brands", "Tech Brands"];
-  const currentBrand = useTypewriter({
-    words: brandTypes,
-    typeSpeed: 22,
-    deleteSpeed: 12,
-    delayBetweenWords: 1000,
-  });
-
   // Parallax effects for background layers
   const parallaxSlow = useParallax({ speed: 0.1 });
   const parallaxMedium = useParallax({ speed: 0.2 });
@@ -78,14 +69,14 @@ const Hero = () => {
       <div className="relative container mx-auto px-4 py-12 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in text-white">
-            <span className="block">Media Partner for</span>
-            <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent inline-block min-h-[1em]">
-              {currentBrand || '\u00A0'}
-              <span className="animate-pulse text-primary ml-1 font-normal">|</span>
+            <span className="block">Get your brand in front of</span>
+            <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent inline-block">
+              the people who shape your market
             </span>
           </h1>
           
-          <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto animate-fade-in">UPM helps you get in front of the right audience through powerful kol collaborations, PR distribution, native ad placements, branded social media content, and earned tier 1 media features.</p>
+          <p className="text-lg sm:text-xl text-gray-300 mb-4 max-w-2xl mx-auto animate-fade-in">Creator campaigns, press releases and media features, planned with you and tracked in one shared sheet. You approve every placement before it is booked.</p>
+          <p className="text-sm text-gray-400 mb-8 animate-fade-in">No minimum budget. Campaigns from around $5k a month are welcome.</p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
             <Button variant="retro" size="lg" className="px-8 py-6 text-lg group relative overflow-hidden cta-pulse cta-shimmer cta-glow-hover" onClick={scrollToCoveragePackages}>

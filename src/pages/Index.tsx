@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import TrustedBy from "@/components/TrustedBy";
+import HowItWorks from "@/components/HowItWorks";
 import Services from "@/components/Services";
 import AlchemistReachSpotlight from "@/components/AlchemistReachSpotlight";
 import CreatorCoverage from "@/components/CreatorCoverage";
@@ -26,7 +27,7 @@ const Index = () => {
     updateMetaTags({
       title: "UPM | Digital Marketing & Press Release Distribution",
       description: "Growth platform built for digital marketing with press release distribution, KOL collaborations, and tier-1 media placements \u2014 powered by Fullmedia Alchemist Content and Reach.",
-      keywords: "digital marketing, press release distribution, KOL collaborations, web3 marketing, crypto marketing, tier-1 media, content promotion, growth platform",
+      keywords: "digital marketing, press release distribution, KOL collaborations, creator campaigns, media placements, content promotion, growth platform",
       canonical: "https://unitedpress.media/",
       ogTitle: "UPM | Digital Marketing & Press Release Distribution",
       ogDescription: "Growth platform built for digital marketing with press release distribution, KOL collaborations, and tier-1 media placements.",
@@ -48,6 +49,7 @@ const Index = () => {
       <div className="min-h-screen bg-background pt-16 pb-16 md:pb-0">
         <Hero />
         <Services />
+        <HowItWorks />
         <CreatorCoverage />
         <AlchemistReachSpotlight />
         <InfluencerPlatforms />

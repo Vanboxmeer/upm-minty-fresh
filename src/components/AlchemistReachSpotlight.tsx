@@ -40,9 +40,10 @@ const AlchemistReachSpotlight = () => {
               <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-5">
                 Shortlists researched against your brand rather than pulled from a generic database.
                 One professional voice across every approach. A follow-up date on every thread, so the
-                creator who said &ldquo;not now&rdquo; in March gets asked again in June. It is our own
-                software, built after watching too many good deals die in a shared inbox. Run it yourself
-                on a free-to-start plan, or let UPM run it for you with Silver and Gold.
+                creator who said &ldquo;not now&rdquo; in March gets asked again in June. It is an app we
+                built after watching too many good deals die in a shared inbox, available as a
+                subscription for any brand or agency. Run it yourself on a free-to-start plan, or let
+                UPM run it for you with Silver and Gold.
               </p>
               <Link
                 to="/alchemist-reach"
