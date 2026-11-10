@@ -8,6 +8,7 @@
     { "source": "/blog/dealflow-by-upm-how-we-stopped-losing-creator-deals-in-our-inbox", "destination": "/blog/alchemist-reach-how-we-stopped-losing-creator-deals-in-our-inbox", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/go/:slug", "destination": "/api/go?slug=:slug" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ],
   "headers": [

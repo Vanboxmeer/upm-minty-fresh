@@ -60,6 +60,7 @@ const BlogPostEdit = lazy(() =>
 );
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AffiliateDashboard = lazy(() => import("./pages/admin/AffiliateDashboard"));
+const LinkClicks = lazy(() => import("./pages/admin/LinkClicks"));
 
 // Floating widgets appear on every page but are not needed for first paint.
 const BoltChatWidget = lazy(() => import("@/components/TankChatWidget"));
@@ -155,6 +156,11 @@ const App = () => (
                   <Route
                     path="/admin/affiliates"
                     element={<ProtectedRoute><AffiliateDashboard /></ProtectedRoute>}
+                  />
+
+                  <Route
+                    path="/admin/links"
+                    element={<ProtectedRoute><LinkClicks /></ProtectedRoute>}
                   />
 
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

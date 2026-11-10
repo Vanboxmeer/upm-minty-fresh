@@ -269,6 +269,24 @@ const AdminDashboard = () => {
             </CardContent>
           </Card>
 
+          {/* Tracked links */}
+          <Card className="hover:shadow-md transition-shadow">
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-blue-500/10 rounded-lg">
+                  <Activity className="h-6 w-6 text-blue-600" />
+                </div>
+                <div>
+                  <CardTitle>Tracked Link Clicks</CardTitle>
+                  <CardDescription>Starlink referral link traffic by article</CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <Link to="/admin/links"><Button variant="outline" className="w-full justify-between">View Clicks<ArrowRight className="h-4 w-4" /></Button></Link>
+            </CardContent>
+          </Card>
+
           {/* Affiliate Management */}
           <Card className="hover:shadow-md transition-shadow">
             <CardHeader>
