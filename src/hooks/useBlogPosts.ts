@@ -96,9 +96,13 @@ export const useBlogPosts = () => {
         query = query.contains('categories', [categoryFilter]);
       }
       
-      const { data: sortedPosts, error } = await query;
+      const { data: rawPosts, error } = await query;
       
       if (error) throw error;
+
+      // Defensive: never show scheduled (future-dated) posts publicly
+      const nowMs = Date.now();
+      const sortedPosts = (rawPosts || []).filter((p: any) => !p.publish_date || new Date(p.publish_date).getTime() <= nowMs);
       
       setPosts((sortedPosts || []) as BlogPost[]);
       

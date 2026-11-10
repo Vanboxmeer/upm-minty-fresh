@@ -22,8 +22,9 @@ const CategoryFilterChips = () => {
     const fetchCategories = async () => {
       const { data, error } = await supabase
         .from('blog_posts')
-        .select('categories')
-        .eq('status', 'published');
+        .select('categories, publish_date')
+        .eq('status', 'published')
+        .or(`publish_date.is.null,publish_date.lte.${new Date().toISOString()}`);
 
       if (error || !data) return;
 
