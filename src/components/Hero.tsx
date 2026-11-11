@@ -27,6 +27,19 @@ const Hero = () => {
   };
 
   return <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <style>{`
+@keyframes heroUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes heroShine{to{background-position:200% center}}
+@keyframes heroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes heroOrb{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-20px) scale(1.15)}}
+.hero-up{opacity:0;animation:heroUp .8s cubic-bezier(.2,.7,.2,1) forwards}
+.hero-shine{background-size:200% auto;animation:heroShine 4s linear infinite}
+.hero-chip{animation:heroFloat 4s ease-in-out infinite;transition:border-color .2s,background .2s}
+.hero-chip:hover{border-color:hsl(var(--primary));background:rgba(255,255,255,.12)}
+.hero-orb{animation:heroOrb 12s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.hero-up,.hero-shine,.hero-chip,.hero-orb{animation:none;opacity:1}}
+`}</style>
+      
       {/* Animated Background with Parallax */}
       <div className="absolute inset-0">
         {/* Base gradient with vibrant colors */}
@@ -38,7 +51,7 @@ const Hero = () => {
         {/* Floating geometric shapes with parallax */}
         <div className="absolute inset-0 parallax-layer">
           <div 
-            className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-r from-primary to-retro-cyan rounded-full blur-3xl opacity-40"
+            className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-r from-primary to-retro-cyan rounded-full blur-3xl opacity-40 hero-orb"
             style={{ transform: `translateY(${parallaxSlow}px)` }}
           />
           <div 
@@ -71,22 +84,22 @@ const Hero = () => {
       
       <div className="relative container mx-auto px-4 py-12 text-center">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in text-white">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight hero-up text-white">
             <span className="block">Promotion & Media Partner for</span>
-            <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent inline-block min-h-[1em]">
+            <span className="bg-gradient-to-r from-primary via-retro-cyan to-primary-glow bg-clip-text text-transparent inline-block min-h-[1em] hero-shine">
               {currentBrand || '\u00A0'}
               <span className="animate-pulse text-primary ml-1 font-normal">|</span>
             </span>
           </h1>
           
-          <p className="text-lg sm:text-xl text-gray-300 mb-6 max-w-2xl mx-auto animate-fade-in">Whatever you sell, we put it in front of the right people: creators, press and communities. You approve every placement before it is booked.</p>
-          <div className="flex flex-wrap justify-center gap-2 mb-8 animate-fade-in">
-            {["Creator campaigns", "PR & press releases", "Native ads", "Social content", "Media features"].map((t) => (
-              <span key={t} className="px-3 py-1 rounded-full text-xs sm:text-sm text-gray-200 border border-white/20 bg-white/5 backdrop-blur-sm">{t}</span>
+          <p className="text-lg sm:text-xl text-gray-300 mb-6 max-w-2xl mx-auto hero-up" style={{animationDelay:"0.2s"}}>Whatever you sell, we put it in front of the right people: creators, press and communities. You approve every placement before it is booked.</p>
+          <div className="flex flex-wrap justify-center gap-2 mb-8">
+            {["Creator campaigns", "PR & press releases", "Native ads", "Social content", "Media features"].map((t, i) => (
+              <span key={t} style={{animationDelay:`${0.4+i*0.1}s`}} className="hero-up px-3 py-1 rounded-full text-xs sm:text-sm text-gray-200 border border-white/20 bg-white/5 backdrop-blur-sm">{t}</span>
             ))}
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center hero-up" style={{animationDelay:"0.9s"}}>
             <Button variant="retro" size="lg" className="px-8 py-6 text-lg group relative overflow-hidden cta-pulse cta-shimmer cta-glow-hover" onClick={scrollToCoveragePackages}>
               <span className="group-hover:scale-110 transition-transform duration-200">Start a Campaign</span>
               <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-primary/20 to-transparent group-hover:animate-[synthwave-scan_1s_ease-in-out] pointer-events-none" />
