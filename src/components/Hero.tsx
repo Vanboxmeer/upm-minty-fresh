@@ -3,7 +3,7 @@ import { useParallax } from "@/hooks/useParallax";
 import { useTypewriter } from "@/hooks/useTypewriter";
 
 const Hero = () => {
-  const brandTypes = ["Startups", "Tech Brands", "AI Brands", "Gaming Brands", "Consumer Brands", "Web3 Brands"];
+  const brandTypes = ["Every Brand", "Startups", "Online Stores", "Local Businesses", "Creators", "Apps & Tech"];
   const currentBrand = useTypewriter({ words: brandTypes, typeSpeed: 22, deleteSpeed: 12, delayBetweenWords: 1000 });
   // Parallax effects for background layers
   const parallaxSlow = useParallax({ speed: 0.1 });
@@ -72,14 +72,19 @@ const Hero = () => {
       <div className="relative container mx-auto px-4 py-12 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in text-white">
-            <span className="block">Media Partner for</span>
+            <span className="block">Promotion & Media Partner for</span>
             <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent inline-block min-h-[1em]">
               {currentBrand || '\u00A0'}
               <span className="animate-pulse text-primary ml-1 font-normal">|</span>
             </span>
           </h1>
           
-          <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto animate-fade-in">UPM helps you get in front of the right audience through creator collaborations, PR distribution, native ad placements, branded social content, and earned media features. You approve every placement before it is booked.</p>
+          <p className="text-lg sm:text-xl text-gray-300 mb-6 max-w-2xl mx-auto animate-fade-in">Whatever you sell, we put it in front of the right people: creators, press and communities. You approve every placement before it is booked.</p>
+          <div className="flex flex-wrap justify-center gap-2 mb-8 animate-fade-in">
+            {["Creator campaigns", "PR & press releases", "Native ads", "Social content", "Media features"].map((t) => (
+              <span key={t} className="px-3 py-1 rounded-full text-xs sm:text-sm text-gray-200 border border-white/20 bg-white/5 backdrop-blur-sm">{t}</span>
+            ))}
+          </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in">
             <Button variant="retro" size="lg" className="px-8 py-6 text-lg group relative overflow-hidden cta-pulse cta-shimmer cta-glow-hover" onClick={scrollToCoveragePackages}>
