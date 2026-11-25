@@ -11,6 +11,7 @@ import { updateMetaTags } from "@/utils/seoUtils";
 import readingRaceIcon from "@/assets/apps/reading-race.png";
 import spinquestIcon from "@/assets/apps/spinquest-logo.png";
 import vaporsmoothIcon from "@/assets/apps/vaporsmooth.png";
+import coachDrillsIcon from "@/assets/apps/coachdrills.svg";
 import everythingNightlifeIcon from "@/assets/apps/everything-nightlife-mark.svg";
 import fullmediaAlchemistIcon from "@/assets/apps/fullmedia-alchemist.svg";
 
@@ -19,6 +20,7 @@ const apps = [
   { name: "SpinQuest", icon: spinquestIcon, url: "https://spinquest.app/" },
   { name: "Reading Race", icon: readingRaceIcon, url: "https://readingrace.com/" },
   { name: "Vaporsmooth", icon: vaporsmoothIcon, url: "https://vaporsmooth.com" },
+  { name: "CoachDrills", icon: coachDrillsIcon, url: "https://coachdrills.app" },
   { name: "Everything Nightlife", icon: everythingNightlifeIcon, url: "https://everythingnightlife.com" },
 ];
 

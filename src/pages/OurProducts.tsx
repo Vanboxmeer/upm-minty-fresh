@@ -13,6 +13,7 @@ import readingRaceIcon from "@/assets/apps/reading-race.png";
 import everythingNightlifeIcon from "@/assets/apps/everything-nightlife-mark.svg";
 import vaporsmoothIcon from "@/assets/apps/vaporsmooth.png";
 import fullmediaAlchemistIcon from "@/assets/apps/fullmedia-alchemist.svg";
+import coachDrillsIcon from "@/assets/apps/coachdrills.svg";
 
 const products = [
   {
@@ -46,6 +47,16 @@ const products = [
     gradient: "from-purple-500/20 to-pink-500/20",
     isWide: true,
     rounded: false
+  },
+  {
+    name: "CoachDrills",
+    tagline: "Youth Sport Practice Planner",
+    description: "Build a practice in two taps, run it drill by drill with an on-screen demo, and track how every player improves. Made for coaches, players and parents, with group updates only and no direct messages. Free to start.",
+    url: "https://coachdrills.app",
+    icon: coachDrillsIcon,
+    gradient: "from-green-500/20 to-sky-500/20",
+    isWide: false,
+    rounded: true
   },
   {
     name: "Reading Race",
@@ -83,8 +94,8 @@ const OurProducts = () => {
   useEffect(() => {
     updateMetaTags({
       title: "Our Apps | UPM Ecosystem",
-      description: "A few of the apps built by UPM, including Fullmedia Alchemist, Alchemist Reach, SpinQuest, Reading Race, Everything Nightlife, and Vaporsmooth.",
-      keywords: "UPM apps, Fullmedia Alchemist, Alchemist Reach, creator outreach, AI social content, social content calendar, SpinQuest, Reading Race, Everything Nightlife, Vaporsmooth, crypto tools, community apps, cannabis marketplace"
+      description: "A few of the apps built by UPM, including Fullmedia Alchemist, Alchemist Reach, SpinQuest, CoachDrills, Reading Race, Everything Nightlife, and Vaporsmooth.",
+      keywords: "UPM apps, Fullmedia Alchemist, Alchemist Reach, creator outreach, AI social content, social content calendar, SpinQuest, CoachDrills, Reading Race, Everything Nightlife, Vaporsmooth, crypto tools, community apps, cannabis marketplace"
     });
   }, []);
 

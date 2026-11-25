@@ -1325,6 +1325,7 @@ const Footer = () => {
               <li><a href="https://www.fullmediaalchemist.com/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Fullmedia Alchemist</a></li>
               <li><a href="/alchemist-reach" className="hover:text-primary transition-colors">Alchemist Reach</a></li>
               <li><a href="https://spinquest.app/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">SpinQuest</a></li>
+              <li><a href="https://coachdrills.app" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">CoachDrills</a></li>
               <li><a href="https://readingrace.com/" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Reading Race</a></li>
               <li><a href="https://vaporsmooth.com" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Vaporsmooth</a></li>
               <li><a href="https://everythingnightlife.com" className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Everything Nightlife</a></li>
